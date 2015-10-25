@@ -3,6 +3,9 @@
 bower_components
 node_modules
 
+# we ignore this becasue everythings in this directory should be "generated from somewhere else"
+public
+
 
 # Some other default ignores
 # OSX ignores
