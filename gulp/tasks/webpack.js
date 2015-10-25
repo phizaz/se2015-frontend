@@ -29,16 +29,13 @@ gulp.task('webpack:development',
 
     var developmentConfig = _.extend(webpackConfig, {
       watch: true,
+      // this is a faster but not as good sourcemap
+      devtool: '#eval-cheap-module-source-map',
       plugins: [
         new ngAnnotatePlugin()
       ]
     });
     developmentConfig.module.loaders = webpackLoaders;
-
-    return gulp
-      .src('./client/app/bootstrap.js')
-      .pipe(webpackStream(developmentConfig, null, compileDone))
-      .pipe(gulp.dest('./public/'));
 
     function compileDone(err, stats) {
       if (err) {
@@ -67,6 +64,11 @@ gulp.task('webpack:development',
         message: message
       });
     }
+
+    return gulp
+      .src('./client/app/bootstrap.js')
+      .pipe(webpackStream(developmentConfig, null, compileDone))
+      .pipe(gulp.dest('./public/'));
   });
 
 gulp.task('webpack:production',
@@ -89,6 +91,8 @@ gulp.task('webpack:production',
     ];
 
     var productionConfig = _.extend(webpackConfig, {
+      // the perfect sourcemap used only for production
+      devtool: '#source-map',
       plugins: [
         // annotation is working
         new ngAnnotatePlugin(),

@@ -13,7 +13,6 @@ module.exports = {
         publicPath: '/public/',
         filename: "[name].bundle.js",
     },
-    devtool: '#source-map',
     module: {
         // this will be extended in gulp/webpack
         loader: []

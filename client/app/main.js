@@ -18,7 +18,7 @@ let that = angular.module('mainModule', [
 export let mainModule = that;
 
 that.run(
-  function mainModuleRun() {
+  function mainModuleRun($rootScope) {
     console.log('the app is running');
 
     $rootScope.$on('$stateChangeSuccess',
