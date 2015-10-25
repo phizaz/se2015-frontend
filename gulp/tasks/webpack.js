@@ -37,9 +37,36 @@ gulp.task('webpack:development',
 
     return gulp
       .src('./client/app/bootstrap.js')
-      .pipe(webpackStream(developmentConfig
-        ))
+      .pipe(webpackStream(developmentConfig, null, compileDone))
       .pipe(gulp.dest('./public/'));
+
+    function compileDone(err, stats) {
+      if (err) {
+        console.error('err', err);
+      }
+
+      var compilationErrors = stats.compilation.errors;
+      if (compilationErrors.length > 0) {
+        console.log('Error!! =======================');
+        compilationErrors.forEach(
+          function eachError(error) {
+            console.error(error.name);
+            console.error(error.message);
+          });
+      }
+
+      // console.info('stats', stats);
+
+      var timeElapsed = stats.endTime - stats.startTime;
+      var message = 'compilation is done.. ' + 'using: ' + timeElapsed / 1000.0 + ' s.';
+
+      console.log('webpack:production' + message);
+
+      notifier.notify({
+        title: 'webpack:production',
+        message: message
+      });
+    }
   });
 
 gulp.task('webpack:production',
@@ -74,16 +101,4 @@ gulp.task('webpack:production',
       .src('./client/app/bootstrap.js')
       .pipe(webpackStream(productionConfig))
       .pipe(gulp.dest('./public/'));
-
-    // function compileDone(err, stats) {
-    //   if (err) {
-    //     console.error('err', err);
-    //   }
-
-    //   console.log('webpack:production compilation is done...');
-    //   notifier.notify({
-    //     title: 'webpack:production',
-    //     message: 'compilation is done'
-    //   });
-    // }
   });

@@ -9,7 +9,7 @@ let that = angular.module('mainModule', [
   'ui.router',
   mainConfigModule.name,
 
-  // routes
+  // Routes
   // this should contain all the routes that don't depend on others say parent routes
   navigatorRouteModule.name,
   ]);
@@ -18,9 +18,8 @@ let that = angular.module('mainModule', [
 export let mainModule = that;
 
 that.run(
-  function mainModuleRun($rootScope) {
+  function mainModuleRun() {
     console.log('the app is running');
-    console.log('rootScope:', $rootScope);
 
     $rootScope.$on('$stateChangeSuccess',
       (event, toState, toParams, fromState, fromParams) => {

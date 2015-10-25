@@ -3,7 +3,9 @@ import 'angular-ui-router';
 
 import navigatorTemplate from './navigator.template.html';
 
-let that = angular.module('navigatorRouteModule', [ 'ui.router' ]);
+let that = angular.module('navigatorRouteModule', [
+  'ui.router'
+  ]);
 
 export let navigatorRouteModule = that;
 
