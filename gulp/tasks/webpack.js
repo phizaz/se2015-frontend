@@ -27,7 +27,12 @@ gulp.task('webpack:development',
       { test: /\.html$/, loader: 'html' },
     ];
 
-    var developmentConfig = _.extend(webpackConfig, { watch: true });
+    var developmentConfig = _.extend(webpackConfig, {
+      watch: true,
+      plugins: [
+        new ngAnnotatePlugin()
+      ]
+    });
     developmentConfig.module.loaders = webpackLoaders;
 
     return gulp
@@ -58,6 +63,7 @@ gulp.task('webpack:production',
 
     var productionConfig = _.extend(webpackConfig, {
       plugins: [
+        // annotation is working
         new ngAnnotatePlugin(),
         new webpack.optimize.UglifyJsPlugin({ sourceMap: true })
       ]
@@ -69,15 +75,15 @@ gulp.task('webpack:production',
       .pipe(webpackStream(productionConfig))
       .pipe(gulp.dest('./public/'));
 
-    function compileDone(err, stats) {
-      if (err) {
-        console.error('err', err);
-      }
+    // function compileDone(err, stats) {
+    //   if (err) {
+    //     console.error('err', err);
+    //   }
 
-      console.log('webpack:production compilation is done...');
-      notifier.notify({
-        title: 'webpack:production',
-        message: 'compilation is done'
-      });
-    }
+    //   console.log('webpack:production compilation is done...');
+    //   notifier.notify({
+    //     title: 'webpack:production',
+    //     message: 'compilation is done'
+    //   });
+    // }
   });
