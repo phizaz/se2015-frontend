@@ -15,6 +15,6 @@ module.exports = {
     },
     module: {
         // this will be extended in gulp/webpack
-        loader: []
+        loaders: []
     },
 };

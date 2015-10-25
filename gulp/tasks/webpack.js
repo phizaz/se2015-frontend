@@ -1,41 +1,14 @@
-var _ = require('lodash');
-
 var gulp = require('gulp');
 var webpackStream = require('webpack-stream');
-var webpack = require('webpack');
 var notifier = require('node-notifier');
-var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
-var webpackConfig = require('../../webpack.config');
+var developmentConfig = require('../../webpack.development.config');
+var productionConfig = require('../../webpack.production.config');
 
 gulp.task('webpack:development',
   function webpackDevelopment() {
-    var webpackLoaders = [
-      // babel (es6)
-      {
-          test: /\.js$/,
-          exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
-      },
-      // css loader
-      { test: /\.css$/, loader: 'style!css!autoprefixer?browsers=last 2 versions' },
-      // sass loader
-      { test: /\.scss|\.sass$/, loader: 'style!css!autoprefixer?browsers=last 2 versions!sass' },
-      // json loader
-      { test: /\.json$/, loader: 'json' },
-      // html loader
-      { test: /\.html$/, loader: 'html' },
-    ];
 
-    var developmentConfig = _.extend(webpackConfig, {
-      watch: true,
-      // this is a faster but not as good sourcemap
-      devtool: '#eval-cheap-module-source-map',
-      plugins: [
-        new ngAnnotatePlugin()
-      ]
-    });
-    developmentConfig.module.loaders = webpackLoaders;
+    console.log('developmentConfig:', developmentConfig);
 
     function compileDone(err, stats) {
       if (err) {
@@ -57,10 +30,10 @@ gulp.task('webpack:development',
       var timeElapsed = stats.endTime - stats.startTime;
       var message = 'compilation is done.. ' + 'using: ' + timeElapsed / 1000.0 + ' s.';
 
-      console.log('webpack:production' + message);
+      console.log('webpack:development' + message);
 
       notifier.notify({
-        title: 'webpack:production',
+        title: 'webpack:development',
         message: message
       });
     }
@@ -73,34 +46,6 @@ gulp.task('webpack:development',
 
 gulp.task('webpack:production',
   function webpackProduction() {
-    var webpackLoadersWithMinification = [
-      // babel (es6)
-      {
-          test: /\.js$/,
-          exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
-      },
-      // css loader
-      { test: /\.css$/, loader: 'style!css?minimize!autoprefixer?browsers=last 2 versions' },
-      // sass loader
-      { test: /\.scss|\.sass$/, loader: 'style!css?minimize!autoprefixer?browsers=last 2 versions!sass' },
-      // json loader
-      { test: /\.json$/, loader: 'json' },
-      // html loader
-      { test: /\.html$/, loader: 'html' },
-    ];
-
-    var productionConfig = _.extend(webpackConfig, {
-      // the perfect sourcemap used only for production
-      devtool: '#source-map',
-      plugins: [
-        // annotation is working
-        new ngAnnotatePlugin(),
-        new webpack.optimize.UglifyJsPlugin({ sourceMap: true })
-      ]
-    });
-    productionConfig.module.loaders = webpackLoadersWithMinification;
-
     return gulp
       .src('./client/app/bootstrap.js')
       .pipe(webpackStream(productionConfig))
