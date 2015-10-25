@@ -1,5 +1,7 @@
 /* globals __dirname */
 
+// the webpack config in this file also be used from gulp in /gulp/task/webpack.js
+
 var path = require('path');
 
 module.exports = {
@@ -11,26 +13,9 @@ module.exports = {
         publicPath: '/public/',
         filename: "[name].bundle.js",
     },
+    devtool: '#source-map',
     module: {
-        loaders: [
-            // babel (es6)
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: 'babel'
-            },
-            // css loader
-            { test: /\.css$/, loader: ['style', 'css'] },
-            // sass loader
-            { test: /\.scss|\.sass$/, loader: ['style', 'css', 'sass'] },
-            // json loader
-            { test: /\.json$/, loader: ['json'] },
-            // html loader
-            { test: /\.html$/, loader: ['html'] },
-        ]
+        // this will be extended in gulp/webpack
+        loader: []
     },
-    devServer: {
-        port: 3000,
-        colors: true,
-    }
 };
