@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/phizaz/angular-seed/issues"
   },
-  "homepage": "https://github.com/phizaz/angular-seed#readme"
+  "homepage": "https://github.com/phizaz/angular-seed#readme",
+  "devDependencies": {
+    "angular": "^1.4.7",
+    "gulp": "^3.9.0",
+    "lodash": "^3.10.1",
+    "webpack": "^1.12.2"
+  }
 }
