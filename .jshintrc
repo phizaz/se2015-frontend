@@ -13,5 +13,5 @@
   "jasmine": true,
   "globals": {
   },
-  "predef": ["console", "document", "setTimeout"]
+  "predef": ["console", "document", "setTimeout", "module", "require"]
 }
