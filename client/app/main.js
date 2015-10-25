@@ -1,6 +1,11 @@
 import angular from 'angular';
 
-let module = angular.module('mainModule', []);
-export let mainModule = module;
+let that = angular.module('mainModule', []);
 
-module.run();
+// export this module to the outside world
+export let mainModule = that;
+
+that.run(
+  function mainModuleRun() {
+    console.log('the app is running');
+  });
