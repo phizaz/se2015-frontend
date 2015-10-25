@@ -5,10 +5,11 @@ var notifier = require('node-notifier');
 var developmentConfig = require('../../webpack.development.config');
 var productionConfig = require('../../webpack.production.config');
 
+gulp.task('develop', ['clean:public', 'webpack:development']);
+gulp.task('deploy', ['clean:public', 'webpack:production']);
+
 gulp.task('webpack:development',
   function webpackDevelopment() {
-
-    console.log('developmentConfig:', developmentConfig);
 
     function compileDone(err, stats) {
       if (err) {
@@ -43,6 +44,7 @@ gulp.task('webpack:development',
       .pipe(webpackStream(developmentConfig, null, compileDone))
       .pipe(gulp.dest('./public/'));
   });
+
 
 gulp.task('webpack:production',
   function webpackProduction() {
