@@ -1,0 +1,19 @@
+{
+  "name": "angular-seed",
+  "version": "1.0.0",
+  "description": "Angular skeleton with Webpack and Karma configured",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/phizaz/angular-seed.git"
+  },
+  "author": "phizaz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phizaz/angular-seed/issues"
+  },
+  "homepage": "https://github.com/phizaz/angular-seed#readme"
+}

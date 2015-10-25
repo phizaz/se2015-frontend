@@ -1,0 +1,19 @@
+{
+  "name": "angular-seed",
+  "description": "Angular skeleton with Webpack and Karma configured",
+  "main": "index.js",
+  "authors": [
+    "phizaz"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
