@@ -1,0 +1,17 @@
+{
+  "es5": true,
+  "esnext": true,
+  "module": true,
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "latedef": false,
+  "noarg": true,
+  "undef": true,
+  "unused": true,
+  "validthis": true,
+  "jasmine": true,
+  "globals": {
+  },
+  "predef": ["console", "document", "setTimeout"]
+}
