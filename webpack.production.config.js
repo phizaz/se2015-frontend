@@ -3,7 +3,7 @@ var _ = require('lodash');
 var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var webpack = require('webpack');
 
-var webpackBaseConfig = _.cloneDeep(require('./webpack.config'));
+var webpackBaseConfig = _.cloneDeep(require('./webpack.base.config'));
 
 var webpackProductionConfig = _.extend(webpackBaseConfig, {
   // the perfect sourcemap used only for production
@@ -23,9 +23,10 @@ webpackProductionConfig.module.loaders = [
       loader: 'babel',
   },
   // css loader
-  { test: /\.css$/, loader: 'style!css?minimize!autoprefixer?browsers=last 2 versions' },
+  { test: /\.css$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions'] },
   // sass loader
-  { test: /\.scss|\.sass$/, loader: 'style!css?minimize!autoprefixer?browsers=last 2 versions!sass' },
+  { test: /\.scss$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions', 'sass'] },
+  { test: /\.sass$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions', 'sass?indentedSyntax'] },
   // json loader
   { test: /\.json$/, loader: 'json' },
   // html loader
