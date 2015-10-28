@@ -19,7 +19,31 @@ module.exports = {
         filename: '[name].bundle.js',
     },
     module: {
-        // this will be extended in gulp/webpack
-        loaders: []
+
+        /**
+         * default loaders
+         * this will be extended in gulp/webpack
+         */
+        loaders: [
+
+            // json loader
+            { test: /\.json$/, loader: 'json' },
+
+            // html loader
+            // this also will load images as well (apply to all non-root images)
+            { test: /\.html$/, loader: 'html' },
+
+            // fonts
+            { test: /\.(woff|ttf|eot)([\?]?.*)$/, loader: 'file-loader?name=[name].[ext]' },
+
+            // images
+            {
+              test: /\.(jpe?g|png|gif|svg)$/i,
+              loaders: [
+                'file?hash=sha256&digest=hex&name=[hash].[ext]',
+                'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+              ]
+            }
+        ]
     },
 };

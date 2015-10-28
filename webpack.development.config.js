@@ -1,6 +1,7 @@
 // webpack development config
 var _ = require('lodash');
 var webpack = require('webpack');
+// var BowerWebPackPlugin = require('bower-webpack-plugin');
 
 var webpackBaseConfig = _.cloneDeep(require('./webpack.base.config'));
 
@@ -25,14 +26,19 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
     publicPath: webpackBaseConfig.output.publicPath,
 
     quiet: false,
-    // noInfo: true,
+    // suppress boring information
+    noInfo: true,
     stats: { colors: true },
 
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    // new BowerWebPackPlugin({
+    //   excludes: /(.*\.less)|(.*\.sass)/
+    // }),
   ]
+
 });
 
 /**
@@ -40,24 +46,25 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
  * add an entry point to the webpack configuration:
  * 'webpack/hot/dev-server'
  */
-webpackDevelopmentConfig.entry.app.unshift("webpack-dev-server/client?http://localhost:" + webpackDevelopmentConfig.devServer.port, "webpack/hot/dev-server");
+webpackDevelopmentConfig.entry.app.unshift('webpack-dev-server/client?http://localhost:' + webpackDevelopmentConfig.devServer.port, 'webpack/hot/dev-server');
 
-webpackDevelopmentConfig.module.loaders = [
-  // babel (es6)
-  {
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel',
-  },
-  // css loader
-  { test: /\.css$/, loaders: ['style', 'css', 'autoprefixer?browsers=last 2 versions'] },
-  // sass loader
-  { test: /\.scss$/, loaders: ['style', 'css', 'autoprefixer?browsers=last 2 versions', 'sass' ] },
-  { test: /\.sass$/, loaders: ['style', 'css', 'autoprefixer?browsers=last 2 versions', 'sass?indentedSyntax'] },
-  // json loader
-  { test: /\.json$/, loader: 'json' },
-  // html loader
-  { test: /\.html$/, loader: 'html' },
-];
+webpackDevelopmentConfig.module.loaders = webpackDevelopmentConfig.module.loaders.concat(
+  [
+
+    // babel (es6)
+    {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel',
+    },
+
+    // css loader
+    { test: /\.css$/, loaders: ['style', 'css', 'autoprefixer?browsers=last 2 versions'] },
+
+    // sass loader
+    { test: /\.scss$/, loaders: ['style', 'css', 'autoprefixer?browsers=last 2 versions', 'sass' ] },
+    { test: /\.sass$/, loaders: ['style', 'css', 'autoprefixer?browsers=last 2 versions', 'sass?indentedSyntax'] },
+
+  ]);
 
 module.exports = webpackDevelopmentConfig;

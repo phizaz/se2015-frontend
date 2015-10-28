@@ -15,22 +15,19 @@ var webpackProductionConfig = _.extend(webpackBaseConfig, {
   ]
 });
 
-webpackProductionConfig.module.loaders = [
-  // babel (es6)
-  {
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel',
-  },
-  // css loader
-  { test: /\.css$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions'] },
-  // sass loader
-  { test: /\.scss$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions', 'sass'] },
-  { test: /\.sass$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions', 'sass?indentedSyntax'] },
-  // json loader
-  { test: /\.json$/, loader: 'json' },
-  // html loader
-  { test: /\.html$/, loader: 'html' },
-];
+webpackProductionConfig.module.loaders = webpackProductionConfig.module.loaders.concat(
+  [
+    // babel (es6)
+    {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel',
+    },
+    // css loader
+    { test: /\.css$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions'] },
+    // sass loader
+    { test: /\.scss$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions', 'sass'] },
+    { test: /\.sass$/, loaders: ['style', 'css?minimize', 'autoprefixer?browsers=last 2 versions', 'sass?indentedSyntax'] },
+  ]);
 
 module.exports = webpackProductionConfig;
