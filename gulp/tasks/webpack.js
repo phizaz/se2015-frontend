@@ -9,7 +9,7 @@ var developmentConfig = require('../../webpack.development.config');
 var productionConfig = require('../../webpack.production.config');
 
 gulp.task('develop', ['clean:public', 'webpack:devserver']);
-gulp.task('deploy', ['clean:public', 'webpack:production']);
+gulp.task('product', ['clean:public', 'webpack:production']);
 
 gulp.task('webpack:devserver',
   function webpackDevServer() {
