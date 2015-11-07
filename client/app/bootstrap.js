@@ -3,6 +3,9 @@
 // babel polyfills
 import 'babel/polyfill';
 
+// bootstrap is included natively
+import 'bootstrap-sass!../../bootstrap-sass.config.js';
+
 import angular from 'angular';
 import {mainModule} from './main';
 

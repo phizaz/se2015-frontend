@@ -1,7 +1,7 @@
 // webpack development config
 var _ = require('lodash');
 var webpack = require('webpack');
-// var BowerWebPackPlugin = require('bower-webpack-plugin');
+var path = require('path');
 
 var webpackBaseConfig = _.cloneDeep(require('./webpack.base.config'));
 
@@ -9,6 +9,29 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
   watch: true,
   // this is a faster but not as good sourcemap
   devtool: '#eval-cheap-module-source-map',
+
+  resolve: {
+    // root: [
+    //   path.join(__dirname, "node_modules"),
+    //   path.join(__dirname, "bower_components")
+    // ]
+    modulesDirectories: ['node_modules', 'bower_components'],
+  },
+
+  plugins: [
+    // makes bower (and normal) packages requirable
+    new webpack.ResolverPlugin([
+      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("package.json", ["main"]),
+      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
+      ]),
+    // serve jQuery to every modules
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 
   devServer: {
     port: 3000,
@@ -31,13 +54,6 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
     stats: { colors: true },
 
   },
-
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    // new BowerWebPackPlugin({
-    //   excludes: /(.*\.less)|(.*\.sass)/
-    // }),
-  ]
 
 });
 

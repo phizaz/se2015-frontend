@@ -34,11 +34,11 @@ module.exports = {
             { test: /\.html$/, loader: 'html' },
 
             // fonts
-            { test: /\.(woff|ttf|eot)([\?]?.*)$/, loader: 'file-loader?name=[name].[ext]' },
+            { test: /\.(woff|svg|ttf|eot)([\?]?.*)$/, loader: 'file?name=[name].[ext]' },
 
             // images
             {
-              test: /\.(jpe?g|png|gif|svg)$/i,
+              test: /\.(jpe?g|png|gif)$/i,
               loaders: [
                 'file?hash=sha256&digest=hex&name=[hash].[ext]',
                 'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
