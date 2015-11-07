@@ -20,16 +20,18 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
 
   plugins: [
     // makes bower (and normal) packages requirable
-    new webpack.ResolverPlugin([
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("package.json", ["main"]),
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
+    new webpack.ResolverPlugin(
+      [
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("package.json", ["main"]),
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
       ]),
     // serve jQuery to every modules
-    new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery"
-    }),
+    new webpack.ProvidePlugin(
+      {
+          $: "jquery",
+          jQuery: "jquery",
+          "window.jQuery": "jquery"
+      }),
     new webpack.HotModuleReplacementPlugin(),
   ],
 

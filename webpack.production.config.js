@@ -9,7 +9,28 @@ var webpackProductionConfig = _.extend(webpackBaseConfig, {
   // the perfect sourcemap used only for production
   devtool: '#source-map',
 
+  resolve: {
+    // root: [
+    //   path.join(__dirname, "node_modules"),
+    //   path.join(__dirname, "bower_components")
+    // ]
+    modulesDirectories: ['node_modules', 'bower_components'],
+  },
+
   plugins: [
+    // makes bower (and normal) packages requirable
+    new webpack.ResolverPlugin(
+      [
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("package.json", ["main"]),
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
+      ]),
+    // serve jQuery to every modules
+    new webpack.ProvidePlugin(
+      {
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
+      }),
     new ngAnnotatePlugin(),
     new webpack.optimize.UglifyJsPlugin({ sourceMap: true })
   ],
