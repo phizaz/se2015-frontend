@@ -2,9 +2,11 @@ import angular from 'angular';
 import 'angular-ui-router';
 
 import homeTemplate from './home.template.html';
+import {homeControllerModule} from './home.controller.js';
 
 export let homeRouteModule = angular.module('homeRouteModule', [
-  'ui.router']);
+  'ui.router',
+  homeControllerModule.name]);
 
 homeRouteModule.config(
   ($stateProvider) => {
@@ -12,8 +14,7 @@ homeRouteModule.config(
       .state('navigator.home', {
         url: '/',
         template: homeTemplate,
-        controller: function homeRouteController () {
-          console.log('controller loaded!!');
-        },
+        controller: 'homeController',
+        controllerAs: 'home',
       });
   });
