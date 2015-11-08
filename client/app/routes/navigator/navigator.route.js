@@ -2,19 +2,21 @@ import angular from 'angular';
 import 'angular-ui-router';
 
 import navigatorTemplate from './navigator.template.html';
+import './navigator.sass';
 
-let that = angular.module('navigatorRouteModule', [
-  'ui.router'
+import {homeRouteModule} from '../home/home.route.js';
+
+export let navigatorRouteModule = angular.module('navigatorRouteModule', [
+  'ui.router',
+  homeRouteModule.name,
   ]);
 
-export let navigatorRouteModule = that;
-
-that.config(
-  function navigatorRouteModuleConfig($stateProvider) {
+navigatorRouteModule.config(
+  ($stateProvider) => {
     $stateProvider
       // login with facebook page
       .state('navigator', {
-        url: '/',
+        abstract: true,
         template: navigatorTemplate,
       });
   });
