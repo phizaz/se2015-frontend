@@ -120,3 +120,7 @@ npm test
 
 # หากต้องการ่ทำให้ REPO นี้ดีขึ้น
 สามารถ contribute ด้วยการ fork ไปแล้วสร้าง branch ของตัวเอง ตั้งชื่อเป็นสิ่งที่ต้องการจะเพิ่มเติม (ชื่อ feature) เมื่อแก้ไขทุกอย่างเรียบร้อยแล้ว (ทดสอบด้วยนะ -..-) ก็ขอ pull request มา
+
+# อ่านเพิ่มเติม
+1. [Gocardless' Angular Style](https://github.com/gocardless/angularjs-style-guide)
+2. [Exploring Angular 1.3: Binding to Directive Controllers](http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html)
