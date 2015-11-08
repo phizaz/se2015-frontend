@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Sun Sep 27 2015 13:42:07 GMT+0700 (ICT)
+var path = require('path');
 var _ = require('lodash');
 
 var webpackConfig = _.clone(require('./webpack.development.config'));
@@ -18,7 +19,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'client/app/**/*.spec.js',
+        'client/**/*.spec.js',
     ],
 
 
@@ -26,24 +27,27 @@ module.exports = function(config) {
     exclude: [
     ],
 
-    webpack: _.extend(webpackConfig, {
-        devtool: 'inline-source-map'
-    }),
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-        'client/app/**/*.spec.js': ['webpack', 'sourcemap']
+    webpack: {
+        devtool: 'inline-source-map',
+        module: {
+            preLoaders: [
+                {test: /_spec\.js$/, loader: 'babel', include: [path.resolve('./client')]},
+            ],
+            loaders: webpackConfig.module.loaders,
+        },
+        cache: true,
     },
-
-    // plugins: [
-    //     require("karma-webpack")
-    // ],
 
     webpackMiddleware: {
         // webpack-dev-middleware configuration
         // i. e.
         noInfo: true
+    },
+
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+        'client/**/*.spec.js': ['webpack', 'sourcemap']
     },
 
     // test results reporter to use
@@ -71,7 +75,8 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    // browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
