@@ -27,7 +27,7 @@ export let Messager =
         throw new Error('broadcasting without listeners');
       }
 
-      this.$rootScope.emit(identifier, message);
+      this.$rootScope.$emit(identifier, message);
     }
 
     /**
@@ -42,12 +42,12 @@ export let Messager =
       // register the listener
       this.private.listeners[identifier] = true;
 
-      let destroyer = this.$rootScope.on(identifier, callbackWrapper);
+      let destroyer = this.$rootScope.$on(identifier, callbackWrapper);
       return destroyerWrapper;
 
-      function callbackWrapper(args) {
+      function callbackWrapper(...args) {
         console.log('message arrives for:', identifier, 'content:', args);
-        callback(args);
+        callback(args[1]);
       }
 
       function destroyerWrapper() {

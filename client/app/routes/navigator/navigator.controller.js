@@ -2,7 +2,12 @@ import _ from 'lodash';
 
 export let NavigatorController =
   class NavigatorController {
-    constructor(Navigator) {
+    constructor(Navigator, Messager) {
+
+      Messager.on('pageChanged',
+        (message) => {
+          this.currentPage = message.page;
+        });
 
       // private vars
       this.private = {};
@@ -10,11 +15,7 @@ export let NavigatorController =
 
       // 'this' is the scope
       _.extend(this, {
-
+        currentPage: null
       });
-    }
-
-    getCurrentPage() {
-      return this.private.Navigator.currentPage;
     }
   };
