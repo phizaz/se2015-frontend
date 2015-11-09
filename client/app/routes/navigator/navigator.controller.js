@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
-export let NavigatorController =
-  class NavigatorController {
+export class NavigatorController {
     constructor(Navigator, Messager) {
 
       Messager.on('pageChanged',
@@ -18,4 +17,4 @@ export let NavigatorController =
         currentPage: null
       });
     }
-  };
+  }

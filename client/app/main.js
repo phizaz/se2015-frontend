@@ -5,7 +5,7 @@ import {mainConfigModule} from './config/main.config.js';
 import {navigatorRouteModule} from './routes/navigator/navigator.route.js';
 
 
-let that = angular.module('mainModule', [
+export let mainModule = angular.module('mainModule', [
   'ui.router',
   mainConfigModule.name,
 
@@ -15,9 +15,7 @@ let that = angular.module('mainModule', [
   ]);
 
 // export this module to the outside world
-export let mainModule = that;
-
-that.run(
+mainModule.run(
   function mainModuleRun($rootScope) {
     console.log('the app is running');
 
