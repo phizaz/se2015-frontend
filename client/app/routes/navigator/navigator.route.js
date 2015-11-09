@@ -1,14 +1,16 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
+import {homeRouteModule} from '../home/home.route.js';
+
+import {NavigatorController} from './navigator.controller.js';
 import navigatorTemplate from './navigator.template.html';
 import './navigator.sass';
 
-import {homeRouteModule} from '../home/home.route.js';
-
-export let navigatorRouteModule = angular.module('navigatorRouteModule', [
-  'ui.router',
-  homeRouteModule.name,
+export let navigatorRouteModule =
+  angular.module('navigatorRouteModule', [
+    'ui.router',
+    homeRouteModule.name,
   ]);
 
 navigatorRouteModule.config(
@@ -18,5 +20,7 @@ navigatorRouteModule.config(
       .state('navigator', {
         abstract: true,
         template: navigatorTemplate,
+        controller: NavigatorController,
+        controllerAs: 'navigator',
       });
   });
