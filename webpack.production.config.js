@@ -14,6 +14,8 @@ var webpackProductionConfig = _.extend(webpackBaseConfig, {
   },
 
   plugins: [
+    // this will make it requirable but not include in the bundle
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
     // makes bower (and normal) packages requirable
     new webpack.ResolverPlugin(
       [

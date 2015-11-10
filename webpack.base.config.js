@@ -6,8 +6,9 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        app: ['./client/app/bootstrap.js'],
         vendor: ['jquery'],
+        app: ['./client/app/bootstrap.js'],
+        bootstrapper: ['./client/bootstrapper/main.js'],
     },
     output: {
         path: path.resolve(__dirname, 'public'),
