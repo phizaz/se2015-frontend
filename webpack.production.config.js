@@ -10,10 +10,6 @@ var webpackProductionConfig = _.extend(webpackBaseConfig, {
   devtool: '#source-map',
 
   resolve: {
-    // root: [
-    //   path.join(__dirname, "node_modules"),
-    //   path.join(__dirname, "bower_components")
-    // ]
     modulesDirectories: ['node_modules', 'bower_components'],
   },
 

@@ -11,21 +11,19 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
   devtool: '#eval-cheap-module-source-map',
 
   resolve: {
-    // root: [
-    //   path.join(__dirname, "node_modules"),
-    //   path.join(__dirname, "bower_components")
-    // ]
     modulesDirectories: ['node_modules', 'bower_components'],
   },
 
   plugins: [
+    // this will make it requirable but not include in the bundle
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
     // makes bower (and normal) packages requirable
     new webpack.ResolverPlugin(
       [
         new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("package.json", ["main"]),
         new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
       ]),
-    // serve jQuery to every modules
+    // serve jQuery to every modules (from the commonchunkplugin)
     new webpack.ProvidePlugin(
       {
           $: "jquery",
@@ -41,8 +39,8 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
     hot: true,
 
     proxy: {
-      '/server/*': {
-        target: webpackBaseConfig.baseUrl + '/server',
+      '/api*': {
+        target: 'http://homstead.app',
         secure: false,
       },
     },

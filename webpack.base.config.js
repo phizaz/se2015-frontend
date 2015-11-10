@@ -5,11 +5,9 @@
 var path = require('path');
 
 module.exports = {
-    // this will be use as proxy for development server
-    // it will be called for backend
-    baseUrl: 'http://angular-seed.dev',
     entry: {
         app: ['./client/app/bootstrap.js'],
+        vendor: ['jquery'],
     },
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -18,6 +16,10 @@ module.exports = {
         publicPath: '/public/',
         filename: '[name].bundle.js',
     },
+    // // tells webpack not to include jquery in the bundle
+    // externals: {
+    //     jquery: 'jQuery'
+    // },
     module: {
 
         /**
