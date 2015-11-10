@@ -3,12 +3,10 @@
 // babel polyfills
 import 'babel/polyfill';
 
-// bootstrap is included natively
-// import 'bootstrap-sass!../../bootstrap-sass.config.js';
-
 // materialize
 import 'Materialize/dist/css/materialize.css';
 import 'Materialize/dist/js/materialize.js';
+
 // font-awesome
 import 'font-awesome/css/font-awesome.css';
 

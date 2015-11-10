@@ -10,11 +10,10 @@ export let mainModule = angular.module('mainModule', [
   mainConfigModule.name,
 
   // Routes
-  // this should contain all the routes that don't depend on others say parent routes
+  // this should list all the routes that don't depend on others say parent routes
   navigatorRouteModule.name,
   ]);
 
-// export this module to the outside world
 mainModule.run(
   function mainModuleRun($rootScope) {
     console.log('the app is running');
