@@ -45,7 +45,4 @@ export function loginFormDirective() {
 export let loginFormDirectiveModule =
   angular.module('loginFormDirectiveModule', []);
 
-loginFormDirectiveModule.directive('loginForm',
-  () => {
-    return loginFormDirective();
-  });
+loginFormDirectiveModule.directive('loginForm', loginFormDirective);

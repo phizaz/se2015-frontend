@@ -59,8 +59,4 @@ export function loginModalDirective() {
 export let loginModalDirectiveModule =
   angular.module('loginModalDirectiveModule', []);
 
-loginModalDirectiveModule.directive('loginModal',
-  () => {
-    // return new LoginModalDirective();
-    return loginModalDirective();
-  });
+loginModalDirectiveModule.directive('loginModal', loginModalDirective);
