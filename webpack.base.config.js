@@ -6,7 +6,11 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        vendor: ['jquery'],
+        vendor: [
+            'jquery',
+            // 'pace/pace.js',
+            // 'pace/themes/orange/pace-theme-minimal.css',
+        ],
         app: ['./client/app/bootstrap.js'],
         bootstrapper: ['./client/bootstrapper/main.js'],
     },
