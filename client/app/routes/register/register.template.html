@@ -1,0 +1,51 @@
+<body>
+<div id="register-page-wrapper">
+	<form>
+ 	<img src="../../images/BlankFace.jpg" height="200px"><img>
+ 	<input type="file" ng-model="register.form.photo"></input>
+ 	<div>เลือกภาพ</div>
+ 	<div>
+ 		<span>ชื่อ</span>
+ 		<span>นามสกุล</span>
+ 	</div>
+ 
+ 		<input type='text' ng-model="register.form.firstname"></input>
+ 		<input type='text' ng-model="register.form.lastname"></input>
+ 		
+ 	<div>ที่อยู่</div>
+ 	<input type='text' ng-model="register.form.address"></input>
+ 	<div>เบอร์โทรศัพท์</div>
+ 	<input type='text' ng-model="register.form.telephone"></input>
+ 	<div>อีเมลล์</div>
+ 	<input type='text' ng-model="register.form.email"></input>
+ 	<div>
+ 		<span>เพศ</span>
+ 		<span>เชื้อชาติ</span>
+ 	</div>
+ 	<input ng-model="register.form.sex"></input>
+ 	<input ng-model="register.form.nation"></input>
+ 	<div>
+ 		<span>ศาสนา</span>
+ 		<span>กรุ๊ปเลือด</span>
+ 	</div>
+ 	<input ng-model="register.form.religion"></input>
+ 	<input ng-model="register.form.blood"></input>
+ 	<div></div>
+ 	<div>เลขประจำตัวประชาชน</div>
+ 	<input type='text' ng-model="register.form.pid"></input>
+ 	<div>
+ 		<span>รหัสผ่าน</span>
+ 		<span>ยืนยันรหัสผ่าน</span>
+ 	</div>
+ 	<input ng-model="register.form.password"></input>
+ 	<input ng-model="register.form.cpassword"></input>
+ 	</form>
+ 	</br>
+ 	<a class="amber darken-3 btn-large">ลงทะเบียน</a>
+ 	<div>
+ 		<span>เคยลงทะเบียนแล้ว? </span>
+ 		<login-modal name="register.loginModal"></login-modal>
+ 		<a ng-click="register.loginModal.show()">เข้าสู่ระบบได้เลย</a>
+ 	</div>
+</div>
+</body>

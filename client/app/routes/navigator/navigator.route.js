@@ -4,7 +4,7 @@ import 'angular-ui-router';
 // routes
 import {homeRouteModule} from '../home/home.route.js';
 import {loginRouteModule} from '../login/login.route.js';
-
+import {registerRouteModule} from '../register/register.route.js';
 // servicse
 import {navigatorServiceModule} from '../../services/navigator.service.js';
 import {messagerServiceModule} from '../../services/messager.service.js';
@@ -21,7 +21,7 @@ export let navigatorRouteModule =
     // routes
     homeRouteModule.name,
     loginRouteModule.name,
-
+    registerRouteModule.name,
     // services
     navigatorServiceModule.name,
     messagerServiceModule.name,
