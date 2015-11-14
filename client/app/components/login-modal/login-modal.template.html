@@ -1,9 +1,13 @@
 <div class="login-box-modal modal">
   <div class="modal-content">
-    <login-form></login-form>
+    <login-form name="loginModal.loginForm"></login-form>
+    username: {{loginModal.loginForm.username}}<br>
+    password: {{loginModal.loginForm.password}}
   </div>
   <div class="modal-footer">
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Login</a>
+    <a  ng-click="loginModal.login()"
+        href="#!"
+        class=" modal-action modal-close waves-effect waves-green btn-flat">Login</a>
     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Register</a>
   </div>
 </div>

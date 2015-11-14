@@ -9,11 +9,19 @@ import _ from 'lodash';
 import loginFormTemplate from './login-form.template.html';
 import './login-form.sass';
 
+export let loginFormDirectiveModule =
+  angular.module('loginFormDirectiveModule', []);
+
 export function loginFormDirective() {
   let shared = {};
 
   function controller () {
-    _.extend(this, {});
+    _.extend(this, {
+      form: {
+        username: '',
+        password: '',
+      }
+    });
   }
 
   function link($scope, element, attrs) {
@@ -29,7 +37,9 @@ export function loginFormDirective() {
     // create its isolate scope that will not interfere with
     // the outside world
     // scope is equivalent to `this` in the class
-    scope: {},
+    scope: {
+      form: '=name'
+    },
     // always use bindToController
     // so that the code will work as expected
     bindToController: true,
@@ -41,8 +51,5 @@ export function loginFormDirective() {
     template: loginFormTemplate,
   };
 }
-
-export let loginFormDirectiveModule =
-  angular.module('loginFormDirectiveModule', []);
 
 loginFormDirectiveModule.directive('loginForm', loginFormDirective);

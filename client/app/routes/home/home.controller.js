@@ -2,11 +2,13 @@ import _ from 'lodash';
 
 export class HomeController {
   constructor(Navigator) {
+    console.log('home controller is loaded');
     // set the current page
     Navigator.currentPage = 'home';
 
     this.private = {};
     this.private.input = 0;
+
 
     // assigning to this ($scope)
     // should be done in one place

@@ -3,7 +3,7 @@
  * <login-modal name="..."></login-modal>
  * ex.
  * <login-modal name="home.loginModal"></login-modal>
- * now, you can call home.loginModal.setActive()
+ * now, you can call home.loginModal.show()
  */
 
 import angular from 'angular';
@@ -11,17 +11,30 @@ import _ from 'lodash';
 
 import loginModalTemplate from './login-modal.template.html';
 import './login-modal.sass';
+import {loginServiceModule} from '../../services/login.service.js';
 
-export function loginModalDirective() {
+export let loginModalDirectiveModule =
+  angular.module('loginModalDirectiveModule', [
+    loginServiceModule.name
+  ]);
+
+export function loginModalDirective(Login) {
+  console.log('login modal is loaded');
   let shared = {};
 
   let api = {
-    setActive: setActive
+    show: show
   };
 
   function controller () {
+    console.log('login modal controller is loaded');
     // expose 'api' to the outside (=name)
-    _.extend(this, { api: api });
+    _.extend(this, {
+      api: api,
+      login: () => {
+        Login.takeLogin(this.form);
+      }
+    });
   }
 
   function link($scope, element, attrs) {
@@ -29,7 +42,8 @@ export function loginModalDirective() {
     shared.attrs = attrs;
   }
 
-  function setActive() {
+  function show() {
+    console.log('show');
     shared.element.children('.modal').openModal();
   }
 
@@ -55,8 +69,5 @@ export function loginModalDirective() {
     template: loginModalTemplate,
   };
 }
-
-export let loginModalDirectiveModule =
-  angular.module('loginModalDirectiveModule', []);
 
 loginModalDirectiveModule.directive('loginModal', loginModalDirective);
