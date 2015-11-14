@@ -20,6 +20,7 @@
     "jquery": "~2.1.4",
     "font-awesome": "~4.4.0",
     "Materialize": "materialize#~0.97.2",
-    "nprogress": "~0.2.0"
+    "nprogress": "~0.2.0",
+    "ui-select": "angular-ui-select#~0.13.2"
   }
 }
