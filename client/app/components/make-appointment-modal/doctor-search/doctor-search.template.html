@@ -1,0 +1,10 @@
+<div class="doctor-search">
+
+  <div class="input-field">
+    <i class="material-icons search prefix">search</i>
+    <input  id="doctor_name" type="text" class="validate"
+            ng-model="scope.form.doctorName"
+            ng-change="scope.getDoctorList(scope.form.doctorName)">
+    <label for="doctor_name">ค้นหาแพทย์ตามชื่อ</label>
+  </div>
+</div>

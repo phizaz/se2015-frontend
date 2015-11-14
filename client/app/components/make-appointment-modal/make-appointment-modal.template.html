@@ -1,0 +1,24 @@
+<div class="make-appointment-modal modal">
+  <div class="modal-content">
+    <div class="row">
+
+      <div class="search-doctor-name col s6">
+        <doctor-search name="modal.doctorSearcher"></doctor-search>
+      </div>
+
+      <div class="select-by-specialty col s6">
+        <specialty-select name="modal.specialtySelector"></specialty-select>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button ng-click="modal.findPossibleAppointments(modal.string, modal.type)"
+            class="modal-action modal-close waves-effect waves-light btn">
+      ค้นหาเวลานัด
+    </button>
+  </div>
+</div>
