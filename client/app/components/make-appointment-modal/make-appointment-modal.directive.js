@@ -31,7 +31,7 @@ export function makeAppointmentModalDirective() {
     _.extend(this, {
       type: '',
       string: '',
-      findPossibleAppointments: findPossibleAppointments,
+      getOptions: getOptions,
       api: {
         show: showModal
       },
@@ -49,7 +49,7 @@ export function makeAppointmentModalDirective() {
     shared.element.children('.modal').openModal();
   }
 
-  function findPossibleAppointments(string, type) {
+  function getOptions(string, type) {
     console.log('finding possible appoinments');
   }
 
