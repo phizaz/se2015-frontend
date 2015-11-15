@@ -10,6 +10,9 @@ import 'Materialize/dist/js/materialize.js';
 // font-awesome
 import 'font-awesome/css/font-awesome.css';
 
+// quark
+import './fonts/quark/stylesheet.css';
+
 import angular from 'angular';
 import {mainModule} from './main';
 
