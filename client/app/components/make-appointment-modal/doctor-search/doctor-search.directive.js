@@ -40,7 +40,7 @@ export function doctorSearchDirective(Doctor) {
     _.extend(this, {
       doctorList: shared.doctorList,
       form: {
-        doctorName: '',
+        doctor: null,
       },
     });
   }

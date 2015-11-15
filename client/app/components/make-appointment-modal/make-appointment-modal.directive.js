@@ -11,6 +11,7 @@ import _ from 'lodash';
 // directives
 import {doctorSearchDirectiveModule} from './doctor-search/doctor-search.directive.js';
 import {specialtySelectDirectiveModule} from './specialty-select/specialty-select.directive.js';
+import {appointmentSelectDirectiveModule} from './appointment-select/appointment-select.directive.js';
 
 // locals
 import makeAppointmentModalTemplate from './make-appointment-modal.template.html';
@@ -21,20 +22,24 @@ export let makeAppointmentModalDirectiveModule =
     .module('makeAppointmentModalDirectiveModule', [
       doctorSearchDirectiveModule.name,
       specialtySelectDirectiveModule.name,
+      appointmentSelectDirectiveModule.name,
     ])
     .directive('makeAppointmentModal', makeAppointmentModalDirective);
 
 export function makeAppointmentModalDirective() {
-  let shared = {};
+  let shared;
 
   function controller () {
-    _.extend(this, {
-      type: '',
-      string: '',
+    shared = this;
+
+    _.extend(shared, {
+      type: null,
       getOptions: getOptions,
       api: {
         show: showModal
       },
+      doctorSearcher: null,
+      specialtySelector: null,
     });
   }
 
@@ -42,15 +47,19 @@ export function makeAppointmentModalDirective() {
     shared.element = element;
     shared.attrs = attrs;
 
-    showModal();
+    // showModal();
   }
 
   function showModal() {
     shared.element.children('.modal').openModal();
   }
 
-  function getOptions(string, type) {
+  function getOptions() {
     console.log('finding possible appoinments');
+    console.log('doctorSearcher:', shared.doctorSearcher);
+    console.log('specialtySelector:', shared.specialtySelector);
+
+    // todo...
   }
 
   return {

@@ -36,7 +36,7 @@ export function specialtySelectDirective(Doctor) {
     _.extend(this, {
       specialtyList: shared.specialtyList,
       form: {
-        specialty: '',
+        specialty: null,
       },
     });
   }
@@ -60,6 +60,7 @@ export function specialtySelectDirective(Doctor) {
   return {
     restrict: 'E',
     scope: {
+      form: '=name'
     },
     bindToController: true,
     controller: controller,

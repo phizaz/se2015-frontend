@@ -1,3 +1,5 @@
+<!-- step 1 - select doctors  -->
+
 <div class="make-appointment-modal modal">
   <div class="modal-content">
 
@@ -10,8 +12,7 @@
 
       <div class="search-doctor-name col s6">
         <doctor-search
-          name="modal.doctorSearcher"
-          doctor-list="modal.doctorList"></doctor-search>
+          name="modal.doctorSearcher"></doctor-search>
       </div>
 
       <div class="select-by-specialty col s6">
@@ -24,10 +25,13 @@
 
   <div class="modal-footer">
     <div class="row">
-      <button ng-click="modal.getOptions(modal.string, modal.type)"
+      <button ng-click="modal.getOptions()"
               class="modal-action waves-effect waves-light btn quark bold">
         ค้นหาเวลานัด
       </button>
     </div>
   </div>
 </div>
+
+<!-- step 2 - select appointment -->
+<appointment-select></appointment-select>
