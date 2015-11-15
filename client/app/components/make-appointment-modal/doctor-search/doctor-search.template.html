@@ -1,19 +1,11 @@
 <div class="doctor-search">
 
-  <ui-select ng-model="selectedItem">
-    <ui-select-match>
-        <span ng-bind="$select.selected.firstname"></span>
-    </ui-select-match>
-    <ui-select-choices repeat="item in (scope.doctorList | filter: $select.search) track by item.id">
-        <span ng-bind="item.firstname"></span>
-        <span ng-bind="item.lastname"></span>
+  <ui-select ng-model="scope.form.doctorName" theme="selectize" ng-disabled="disabled" style="width: 300px;">
+    <ui-select-match placeholder="Select or search a country in the list...">{{$select.selected.firstname}}</ui-select-match>
+    <ui-select-choices repeat="doctor in scope.doctorList | filter: $select.search">
+      <span ng-bind-html="doctor.firstname | highlight: $select.search"></span>
+      <span ng-bind-html="doctor.lastname | highlight: $select.search"></span>
     </ui-select-choices>
   </ui-select>
-  <!-- <div class="input-field">
-    <i class="material-icons search prefix">search</i>
-    <input  id="doctor_name" type="text" class="validate"
-            ng-model="scope.form.doctorName"
-            ng-change="scope.getDoctorList(scope.form.doctorName)">
-    <label for="doctor_name">ค้นหาแพทย์ตามชื่อ</label>
-  </div> -->
+
 </div>

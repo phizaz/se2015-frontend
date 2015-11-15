@@ -15,7 +15,7 @@ export class HomeController {
     // when using `this` instead of $scope
     // you have to make sure you also use 'controllerAs'
     _.extend(this, {
-      test: 'aoeuaoeuao'
+      test: 'aoeuaoeuao',
     });
   }
 

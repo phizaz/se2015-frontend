@@ -56,7 +56,7 @@ export function makeAppointmentModalDirective() {
   return {
     restrict: 'E',
     scope: {
-      api: '=name'
+      api: '=name',
     },
     bindToController: true,
     controller: controller,

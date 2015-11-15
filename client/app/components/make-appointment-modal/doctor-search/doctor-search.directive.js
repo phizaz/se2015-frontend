@@ -12,8 +12,10 @@ import 'angular-sanitize';
 import 'ui-select/dist/select.js';
 import 'ui-select/dist/select.css';
 
-// services
-import {doctorSearchServiceModule} from '../../../services/doctorSearch.service.js';
+// selector theme
+import 'selectize/dist/css/selectize.default.css';
+
+import {doctorServiceModule} from '../../../services/doctor.service.js';
 
 import doctorSearchTemplate from './doctor-search.template.html';
 
@@ -22,11 +24,11 @@ export let doctorSearchDirectiveModule =
     .module('doctorSearchearchDirectiveModule', [
       'ui.select',
       'ngSanitize',
-      doctorSearchServiceModule.name,
+      doctorServiceModule.name,
     ])
     .directive('doctorSearch', doctorSearchDirective);
 
-export function doctorSearchDirective(DoctorSearch) {
+export function doctorSearchDirective(Doctor) {
   let shared = {
     doctorList: [],
   };
@@ -39,7 +41,6 @@ export function doctorSearchDirective(DoctorSearch) {
       form: {
         doctorName: '',
       },
-      getDoctorList: getDoctorList
     });
   }
 
@@ -48,21 +49,16 @@ export function doctorSearchDirective(DoctorSearch) {
     shared.attrs = attrs;
   }
 
-  function getDoctorList(name) {
-    console.log('..');
-    DoctorSearch
-      .search(name)
-      .then(
-        (result) => {
-          console.log('getDoctorlist:', result);
-          angular.copy(result, shared.doctorList);
-        });
+  function getDoctorList() {
+    Doctor
+      .getDoctorList()
+      .then((result) => angular.copy(result, shared.doctorList));
   }
 
   return {
     restrict: 'E',
     scope: {
-      form: '=name'
+      form: '=name',
     },
     bindToController: true,
     controller: controller,

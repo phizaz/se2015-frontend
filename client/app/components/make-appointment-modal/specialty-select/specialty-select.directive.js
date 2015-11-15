@@ -6,18 +6,34 @@
 import angular from 'angular';
 import _ from 'lodash';
 
+import 'angular-sanitize';
+import 'ui-select/dist/select.js';
+import 'ui-select/dist/select.css';
+
+// selector theme
+import 'selectize/dist/css/selectize.default.css';
+
+import {doctorServiceModule} from '../../../services/doctor.service.js';
+
 import specialtySelectTemplate from './specialty-select.template.html';
 
 export let specialtySelectDirectiveModule =
   angular
-    .module('specialtySelectDirectiveModule', [])
+    .module('specialtySelectDirectiveModule', [
+      doctorServiceModule.name,
+    ])
     .directive('specialtySelect', specialtySelectDirective);
 
-export function specialtySelectDirective() {
-  let shared = {};
+export function specialtySelectDirective(Doctor) {
+  let shared = {
+    specialtyList: [],
+  };
 
   function controller () {
+    getSpecialtyList();
+
     _.extend(this, {
+      specialtyList: shared.specialtyList,
       form: {
         specialty: '',
       },
@@ -27,16 +43,26 @@ export function specialtySelectDirective() {
   function link($scope, element, attrs) {
     shared.element = element;
     shared.attrs = attrs;
+
+
+  }
+
+  function getSpecialtyList() {
+    Doctor
+      .getSpecialtyList()
+      .then((result) => {
+        console.log('specialtyList:', result);
+        angular.copy(result, shared.specialtyList);
+      });
   }
 
   return {
     restrict: 'E',
     scope: {
-
     },
     bindToController: true,
     controller: controller,
-    controllerAs: 'modal',
+    controllerAs: 'scope',
     link: link,
     template: specialtySelectTemplate,
   };

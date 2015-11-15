@@ -16,6 +16,7 @@ export let homeRouteModule =
   angular.module('homeRouteModule', [
     'ui.router',
     navigatorServiceModule.name,
+
     loginModalDirectiveModule.name,
     makeAppointmentModalDirectiveModule.name,
   ]);
@@ -28,5 +29,8 @@ homeRouteModule.config(
         template: homeTemplate,
         controller: HomeController,
         controllerAs: 'home',
+        resolve: {
+
+        }
       });
   });
