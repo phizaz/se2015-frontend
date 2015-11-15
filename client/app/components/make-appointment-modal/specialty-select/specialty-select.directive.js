@@ -16,6 +16,7 @@ import 'selectize/dist/css/selectize.default.css';
 import {doctorServiceModule} from '../../../services/doctor.service.js';
 
 import specialtySelectTemplate from './specialty-select.template.html';
+import './specialty-select.sass';
 
 export let specialtySelectDirectiveModule =
   angular

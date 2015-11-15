@@ -1,6 +1,6 @@
 <div class="specialty-select">
 
-  <ui-select ng-model="scope.form.specialty" theme="selectize" style="width: 300px;">
+  <ui-select ng-model="scope.form.specialty" theme="selectize">
     <ui-select-match placeholder="โปรดเลือกแพทย์เฉพาะทางที่ต้องการพบ">{{$select.selected.val}}</ui-select-match>
     <ui-select-choices repeat="specialty in scope.specialtyList | filter: $select.search">
       <span ng-bind-html="specialty.val | highlight: $select.search"></span>

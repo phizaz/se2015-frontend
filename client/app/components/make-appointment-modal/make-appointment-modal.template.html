@@ -1,6 +1,8 @@
 <div class="make-appointment-modal modal">
   <div class="modal-content">
+
     <div class="row">
+      <h4 class="bold quark col s12">ค้นหานัดหมายแพทย์</h4>
 
       <div class="search-doctor-name col s6">
         <doctor-search
@@ -12,13 +14,13 @@
         <specialty-select
           name="modal.specialtySelector"></specialty-select>
       </div>
-
     </div>
+
   </div>
 
   <div class="modal-footer">
     <button ng-click="modal.findPossibleAppointments(modal.string, modal.type)"
-            class="modal-action modal-close waves-effect waves-light btn">
+            class="modal-action modal-close waves-effect waves-light btn quark bold">
       ค้นหาเวลานัด
     </button>
   </div>

@@ -4,6 +4,8 @@ import 'angular-ui-router';
 import {mainConfigModule} from './config/main.config.js';
 import {navigatorRouteModule} from './routes/navigator/navigator.route.js';
 
+// main css file
+import './main.sass';
 
 export let mainModule = angular.module('mainModule', [
   'ui.router',

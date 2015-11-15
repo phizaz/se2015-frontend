@@ -18,6 +18,7 @@ import 'selectize/dist/css/selectize.default.css';
 import {doctorServiceModule} from '../../../services/doctor.service.js';
 
 import doctorSearchTemplate from './doctor-search.template.html';
+import './doctor-search.sass';
 
 export let doctorSearchDirectiveModule =
   angular
