@@ -2,7 +2,7 @@
 export class SRegisterController {
 
   constructor(Navigator, SRegister) {
-    Navigator.currentPage = 'Sregister';
+    Navigator.currentPage = 'SRegister';
     this.SRegister =SRegister;
     this.form = {};
   }

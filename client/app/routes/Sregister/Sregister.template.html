@@ -1,0 +1,41 @@
+<body>
+<div id="Sregister-page-wrapper">
+	<form>
+ 	<img src="../../images/BlankFace.jpg" height="200px"><img>
+ 	<input type="file" ng-model="Sregister.form.photo"></input>
+ 	<div>เลือกภาพ</div>
+ 	<div><span>ร้องขอตำแหน่ง</span>
+ 		<span>ความถนัดเฉพาะ(แพทย์)</span>
+ 	</div>
+ 	<input></input>
+ 	<input type='text'></input>
+ 	<div>
+ 		<span>ชื่อ</span>
+ 		<span>นามสกุล</span>
+ 	</div>
+ 
+ 		<input type='text' ng-model="Sregister.form.firstname"></input>
+ 		<input type='text' ng-model="Sregister.form.lastname"></input>
+ 	<div>เบอร์โทรศัพท์</div>
+ 	<input type='text' ng-model="Sregister.form.telephone"></input>
+ 	<div>อีเมลล์</div>
+ 	<input type='text' ng-model="Sregister.form.email"></input>
+ 	
+ 	<div>ยูสเซอร์เนม</div>
+ 	<input type='text' ng-model="Sregister.form.pid" length="10"></input>
+ 	<div>z
+ 		<span>รหัสผ่าน</span>
+ 		<span>ยืนยันรหัสผ่าน</span>
+ 	</div>
+ 	<input ng-model="Sregister.form.password"></input>
+ 	<input ng-model="Sregister.form.cpassword"></input>
+ 	</form>
+ 	</br>
+ 	<a class="amber darken-3 btn-large" ng-click="Sregister.show()">ลงทะเบียน</a>
+ 	<div>
+ 		<span>เคยลงทะเบียนแล้ว? </span>
+ 		<login-modal name="Sregister.loginModal"></login-modal>
+ 		<a ng-click="Sregister.loginModal.show()">เข้าสู่ระบบได้เลย</a>
+ 	</div>
+</div>
+</body>

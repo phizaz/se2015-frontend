@@ -1,10 +1,10 @@
 import angular from 'angular';
 import _ from 'lodash';
 
-export let registerServiceModule =
-  angular.module('registerServiceModule', []);
+export let SregisterServiceModule =
+  angular.module('SregisterServiceModule', []);
 
-export class Register {
+export class SRegister {
   constructor($http) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)
@@ -16,8 +16,8 @@ export class Register {
     });
   }
 
-  takeRegister() {
-    console.log('registerSuccess');
+  takeSregister() {
+    console.log('SRegisterSuccess');
     return new Promise(
       (resolve, reject) => {
 
@@ -51,4 +51,4 @@ export class Register {
 
 }
 
-registerServiceModule.service('Register', Register);
+SregisterServiceModule.service('Sregister', SRegister);
