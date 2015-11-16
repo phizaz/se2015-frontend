@@ -7,6 +7,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
+import {DirectiveBlueprint} from '../directive.js';
 
 // directives
 import {doctorSearchDirectiveModule} from './doctor-search/doctor-search.directive.js';
@@ -27,12 +28,35 @@ export let makeAppointmentModalDirectiveModule =
     .directive('makeAppointmentModal', makeAppointmentModalDirective);
 
 export function makeAppointmentModalDirective() {
-  let shared;
+  // this will be the same across the directive of this kind
+  let shared = {};
 
-  function controller () {
-    shared = this;
+  function link($scope, element, attrs) {
+    let my = DirectiveBlueprint.getPrivate($scope);
+    my.element = element;
+    my.attrs = attrs;
 
-    _.extend(shared, {
+    console.log('my:', my);
+
+    // showModal();
+  }
+
+  function controller ($scope) {
+    let my = DirectiveBlueprint.constructor($scope, this);
+
+    function showModal() {
+      my.element.children('.modal').openModal();
+    }
+
+    function getOptions() {
+      console.log('finding possible appoinments');
+      console.log('doctorSearcher:', my.doctorSearcher);
+      console.log('specialtySelector:', my.specialtySelector);
+
+      // todo...
+    }
+
+    _.extend(my, {
       type: null,
       getOptions: getOptions,
       api: {
@@ -41,25 +65,6 @@ export function makeAppointmentModalDirective() {
       doctorSearcher: null,
       specialtySelector: null,
     });
-  }
-
-  function link($scope, element, attrs) {
-    shared.element = element;
-    shared.attrs = attrs;
-
-    // showModal();
-  }
-
-  function showModal() {
-    shared.element.children('.modal').openModal();
-  }
-
-  function getOptions() {
-    console.log('finding possible appoinments');
-    console.log('doctorSearcher:', shared.doctorSearcher);
-    console.log('specialtySelector:', shared.specialtySelector);
-
-    // todo...
   }
 
   return {
