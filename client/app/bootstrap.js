@@ -3,6 +3,8 @@
 // babel polyfills
 import 'babel/polyfill';
 
+import angular from 'angular';
+
 // materialize
 import 'Materialize/dist/css/materialize.css';
 import 'Materialize/dist/js/materialize.js';
@@ -10,7 +12,9 @@ import 'Materialize/dist/js/materialize.js';
 // font-awesome
 import 'font-awesome/css/font-awesome.css';
 
-import angular from 'angular';
+// quark
+import './fonts/quark/stylesheet.css';
+
 import {mainModule} from './main';
 
 angular.element(document).ready(function() {

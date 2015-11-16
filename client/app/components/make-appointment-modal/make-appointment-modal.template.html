@@ -1,0 +1,37 @@
+<!-- step 1 - select doctors  -->
+
+<div class="make-appointment-modal modal">
+  <div class="modal-content">
+
+    <button class="close-button modal-close btn-flat">
+      <i class="fa fa-close"></i>
+    </button>
+
+    <div class="row">
+      <h4 class="bold quark col s12">ค้นหานัดหมายแพทย์</h4>
+
+      <div class="search-doctor-name col s6">
+        <doctor-search
+          name="modal.doctorSearcher"></doctor-search>
+      </div>
+
+      <div class="select-by-specialty col s6">
+        <specialty-select
+          name="modal.specialtySelector"></specialty-select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <div class="row">
+      <button ng-click="modal.getOptions()"
+              class="modal-action waves-effect waves-light btn quark bold">
+        ค้นหาเวลานัด
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- step 2 - select appointment -->
+<appointment-select></appointment-select>

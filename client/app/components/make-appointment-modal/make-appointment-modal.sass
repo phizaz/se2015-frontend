@@ -1,0 +1,20 @@
+.make-appointment-modal
+
+  .modal-content
+    $light-grey: rgb(180,180,180)
+    .close-button
+      color: $light-grey
+      position: absolute
+      right: 0px
+
+    .close-button:active, .close-button:focus
+      background-color: transparent
+
+    .close-button:hover
+      color: darken($light-grey, 10%)
+
+  .modal-footer
+    text-align: center
+
+    .btn
+      float: none

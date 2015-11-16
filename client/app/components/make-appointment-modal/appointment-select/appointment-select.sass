@@ -1,0 +1,35 @@
+.appointment-select
+
+  $orange: rgb(254,163,0)
+  $grey: rgb(66,66,66)
+
+  overflow: hidden
+
+  .modal-header
+    padding: 1rem
+    background-color: $orange
+
+  .modal-content
+    width: 100%
+    overflow-x: scroll
+    overflow-y: hidden
+
+    .appointment-card-wrapper
+      white-space: nowrap
+
+  .back-button
+    float: left
+
+  .next-button
+    float: right
+
+  .close-button
+    float: right
+    color: $grey
+    padding: 0rem 1rem
+
+  .close-button:active, .close-button:focus
+    background-color: transparent
+
+  .close-button:hover
+    color: darken($grey, 10%)
