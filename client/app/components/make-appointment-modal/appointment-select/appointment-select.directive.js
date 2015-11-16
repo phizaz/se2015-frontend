@@ -9,12 +9,16 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../../directive.js';
 
+import {appointmentSelectCardDirectiveModule} from './appointment-select-card/appointment-select-card.directive.js';
+
 import appointmentSelectTemplate from './appointment-select.template.html';
 import './appointment-select.sass';
 
 export let appointmentSelectDirectiveModule =
   angular
-    .module('appointmentSelectDirectiveModule', [])
+    .module('appointmentSelectDirectiveModule', [
+      appointmentSelectCardDirectiveModule.name,
+      ])
     .directive('appointmentSelect', appointmentSelect);
 
 export function appointmentSelect() {
