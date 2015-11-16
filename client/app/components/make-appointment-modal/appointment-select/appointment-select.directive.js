@@ -7,6 +7,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
+import {DirectiveBlueprint} from '../../directive.js';
 
 import appointmentSelectTemplate from './appointment-select.template.html';
 import './appointment-select.sass';
@@ -17,13 +18,16 @@ export let appointmentSelectDirectiveModule =
     .directive('appointmentSelect', appointmentSelect);
 
 export function appointmentSelect() {
-  let shared;
+  let shared = {};
 
+  function controller($scope) {
+    let my = DirectiveBlueprint.constructor($scope, this);
 
-  function controller() {
-    shared = this;
+    function showModal() {
+      my.element.children('.modal').openModal();
+    }
 
-    _.extend(shared, {
+    _.extend(my, {
       public: {
         show: showModal
       }
@@ -31,14 +35,11 @@ export function appointmentSelect() {
   }
 
   function link($scope, element, attrs) {
-    shared.element = element;
-    shared.attrs = attrs;
+    let my = DirectiveBlueprint.getPrivate($scope);
+    my.element = element;
+    my.attrs = attrs;
 
-    showModal();
-  }
-
-  function showModal() {
-    shared.element.children('.modal').openModal();
+    my.public.show();
   }
 
   return {
