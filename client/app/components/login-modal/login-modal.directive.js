@@ -31,12 +31,15 @@ export function loginModalDirective(Login) {
     // expose 'api' to the outside (=name)
     _.extend(this, {
       api: api,
+      reg: reg,
       login: () => {
-        Login.takeLogin(this.form);
+        Login.takeLogin(this.loginForm.username,this.loginForm.password);
       }
     });
   }
-
+  function reg(){
+    console.log("reg already");
+  }
   function link($scope, element, attrs) {
     shared.element = element;
     shared.attrs = attrs;

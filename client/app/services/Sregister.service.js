@@ -16,8 +16,15 @@ export class SRegister {
     });
   }
 
-  takeSregister() {
-    console.log('SRegisterSuccess');
+  takeSRegister(photo,role,specialist,firstname,lastname,telephone,email,uid,password) {
+    console.log(role);
+    console.log(specialist);
+    console.log(firstname);
+    console.log(lastname);
+    console.log(telephone);
+    console.log(email);
+    console.log(uid);
+    console.log(password);
     return new Promise(
       (resolve, reject) => {
 
@@ -51,4 +58,4 @@ export class SRegister {
 
 }
 
-SregisterServiceModule.service('Sregister', SRegister);
+SregisterServiceModule.service('SRegister', SRegister);

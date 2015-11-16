@@ -7,8 +7,8 @@ export class SRegisterController {
     this.form = {};
   }
 
-  show(){
-	this.SRegister.takeSRegister();
+  regis(){
+    this.SRegister.takeSRegister(this.photo,this.role,this.specialist,this.firstname,this.lastname,this.telephone,this.email,this.uid,this.password);
 	}
 }
 	

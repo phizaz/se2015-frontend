@@ -16,8 +16,9 @@ export class Login {
     });
   }
 
-  takeLogin() {
-    console.log('calling takeLogin()');
+  takeLogin(username,password) {
+    console.log(username);
+    console.log(password);
     return new Promise(
       (resolve, reject) => {
 

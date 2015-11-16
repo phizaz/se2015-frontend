@@ -16,8 +16,18 @@ export class Register {
     });
   }
 
-  takeRegister() {
-    console.log('registerSuccess');
+  takeRegister(photo,firstname,lastname,address,telephone,email,sex,nation,religion,blood,pid,password) {
+    console.log(firstname);
+    console.log(lastname);
+    console.log(address);
+    console.log(telephone);
+    console.log(email);
+    console.log(sex);
+    console.log(nation);
+    console.log(religion);
+    console.log(blood);
+    console.log(pid);
+    console.log(password);
     return new Promise(
       (resolve, reject) => {
 

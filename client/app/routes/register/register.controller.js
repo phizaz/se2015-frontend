@@ -1,14 +1,13 @@
 
-export class SRegisterController {
-
-  constructor(Navigator, SRegister) {
-    Navigator.currentPage = 'Sregister';
-    this.SRegister =SRegister;
+export class RegisterController {
+  constructor(Navigator, Register) {
+    Navigator.currentPage = 'register';
+    this.Register =Register;
     this.form = {};
   }
 
-  show(){
-	this.SRegister.takeSRegister();
+  regis(){
+    this.Register.takeRegister(this.photo,this.firstname,this.lastname,this.address,this.telephone,this.email,this.sex,this.nation,this.religion,this.blood,this.pid,this.password);
 	}
 }
 	
