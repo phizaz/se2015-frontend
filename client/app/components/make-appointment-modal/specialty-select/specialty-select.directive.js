@@ -5,6 +5,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
+import {DirectiveBlueprint} from '../../directive.js';
 
 import 'angular-sanitize';
 import 'ui-select/dist/select.js';
@@ -30,10 +31,20 @@ export function specialtySelectDirective(Doctor) {
     specialtyList: [],
   };
 
-  function controller () {
-    getSpecialtyList();
+  function getSpecialtyList() {
+    Doctor
+      .getSpecialtyList()
+      .then((result) => {
+        console.log('specialtyList:', result);
+        angular.copy(result, shared.specialtyList);
+      });
+  }
+  getSpecialtyList();
 
-    _.extend(this, {
+  function controller ($scope) {
+    let my = DirectiveBlueprint.constructor($scope, this);
+
+    _.extend(my, {
       specialtyList: shared.specialtyList,
       form: {
         specialty: null,
@@ -42,19 +53,9 @@ export function specialtySelectDirective(Doctor) {
   }
 
   function link($scope, element, attrs) {
-    shared.element = element;
-    shared.attrs = attrs;
-
-
-  }
-
-  function getSpecialtyList() {
-    Doctor
-      .getSpecialtyList()
-      .then((result) => {
-        console.log('specialtyList:', result);
-        angular.copy(result, shared.specialtyList);
-      });
+    let my = DirectiveBlueprint.getPrivate($scope);
+    my.element = element;
+    my.attrs = attrs;
   }
 
   return {
