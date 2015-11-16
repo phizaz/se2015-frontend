@@ -7,6 +7,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
+import {DirectiveBlueprint} from '../../directive.js';
 
 import 'angular-sanitize';
 import 'ui-select/dist/select.js';
@@ -30,14 +31,23 @@ export let doctorSearchDirectiveModule =
     .directive('doctorSearch', doctorSearchDirective);
 
 export function doctorSearchDirective(Doctor) {
+  // this will be the same across the directive of this kind
   let shared = {
     doctorList: [],
   };
 
-  function controller () {
-    getDoctorList();
+  // this will be done only once no mattter how many instances
+  function getDoctorList() {
+    Doctor
+      .getDoctorList()
+      .then((result) => angular.copy(result, shared.doctorList));
+  }
+  getDoctorList();
 
-    _.extend(this, {
+  function controller ($scope) {
+    let my = DirectiveBlueprint.constructor($scope, this);
+
+    _.extend(my, {
       doctorList: shared.doctorList,
       form: {
         doctor: null,
@@ -46,14 +56,10 @@ export function doctorSearchDirective(Doctor) {
   }
 
   function link($scope, element, attrs) {
-    shared.element = element;
-    shared.attrs = attrs;
-  }
+    let my = DirectiveBlueprint.getPrivate($scope);
 
-  function getDoctorList() {
-    Doctor
-      .getDoctorList()
-      .then((result) => angular.copy(result, shared.doctorList));
+    my.element = element;
+    my.attrs = attrs;
   }
 
   return {
