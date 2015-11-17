@@ -41,7 +41,9 @@ export function appointmentSelect(MakeAppointment) {
     }
 
     function showModal() {
-      my.element.children('.modal').openModal();
+      my.element.children('.modal').openModal({
+        dismissible: false,
+      });
     }
 
     function hideModal() {

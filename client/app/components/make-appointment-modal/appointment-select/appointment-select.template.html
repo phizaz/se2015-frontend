@@ -7,13 +7,13 @@
 
 
 
-    <button ng-click=""
-            class="close-button btn-flat">
+    <button
+      class="modal-close close-button btn-flat">
       <i class="fa fa-close"></i>
     </button>
 
     <button ng-click="my.submitAppointment()"
-            ng-disabled="my.submitting"
+            ng-disabled="my.submitting || !my.selectingCard"
             class="next-button modal-action waves-effect waves-light btn quark bold">
       <span ng-if="!my.submitting">ยืนยันการจอง</span>
       <span ng-if="my.submitting">รอซักครู่</span>

@@ -40,7 +40,9 @@ export function makeAppointmentModalDirective(MakeAppointment) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
     function showModal() {
-      my.element.children('.modal').openModal();
+      my.element.children('.modal').openModal({
+        dismissible: false,
+      });
     }
 
     function hideModal() {
