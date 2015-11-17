@@ -9,11 +9,15 @@
         <a ui-sref="navigator.login">Login</a>
       </li>
       <li ng-class="{ active: navigator.currentPage === 'register' }">
-        <a ui-sref="navigator.register">Register</a>  
-      </li>   
+        <a ui-sref="navigator.register">Register</a>
+      </li>
       <li ng-class="{ active: navigator.currentPage === 'SRegister' }">
-        <a ui-sref="navigator.SRegister">SRegister</a>  
-      </li> 
+        <a ui-sref="navigator.SRegister">SRegister</a>
+      </li>
+
+      <li ng-class="{ active: navigator.currentPage === 'doctor' }">
+        <a ui-sref="navigator.doctor">doctor</a>
+      </li>
     </ul>
   </div>
 </nav>

@@ -6,6 +6,8 @@ import {homeRouteModule} from '../home/home.route.js';
 import {loginRouteModule} from '../login/login.route.js';
 import {registerRouteModule} from '../register/register.route.js';
 import {SRegisterRouteModule} from '../Sregister/Sregister.route.js';
+import {doctorRouteModule} from '../doctor/doctor.route';
+
 // services
 import {navigatorServiceModule} from '../../services/navigator.service.js';
 import {messagerServiceModule} from '../../services/messager.service.js';
@@ -24,6 +26,7 @@ export let navigatorRouteModule =
     loginRouteModule.name,
     registerRouteModule.name,
     SRegisterRouteModule.name,
+    doctorRouteModule.name,
     // services
     navigatorServiceModule.name,
     messagerServiceModule.name,
