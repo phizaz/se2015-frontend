@@ -31,17 +31,7 @@ export function makeAppointmentModalDirective() {
   // this will be the same across the directive of this kind
   let shared = {};
 
-  function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
-    my.element = element;
-    my.attrs = attrs;
-
-    console.log('my:', my);
-
-    // showModal();
-  }
-
-  function controller ($scope) {
+  function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
     function showModal() {
@@ -65,6 +55,16 @@ export function makeAppointmentModalDirective() {
       doctorSearcher: null,
       specialtySelector: null,
     });
+  }
+
+  function link($scope, element, attrs) {
+    let my = DirectiveBlueprint.getPrivate($scope);
+    my.element = element;
+    my.attrs = attrs;
+
+    console.log('my:', my);
+
+    // showModal();
   }
 
   return {
