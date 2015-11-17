@@ -59,10 +59,6 @@ export function makeAppointmentModalDirective(MakeAppointment) {
     }
 
     function findOptions() {
-      console.log('finding possible appoinments');
-      console.log('doctorSearcher:', my.doctorSearcher);
-      console.log('specialtySelector:', my.specialtySelector);
-
       my.findingOptions = true;
       let promise = null;
 
@@ -126,7 +122,7 @@ export function makeAppointmentModalDirective(MakeAppointment) {
       attrs: attrs,
     });
 
-    my.showModal();
+    // my.showModal();
   }
 
   return {
