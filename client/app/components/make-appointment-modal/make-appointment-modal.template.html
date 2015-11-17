@@ -9,35 +9,44 @@
     </button>
 
     <div class="row">
-      <h4 class="bold quark col s12">ค้นหานัดหมายแพทย์</h4>
+      <h4 class="title bold quark col s12">นัดหมายออนไลน์</h4>
 
-      <div class="search-doctor-name col s6">
+      <!-- docotr search -->
+      <div
+        class="search-doctor-name col s6">
+        <h5 class="search-title">ค้นหาจากชื่อแพทย์</h5>
         <doctor-search
-          name="my.doctorSearcher"></doctor-search>
+          ng-class="{focused: my.searchingMethod === 'doctor'}"
+          name="my.doctorSearcher"
+          on-change="my.changeSearchingMethod('doctor')"></doctor-search>
       </div>
 
-      <div class="select-by-specialty col s6">
+      <!-- specialty select -->
+      <div
+        class="select-by-specialty col s6">
+        <h5 class="search-title">ค้นหาจากความถนัดของแพทย์</h5>
         <specialty-select
-          name="my.specialtySelector"></specialty-select>
+          ng-class="{focused: my.searchingMethod === 'specialty'}"
+          name="my.specialtySelector"
+          on-change="my.changeSearchingMethod('specialty')"></specialty-select>
       </div>
     </div>
 
   </div>
 
   <div class="modal-footer">
-    <div class="row">
-      <button ng-click="my.findOptions()"
-              ng-disabled="my.findingOptions"
-              class="modal-action waves-effect waves-light btn quark bold">
-        <span ng-if="!my.findingOptions">ค้นหาเวลานัด</span>
-        <span ng-if="my.findingOptions">รอซักครู่</span>
-      </button>
-    </div>
+    <button ng-click="my.findOptions()"
+            ng-disabled="my.findingOptions"
+            class="modal-action waves-effect waves-light btn quark bold">
+      <span ng-if="!my.findingOptions">ค้นหาเวลานัดหมาย</span>
+      <span ng-if="my.findingOptions">รอซักครู่</span>
+    </button>
   </div>
 </div>
 
 <!-- step 2 - select appointment -->
 <appointment-select
   name="my.appointmentSelector"
+  title="my.appointmentSelectorTitle"
   on-back="my.showModal()"
   possible-appointments="my.possibleAppointments"></appointment-select>

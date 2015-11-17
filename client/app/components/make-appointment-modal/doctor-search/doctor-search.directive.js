@@ -47,29 +47,38 @@ export function doctorSearchDirective(Doctor) {
   function controller ($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
+    function change() {
+      console.log('changed!');
+      my.onChange();
+    }
+
     _.extend(my, {
       doctorList: shared.doctorList,
-      form: {
-        doctor: null,
-      },
+      doctor: null,
+
+      change: change,
+      // this is put here intentionally
+      public: my,
     });
   }
 
   function link($scope, element, attrs) {
     let my = DirectiveBlueprint.getPrivate($scope);
-
-    my.element = element;
-    my.attrs = attrs;
+    _.extend(my, {
+      element: element,
+      attrs: attrs,
+    });
   }
 
   return {
     restrict: 'E',
     scope: {
-      form: '=name',
+      public: '=name',
+      onChange: '&',
     },
     bindToController: true,
     controller: controller,
-    controllerAs: 'scope',
+    controllerAs: 'my',
     link: link,
     template: doctorSearchTemplate,
   };

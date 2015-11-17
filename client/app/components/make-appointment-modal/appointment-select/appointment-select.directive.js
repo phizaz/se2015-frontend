@@ -119,6 +119,7 @@ export function appointmentSelect(MakeAppointment) {
     restrict: 'E',
     scope: {
       public: '=name',
+      title: '=',
       possibleAppointments: '=',
       onBack: '&'
     },

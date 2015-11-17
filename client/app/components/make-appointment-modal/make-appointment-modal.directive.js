@@ -49,32 +49,66 @@ export function makeAppointmentModalDirective(MakeAppointment) {
       my.element.children('.modal').closeModal();
     }
 
+    function makeTitle(searchMethod, searchString) {
+      let title = 'แสดงนัดหมาย';
+      title +=
+        (searchMethod === 'doctor') ?
+          'ของ ' + searchString
+          : 'จากแพทย์ที่มีความถนัดทาง ' + searchString;
+      return title;
+    }
+
     function findOptions() {
       console.log('finding possible appoinments');
       console.log('doctorSearcher:', my.doctorSearcher);
       console.log('specialtySelector:', my.specialtySelector);
 
-      // todo...
       my.findingOptions = true;
-      MakeAppointment
-        .findOptionsByDoctor()
+      let promise = null;
+
+      if (my.searchingMethod === 'doctor') {
+        promise = MakeAppointment.findOptionsByDoctor();
+      } else if (my.searchingMethod === 'specialty') {
+        promise = MakeAppointment.findOptionsBySpecialty();
+      } else {
+        throw new Error('no searchingMethod');
+      }
+
+      promise
         .then(
           (res) => {
             my.findingOptions = false;
-
             my.possibleAppointments = res;
+
             hideModal();
+            my.appointmentSelectorTitle =
+              makeTitle(my.searchingMethod,
+                (my.searchingMethod === 'doctor') ?
+                  my.doctorSearcher.doctor.firstname + ' ' + my.doctorSearcher.doctor.lastname
+                  : my.specialtySelector.specialty.val);
             my.appointmentSelector.showModal();
           });
     }
 
+    function changeSearchingMethod(option) {
+      console.log('changing seraching method:', option);
+      if (option !== 'doctor'  && option !== 'specialty') {
+        throw new Error('method is not right');
+      }
+
+      my.searchingMethod = option;
+    }
+
     _.extend(my, {
+      searchingMethod: null,
       possibleAppointments: [],
       type: null,
       doctorSearcher: null,
       specialtySelector: null,
       findingOptions: false,
+      appointmentSelectorTitle: null,
 
+      changeSearchingMethod: changeSearchingMethod,
       findOptions: findOptions,
       showModal: showModal,
       hideModal: hideModal,
