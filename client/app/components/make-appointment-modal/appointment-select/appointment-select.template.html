@@ -13,8 +13,10 @@
     </button>
 
     <button ng-click="my.submitAppointment()"
+            ng-disabled="my.submitting"
             class="next-button modal-action waves-effect waves-light btn quark bold">
-      ยืนยันการจอง
+      <span ng-if="!my.submitting">ยืนยันการจอง</span>
+      <span ng-if="my.submitting">รอซักครู่</span>
     </button>
 
     <div style="clear: both;"></div>
@@ -27,7 +29,8 @@
         ng-repeat="appointment in my.possibleAppointments"
         datetime="appointment.datetime"
         doctor="appointment.doctor"
-        on-click="my.select(my.appointmentSelectCards[$index])"
+        on-select="my.select(my.appointmentSelectCards[$index])"
+        on-deselect="my.deselect()"
         name="my.appointmentSelectCards[$index]"></appointment-select-card>
     </div>
   </div>

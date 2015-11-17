@@ -44,7 +44,11 @@ export function appointmentSelectCardDirective(MakeAppointment) {
           my.selecting = false;
           my.selected = !my.selected;
           // tell the parent
-          my.onClick();
+          if (my.selected) {
+            my.onSelect();
+          } else {
+            my.onDeselect();
+          }
         });
     }
 
@@ -79,7 +83,8 @@ export function appointmentSelectCardDirective(MakeAppointment) {
       public: '=name',
       datetime: '=',
       doctor: '=',
-      onClick: '&',
+      onSelect: '&',
+      onDeselect: '&',
     },
   };
 }

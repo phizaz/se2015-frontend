@@ -52,8 +52,13 @@ export function appointmentSelect(MakeAppointment) {
       my.element.children('.modal').openModal();
     }
 
+    function hideModal() {
+      my.element.children('.modal').closeModal();
+    }
+
     function select(cardInstance) {
       console.log('card:', cardInstance, 'is being selected');
+      my.selectingCard = cardInstance;
       // deselect the rest
       for (let card of appointmentSelectCards) {
         if (card === cardInstance) {
@@ -66,33 +71,40 @@ export function appointmentSelect(MakeAppointment) {
       }
     }
 
-    function submitAppointment() {
-      let selectedCard = null;
-      for (let card in appointmentSelectCards) {
-        if (card.selecetd) {
-          selectedCard = card;
-          break;
-        }
-      }
+    function deselect() {
+      my.selectingCard = null;
+    }
 
-      if (!selectedCard) {
+    function submitAppointment() {
+      if (!my.selectingCard) {
         throw new Error('no selected card');
       }
 
+      my.submitting = true;
       MakeAppointment
         .makeAppointment()
         .then(
           (res) => {
+            console.log('summiting result:', res);
+            my.submitting = false;
             // ...todo
+            //
+            // go some where
+            // hide modal
+            hideModal();
           });
     }
 
     _.extend(my, {
+      selectingCard: null,
+      submitting: false,
       possibleAppointments: possibleAppointments,
       appointmentSelectCards: appointmentSelectCards,
 
       show: showModal,
+      hide: hideModal,
       select: select,
+      deselect: deselect,
       submitAppointment: submitAppointment,
 
       // this is intensiontally placed here!
