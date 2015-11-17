@@ -3,7 +3,8 @@
 <div class="make-appointment-modal modal">
   <div class="modal-content">
 
-    <button class="close-button modal-close btn-flat">
+    <button
+      class="close-button modal-close btn-flat">
       <i class="fa fa-close"></i>
     </button>
 
@@ -12,12 +13,12 @@
 
       <div class="search-doctor-name col s6">
         <doctor-search
-          name="modal.doctorSearcher"></doctor-search>
+          name="my.doctorSearcher"></doctor-search>
       </div>
 
       <div class="select-by-specialty col s6">
         <specialty-select
-          name="modal.specialtySelector"></specialty-select>
+          name="my.specialtySelector"></specialty-select>
       </div>
     </div>
 
@@ -25,13 +26,18 @@
 
   <div class="modal-footer">
     <div class="row">
-      <button ng-click="modal.getOptions()"
+      <button ng-click="my.findOptions()"
+              ng-disabled="my.findingOptions"
               class="modal-action waves-effect waves-light btn quark bold">
-        ค้นหาเวลานัด
+        <span ng-if="!my.findingOptions">ค้นหาเวลานัด</span>
+        <span ng-if="my.findingOptions">รอซักครู่</span>
       </button>
     </div>
   </div>
 </div>
 
 <!-- step 2 - select appointment -->
-<appointment-select></appointment-select>
+<appointment-select
+  name="my.appointmentSelector"
+  on-back="my.showModal()"
+  possible-appointments="my.possibleAppointments"></appointment-select>

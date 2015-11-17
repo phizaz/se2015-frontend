@@ -12,7 +12,6 @@ import {DirectiveBlueprint} from '../../directive.js';
 // services
 import {makeAppointmentServiceModule} from '../../../services/makeAppointment.service';
 
-
 // directives
 import {appointmentSelectCardDirectiveModule} from './appointment-select-card/appointment-select-card.directive.js';
 
@@ -34,19 +33,12 @@ export function appointmentSelect(MakeAppointment) {
   function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
-    let possibleAppointments = [
-      { datetime: new Date("2016-10-10T14:48:00"),
-        doctor: 'นพ. กรพัฒน์ ปรีชากุล' },
-      { datetime: new Date("2015-10-10T12:00:00"),
-        doctor: 'นพ. กรพัฒน์ ปรีชากุล' },
-      { datetime: new Date(),
-        doctor: 'นพ. กรพัฒน์ ปรีชากุล' },
-      { datetime: new Date(),
-        doctor: 'นพ. กรพัฒน์ ปรีชากุล' },
-      { datetime: new Date(),
-        doctor: 'นพ. กรพัฒน์ ปรีชากุล' },
-    ];
     let appointmentSelectCards = [];
+
+    function back() {
+      hideModal();
+      my.onBack();
+    }
 
     function showModal() {
       my.element.children('.modal').openModal();
@@ -98,11 +90,11 @@ export function appointmentSelect(MakeAppointment) {
     _.extend(my, {
       selectingCard: null,
       submitting: false,
-      possibleAppointments: possibleAppointments,
       appointmentSelectCards: appointmentSelectCards,
 
-      show: showModal,
-      hide: hideModal,
+      back: back,
+      showModal: showModal,
+      hideModal: hideModal,
       select: select,
       deselect: deselect,
       submitAppointment: submitAppointment,
@@ -118,13 +110,15 @@ export function appointmentSelect(MakeAppointment) {
     my.element = element;
     my.attrs = attrs;
 
-    my.public.show();
+    // my.showModal();
   }
 
   return {
     restrict: 'E',
     scope: {
-      public: '=name'
+      public: '=name',
+      possibleAppointments: '=',
+      onBack: '&'
     },
     bindToController: true,
     controller: controller,
