@@ -43,7 +43,7 @@ export function appointmentSelect() {
     my.element = element;
     my.attrs = attrs;
 
-    my.public.show();
+    // my.public.show();
   }
 
   return {
