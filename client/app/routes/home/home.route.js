@@ -8,6 +8,7 @@ import {navigatorServiceModule} from '../../services/navigator.service.js';
 import {loginModalDirectiveModule} from '../../components/login-modal/login-modal.directive.js';
 import {makeAppointmentModalDirectiveModule} from '../../components/make-appointment-modal/make-appointment-modal.directive.js';
 import {greetDirectiveModule} from '../../components/greet/greet.directive.js';
+import {staffDirectiveTransacModule} from '../../components/staff-transac/staff-transac.directive.js';
 // locals
 import homeTemplate from './home.template.html';
 import {HomeController} from './home.controller.js';
@@ -18,6 +19,7 @@ export let homeRouteModule =
     navigatorServiceModule.name,
     greetDirectiveModule.name,
     loginModalDirectiveModule.name,
+    staffDirectiveTransacModule.name,
     makeAppointmentModalDirectiveModule.name,
   ]);
 

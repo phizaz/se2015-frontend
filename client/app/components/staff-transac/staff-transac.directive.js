@@ -2,16 +2,16 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive.js';
 
-import greetTemplate from './greet.template.html';
-import './greet.sass';
+import staffTransacTemplate from './staff-transac.template.html';
+import './staff-transac.sass';
 
-export let greetDirectiveModule =
+export let staffTransacDirectiveModule =
   angular
-    .module('greetDirectiveModule', [
+    .module('staffTransacDirectiveModule', [
       ])
-    .directive('greet', greet);
+    .directive('staffTransac', staffTransac);
 
-export function greet() {
+export function staffTransac() {
   let shared = {};
 
   function controller($scope) {
@@ -37,8 +37,8 @@ export function greet() {
     },
     bindToController: true,
     controller: controller,
-    controllerAs: 'greet',
+    controllerAs: 'staffTransac',
     link: link,
-    template: greetTemplate,
+    template: staffTransacTemplate,
   };
 }
