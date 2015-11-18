@@ -1,18 +1,30 @@
 import angular from 'angular';
 import _ from 'lodash';
 
+import {cacheServiceModule} from './cache.service';
+
+// local
+import isLoginMock './mocks/is-login.mock.json';
+
 export let loginServiceModule =
-  angular.module('loginServiceModule', []);
+angular.module('loginServiceModule', [
+  cacheServiceModule.name,
+  ]);
 
 export class Login {
-  constructor($http) {
+  constructor($http, Cache, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)
     this.private = {};
-    this.private.$http = $http;
+    _.extend(this.private, {
+      $http: $http,
+      Cache: Cache,
+      $q: $q,
+    });
 
     // set public vars (if any)
     _.extend(this, {
+
     });
   }
 
@@ -46,8 +58,56 @@ export class Login {
 
         //     });
 
+  });
+
+  }
+
+  isLoginFresh() {
+    console.log('getting fresh isLogin');
+
+    let $http = this.private.$http;
+    let Cache = this.private.Cache;
+    let $q = this.private.$q;
+
+    // real function
+    // return $q(
+    //     (resolve, reject) => {
+    //         $http
+    //             .get('/api/is-login')
+    //             .then(
+    //                 (res) => {
+    //                     Cache.setCache('is-login', res);
+    //                 });
+    //     });
+
+    // mock function
+    return $q(
+      (resolve, reject) => {
+        let delay = 10;
+        setTimeout(() => {
+          // set cache
+          Cache.setCache('is-login', isLoginMock);
+
+          resolve(isLoginMock);
+        }, delay);
       });
 
+  }
+
+  isLogin() {
+    console.log('getting isLogin..');
+
+    let $q = this.private.$q;
+    let Cache = this.private.cache;
+
+    return $q(
+      (resolve, reject) => {
+        if (Cache.isValid('is-login')) {
+          resolve(Cache.getCache('is-login'));
+        } else {
+          this.isLoginFresh().then((res) => resolve(res));
+        }
+      });
   }
 
 }
