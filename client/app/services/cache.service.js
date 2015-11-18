@@ -3,16 +3,12 @@ import _ from 'lodash';
 
 import moment from 'moment';
 
-export let cacheServiceModule =
-  angular.module('cacheServiceModule', []);
-
 export class Cache {
-
   constructor() {
 
     this.private = {};
     _.extend(this.private, {
-      defaultCacheLifetime: 2 * 3600,
+      defaultCacheLifetime: 2,
       cache: {},
       timeout: {},
     });
@@ -90,3 +86,8 @@ export class Cache {
     return cache;
   }
 }
+
+export let cacheServiceModule =
+  angular
+    .module('cacheServiceModule', [])
+    .service('Cache', Cache);
