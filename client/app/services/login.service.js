@@ -2,17 +2,19 @@ import angular from 'angular';
 import _ from 'lodash';
 
 import {cacheServiceModule} from './cache.service';
+import {callOnceServiceModule} from './callOnce.service';
 
 // local
-import isLoginMock './mocks/is-login.mock.json';
+import isLoginMock from './mocks/is-login.mock.json';
 
 export let loginServiceModule =
 angular.module('loginServiceModule', [
   cacheServiceModule.name,
+  callOnceServiceModule.name,
   ]);
 
 export class Login {
-  constructor($http, Cache, $q) {
+  constructor($http, Cache, $q, CallOnce) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)
     this.private = {};
@@ -20,12 +22,14 @@ export class Login {
       $http: $http,
       Cache: Cache,
       $q: $q,
+      CallOnce: CallOnce,
     });
 
     // set public vars (if any)
     _.extend(this, {
 
     });
+
   }
 
   takeLogin(username,password) {
@@ -58,16 +62,17 @@ export class Login {
 
         //     });
 
-  });
+    });
 
   }
 
   isLoginFresh() {
-    console.log('getting fresh isLogin');
+    // console.log('getting fresh isLogin');
 
     let $http = this.private.$http;
     let Cache = this.private.Cache;
     let $q = this.private.$q;
+    let CallOnce = this.private.CallOnce;
 
     // real function
     // return $q(
@@ -81,24 +86,29 @@ export class Login {
     //     });
 
     // mock function
-    return $q(
-      (resolve, reject) => {
-        let delay = 10;
-        setTimeout(() => {
-          // set cache
-          Cache.setCache('is-login', isLoginMock);
+    return CallOnce.call(mockRequest);
 
-          resolve(isLoginMock);
-        }, delay);
-      });
+    function mockRequest() {
+      // console.log('really do http request');
+      return $q(
+        (resolve, reject) => {
+          let delay = 10;
+          setTimeout(() => {
+            // set cache
+            Cache.setCache('is-login', isLoginMock);
+
+            resolve(isLoginMock);
+          }, delay);
+        });
+    }
 
   }
 
   isLogin() {
-    console.log('getting isLogin..');
+    // console.log('getting isLogin..');
 
     let $q = this.private.$q;
-    let Cache = this.private.cache;
+    let Cache = this.private.Cache;
 
     return $q(
       (resolve, reject) => {
