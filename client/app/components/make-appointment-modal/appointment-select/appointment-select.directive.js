@@ -76,7 +76,7 @@ export function appointmentSelect(MakeAppointment) {
 
       my.submitting = true;
       MakeAppointment
-        .makeAppointment()
+        .submitAppointment()
         .then(
           (res) => {
             console.log('summiting result:', res);

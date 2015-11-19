@@ -50,7 +50,7 @@ export class MakeAppointment {
       });
   }
 
-  makeAppointment() {
+  submitAppointment() {
     // the booked one
     return this.$q(
       (resolve, reject) => {
