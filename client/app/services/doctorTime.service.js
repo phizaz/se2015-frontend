@@ -2,6 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 
 import doctorTimeList from './mocks/doctorTimeList.mock.json';
+import doctorAppointmentList from './mocks/doctorAppointmentList.mock.json';
 
 export class DoctorTime{
   constructor($http, $q) {
@@ -10,6 +11,20 @@ export class DoctorTime{
       $http: $http,
       $q: $q,
     });
+  }
+
+  getDoctorAppointmentList(doctor) {
+    if (!doctor.emp_id) {
+      throw new Error('doctor.emp_id not found');
+    }
+
+    let $q = this.private.$q;
+
+    return $q(
+      (resolve, reject) => {
+        let delay = 10;
+        setTimeout(() => resolve(doctorAppointmentList), delay);
+      });
   }
 
   getDoctorTimeList(doctor) {
