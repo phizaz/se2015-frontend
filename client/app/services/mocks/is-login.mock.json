@@ -1,20 +1,18 @@
 {
   "success": true,
-  "data": [
-    {
-      "personal_id": "111111111111",
-      "firstname": "กรพัฒน์",
-      "lastname": "ปรีชากุล",
-      "birthdate": "1994-02-14",
-      "address": "218/238",
-      "gender": "M",
-      "religion": "พุทธ",
-      "nationality": "ไทย",
-      "bloodtype": "O",
-      "remark": null,
-      "updated_at": "2015-11-18 15:46:54",
-      "created_at": "2015-11-18 15:46:54",
-      "id": 1
-    }
-  ]
+  "data": {
+    "personal_id": "111111111111",
+    "firstname": "กรพัฒน์",
+    "lastname": "ปรีชากุล",
+    "birthdate": "1994-02-14",
+    "address": "218/238",
+    "gender": "M",
+    "religion": "พุทธ",
+    "nationality": "ไทย",
+    "bloodtype": "O",
+    "remark": null,
+    "updated_at": "2015-11-18 15:46:54",
+    "created_at": "2015-11-18 15:46:54",
+    "id": 1
+  }
 }

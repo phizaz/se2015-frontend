@@ -120,6 +120,20 @@ export class Login {
       });
   }
 
+  userInfo() {
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin().then((res) => {
+          if (res.data) {
+            resolve(res.data);
+          } else {
+            reject();
+          }
+        });
+      });
+  }
+
 }
 
 loginServiceModule.service('Login', Login);
