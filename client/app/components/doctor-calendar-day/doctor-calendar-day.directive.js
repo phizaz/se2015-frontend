@@ -37,7 +37,7 @@ export function doctorCalendarDayDirective() {
   return {
     restrict: 'E',
     scope: {
-
+      blockCounts: '=',
     },
     bindToController: true,
     controller: controller,
