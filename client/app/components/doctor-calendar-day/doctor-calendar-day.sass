@@ -1,0 +1,24 @@
+doctor-calendar-day
+  $grey: rgb(235,235,235)
+
+
+  .doctor-calendar-day
+    font-size: 1rem
+    width: 14.285714%
+    display: inline-block
+    box-sizing: border-box
+    border-right: 1px solid $grey
+    position: relative
+
+  .doctor-calendar-day.first
+    border-left: 1px solid $grey
+
+  .calendar-line
+    height: 65px
+    box-sizing: border-box
+
+  .calendar-line:nth-child(odd)
+    border-top: 1px solid $grey
+
+  .calendar-line:nth-child(even)
+    border-top: 1px dashed $grey

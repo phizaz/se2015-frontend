@@ -9,7 +9,19 @@ import './doctor-calendar-day.sass';
 export let doctorCalendarDayDirectiveModule =
   angular
     .module('doctorCalendarDayDirectiveModule', [])
-    .directive('doctorCalendarDay', doctorCalendarDayDirective);
+    .directive('doctorCalendarDay', doctorCalendarDayDirective)
+    .filter('range',
+      () => {
+        return (input, total) => {
+          total = parseInt(total);
+
+          for (var i=0; i<total; i++) {
+            input.push(i);
+          }
+
+          return input;
+        };
+    });
 
 export function doctorCalendarDayDirective() {
 
@@ -19,7 +31,6 @@ export function doctorCalendarDayDirective() {
     let my = DirectiveBlueprint.constructor($scope, this);
 
     _.extend(my, {
-
       // this is intentionally put here
       public: my,
     });
@@ -38,6 +49,7 @@ export function doctorCalendarDayDirective() {
     restrict: 'E',
     scope: {
       blockCounts: '=',
+      first: '=',
     },
     bindToController: true,
     controller: controller,

@@ -1,11 +1,21 @@
 <div class="doctor-route">
 
-  <div gridster>
+  <nav class="doctor-navigator">
+
+  </nav>
+
+  <!-- <div gridster>
     <ul>
       <li gridster-item="item"
           ng-repeat="item in doctor.items"></li>
     </ul>
-  </div>
+  </div> -->
+
+  <doctor-calendar-body
+    begin-hours="8"
+    block-counts="40"
+    margin-top="135"
+    time-width="100"></doctor-calendar-body>
 
 </div>
 

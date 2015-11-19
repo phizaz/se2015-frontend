@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export class DoctorController {
-  constructor(Navigator, $scope) {
+  constructor() {
     Navigator.currentPage = 'doctor';
 
     let items = [

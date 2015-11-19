@@ -1,0 +1,27 @@
+<div class="doctor-calendar-body">
+  <div class="doctor-calendar-time">
+    <div class="each-time-block" ng-repeat="calendarTime in my.calendarTimes">
+      <span ng-if="calendarTime.blockNumber % 2 === 0"
+            ng-bind="(calendarTime.time | amDateFormat: 'H:mm')"></span>
+    </div>
+  </div>
+
+
+  <div class="doctor-calendar-week">
+
+    <doctor-calendar-day block-counts="my.blockCounts" first="true"></doctor-calendar-day>
+
+    <doctor-calendar-day block-counts="my.blockCounts"></doctor-calendar-day>
+
+    <doctor-calendar-day block-counts="my.blockCounts"></doctor-calendar-day>
+
+    <doctor-calendar-day block-counts="my.blockCounts"></doctor-calendar-day>
+
+    <doctor-calendar-day block-counts="my.blockCounts"></doctor-calendar-day>
+
+    <doctor-calendar-day block-counts="my.blockCounts"></doctor-calendar-day>
+
+    <doctor-calendar-day block-counts="my.blockCounts"></doctor-calendar-day>
+
+  </div>
+</div>

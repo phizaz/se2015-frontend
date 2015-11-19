@@ -1,3 +1,11 @@
-<div class="doctor-calendar-day">
+<div
+  class="doctor-calendar-day"
+  ng-class="{first: my.first}">
+  <div  class="calendar-line"
+        ng-repeat="n in [] | range: my.blockCounts"
+        ng-style="my.calendarLineStyle">
+  </div>
 
+  <!-- <doctor-calendar-freetime
+    ng-repeat="" -->
 </div>

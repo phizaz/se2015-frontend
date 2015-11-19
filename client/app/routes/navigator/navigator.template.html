@@ -1,27 +1,30 @@
-<nav>
-  <div class="nav-wrapper container">
-    <a href="#" class="brand-logo">Logo</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li ng-class="{ active: navigator.currentPage === 'home' }">
-        <a ui-sref="navigator.home">Home</a>
-      </li>
-      <li ng-class="{ active: navigator.currentPage === 'login' }">
-        <a ui-sref="navigator.login">Login</a>
-      </li>
-      <li ng-class="{ active: navigator.currentPage === 'register' }">
-        <a ui-sref="navigator.register">Register</a>
-      </li>
-      <li ng-class="{ active: navigator.currentPage === 'SRegister' }">
-        <a ui-sref="navigator.SRegister">SRegister</a>
-      </li>
+<div class="navigator-route">
+  <nav class="navigator-wrapper">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li ng-class="{ active: navigator.currentPage === 'home' }">
+          <a ui-sref="navigator.home">Home</a>
+        </li>
+        <li ng-class="{ active: navigator.currentPage === 'login' }">
+          <a ui-sref="navigator.login">Login</a>
+        </li>
+        <li ng-class="{ active: navigator.currentPage === 'register' }">
+          <a ui-sref="navigator.register">Register</a>
+        </li>
+        <li ng-class="{ active: navigator.currentPage === 'SRegister' }">
+          <a ui-sref="navigator.SRegister">SRegister</a>
+        </li>
 
-      <li ng-class="{ active: navigator.currentPage === 'doctor' }">
-        <a ui-sref="navigator.doctor">doctor</a>
-      </li>
-    </ul>
+        <li ng-class="{ active: navigator.currentPage === 'doctor' }">
+          <a ui-sref="navigator.doctor">doctor</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="navigator-sub-route" ui-view>
+
   </div>
-</nav>
-
-<div ui-view>
 
 </div>
