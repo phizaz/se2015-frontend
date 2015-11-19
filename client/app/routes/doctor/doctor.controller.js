@@ -1,8 +1,9 @@
 import _ from 'lodash';
 
 export class DoctorController {
-  constructor() {
-    Navigator.currentPage = 'doctor';
+  constructor(userInfo) {
+
+    console.log('userInfo:', userInfo);
 
     let items = [
       { sizeX: 2, sizeY: 1, row: 0, col: 0 },
