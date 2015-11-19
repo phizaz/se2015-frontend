@@ -26,8 +26,8 @@ export function doctorCalendarBodyDirective() {
     let hoursPassed = blockNumber / 4;
     let minutesPassed = (blockNumber % 4) * 15;
 
-    console.log('hoursPassed:', hoursPassed);
-    console.log('minutesPassed:', minutesPassed);
+    // console.log('hoursPassed:', hoursPassed);
+    // console.log('minutesPassed:', minutesPassed);
 
     let time =
       moment({
