@@ -1,20 +1,22 @@
 <div class="appointment-select modal">
   <div class="modal-header">
-    <button ng-click=""
+    <button ng-click="my.back()"
             class="back-button modal-action waves-effect waves-light btn quark bold">
       กลับไปแก้ไข
     </button>
 
+    <h4 class="title" ng-bind="my.title"></h4>
 
-
-    <button ng-click=""
-            class="close-button btn-flat">
+    <button
+      class="modal-close close-button btn-flat">
       <i class="fa fa-close"></i>
     </button>
 
-    <button ng-click=""
+    <button ng-click="my.submitAppointment()"
+            ng-disabled="my.submitting || !my.selectingCard"
             class="next-button modal-action waves-effect waves-light btn quark bold">
-      ยืนยันการจอง
+      <span ng-if="!my.submitting">ยืนยันการจอง</span>
+      <span ng-if="my.submitting">รอซักครู่</span>
     </button>
 
     <div style="clear: both;"></div>
@@ -23,11 +25,13 @@
 
   <div class="modal-content">
     <div class="appointment-card-wrapper">
-      <appointment-select-card></appointment-select-card>
-      <appointment-select-card></appointment-select-card>
-      <appointment-select-card></appointment-select-card>
-      <appointment-select-card></appointment-select-card>
-      <appointment-select-card></appointment-select-card>
+      <appointment-select-card
+        ng-repeat="appointment in my.possibleAppointments"
+        datetime="appointment.datetime"
+        doctor="appointment.doctor"
+        on-select="my.select(my.appointmentSelectCards[$index])"
+        on-deselect="my.deselect()"
+        name="my.appointmentSelectCards[$index]"></appointment-select-card>
     </div>
   </div>
 </div>

@@ -44,28 +44,39 @@ export function specialtySelectDirective(Doctor) {
   function controller ($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
+    function change() {
+      my.onChange();
+    }
+
     _.extend(my, {
       specialtyList: shared.specialtyList,
-      form: {
-        specialty: null,
-      },
+      specialty: null,
+
+      change: change,
+
+      // this is intentionally put here
+      public: my,
     });
   }
 
   function link($scope, element, attrs) {
     let my = DirectiveBlueprint.getPrivate($scope);
-    my.element = element;
-    my.attrs = attrs;
+
+    _.extend(my, {
+      element: element,
+      attrs: attrs,
+    });
   }
 
   return {
     restrict: 'E',
     scope: {
-      form: '=name'
+      public: '=name',
+      onChange: '&',
     },
     bindToController: true,
     controller: controller,
-    controllerAs: 'scope',
+    controllerAs: 'my',
     link: link,
     template: specialtySelectTemplate,
   };

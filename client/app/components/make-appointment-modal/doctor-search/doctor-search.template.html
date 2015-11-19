@@ -1,11 +1,14 @@
 <div class="doctor-search">
 
-  <ui-select ng-model="scope.form.doctor" theme="selectize">
+  <ui-select
+    ng-model="my.doctor"
+    ng-click="my.change()"
+    theme="selectize">
     <ui-select-match placeholder="พิมพ์ชื่อแพทย์ที่ต้องการพบ ..">
       <span ng-bind="$select.selected.firstname"></span>
       <span ng-bind="$select.selected.lastname"></span>
     </ui-select-match>
-    <ui-select-choices repeat="doctor in scope.doctorList | filter: $select.search">
+    <ui-select-choices repeat="doctor in my.doctorList | filter: $select.search">
       <span ng-bind-html="doctor.firstname | highlight: $select.search"></span>
       <span ng-bind-html="doctor.lastname | highlight: $select.search"></span>
     </ui-select-choices>

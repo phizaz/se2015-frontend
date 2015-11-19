@@ -1,6 +1,20 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
+// moment
+// angular-moment will include things automatically
+import 'angular-moment';
+
+// materialize
+import 'Materialize/dist/css/materialize.css';
+import 'Materialize/dist/js/materialize.js';
+
+// font-awesome
+import 'font-awesome/css/font-awesome.css';
+
+// quark
+import './fonts/quark/stylesheet.css';
+
 import {mainConfigModule} from './config/main.config.js';
 import {navigatorRouteModule} from './routes/navigator/navigator.route.js';
 
@@ -9,6 +23,7 @@ import './main.sass';
 
 export let mainModule = angular.module('mainModule', [
   'ui.router',
+  'angularMoment',
   mainConfigModule.name,
 
   // Routes
@@ -17,7 +32,12 @@ export let mainModule = angular.module('mainModule', [
   ]);
 
 mainModule.run(
-  function mainModuleRun($rootScope) {
+  (amMoment) => {
+    amMoment.changeLocale('th');
+  });
+
+mainModule.run(
+  ($rootScope) => {
     console.log('the app is running');
 
     $rootScope.$on('$stateChangeSuccess',

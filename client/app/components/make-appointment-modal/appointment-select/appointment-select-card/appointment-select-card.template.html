@@ -1,21 +1,27 @@
-<div class="appointment-select-card card">
+<div  class="appointment-select-card card"
+      ng-class="{selected: my.selected}">
   <div class="card-content">
     <h4 class="appointment-date">
-      14 มีนาคม 2558
+      {{my.datetime | amDateFormat:'ddddที่ Do MMMM YYYY'}}
     </h4>
 
     <div class="appointment-time">
-      <h2>13.00 น.</h2>
+      <h2>{{my.datetime | amDateFormat:'H:mm'}} น.</h2>
     </div>
 
     <h4 class="doctor-name">
-      นพ.​ กรพัฒน์ ปรีชากุล
+      {{my.doctor}}
     </h4>
   </div>
   <div class="card-action">
-    <a href="#" class="quark bold">
+    <button
+      href="#" class="btn-flat quark bold booking-button"
+      ng-click="my.toggleSelect()"
+      ng-disabled="my.selecting">
       <i class="fa fa-heart"></i>
-      เลือก
-    </a>
+      <span ng-if="!my.selecting && !my.selected">เลือก</span>
+      <span ng-if="!my.selecting && my.selected">ไม่เลือก</span>
+      <span ng-if="my.selecting">รอซักครู่</span>
+    </button>
   </div>
 </div>
