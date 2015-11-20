@@ -7,9 +7,13 @@ import doctorAppointmentList from './mocks/doctorAppointmentList.mock.json';
 export class DoctorTime{
   constructor($http, $q) {
     this.private = {};
-    _.extend(this, {
+    _.extend(this.private, {
       $http: $http,
       $q: $q,
+    });
+
+    _.extend(this, {
+
     });
   }
 

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "doctor_id": 1,
+    "doctorTime_begin": "2015-11-10 9:00",
+    "doctorTime_end": "2015-11-10 10:00"
+    },
+  {
+    "id": 2,
+    "doctor_id": 1,
+    "doctorTime_begin": "2015-11-10 11:00",
+    "doctorTime_end": "2015-11-10 11:30"
+    },
+  {
+    "id": 3,
+    "doctor_id": 1,
+    "doctorTime_begin": "2015-11-10 12:45",
+    "doctorTime_end": "2015-11-10 15:00"
+    },
+  {
+    "id": 4,
+    "doctor_id": 1,
+    "doctorTime_begin": "2015-11-11 12:00",
+    "doctorTime_end": "2015-11-11 13:00"
+    },
+  {
+    "id": 5,
+    "doctor_id": 1,
+    "doctorTime_begin": "2015-11-12 15:00",
+    "doctorTime_end": "2015-11-12 18:00"
+    },
+  {
+    "id": 6,
+    "doctor_id": 1,
+    "doctorTime_begin": "2015-11-13 9:00",
+    "doctorTime_end": "2015-11-13 11:00"
+    },
+  {
+    "id": 7,
+    "doctor_id": 1,
+    "doctorTime_begin": "2015-11-15 14:45",
+    "doctorTime_end": "2015-11-15 15:15"
+    }
+]

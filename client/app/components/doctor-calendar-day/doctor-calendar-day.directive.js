@@ -2,26 +2,21 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive';
 
+// angular gridster
+import 'javascript-detect-element-resize/jquery.resize.js';
+import 'angular-gridster/dist/angular-gridster.min.js';
+import 'angular-gridster/dist/angular-gridster.min.css';
+
 // locals
 import template from './doctor-calendar-day.template.html';
 import './doctor-calendar-day.sass';
 
 export let doctorCalendarDayDirectiveModule =
   angular
-    .module('doctorCalendarDayDirectiveModule', [])
-    .directive('doctorCalendarDay', doctorCalendarDayDirective)
-    .filter('range',
-      () => {
-        return (input, total) => {
-          total = parseInt(total);
-
-          for (var i=0; i<total; i++) {
-            input.push(i);
-          }
-
-          return input;
-        };
-    });
+    .module('doctorCalendarDayDirectiveModule', [
+      'gridster',
+      ])
+    .directive('doctorCalendarDay', doctorCalendarDayDirective);
 
 export function doctorCalendarDayDirective() {
 
@@ -48,6 +43,7 @@ export function doctorCalendarDayDirective() {
   return {
     restrict: 'E',
     scope: {
+      date: '=',
       blockCounts: '=',
       first: '=',
     },

@@ -2,10 +2,8 @@ import angular from 'angular';
 import _ from 'lodash';
 import 'angular-ui-router';
 
-// angular gridster
-import 'javascript-detect-element-resize/jquery.resize.js';
-import 'angular-gridster/dist/angular-gridster.min.js';
-import 'angular-gridster/dist/angular-gridster.min.css';
+// services
+import {doctorTimeServiceModule} from '../../services/doctorTime.service';
 
 // directives
 import {doctorCalendarBodyDirectiveModule} from '../../components/doctor-calendar-body/doctor-calendar-body.directive';
@@ -18,7 +16,9 @@ import './doctor.sass';
 export let doctorRouteModule =
   angular.module('doctorRouteModule', [
     'ui.router',
-    'gridster',
+
+    // serivces
+    doctorTimeServiceModule.name,
 
     // directives
     doctorCalendarBodyDirectiveModule.name,
@@ -33,7 +33,9 @@ doctorRouteModule.config(
         controller: DoctorController,
         controllerAs: 'doctor',
         resolve: {
-
+          doctorTimeList: (DoctorTime, userInfo) => {
+            return DoctorTime.getDoctorTimeList(userInfo);
+          }
         }
       });
   });

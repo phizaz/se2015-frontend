@@ -11,9 +11,13 @@ export class Doctor {
 
   constructor ($http, $q) {
     this.private = {};
-    _.extend(this, {
+    _.extend(this.private, {
       $http: $http,
       $q: $q,
+    });
+
+    _.extend(this, {
+
     });
   }
 
