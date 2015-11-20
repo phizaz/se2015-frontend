@@ -2,12 +2,13 @@ import _ from 'lodash';
 import moment from 'moment';
 
 export class DoctorController {
-  constructor(userInfo, doctorTimeList) {
+  constructor(userInfo, doctorTimeList, doctorAppointmentList) {
 
     console.log('userInfo:', userInfo);
 
     _.extend(this, {
       doctorTimeList: doctorTimeList,
+      doctorAppointmentList: doctorAppointmentList,
       currentWeek: moment(),
     });
 

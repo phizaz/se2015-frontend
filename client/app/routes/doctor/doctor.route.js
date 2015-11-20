@@ -31,11 +31,14 @@ doctorRouteModule.config(
         url: '/doctor',
         template: doctorTemplate,
         controller: DoctorController,
-        controllerAs: 'doctor',
+        controllerAs: 'my',
         resolve: {
           doctorTimeList: (DoctorTime, userInfo) => {
             return DoctorTime.getDoctorTimeList(userInfo);
-          }
+          },
+          doctorAppointmentList: (DoctorTime, userInfo) => {
+            return DoctorTime.getDoctorAppointmentList(userInfo);
+          },
         }
       });
   });

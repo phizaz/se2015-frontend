@@ -29,6 +29,8 @@ export function doctorCalendarDayDirective() {
       // this is intentionally put here
       public: my,
     });
+
+    console.log('calendar-day my:', my);
   }
 
   function link($scope, element, attrs) {
@@ -44,6 +46,8 @@ export function doctorCalendarDayDirective() {
     restrict: 'E',
     scope: {
       date: '=',
+      appointmentList: '=',
+      doctorTimeList: '=',
       blockCounts: '=',
       first: '=',
     },
