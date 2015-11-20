@@ -41,18 +41,18 @@ export function doctorCalendarBodyDirective() {
   function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
-    let calendarTimes = [];
+    let calendarTimesList = [];
     for (let i = 0; i < my.blockCounts; ++i) {
-      calendarTimes.push({
+      calendarTimesList.push({
         blockNumber: i,
         time: blockToTime(my.beginHours, i)
       });
     }
 
-    console.log(calendarTimes);
+    console.log(calendarTimesList);
 
     _.extend(my, {
-      calendarTimes: calendarTimes,
+      calendarTimesList: calendarTimesList,
       // this is intentionally put here
       public: my,
     });
@@ -92,6 +92,7 @@ export function doctorCalendarBodyDirective() {
   return {
     restrict: 'E',
     scope: {
+      currentWeek: '=',
       beginHours: '=',
       blockCounts: '=',
       marginTop: '=',
