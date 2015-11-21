@@ -24,9 +24,22 @@ export function doctorCalendarAppointmentModalDirective() {
 
   function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
+    let patient = my.appointment.patient;
+    let patientReport = my.appointment.patientReport;
+    let drugInfo = my.appointment.drugInfo;
+    let symtomInfo = my.appointment.symtomInfo;
+
+    function patientToPharmacist() {
+
+    }
 
     _.extend(my, {
+      patient: patient,
+      patientReport: patientReport,
+      drugInfo: drugInfo,
+      symtomInfo: symtomInfo,
 
+      patientToPharmacist: patientToPharmacist,
       // this is intentionally put here
       public: my,
     });
@@ -61,6 +74,7 @@ export function doctorCalendarAppointmentModalDirective() {
     restrict: 'E',
     scope: {
       public: '=name',
+      appointment: '=',
     },
     bindToController: true,
     controller: controller,
