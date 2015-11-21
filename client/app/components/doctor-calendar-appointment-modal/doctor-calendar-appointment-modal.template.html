@@ -1,0 +1,122 @@
+<div class="appointment-modal modal">
+  <div class="modal-header">
+
+    <h4 class="title">
+      นัดหมายกับ คุณ, กรพัฒน์ ปรีชากุล
+    </h4>
+
+    <button
+      class="modal-close close-button btn-flat">
+      <i class="fa fa-close"></i>
+    </button>
+
+    <button ng-click="my.startProcess()"
+            class="next-button modal-action waves-effect waves-light btn quark bold">
+      <span>เริ่มตรวจ</span>
+    </button>
+
+    <div style="clear: both;"></div>
+
+  </div>
+
+  <div class="modal-content">
+
+    <div class="patient-name row">
+
+      <div class="col s12">
+        <div class="avatar"></div>
+        <h4 class="name">กรพัฒน์ ปรีชากุล</h4>
+      </div>
+
+    </div>
+
+    <!-- patient info -->
+    <div class="patient-info row">
+
+      <div class="patient-info-left col s6">
+        <span class="personal-id">
+          <strong>เลขประจำตัวประชาชน</strong> - 1409901127615
+        </span>
+
+        <br>
+
+        <span class="gender">
+          <strong>เพศ</strong> - ชาย
+        </span>
+
+        <span class="nationality">
+          <strong>เชื้อชาติ</strong> - ไทย
+        </span>
+
+        <span class="religion">
+          <strong>ศาสนา</strong> - พุทธ
+        </span>
+
+        <br>
+
+        <span class="address">
+          <strong>ที่อยู่</strong> - 218/238 คอนโด Rhythm รัชดา - ห้วยขวาง ห้วยขวาง กรุงเทพ​ ฯ​ 10310
+        </span>
+
+        <br>
+
+        <span class="tel">
+          <strong>โทร</strong> - 087-2229505
+        </span>
+
+        <br>
+
+        <span class="email">
+          <strong>อีเมล</strong> - the.akita.ta@gmail.com
+        </span>
+      </div>
+
+      <div class="patient-info-right col s6">
+
+        <div class="patient-report row">
+          <div class="height col s4">
+            <strong>ส่วนสูง</strong>
+            <br>
+            <span>170 ซม.</span>
+          </div>
+          <div class="weight col s4">
+            <strong>น้ำหนัก</strong>
+            <br>
+            <span>67 กก.</span>
+          </div>
+          <div class="pressure col s4">
+            <strong>ความดัน</strong>
+            <br>
+            <span>140/70</span>
+          </div>
+        </div>
+
+        <span class="drug-allergic">
+          <strong>ยาที่แพ้</strong> - Adenaline Peptide 500 mg., Amoxcillin
+        </span>
+      </div>
+
+    </div>
+
+    <!-- patient deeper info -->
+    <div class="row">
+
+      <!-- drug info -->
+      <div class="col s6">
+
+        <doctor-drug-list
+          drug-list=""></doctor-drug-list>
+
+      </div>
+
+      <!-- symtoms info -->
+      <div class="col s6">
+
+        <doctor-symtom-list
+          symtom-list=""></doctor-symtom-list>
+
+      </div>
+    </div>
+
+  </div>
+</div>

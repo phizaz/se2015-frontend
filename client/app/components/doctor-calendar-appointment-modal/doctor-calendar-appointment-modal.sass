@@ -1,0 +1,77 @@
+doctor-calendar-appointment-modal
+  .appointment-modal
+    $avatar-size: 60px
+    $orange: rgb(254,163,0)
+    $grey: rgb(66,66,66)
+
+    overflow: scroll
+    max-height: 90%
+    top: 5% !important
+
+    .modal-header
+      padding: 1rem
+      background-color: $orange
+
+      .title
+        float: left
+        margin: 0px
+        color: white
+        letter-spacing: 1px
+        font-size: 1.1rem
+        line-height: 36px
+        font-weight: bold
+        font-family: 'quark'
+        padding: 0rem 1rem
+
+      .next-button
+        float: right
+
+      .close-button
+        float: right
+        color: $grey
+        padding: 0rem 1rem
+
+      .close-button:active, .close-button:focus
+        background-color: transparent
+
+      .close-button:hover
+        color: darken($grey, 10%)
+
+
+
+    .modal-content
+      width: 100%
+      overflow: visible
+      color: lighten(black, 30%)
+      font-size: 0.9rem
+
+      strong
+        font-weight: bold
+
+      .patient-name
+
+        .avatar
+          width: $avatar-size
+          height: $avatar-size
+          display: inline-block
+          border-radius: $avatar-size / 2
+          background-color: rgb(200,200,200)
+          vertical-align: middle
+
+        .name
+          font-size: 2rem
+          font-family: "quark"
+          font-weight: bold
+          margin: 0rem 1rem
+          display: inline-block
+          vertical-align: middle
+
+      .patient-info-left
+        span
+          display: inline-block
+          margin: 0.1rem 0.3rem 0.15rem 0rem
+
+      .patient-info-right
+
+        .patient-report
+          margin: 0.2rem -0.75rem

@@ -2,6 +2,9 @@ import angular from 'angular';
 import _ from 'lodash';
 import 'angular-ui-router';
 
+// constants
+import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant'
+
 // services
 import {doctorTimeServiceModule} from '../../services/doctorTime.service';
 
@@ -16,6 +19,8 @@ import './doctor.sass';
 export let doctorRouteModule =
   angular.module('doctorRouteModule', [
     'ui.router',
+    // constant
+    doctorCalendarConstantModule.name,
 
     // serivces
     doctorTimeServiceModule.name,

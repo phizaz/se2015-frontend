@@ -1,6 +1,10 @@
 import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive';
+import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
+
+// constant
+import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
 
 // locals
 import template from './doctor-calendar-appointment.template.html';
@@ -8,10 +12,12 @@ import './doctor-calendar-appointment.sass';
 
 export let doctorCalendarAppointmentDirectiveModule =
   angular
-    .module('doctorCalendarAppointmentDirectiveModule', [])
+    .module('doctorCalendarAppointmentDirectiveModule', [
+      doctorCalendarConstantModule.name,
+      ])
     .directive('doctorCalendarAppointment', doctorCalendarAppointmentDirective);
 
-export function doctorCalendarAppointmentDirective() {
+export function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
 
   let shared = {};
 
@@ -28,32 +34,33 @@ export function doctorCalendarAppointmentDirective() {
   function link($scope, element, attrs) {
     let my = DirectiveBlueprint.getPrivate($scope);
 
-    let $modal = element.find('.modal');
 
-    function showModal() {
-      $modal.openModal({
-        dismissible: false,
-      });
+    function setPos() {
+      let blockHeight = DOCTOR_CALENDAR.blockHeight;
+      let startBlock =
+        TimeBlockConverter.timeToBlock(DOCTOR_CALENDAR.beginHours, my.appointment.time);
+      let top = blockHeight * startBlock - 1.5 * DOCTOR_CALENDAR.blockPadding;
+
+      // console.log('top:', top);
+
+      element.css('top', top);
     }
 
-    function closeModal() {
-       $modal.closeModal();
-    }
+    setPos();
 
     _.extend(my, {
       element: element,
       attrs: attrs,
-      $modal: $modal,
 
-      showModal: showModal,
-      closeModal: closeModal,
+      setPos: setPos,
     });
   }
 
   return {
     restrict: 'E',
     scope: {
-
+      modal: '=',
+      appointment: '=',
     },
     bindToController: true,
     controller: controller,

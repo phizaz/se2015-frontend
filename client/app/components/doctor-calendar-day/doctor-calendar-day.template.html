@@ -7,26 +7,37 @@
     <span ng-bind="(my.date | amDateFormat: 'dddd, DD')"></span>
   </div>
 
-  <!-- doctor times -->
-  <div class="doctor-time-layer">
-    <div class="doctor-time-wrapper">
-      <div class="doctor-time">
-
-        <doctor-calendar-appointment></doctor-calendar-appointment>
-
-        <doctor-calendar-appointment></doctor-calendar-appointment>
-
-      </div>
-    </div>
-  </div>
-
   <div class="calendar-line-layer">
     <!-- calendar lines -->
     <div  class="calendar-line"
-          ng-repeat="n in [] | range: my.blockCounts"
+          ng-repeat="n in [] | range: my.DOCTOR_CALENDAR.blockCounts"
           ng-style="my.calendarLineStyle">
     </div>
   </div>
 
+  <!-- doctor times -->
+  <div class="doctor-time-layer">
 
+    <doctor-calendar-freearea
+      ng-repeat="doctorTime in my.doctorTimeList"
+      start-time="doctorTime.doctorTime_begin"
+      end-time="doctorTime.doctorTime_end">
+    </doctor-calendar-freearea>
+
+    <doctor-calendar-appointment
+      ng-repeat="appointment in my.appointmentList"
+      appointment="appointment"
+      modal="my.appointmentModals[$index]">
+      </doctor-calendar-appointment>
+
+  </div>
+
+</div>
+
+<!-- doctor-calendar-appointment-modal -->
+<div class="appointment-modal-collection">
+  <doctor-calendar-appointment-modal
+    ng-repeat="appointment in my.appointmentList"
+    name="my.appointmentModals[$index]">
+    </doctor-calendar-appoinment-modal>
 </div>

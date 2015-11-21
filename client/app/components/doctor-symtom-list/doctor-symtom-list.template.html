@@ -1,0 +1,56 @@
+<div class="symtom-list card">
+  <div class="card-header">
+
+    <div class="actions">
+      <button
+        ng-click="my.addSymtom()"
+        class="add btn">
+        เพิ่ม
+      </button>
+    </div>
+
+    <h4 class="title">
+      อาการ
+    </h4>
+  </div>
+
+  <div class="card-content">
+
+    <ul class="collection with-header">
+      <li class="collection-header">
+        <h4>วันนี้</h4>
+      </li>
+
+      <!-- each drug info -->
+      <li class="collection-item">
+        <div class="symtom-list-each">
+          <div class="actions">
+
+            <div>
+              <button
+                ng-click="my.editSymtom()"
+                class="edit btn">แก้ไข</button>
+            </div>
+
+            <div>
+              <button
+                ng-click="my.deleteSymtom()"
+                class="cancel btn">ยกเลิก</button>
+            </div>
+
+          </div>
+
+          <div class="content">
+            <p class="description">
+              ผู้ป่วยมีอาการเจ็บคอ เนื่องจากหวัด และแพ้อากาศฤดูหนาว
+            </p>
+          </div>
+
+          <div style="clear:both;"></div>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+</div>

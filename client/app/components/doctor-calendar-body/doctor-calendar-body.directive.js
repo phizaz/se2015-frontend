@@ -2,6 +2,10 @@ import angular from 'angular';
 import _ from 'lodash';
 import moment from 'moment';
 import {DirectiveBlueprint} from '../directive';
+import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
+
+// constants
+import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
 
 // directives
 import {doctorCalendarDayDirectiveModule} from '../doctor-calendar-day/doctor-calendar-day.directive';
@@ -13,30 +17,13 @@ import './doctor-calendar-body.sass';
 export let doctorCalendarBodyDirectiveModule =
   angular
     .module('doctorCalendarBodyDirectiveModule', [
+      doctorCalendarConstantModule.name,
       doctorCalendarDayDirectiveModule.name,
       ])
     .directive('doctorCalendarBody', doctorCalendarBodyDirective);
 
-export function doctorCalendarBodyDirective() {
+export function doctorCalendarBodyDirective(DOCTOR_CALENDAR) {
   let shared = {};
-
-  function blockToTime(beginHours, blockNumber) {
-    // block number shall start from 0
-    // since block is 15 minutes
-    let hoursPassed = blockNumber / 4;
-    let minutesPassed = (blockNumber % 4) * 15;
-
-    // console.log('hoursPassed:', hoursPassed);
-    // console.log('minutesPassed:', minutesPassed);
-
-    let time =
-      moment({
-        hour: beginHours + hoursPassed,
-        minute: minutesPassed
-      });
-
-    return time;
-  }
 
   function dateFormat(datetime) {
     return datetime.format('YYYY-MM-DD');
@@ -76,19 +63,25 @@ export function doctorCalendarBodyDirective() {
     let my = DirectiveBlueprint.constructor($scope, this);
 
     let calendarTimesList = [];
-    for (let i = 0; i < my.blockCounts; ++i) {
+    for (let i = 0; i < DOCTOR_CALENDAR.blockCounts; ++i) {
       calendarTimesList.push({
         blockNumber: i,
-        time: blockToTime(my.beginHours, i)
+        time: TimeBlockConverter.blockToTime(DOCTOR_CALENDAR.beginHours, i)
       });
     }
 
     let daysInWeek = [];
+
+    function createDaysInWeek() {
+      for (let i = 0; i < 7; ++i) {
+        daysInWeek[i] = moment(my.currentWeek).day(i).startOf('day');
+      }
+    }
+    createDaysInWeek();
+
     $scope.$watch('my.currentWeek',
       (currentWeek) => {
-        for (let i = 0; i < 7; ++i) {
-          daysInWeek[i] = moment(currentWeek).day(i);
-        }
+        createDaysInWeek();
       });
 
     _.extend(my, {
@@ -142,8 +135,6 @@ export function doctorCalendarBodyDirective() {
       currentWeek: '=',
       pureAppointmentList: '=doctorAppointmentList',
       pureDoctorTimeList: '=doctorTimeList',
-      beginHours: '=',
-      blockCounts: '=',
       marginTop: '=',
       timeWidth: '=',
     },
