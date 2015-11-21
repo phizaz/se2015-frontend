@@ -15,10 +15,12 @@ import 'font-awesome/css/font-awesome.css';
 // quark
 import './fonts/quark/stylesheet.css';
 
-import {mainConfigModule} from './config/main.config.js';
+// routes
 import {navigatorRouteModule} from './routes/navigator/navigator.route.js';
+import {memberRouteModule} from './routes/member/member.route';
 
-// main css file
+// locals
+import {mainConfigModule} from './config/main.config.js';
 import './main.sass';
 
 export let mainModule = angular.module('mainModule', [
@@ -29,6 +31,7 @@ export let mainModule = angular.module('mainModule', [
   // Routes
   // this should list all the routes that don't depend on others say parent routes
   navigatorRouteModule.name,
+  memberRouteModule.name,
   ]);
 
 mainModule.run(

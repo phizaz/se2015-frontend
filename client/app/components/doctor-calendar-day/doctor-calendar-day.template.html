@@ -1,0 +1,32 @@
+<div
+  class="doctor-calendar-day"
+  ng-class="{first: my.first}">
+
+  <!-- header -->
+  <div class="calendar-header-date">
+    <span ng-bind="(my.date | amDateFormat: 'dddd, DD')"></span>
+  </div>
+
+  <!-- doctor times -->
+  <div class="doctor-time-layer">
+    <div class="doctor-time-wrapper">
+      <div class="doctor-time">
+
+        <doctor-calendar-appointment></doctor-calendar-appointment>
+
+        <doctor-calendar-appointment></doctor-calendar-appointment>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar-line-layer">
+    <!-- calendar lines -->
+    <div  class="calendar-line"
+          ng-repeat="n in [] | range: my.blockCounts"
+          ng-style="my.calendarLineStyle">
+    </div>
+  </div>
+
+
+</div>

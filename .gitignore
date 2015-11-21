@@ -2,6 +2,7 @@
 # edit here if you want
 bower_components
 node_modules
+npm-debug.log
 
 # we ignore this becasue everythings in this directory should be "generated from somewhere else"
 public

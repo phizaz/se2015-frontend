@@ -9,13 +9,20 @@ export let doctorServiceModule =
 
 export class Doctor {
 
-  constructor ($http) {
+  constructor ($http, $q) {
     this.private = {};
-    this.private.$http = $http;
+    _.extend(this.private, {
+      $http: $http,
+      $q: $q,
+    });
+
+    _.extend(this, {
+
+    });
   }
 
   getDoctorList() {
-    return new Promise(
+    return this.private.$q(
       (resolve, reject) => {
         resolve(this.getDoctorListMock());
       });
@@ -26,7 +33,7 @@ export class Doctor {
   }
 
   getSpecialtyList() {
-    return new Promise(
+    return this.private.$q(
       (resolve, reject) => {
         resolve(this.getSpecialtyListMock());
       });

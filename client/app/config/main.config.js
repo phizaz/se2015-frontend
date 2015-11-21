@@ -15,3 +15,16 @@ that.config(
     // set fallback url
     $urlRouterProvider.otherwise('/');
   });
+
+that.filter('range',
+  () => {
+    return (input, total) => {
+      total = parseInt(total);
+
+      for (var i=0; i<total; i++) {
+        input.push(i);
+      }
+
+      return input;
+    };
+});

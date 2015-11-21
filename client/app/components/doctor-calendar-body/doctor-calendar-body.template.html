@@ -1,0 +1,21 @@
+<div class="doctor-calendar-body">
+  <div class="doctor-calendar-time">
+    <div class="each-time-block" ng-repeat="calendarTime in my.calendarTimesList">
+      <span ng-if="calendarTime.blockNumber % 2 === 0"
+            ng-bind="(calendarTime.time | amDateFormat: 'H:mm')"></span>
+    </div>
+  </div>
+
+
+  <div class="doctor-calendar-week">
+
+    <doctor-calendar-day
+      ng-repeat="n in [] | range: 7"
+      date="my.daysInWeek[$index]"
+      appointment-list="my.doctorAppointmentList[my.dateFormat(my.daysInWeek[$index])]"
+      doctor-time-list="my.doctorTimeList[my.dateFormat(my.daysInWeek[$index])]"
+      block-counts="my.blockCounts"
+      first="$index === 0"></doctor-calendar-day>
+
+  </div>
+</div>
