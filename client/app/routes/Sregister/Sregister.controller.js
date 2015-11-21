@@ -5,6 +5,7 @@ export class SRegisterController {
     Navigator.currentPage = 'SRegister';
     this.SRegister =SRegister;
     this.form = {};
+    $('select').material_select();
   }
 
   regis(){
