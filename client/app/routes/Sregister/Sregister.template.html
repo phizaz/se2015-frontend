@@ -1,35 +1,53 @@
-  <div id="sregister-page-wrapper" class="container">
-	<form>
- 	<img src="../../images/BlankFace.jpg" height="200px"><img>
- 	<input type="file" ng-model="Sregister.form.photo"></input>
- 	<div>เลือกภาพ</div>
- 	<div><span>ร้องขอตำแหน่ง</span>
- 		<span>ความถนัดเฉพาะ(แพทย์)</span>
- 	</div>
- 	<input type="text" ng-model="Sregister.role"></input>
- 	<input type='text' ng-model="Sregister.specialist"></input>
- 	<div>
- 		<span>ชื่อ</span>
- 		<span>นามสกุล</span>
- 	</div>
- 
- 		<input type='text' ng-model="Sregister.firstname"></input>
- 		<input type='text' ng-model="Sregister.lastname"></input>
- 	<div>เบอร์โทรศัพท์</div>
- 	<input type='text' ng-model="Sregister.telephone"></input>
- 	<div>อีเมลล์</div>
- 	<input type='text' ng-model="Sregister.email"></input>
- 	
- 	<div>ยูสเซอร์เนม</div>
- 	<input type='text' ng-model="Sregister.uid" length="10"></input>
- 	<div>
- 		<span>รหัสผ่าน</span>
- 		<span>ยืนยันรหัสผ่าน</span>
- 	</div>
- 	<input ng-model="Sregister.password" type="password"></input>
- 	<input ng-model="Sregister.cpassword" type="password"></input>
- 	</form>
- 	</br>
- 	<a class="amber darken-3 btn-large" ng-click="Sregister.regis()">ส่งคำร้อง</a>
+<div id="sregister-page-wrapper" style="font-family:quark"class="container">
+  <div class="row">
+    <form class="col s12">
+      <div class="input-field col s6">
+            <select>
+              <option value="" disabled selected></option>
+              <option value="doctor">แพทย์</option>
+              <option value="nurse">พยาบาล</option>
+              <option value="​staff">เจ้าหน้าที่โรงพยาบาล</option>
+              <option value="​pharmarcist">เภสัชกร</option>
+            </select>
+            <label>ร้องขอตำแหน่ง</label>
+      </div>
+      <div class="input-field col s6">
+          <input ng-model="register.Sspecialist" type="text" class="validate">
+          <label for="specailist">ความถนัดเฉพาะ</label>
+      </div>
+       <div class="input-field col s6">
+          <input ng-model="Sregister.firstname" type="text" class="validate">
+          <label for="firstname">ชื่อ</label>
+        </div>
+         <div class="input-field col s6">
+          <input ng-model="Sregister.lastname" type="text" class="validate">
+          <label for="lastname">นามสกุล</label>
+        </div>
+         <div class="input-field col s12">
+          <input ng-model="Sregister.telephone" type="text" class="validate">
+          <label for="telephone">เบอร์โทร</label>
+        </div>
+         <div class="input-field col s12">
+          <input ng-model="Sregister.email" type="text" class="validate">
+          <label for="email">อีเมลล์</label>
+        </div>
+         <div class="input-field col s12">
+          <input ng-model="Sregister.uid" type="text" class="validate">
+          <label for="uid">ยูสเซอร์เนม</label>
+        </div>
+        <div class="input-field col s6">
+           <input ng-model="Sregister.password" type="password" class="validate">
+           <label for="email">รหัส</label> 
+        </div>
+        <div class="input-field col s6">
+           <input ng-model="Sregister.cpassword" type="password" class="validate">
+           <label for="email">ยืนยันรหัสผ่าน</label> 
+        </div>
+    </form>
+    <button class="amber darken-3 btn-large" ng-click="Sregister.regis()" style="margin-left:37%">ส่งคำร้อง</button>
+    <div style="margin-top:30px">
+    <span style="margin-left:30%">เคยลงทะเบียนแล้ว? </span>
+    <login-modal name="Sregister.loginModal"></login-modal>
+    <a href="" ng-click="Sregister.loginModal.show()">เข้าสู่ระบบได้เลย</a>
+  </div>
 </div>
-

@@ -12,7 +12,7 @@ import _ from 'lodash';
 import loginModalTemplate from './login-modal.template.html';
 import './login-modal.sass';
 import {loginServiceModule} from '../../services/login.service.js';
-
+import {DirectiveBlueprint} from '../directive.js';
 export let loginModalDirectiveModule =
   angular.module('loginModalDirectiveModule', [
     loginServiceModule.name
@@ -22,33 +22,41 @@ export function loginModalDirective(Login) {
   console.log('login modal is loaded');
   let shared = {};
 
-  let api = {
-    show: show
-  };
-
-  function controller () {
+  
+  function link($scope, element, attrs) {
+    let my = DirectiveBlueprint.getPrivate($scope);
+    my.element = element;
+    my.attrs = attrs;
+  }
+  function controller ($scope) {
+    let my = DirectiveBlueprint.constructor($scope, this);
     console.log('login modal controller is loaded');
+    let api = {
+        show: show
+      };
     // expose 'api' to the outside (=name)
+    function show() {
+      console.log('show');
+      my.element.children('.modal').openModal();
+    }
+    function close() {
+      my.element.children.closeModal();
+    }
     _.extend(this, {
       api: api,
-      reg: reg,
       login: () => {
-        Login.takeLogin(this.loginForm.username,this.loginForm.password);
+        Login
+          .takeLogin(this.loginForm.username,this.loginForm.password)
+          .then((res) => {
+            close();
+          });
       }
+
     });
   }
-  function reg(){
-    console.log("reg already");
-  }
-  function link($scope, element, attrs) {
-    shared.element = element;
-    shared.attrs = attrs;
-  }
+ 
 
-  function show() {
-    console.log('show');
-    shared.element.children('.modal').openModal();
-  }
+  
 
   return {
     // this direcitve will apply to tag's name only,

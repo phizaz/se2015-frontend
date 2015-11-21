@@ -4,6 +4,8 @@ export class RegisterController {
     Navigator.currentPage = 'register';
     this.Register =Register;
     this.form = {};
+
+    $('select').material_select();
   }
 
   regis(){
