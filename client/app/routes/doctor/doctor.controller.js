@@ -15,23 +15,28 @@ export class DoctorController {
   }
 
   goNextWeek() {
-    this.currentWeek = this.currentWeek.add(1, 'w');
+    console.log('going next week');
+    this.currentWeek.add(1, 'w');
   }
 
   goPreviousWeek() {
-    this.currentWeek = this.currentWeek.substract(1, 'w');
+    console.log('gonig previous week');
+    this.currentWeek.subtract(1, 'w');
   }
 
   goPresentWeek() {
+    console.log('going present week');
     this.currentWeek = moment();
   }
 
   goNextMonth() {
-    this.currentWeek = this.currentWeek.add(1, 'm');
+    console.log('gonig next month');
+    this.currentWeek.add(1, 'month');
   }
 
   goPreviousMonth() {
-    this.currentWeek = this.currentWeek.substract(1, 'm');
+    console.log('going previous month');
+    this.currentWeek.subtract(1, 'month');
   }
 
 

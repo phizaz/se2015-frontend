@@ -2,7 +2,9 @@
   <div class="modal-header">
 
     <h4 class="title">
-      นัดหมายกับ คุณ, {{my.patient.firstname}} {{my.patient.lastname}}
+      นัดหมายกับ คุณ,
+      <span ng-bind="my.patient.firstname"></span>
+      <span ng-bind="my.patient.lastname"></span>
     </h4>
 
     <button
@@ -25,7 +27,10 @@
 
       <div class="col s12">
         <div class="avatar"></div>
-        <h4 class="name">กรพัฒน์ ปรีชากุล</h4>
+        <h4 class="name">
+          <span ng-bind="my.patient.firstname"></span>
+          <span ng-bind="my.patient.lastname"></span>
+        </h4>
       </div>
 
     </div>
@@ -35,39 +40,46 @@
 
       <div class="patient-info-left col s6">
         <span class="personal-id">
-          <strong>เลขประจำตัวประชาชน</strong> - 1409901127615
+          <strong>เลขประจำตัวประชาชน</strong> -
+          <span ng-bind="my.patient.personal_id"></span>
         </span>
 
         <br>
 
         <span class="gender">
-          <strong>เพศ</strong> - ชาย
+          <strong>เพศ</strong> -
+          <span ng-bind="my.patient.gender"></span>
         </span>
 
         <span class="nationality">
-          <strong>เชื้อชาติ</strong> - ไทย
+          <strong>เชื้อชาติ</strong> -
+          <span ng-bind="my.patient.nationality"></span>
         </span>
 
         <span class="religion">
-          <strong>ศาสนา</strong> - พุทธ
+          <strong>ศาสนา</strong> -
+          <span ng-bind="my.patient.religion"></span>
         </span>
 
         <br>
 
         <span class="address">
-          <strong>ที่อยู่</strong> - 218/238 คอนโด Rhythm รัชดา - ห้วยขวาง ห้วยขวาง กรุงเทพ​ ฯ​ 10310
+          <strong>ที่อยู่</strong> -
+          <span ng-bind="my.patient.address"></span>
         </span>
 
         <br>
 
         <span class="tel">
-          <strong>โทร</strong> - 087-2229505
+          <strong>โทร</strong> -
+          <span ng-bind="my.patient.tel"></span>
         </span>
 
         <br>
 
         <span class="email">
-          <strong>อีเมล</strong> - the.akita.ta@gmail.com
+          <strong>อีเมล</strong> -
+          <span ng-bind="my.patient.email"></span>
         </span>
       </div>
 

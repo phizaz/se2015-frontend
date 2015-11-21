@@ -81,8 +81,9 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR) {
 
     $scope.$watch('my.currentWeek',
       (currentWeek) => {
+        console.log('currentWeek has changed to:', currentWeek);
         createDaysInWeek();
-      });
+      }, true);
 
     _.extend(my, {
       calendarTimesList: calendarTimesList,

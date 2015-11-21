@@ -1,7 +1,54 @@
 <div class="doctor-route">
 
   <nav class="doctor-navigator">
+    <div class="calendar-head">
+      <div class="linear-block">
+        <button
+          ng-click="my.goPreviousMonth()"
+          class="action btn">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+      </div>
 
+      <div class="linear-block">
+        {{my.currentWeek.format('MMMM')}}
+      </div>
+
+      <div class="linear-block">
+        <button
+          ng-click="my.goNextMonth()"
+          class="action btn">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="linear-block">
+        <button
+          ng-click="my.goPreviousWeek()"
+          class="action btn">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button
+          ng-click="my.goPresentWeek()"
+          class="action btn">
+          สัปดาห์นี้
+        </button>
+        <button
+          ng-click="my.goNextWeek()"
+          class="action btn">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="edit-doctor-time">
+      <button
+        ng-click="my.edtiDoctorTime()"
+        class="edit btn">
+        แก้ไขเวลาออกตรวจ
+        </button>
+    </div>
   </nav>
 
   <!-- <div gridster>
