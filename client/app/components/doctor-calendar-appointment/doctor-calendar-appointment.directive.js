@@ -28,9 +28,25 @@ export function doctorCalendarAppointmentDirective() {
   function link($scope, element, attrs) {
     let my = DirectiveBlueprint.getPrivate($scope);
 
+    let $modal = element.find('.modal');
+
+    function showModal() {
+      $modal.openModal({
+        dismissible: false,
+      });
+    }
+
+    function closeModal() {
+       $modal.closeModal();
+    }
+
     _.extend(my, {
       element: element,
       attrs: attrs,
+      $modal: $modal,
+
+      showModal: showModal,
+      closeModal: closeModal,
     });
   }
 

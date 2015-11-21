@@ -1,37 +1,64 @@
 doctor-calendar-day
   $grey: rgb(235,235,235)
-
+  $block-height: 65px
+  $padding: 4px
 
   .doctor-calendar-day
     font-size: 1rem
     width: 14.285714%
+    position: relative
     display: inline-block
     box-sizing: border-box
-    border-right: 1px solid $grey
-    position: relative
 
   .doctor-calendar-day.first
-    border-left: 1px solid $grey
+    .calendar-line-layer
+      .calendar-line
+        border-left: 1px solid $grey
 
   .calendar-header-date
-    $height: 1.5rem
+    $height: 2rem
     width: 14.285714%
     margin-top: -$height
-    font-size: 0.8rem
+    font-family: "quark"
+    font-size: 0.9rem
     line-height: $height
     text-align: center
     font-weight: bold
-    color: lighten(black, 40%)
+    color: white
     position: fixed
-    background-color: rgb(200,200,200)
     z-index: 20
 
-  .calendar-line
-    height: 65px
-    box-sizing: border-box
+  .calendar-line-layer
+    z-index: -1
+    top: 0px
+    position: absolute
+    width: 100%
 
-  .calendar-line:nth-child(odd)
-    border-top: 1px solid $grey
+    .calendar-line
+      height: $block-height
+      box-sizing: border-box
+      border-right: 1px solid $grey
 
-  .calendar-line:nth-child(even)
-    border-top: 1px dashed $grey
+    .calendar-line:nth-child(odd)
+      border-top: 1px solid $grey
+
+    .calendar-line:nth-child(even)
+      border-top: 1px dashed $grey
+
+  .doctor-time-layer
+    position: relative
+    width: 100%
+
+    .doctor-time-wrapper
+      height: $block-height * 2 + 3 * $padding
+      padding: $padding
+      margin-top: -1.5 * $padding
+      box-sizing: border-box
+
+      .doctor-time
+        background-color: rgb(236,236,236)
+        height: 100%
+        border-radius: $padding
+        box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3)
+
+

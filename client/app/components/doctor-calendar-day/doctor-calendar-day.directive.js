@@ -7,6 +7,9 @@ import 'javascript-detect-element-resize/jquery.resize.js';
 import 'angular-gridster/dist/angular-gridster.min.js';
 import 'angular-gridster/dist/angular-gridster.min.css';
 
+// directives
+import {doctorCalendarAppointmentDirectiveModule} from '../doctor-calendar-appointment/doctor-calendar-appointment.directive';
+
 // locals
 import template from './doctor-calendar-day.template.html';
 import './doctor-calendar-day.sass';
@@ -15,6 +18,7 @@ export let doctorCalendarDayDirectiveModule =
   angular
     .module('doctorCalendarDayDirectiveModule', [
       'gridster',
+      doctorCalendarAppointmentDirectiveModule.name,
       ])
     .directive('doctorCalendarDay', doctorCalendarDayDirective);
 
