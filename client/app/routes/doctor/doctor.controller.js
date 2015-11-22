@@ -7,8 +7,8 @@ export class DoctorController {
     console.log('userInfo:', userInfo);
 
     // for development
-    setTimeout(
-      () => this.startEditingDoctorTime(), 100);
+    // setTimeout(
+    //   () => this.startEditingDoctorTime(), 100);
 
     _.extend(this, {
       editingMode: false,

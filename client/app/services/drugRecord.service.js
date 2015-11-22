@@ -2,9 +2,6 @@ import angular from 'angular';
 import _ from 'lodash';
 
 
-// local
-// import isLoginMock from './mocks/is-login.mock.json';
-
 export class DrugRecord {
   constructor($http, $q) {
 

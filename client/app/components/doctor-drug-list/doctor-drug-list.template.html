@@ -16,25 +16,36 @@
 
   <div class="card-content">
 
-    <ul class="collection with-header">
+    <ul
+      ng-repeat="day in my.days"
+      class="collection with-header">
       <li class="collection-header">
-        <h4>วันนี้</h4>
+
+        <h4
+          ng-if="day === my.today">วันนี้</h4>
+
+        <h4
+          ng-if="day !== my.today">
+          {{my.momentDays[$index].format('DD MMMM YYYY')}}
+          </h4>
       </li>
 
       <!-- each drug info -->
-      <li class="collection-item">
+      <li
+        ng-repeat="drugReport in my.drugListByDate[day]"
+        class="collection-item">
         <div class="drug-info-each">
           <div class="actions">
 
             <div>
               <button
-                ng-click="my.editDrug()"
+                ng-click="my.editDrug(drugReport)"
                 class="edit btn">แก้ไข</button>
             </div>
 
             <div>
               <button
-                ng-click="my.deleteDrug()"
+                ng-click="my.deleteDrug(drugReport)"
                 class="cancel btn">ยกเลิก</button>
             </div>
 
@@ -42,9 +53,9 @@
 
           <div class="content">
 
-            <h5 class="name">Amoxcillin</h5>
+            <h5 class="name">{{drugReport.name}} ({{drugReport.quantity}} หน่วย)</h5>
             <p class="description">
-              รักษาโรคปอดบวม เนื่องจากการติดเชื้อในกระแสเลือด
+              {{drugReport.remark}}
             </p>
           </div>
 
