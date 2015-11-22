@@ -7,6 +7,9 @@ import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
 // constants
 import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
 
+// service
+import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
+
 // directives
 import {doctorCalendarDayDirectiveModule} from '../doctor-calendar-day/doctor-calendar-day.directive';
 
@@ -18,11 +21,12 @@ export let doctorCalendarBodyDirectiveModule =
   angular
     .module('doctorCalendarBodyDirectiveModule', [
       doctorCalendarConstantModule.name,
+      doctorTimeEditingServiceModule.name,
       doctorCalendarDayDirectiveModule.name,
       ])
     .directive('doctorCalendarBody', doctorCalendarBodyDirective);
 
-export function doctorCalendarBodyDirective(DOCTOR_CALENDAR) {
+export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   let shared = {};
 
   function dateFormat(datetime) {
@@ -71,12 +75,6 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR) {
     }
 
     let daysInWeek = [];
-
-    function createDaysInWeek() {
-      for (let i = 0; i < 7; ++i) {
-        daysInWeek[i] = moment(my.currentWeek).day(i).startOf('day');
-      }
-    }
     createDaysInWeek();
 
     $scope.$watch('my.currentWeek',
@@ -87,16 +85,67 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR) {
 
     _.extend(my, {
       calendarTimesList: calendarTimesList,
-      doctorAppointmentList: sortAppointmentByDate(my.pureAppointmentList),
-      doctorTimeList: sortDoctorTimeByDate(my.pureDoctorTimeList),
+      appointmentListByDate: sortAppointmentByDate(my.pureAppointmentList),
+      doctorTimeListByDate: sortDoctorTimeByDate(my.pureDoctorTimeList),
       daysInWeek: daysInWeek,
+      editing: false,
+      editingGridByDate: {},
+      doctorCalendarDays: [],
 
+      // functions
       dateFormat: dateFormat,
+      startEditing: startEditing,
+      finishEditing: finishEditing,
+      cancelEditing: cancelEditing,
       // this is intentionally put here
       public: my,
     });
 
     console.log('calendar-body my:', my);
+
+    function createDaysInWeek() {
+      for (let i = 0; i < 7; ++i) {
+        daysInWeek[i] = moment(my.currentWeek).day(i).startOf('day');
+      }
+    }
+
+    function makeEditingGrid() {
+      let theGrid =
+        DoctorTimeEditing.makeEditingGrid(my.doctorTimeListByDate);
+
+      angular.copy(theGrid, my.editingGridByDate);
+    }
+
+    function startEditing() {
+      console.log('start editing doctortime');
+      console.log('doctorCalendarDay:', my.doctorCalendarDays);
+      makeEditingGrid();
+      my.editing = true;
+      for (let each of my.doctorCalendarDays) {
+        let dateString = my.dateFormat(each.date);
+        each.startEditing(my.editingGridByDate[dateString]);
+      }
+    }
+
+    function finishEditing() {
+      console.log('stop editing doctortime');
+      let changes = [];
+      for (let each of my.doctorCalendarDays) {
+        changes.push(each.finishEditing());
+      }
+      my.editing = false;
+      return changes;
+
+    }
+
+    function cancelEditing() {
+      console.log('cancel editing doctortime');
+      for (let each of my.doctorCalendarDays) {
+        each.cancelEditing();
+      }
+      my.editing = false;
+    }
+
   }
 
   function link($scope, element, attrs) {
@@ -124,6 +173,10 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR) {
 
     $(window).resize(() => setWeekWidth());
 
+    // // for development
+    // setTimeout(
+    //   () => my.startEditing(), 100);
+
     _.extend(my, {
       element: element,
       attrs: attrs,
@@ -133,6 +186,7 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR) {
   return {
     restrict: 'E',
     scope: {
+      public: '=name',
       currentWeek: '=',
       pureAppointmentList: '=doctorAppointmentList',
       pureDoctorTimeList: '=doctorTimeList',

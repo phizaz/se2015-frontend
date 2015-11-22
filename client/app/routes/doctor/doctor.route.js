@@ -7,6 +7,7 @@ import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.const
 
 // services
 import {doctorTimeServiceModule} from '../../services/doctorTime.service';
+import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service'
 
 // directives
 import {doctorCalendarBodyDirectiveModule} from '../../components/doctor-calendar-body/doctor-calendar-body.directive';
@@ -24,6 +25,7 @@ export let doctorRouteModule =
 
     // serivces
     doctorTimeServiceModule.name,
+    doctorTimeEditingServiceModule.name,
 
     // directives
     doctorCalendarBodyDirectiveModule.name,

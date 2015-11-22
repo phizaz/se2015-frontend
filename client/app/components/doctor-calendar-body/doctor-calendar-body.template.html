@@ -11,9 +11,10 @@
 
     <doctor-calendar-day
       ng-repeat="n in [] | range: 7"
+      name="my.doctorCalendarDays[$index]"
       date="my.daysInWeek[$index]"
-      appointment-list="my.doctorAppointmentList[my.dateFormat(my.daysInWeek[$index])]"
-      doctor-time-list="my.doctorTimeList[my.dateFormat(my.daysInWeek[$index])]"
+      appointment-list="my.appointmentListByDate[my.dateFormat(my.daysInWeek[$index])]"
+      doctor-time-list="my.doctorTimeListByDate[my.dateFormat(my.daysInWeek[$index])]"
       first="$index === 0"></doctor-calendar-day>
 
   </div>

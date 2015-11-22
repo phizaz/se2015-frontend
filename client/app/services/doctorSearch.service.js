@@ -4,10 +4,7 @@ import _ from 'lodash';
 import doctorList from './mocks/doctorList.mock.json';
 import specialtyList from './mocks/specialtyList.mock.json';
 
-export let doctorServiceModule =
-  angular.module('doctorServiceModule', []);
-
-export class Doctor {
+export class DoctorSearch {
 
   constructor ($http, $q) {
     this.private = {};
@@ -17,7 +14,6 @@ export class Doctor {
     });
 
     _.extend(this, {
-
     });
   }
 
@@ -44,4 +40,7 @@ export class Doctor {
   }
 }
 
-doctorServiceModule.service('Doctor', Doctor);
+export let doctorSearchServiceModule =
+  angular
+    .module('doctorSearchServiceModule', [])
+    .service('DoctorSearch', DoctorSearch);

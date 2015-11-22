@@ -16,7 +16,9 @@
   </div>
 
   <!-- doctor times -->
-  <div class="doctor-time-layer">
+  <div
+    ng-hide="my.editing"
+    class="doctor-time-layer">
 
     <doctor-calendar-freearea
       ng-repeat="doctorTime in my.doctorTimeList"
@@ -29,6 +31,28 @@
       appointment="appointment"
       modal="my.appointmentModals[$index]">
       </doctor-calendar-appointment>
+
+  </div>
+
+  <!-- doctor time gridster -->
+  <div
+    ng-if="my.editing"
+    class="doctor-gridster-layer">
+
+    <div
+      gridster
+      class="doctor-gridster">
+      <ul>
+        <li gridster-item="item"
+            ng-repeat="item in my.editingGrid">
+          <div class="label">
+            {{my.blockToTime(item.row).format('HH:mm')}}
+            -
+            {{my.blockToTime(item.row + item.sizeY).format('HH:mm')}}
+          </div>
+        </li>
+      </ul>
+    </div>
 
   </div>
 

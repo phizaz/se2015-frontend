@@ -2,6 +2,7 @@ doctor-calendar-day
   $grey: rgb(235,235,235)
   $block-height: 65px
   $padding: 4px
+  $block-count: 40
 
   font-size: 1rem
   width: 14.285714%
@@ -49,5 +50,24 @@ doctor-calendar-day
   .doctor-time-layer
     position: relative
     width: 100%
+
+  .doctor-gridster-layer
+    width: 100%
+    height: $block-height * $block-count
+    // background-color: rgb(240,240,240)
+    //
+    .gridster-item
+      margin-top: -$padding !important
+      background-color: rgb(255,231,189)
+      border-radius: $padding
+      border: 1px solid darken(rgb(255,231,189), 10%)
+
+      .label
+        padding: 1rem
+        text-align: center
+        font-weight: bold
+        font-family: "quark"
+        color: darken(rgb(255,231,189), 37%)
+        font-size: 1rem
 
 

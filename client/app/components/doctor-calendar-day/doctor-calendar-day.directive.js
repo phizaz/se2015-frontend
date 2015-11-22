@@ -1,6 +1,7 @@
 import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive';
+import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
 
 // angular gridster
 import 'javascript-detect-element-resize/jquery.resize.js';
@@ -28,7 +29,29 @@ export let doctorCalendarDayDirectiveModule =
       doctorCalendarFreeareaDirectiveModule.name,
       doctorCalendarAppointmentModalDirectiveModule.name,
       ])
-    .directive('doctorCalendarDay', doctorCalendarDayDirective);
+    .directive('doctorCalendarDay', doctorCalendarDayDirective)
+    .run((gridsterConfig, DOCTOR_CALENDAR) => {
+        _.extend(gridsterConfig, {
+          mobileBreakPoint: 0,
+          columns: 1,
+          floating: false,
+          swapping: false,
+          pushing: false,
+          rowHeight: DOCTOR_CALENDAR.blockHeight,
+          minColumns: 1,
+          minRows: 1,
+          defaultSizeX: 1,
+          defaultSizeY: 1,
+          minSizeX: 1,
+          maxSizeX: 1,
+          minSizeY: 1,
+          maxSizeY: null,
+          outerMargin: true,
+          margins: [ 2 * DOCTOR_CALENDAR.blockPadding, DOCTOR_CALENDAR.blockPadding],
+        });
+
+        console.log('gridsterConfig:', gridsterConfig);
+      });
 
 export function doctorCalendarDayDirective(DOCTOR_CALENDAR) {
 
@@ -37,16 +60,64 @@ export function doctorCalendarDayDirective(DOCTOR_CALENDAR) {
   function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
-    let appointmentModals = [];
-
     _.extend(my, {
       DOCTOR_CALENDAR: DOCTOR_CALENDAR,
-      appointmentModals: appointmentModals,
+      appointmentModals: [],
+      editing: false,
+      editingGrid: [],
+      grid: [
+        { size: { x: 2, y: 1 }, position: [0, 0] },
+        { size: { x: 2, y: 2 }, position: [0, 2] },
+        { size: { x: 1, y: 1 }, position: [0, 4] },
+        { size: { x: 1, y: 1 }, position: [0, 5] },
+        { size: { x: 2, y: 1 }, position: [1, 0] },
+        { size: { x: 1, y: 1 }, position: [1, 4] },
+        { size: { x: 1, y: 2 }, position: [1, 5] },
+        { size: { x: 1, y: 1 }, position: [2, 0] },
+        { size: { x: 2, y: 1 }, position: [2, 1] },
+        { size: { x: 1, y: 1 }, position: [2, 3] },
+        { size: { x: 1, y: 1 }, position: [2, 4] }
+      ],
+      blockToTime: blockToTime,
+
+      // functions
+      startEditing: startEditing,
+      finishEditing: finishEditing,
+      cancelEditing: cancelEditing,
       // this is intentionally put here
       public: my,
     });
 
     console.log('calendar-day my:', my);
+
+    function blockToTime(block) {
+      return TimeBlockConverter.blockToTime(
+        DOCTOR_CALENDAR.beginHours, block);
+    }
+
+    function startEditing(grid) {
+      console.log('day: ', my.date, 'grid:', grid);
+      my.editing = true;
+      my.editingGrid = grid;
+      // start gridster
+    }
+
+    /**
+     * gather changes done in this day
+     * return the change list
+     */
+    function finishEditing() {
+      let chanegs = [];
+
+      // todo
+
+      my.editing = false;
+      return changes;
+    }
+
+    function cancelEditing() {
+      my.editing = false;
+    }
   }
 
   function link($scope, element, attrs) {
@@ -61,6 +132,7 @@ export function doctorCalendarDayDirective(DOCTOR_CALENDAR) {
   return {
     restrict: 'E',
     scope: {
+      public: '=name',
       date: '=',
       appointmentList: '=',
       doctorTimeList: '=',

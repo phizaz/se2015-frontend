@@ -5,18 +5,20 @@
       <div class="linear-block">
         <button
           ng-click="my.goPreviousMonth()"
+          ng-disabled="my.editingMode"
           class="action btn">
           <i class="fa fa-chevron-left"></i>
         </button>
       </div>
 
       <div class="linear-block">
-        {{my.currentWeek.format('MMMM')}}
+        <span class="month">{{my.currentWeek.format('MMMM')}}</span>
       </div>
 
       <div class="linear-block">
         <button
           ng-click="my.goNextMonth()"
+          ng-disabled="my.editingMode"
           class="action btn">
           <i class="fa fa-chevron-right"></i>
         </button>
@@ -25,16 +27,19 @@
       <div class="linear-block">
         <button
           ng-click="my.goPreviousWeek()"
+          ng-disabled="my.editingMode"
           class="action btn">
           <i class="fa fa-chevron-left"></i>
         </button>
         <button
           ng-click="my.goPresentWeek()"
+          ng-disabled="my.editingMode"
           class="action btn">
           สัปดาห์นี้
         </button>
         <button
           ng-click="my.goNextWeek()"
+          ng-disabled="my.editingMode"
           class="action btn">
           <i class="fa fa-chevron-right"></i>
         </button>
@@ -44,9 +49,24 @@
 
     <div class="edit-doctor-time">
       <button
-        ng-click="my.edtiDoctorTime()"
+        ng-show="!my.editingMode"
+        ng-click="my.startEditingDoctorTime()"
         class="edit btn">
         แก้ไขเวลาออกตรวจ
+        </button>
+
+      <button
+        ng-hide="!my.editingMode"
+        ng-click="my.finishEditingDoctorTime()"
+        class="edit btn">
+        ยืนยันการแก้ไข
+        </button>
+
+      <button
+        ng-hide="!my.editingMode"
+        ng-click="my.cancelEditingDoctorTime()"
+        class="edit btn">
+        ยกเลิกการแก้ไข
         </button>
     </div>
   </nav>
@@ -59,6 +79,7 @@
   </div> -->
 
   <doctor-calendar-body
+    name="my.calendarBody"
     current-week="my.currentWeek"
     doctor-appointment-list="my.doctorAppointmentList"
     doctor-time-list="my.doctorTimeList"

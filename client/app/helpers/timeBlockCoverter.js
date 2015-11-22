@@ -35,7 +35,7 @@ export class TimeBlockConverter {
     let diff = end - begin;
     let diffMinutes = diff / 1000 / 60;
 
-    // console.log('timeToBlock:', begin, end, diffMinutes);
+    // console.log('timeToBlock:', time, end, diffMinutes);
     return diffMinutes / 15;
   }
 
