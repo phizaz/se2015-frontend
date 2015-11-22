@@ -11,6 +11,9 @@ import 'angular-gridster/dist/angular-gridster.min.css';
 // constants
 import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
 
+// service
+import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service'
+
 // directives
 import {doctorCalendarAppointmentDirectiveModule} from '../doctor-calendar-appointment/doctor-calendar-appointment.directive';
 import {doctorCalendarFreeareaDirectiveModule} from '../doctor-calendar-freearea/doctor-calendar-freearea.directive';
@@ -25,6 +28,7 @@ export let doctorCalendarDayDirectiveModule =
     .module('doctorCalendarDayDirectiveModule', [
       'gridster',
       doctorCalendarConstantModule.name,
+      doctorTimeEditingServiceModule.name,
       doctorCalendarAppointmentDirectiveModule.name,
       doctorCalendarFreeareaDirectiveModule.name,
       doctorCalendarAppointmentModalDirectiveModule.name,
@@ -53,7 +57,7 @@ export let doctorCalendarDayDirectiveModule =
         console.log('gridsterConfig:', gridsterConfig);
       });
 
-export function doctorCalendarDayDirective(DOCTOR_CALENDAR) {
+export function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
 
   let shared = {};
 
@@ -65,25 +69,16 @@ export function doctorCalendarDayDirective(DOCTOR_CALENDAR) {
       appointmentModals: [],
       editing: false,
       editingGrid: [],
-      grid: [
-        { size: { x: 2, y: 1 }, position: [0, 0] },
-        { size: { x: 2, y: 2 }, position: [0, 2] },
-        { size: { x: 1, y: 1 }, position: [0, 4] },
-        { size: { x: 1, y: 1 }, position: [0, 5] },
-        { size: { x: 2, y: 1 }, position: [1, 0] },
-        { size: { x: 1, y: 1 }, position: [1, 4] },
-        { size: { x: 1, y: 2 }, position: [1, 5] },
-        { size: { x: 1, y: 1 }, position: [2, 0] },
-        { size: { x: 2, y: 1 }, position: [2, 1] },
-        { size: { x: 1, y: 1 }, position: [2, 3] },
-        { size: { x: 1, y: 1 }, position: [2, 4] }
-      ],
       blockToTime: blockToTime,
 
       // functions
       startEditing: startEditing,
       finishEditing: finishEditing,
       cancelEditing: cancelEditing,
+      askDamage: askDamage,
+
+      editDeleteDoctorTime: editDeleteDoctorTime,
+      editCreateDoctorTime: editCreateDoctorTime,
       // this is intentionally put here
       public: my,
     });
@@ -96,10 +91,16 @@ export function doctorCalendarDayDirective(DOCTOR_CALENDAR) {
     }
 
     function startEditing(grid) {
-      console.log('day: ', my.date, 'grid:', grid);
+      // console.log('day: ', my.date, 'grid:', grid);
       my.editing = true;
-      my.editingGrid = grid;
+      my.editingGrid = grid || [];
       // start gridster
+    }
+
+    function askDamage() {
+      let damages =
+        DoctorTimeEditing.calculateDamage(my.appointmentList, my.editingGrid);
+      return damages;
     }
 
     /**
@@ -107,16 +108,41 @@ export function doctorCalendarDayDirective(DOCTOR_CALENDAR) {
      * return the change list
      */
     function finishEditing() {
-      let chanegs = [];
-
-      // todo
+      let [deletions, creations] =
+        DoctorTimeEditing.calculateChange(my.doctorTimeList, my.editingGrid);
 
       my.editing = false;
-      return changes;
+
+      return {
+        delete: deletions,
+        create: creations,
+      };
     }
 
     function cancelEditing() {
       my.editing = false;
+    }
+
+    function editDeleteDoctorTime(item) {
+      // console.log('my:', my);
+      let idx = _.findIndex(my.editingGrid, item);
+      // remove from array
+      my.editingGrid.splice(idx, 1);
+    }
+
+    function editCreateDoctorTime(row) {
+      console.log('creating a new doctor time:', row, my.editingGrid);
+
+      if (!my.editingGrid) {
+        my.editingGrid = [];
+      }
+
+      my.editingGrid.push({
+        sizeX: 1,
+        sizeY: 1,
+        row: row,
+        col: 0,
+      });
     }
   }
 

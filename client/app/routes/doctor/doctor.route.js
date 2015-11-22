@@ -11,6 +11,7 @@ import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.s
 
 // directives
 import {doctorCalendarBodyDirectiveModule} from '../../components/doctor-calendar-body/doctor-calendar-body.directive';
+import {doctorCalendarPromptModalDirectiveModule} from '../../components/doctor-calendar-prompt-modal/doctor-calendar-prompt-modal.directive';
 
 // locals
 import {DoctorController} from './doctor.controller';
@@ -26,6 +27,7 @@ export let doctorRouteModule =
     // serivces
     doctorTimeServiceModule.name,
     doctorTimeEditingServiceModule.name,
+    doctorCalendarPromptModalDirectiveModule.name,
 
     // directives
     doctorCalendarBodyDirectiveModule.name,

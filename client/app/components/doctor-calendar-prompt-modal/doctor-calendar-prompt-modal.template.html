@@ -1,0 +1,50 @@
+<div class="editing-doctor-time-modal modal">
+  <div class="modal-content">
+    <h4>ยืนยันที่จะแก้ไขเวลาออกตรวจหรือไม่ ?</h4>
+
+    <div
+      ng-if="my.isDamage"
+      class="if-damage">
+      <h5>โดยจะต้องยกเลิกนัดหมายต่อไปนี้</h5>
+
+      <ul
+        ng-repeat="day in my.days"
+        class="collection with-header">
+        <li class="collection-header">
+          <h6>วัน {{my.momentDays[$index].format('dddd ที่ DD')}}</h6>
+        </li>
+        <li
+          ng-repeat="appointment in my.damages[day]"
+          class="collection-item">
+          <span class="title">
+            คุณ, {{appointment.patient.firstname}}
+            {{appointment.patient.lastname}}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      ng-if="!my.isDamage"
+      class="no-damage">
+      <h5>โดยไม่มีผลกระทบใด ๆ</h5>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      ng-disabled="my.loading"
+      ng-click="my.nextStep()"
+      class="modal-action btn-flat">
+
+      <span ng-show="!my.loading">ยืนยัน</span>
+      <span ng-show="my.loading">รอซักครู่</span>
+    </button>
+
+    <button
+      ng-disabled="my.loading"
+      class="modal-action modal-close btn-flat">
+      ยกเลิก
+    </button>
+  </div>
+</div>
+

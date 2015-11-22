@@ -31,7 +31,7 @@ doctor-calendar-day
     z-index: 20
 
   .calendar-line-layer
-    z-index: 0
+    z-index: 1
     top: 0px
     position: absolute
     width: 14.285714%
@@ -56,18 +56,43 @@ doctor-calendar-day
     height: $block-height * $block-count
     // background-color: rgb(240,240,240)
     //
+
+    .gridster-item:hover
+      .action
+        .delete
+          background-color: red
+
     .gridster-item
       margin-top: -$padding !important
-      background-color: rgb(255,231,189)
+      background-color: lighten(rgb(255,152,25), 5%)
       border-radius: $padding
-      border: 1px solid darken(rgb(255,231,189), 10%)
+      // border: 1px solid darken(rgb(255,231,189), 10%)
+
+      .action
+        position: absolute
+        right: 0px
+        top: 0px
+        padding: 0.7rem
+
+        .delete
+          color: white
+          padding: 0.3rem
+          line-height: 1
+          height: auto
+          font-size: 0.9rem
+          font-weight: bold
+          font-family: "quark"
+          background-color: rgb(150,150,150)
+
+          i
+            font-size: 0.9rem
 
       .label
         padding: 1rem
-        text-align: center
+        text-align: left
         font-weight: bold
         font-family: "quark"
-        color: darken(rgb(255,231,189), 37%)
+        color: white
         font-size: 1rem
 
 

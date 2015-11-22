@@ -11,7 +11,8 @@
     <!-- calendar lines -->
     <div  class="calendar-line"
           ng-repeat="n in [] | range: my.DOCTOR_CALENDAR.blockCounts"
-          ng-style="my.calendarLineStyle">
+          ng-style="my.calendarLineStyle"
+          ng-click="my.editCreateDoctorTime($index)">
     </div>
   </div>
 
@@ -45,7 +46,16 @@
       <ul>
         <li gridster-item="item"
             ng-repeat="item in my.editingGrid"
-            class="animated fadeIn">
+            class="animated bounceIn">
+          <div class="action">
+            <button
+              ng-click="my.editDeleteDoctorTime(item)"
+              class="delete btn">
+              <i class="fa fa-close"></i>
+              ลบ
+            </button>
+          </div>
+
           <div class="label">
             {{my.blockToTime(item.row).format('HH:mm')}}
             -

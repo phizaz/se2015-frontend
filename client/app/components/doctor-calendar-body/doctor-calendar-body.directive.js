@@ -96,6 +96,7 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) 
       dateFormat: dateFormat,
       startEditing: startEditing,
       finishEditing: finishEditing,
+      askDamage: askDamage,
       cancelEditing: cancelEditing,
       // this is intentionally put here
       public: my,
@@ -127,6 +128,14 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) 
       }
     }
 
+    function askDamage() {
+      let damages = {};
+      for (let each of my.doctorCalendarDays) {
+        damages[my.dateFormat(each.date)] = each.askDamage();
+      }
+      return damages;
+    }
+
     function finishEditing() {
       console.log('stop editing doctortime');
       let changes = [];
@@ -135,7 +144,6 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) 
       }
       my.editing = false;
       return changes;
-
     }
 
     function cancelEditing() {

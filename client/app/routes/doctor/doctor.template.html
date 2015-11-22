@@ -57,7 +57,7 @@
 
       <button
         ng-hide="!my.editingMode"
-        ng-click="my.finishEditingDoctorTime()"
+        ng-click="my.promptEditingDoctorTime()"
         class="submit btn">
         ยืนยันการแก้ไข
         </button>
@@ -71,13 +71,6 @@
     </div>
   </nav>
 
-  <!-- <div gridster>
-    <ul>
-      <li gridster-item="item"
-          ng-repeat="item in doctor.items"></li>
-    </ul>
-  </div> -->
-
   <doctor-calendar-body
     name="my.calendarBody"
     current-week="my.currentWeek"
@@ -88,3 +81,6 @@
 
 </div>
 
+<doctor-calendar-prompt-modal
+  name="my.calendarPrompt"
+  submit="my.finishEditingDoctorTime()"></doctor-calendar-prompt-modal>

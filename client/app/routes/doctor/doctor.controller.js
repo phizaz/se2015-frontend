@@ -72,18 +72,39 @@ export class DoctorController {
     this.calendarBody.startEditing();
   }
 
+  promptEditingDoctorTime() {
+    if (!this.editingMode) {
+      return false;
+    }
+
+    // ask for damages
+    let damages = this.calendarBody.askDamage();
+    // show modal
+    this.calendarPrompt.init(damages);
+  }
+
   finishEditingDoctorTime() {
     if (!this.editingMode) {
       return false;
     }
 
+    this.calendarPrompt.setLoading(true);
     let changes = this.calendarBody.finishEditing();
 
-    // perform the changes
-    //
-    for (let eachDay of changes) {
+    console.log('changes summary:', changes);
 
+    let allCreates = [];
+    let allDeletes = [];
+
+    for (let change of changes) {
+      allCreates.append(change.create);
+      allDeletes.append(change.delete);
     }
+
+    // call backend with { create: , delete: }
+    //
+    console.log('creates:', allCreates);
+    console.log('deletes:', allDeletes);
 
     this.editingMode = false;
   }
