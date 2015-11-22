@@ -15,6 +15,9 @@ import 'font-awesome/css/font-awesome.css';
 // quark
 import './fonts/quark/stylesheet.css';
 
+// animate-css
+import 'animate.css';
+
 // routes
 import {navigatorRouteModule} from './routes/navigator/navigator.route.js';
 import {memberRouteModule} from './routes/member/member.route';

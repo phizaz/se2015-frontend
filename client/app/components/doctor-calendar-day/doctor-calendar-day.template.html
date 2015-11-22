@@ -44,7 +44,8 @@
       class="doctor-gridster">
       <ul>
         <li gridster-item="item"
-            ng-repeat="item in my.editingGrid">
+            ng-repeat="item in my.editingGrid"
+            class="animated fadeIn">
           <div class="label">
             {{my.blockToTime(item.row).format('HH:mm')}}
             -

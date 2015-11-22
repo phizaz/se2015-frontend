@@ -173,10 +173,6 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) 
 
     $(window).resize(() => setWeekWidth());
 
-    // // for development
-    // setTimeout(
-    //   () => my.startEditing(), 100);
-
     _.extend(my, {
       element: element,
       attrs: attrs,
