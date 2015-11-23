@@ -5,7 +5,7 @@ import 'angular-ui-router';
 import {homeRouteModule} from '../home/home.route.js';
 import {loginRouteModule} from '../login/login.route.js';
 import {registerRouteModule} from '../register/register.route.js';
-import {SRegisterRouteModule} from '../Sregister/Sregister.route.js';
+import {staffRegisterRouteModule} from '../staff-register/staff-register.route.js';
 import {staffRouteModule} from '../staff/staff.route.js';
 import {doctorRouteModule} from '../doctor/doctor.route';
 // services
@@ -25,7 +25,7 @@ export let navigatorRouteModule =
     homeRouteModule.name,
     loginRouteModule.name,
     registerRouteModule.name,
-    SRegisterRouteModule.name,
+    staffRegisterRouteModule.name,
     staffRouteModule.name,
     doctorRouteModule.name,
     // services
@@ -36,7 +36,7 @@ export let navigatorRouteModule =
 navigatorRouteModule.config(
   ($stateProvider) => {
     $stateProvider
-      // login with facebook page
+
       .state('navigator', {
         abstract: true,
         template: navigatorTemplate,
