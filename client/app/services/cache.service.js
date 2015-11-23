@@ -8,7 +8,7 @@ export class Cache {
 
     this.private = {};
     _.extend(this.private, {
-      defaultCacheLifetime: 2,
+      defaultCacheLifetime: 2 * 3600,
       cache: {},
       timeout: {},
     });
@@ -44,6 +44,15 @@ export class Cache {
     }
 
     return true;
+  }
+
+  destroyCache(field) {
+    let cache = this.private.cache;
+    if (cache[field] === undefined) {
+      throw new Error('cache field not found, mispelling ?');
+    }
+
+    delete cache[field];
   }
 
   getCache(field) {

@@ -40,7 +40,7 @@ var webpackDevelopmentConfig = _.extend(webpackBaseConfig, {
 
     proxy: {
       '/api*': {
-        target: 'http://homstead.app',
+        target: 'http://se2015-backend.dev',
         secure: false,
       },
     },
