@@ -31,11 +31,12 @@ export class RegisterController {
       })
       .catch((res) => {
         this.loading = false;
-        throw new Error(res);
+        console.error(res);
+        throw new Error('regis');
       });
 	}
 
-  nextStep() {
+  goHome() {
     this.$state.go('navigator.home');
   }
 

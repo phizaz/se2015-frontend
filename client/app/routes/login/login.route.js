@@ -3,6 +3,8 @@ import 'angular-ui-router';
 
 import {loginServiceModule} from '../../services/login.service';
 import {loginFormDirectiveModule} from '../../components/login-form/login-form.directive.js';
+
+import './login.sass';
 import loginTemplate from './login.template.html';
 import {LoginController} from './login.controller';
 

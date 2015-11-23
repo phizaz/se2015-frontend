@@ -177,7 +177,8 @@ export class Login {
               })
             .catch(
               (res) => {
-                throw new Error(res);
+                console.error(res);
+                throw new Error('login.service.isloginFresh');
               });
           });
     }

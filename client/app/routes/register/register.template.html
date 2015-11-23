@@ -1,3 +1,6 @@
+<!-- login modal -->
+<login-modal name="register.loginModal"></login-modal>
+
 <div id="register-page-wrapper">
   <div class="jumbotron section no-pad-bot orange animated fadeIn" id="index-banner">
     <div class="container">
@@ -146,7 +149,7 @@
             </label>
           </div>
 
-          <div style="text-align: center">
+          <div class="footer col s12">
             <button
               ng-hide="register.finished"
               ng-disabled="register.isError() || register.loading"
@@ -159,9 +162,10 @@
             <button
               ng-show="register.finished"
               class="amber darken-3 btn-large"
-              ng-click="register.nextStep()">
-              กลับไปหน้าแรก
+              ng-click="register.loginModal.showModal()">
+              ลงทะเบียนเรียบร้อยแล้ว! เข้าสู่ระบบเลย
             </button>
+
           </div>
 
       </form>
@@ -169,10 +173,8 @@
       <div style="margin-top:30px">
 
       <span style="margin-left:30%">เคยลงทะเบียนแล้ว? </span>
-      <login-modal name="register.loginModal"></login-modal>
-      <a href="" ng-click="register.loginModal.show()">เข้าสู่ระบบได้เลย</a>
+      <a href="" class="orange-text" ng-click="register.loginModal.showModal()">เข้าสู่ระบบได้เลย</a>
     </div>
   </div>
 
 </div>
-

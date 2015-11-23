@@ -1,7 +1,54 @@
 <div class="login-form">
-  <form>
-    <input type="text" ng-model="loginForm.form.username"  placeholder="เลขประจำตัวประชาชน หรือ ยูสเซอร์เนม" id="username">
-    </br>
-    <input type="password" ng-model="loginForm.form.password" placeholder="รหัสผ่าน" id="password">
-  </form>
+  <div class="row">
+
+    <form name="form">
+
+      <!-- <input type="text" ng-model="loginForm.form.username"  placeholder="เลขประจำตัวประชาชน หรือ ยูสเซอร์เนม" id="username">
+      </br>
+      <input type="password" ng-model="loginForm.form.password" placeholder="รหัสผ่าน" id="password"> -->
+
+      <div input-field class="col s12">
+
+        <input
+          ng-model="loginForm.form.username"
+          type="text"
+          class="validate"
+          id="username"
+          required>
+        <label for="username">เลขประจำตัวประชาชน หรือ ยูสเซอร์เนม</label>
+      </div>
+
+      <div input-field class="col s12">
+        <input
+          ng-model="loginForm.form.password"
+          type="text"
+          class="validate"
+          id="password"
+          required>
+        <label for="password">รหัสผ่าน</label>
+      </div>
+
+      <div class="col s12" style="text-align: center">
+        <button
+          ng-hide="loginForm.finished"
+          ng-disabled="loginForm.isError() || loginForm.loading"
+          class="amber darken-3 btn-large"
+          ng-click="loginForm.regis(loginForm.form)">
+          <span ng-show="!loginForm.loading">ลงทะเบียน</span>
+          <span ng-show="loginForm.loading">รอซักครู่</span>
+        </button>
+
+        <button
+          ng-show="loginForm.finished"
+          class="amber darken-3 btn-large"
+          ng-click="loginForm.nextStep()">
+          กลับไปหน้าแรก
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
 </div>

@@ -30,18 +30,21 @@ export class Register {
           .then(
             (res) => {
               res = res.data;
+              console.log('takeRegister res:', res);
               if (res.success) {
                 resolve(res);
               } else {
                 if (!res.message) {
-                  throw new Error('undefiend error', res);
+                  console.error(res);
+                  throw new Error('undefiend error');
                 }
                 reject(res);
               }
             })
           .catch(
             (res) => {
-              throw new Error(res);
+              console.error(res);
+              throw new Error('register.takeRegister');
             });
       });
 

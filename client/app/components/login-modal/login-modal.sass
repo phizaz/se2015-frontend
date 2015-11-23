@@ -1,13 +1,51 @@
 .login-box-modal
-  width: 400px
-  height: 400px
+
+  max-width: 400px
   font-family: quark
+  overflow: hidden
+  height: auto
+
+  .header
+    padding: 1.75rem
+
+    h2
+      font-family: quark
+      font-weight: bold
+      margin: 0rem 0rem
+      font-size: 1.6rem
+      text-align: center
+      color: white
+
+  .modal-content
+    font-family: quark
+    font-weight: bold
+    padding: 3rem
+
+    .error
+      background-color: red
+      color: white
+      font-size: 1rem
+      font-weight: bold
+      padding: 0.7rem
+      border-radius: 4px
+      text-align: center
+      margin-bottom: 2rem
+
+    input
+      padding-left: 0.75rem
+      padding-right: 0.75rem
+      box-sizing: border-box
+
+
   .modal-footer
     text-align: center
-    .modal-action
-      float: none
-#button
-  text-align: center
-  margin-right: 130px
-#foot 
-  text-align: center
+    height: auto
+    padding-bottom: 2rem
+
+    button
+      float: none !important
+      font-weight: bold
+
+    .sub-button
+      padding: 1.5rem
+

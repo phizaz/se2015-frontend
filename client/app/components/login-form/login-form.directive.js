@@ -34,12 +34,6 @@ export function loginFormDirective() {
     // i.e. <login-form>, note that loginForm will be
     // transformed to login-form
     restrict: 'E',
-    // create its isolate scope that will not interfere with
-    // the outside world
-    // scope is equivalent to `this` in the class
-    scope: {
-      form: '=name'
-    },
     // always use bindToController
     // so that the code will work as expected
     bindToController: true,
