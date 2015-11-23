@@ -8,7 +8,7 @@ import {registerRouteModule} from '../register/register.route.js';
 import {SRegisterRouteModule} from '../Sregister/Sregister.route.js';
 import {doctorRouteModule} from '../doctor/doctor.route';
 import {nurseRouteModule} from '../nurse/nurse.route';
-import {pharmarcistRouteModule} from '../pharmarcist/pharmarcist.route.js';
+import {pharmacistRouteModule} from '../pharmacist/pharmacist.route.js';
 // services
 import {navigatorServiceModule} from '../../services/navigator.service.js';
 import {messagerServiceModule} from '../../services/messager.service.js';
@@ -29,7 +29,7 @@ export let navigatorRouteModule =
     SRegisterRouteModule.name,
     doctorRouteModule.name,
     nurseRouteModule.name,
-    pharmarcistRouteModule.name,
+    pharmacistRouteModule.name,
     // services
     navigatorServiceModule.name,
     messagerServiceModule.name,

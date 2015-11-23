@@ -2,7 +2,9 @@ import angular from 'angular';
 import _ from 'lodash';
 
 // local
+
 import patientInfoMock from './mocks/get-patient.mock.json';
+
 export let nurseServiceModule =
   angular.module('nurseServiceModule', []);
 
@@ -22,6 +24,7 @@ export class Nurse {
     let $q = this.private.$q;
     return $q(
         (resolve,reject) => {
+            // nurseINfoMock ไม่มีจริง
             resolve(nurseInfoMock.data);
         });
   }

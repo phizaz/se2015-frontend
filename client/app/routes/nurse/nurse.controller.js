@@ -7,13 +7,15 @@ export class NurseController {
     this.patients = [];
     this.nurses =[];
     this.search();
-    this.Nurse
-    .staffInfo()
-    .then(
-        (res) => {
-          this.nurses = res;
-        }
-      );
+
+    // ฟังก์ชันนี้ไม่มีจริง
+    // this.Nurse
+    // .staffInfo()
+    // .then(
+    //     (res) => {
+    //       this.nurses = res;
+    //     }
+    //   );
   }
 
   search(firstname, lastname) {
@@ -27,4 +29,4 @@ export class NurseController {
   }
 
 }
-  
+

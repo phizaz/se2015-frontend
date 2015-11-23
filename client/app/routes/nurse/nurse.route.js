@@ -27,8 +27,8 @@ nurseRouteModule.config(
         controller: NurseController,
         controllerAs: 'nurse',
         resolve: {
-          isnurse: (Login) => {
-              return Login.isnurse();
+          isNurse: (Login) => {
+              return Login.isNurse();
           }
         }
       });

@@ -2,37 +2,39 @@ import angular from 'angular';
 import 'angular-ui-router';
 
 // services
-import {pharmarcistServiceModule} from '../../services/pharmarcist.service.js';
+import {pharmacistServiceModule} from '../../services/pharmacist.service.js';
+import {staffServiceModule} from '../../services/staff.service';
 // directives
 import {greetDirectiveModule} from '../../components/greet/greet.directive.js';
 import {patientInformationDirectiveModule} from '../../components/patient-information/patient-information.directive.js';
 import {showAppointmentDirectiveModule} from '../../components/show-appointment/show-appointment.directive.js';
 import {doctorInformationDirectiveModule} from '../../components/doctor-information/doctor-information.directive.js';
 // locals
-import pharmarcistTemplate from './pharmarcist.template.html';
-import {pharmarcistController} from './pharmarcist.controller.js';
-import './pharmarcist.sass';
-export let pharmarcistRouteModule =
-  angular.module('pharmarcistRouteModule', [
+import pharmacistTemplate from './pharmacist.template.html';
+import {PharmacistController} from './pharmacist.controller.js';
+import './pharmacist.sass';
+export let pharmacistRouteModule =
+  angular.module('pharmacistRouteModule', [
     'ui.router',
-    pharmarcistServiceModule.name,
+    pharmacistServiceModule.name,
+    staffServiceModule.name,
     greetDirectiveModule.name,
     patientInformationDirectiveModule.name,
     doctorInformationDirectiveModule.name,
     showAppointmentDirectiveModule.name
   ]);
 
-pharmarcistRouteModule.config(
+pharmacistRouteModule.config(
   ($stateProvider) => {
     $stateProvider
-      .state('navigator.pharmarcist', {
-        url: '/pharmarcist',
-        template: pharmarcistTemplate,
-        controller: pharmarcistController,
-        controllerAs: 'pharmarcist',
+      .state('navigator.pharmacist', {
+        url: '/pharmacist',
+        template: pharmacistTemplate,
+        controller: PharmacistController,
+        controllerAs: 'pharmacist',
         resolve: {
-          isPharmarcist: (Login) => {
-              return Login.isPharmarcist();
+          isPharmacist: (Login) => {
+              return Login.isPharmacist();
           }
         }
       });

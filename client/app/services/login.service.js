@@ -144,7 +144,29 @@ export class Login {
             reject();
           }
         });
-      }); 
+      });
+  }
+
+  isNurse() {
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+
+        // just pass it
+        resolve();
+
+      });
+  }
+
+  isPharmacist() {
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+
+        // just pass it
+        resolve();
+
+      });
   }
 }
 
