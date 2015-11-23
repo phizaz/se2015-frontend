@@ -27,8 +27,10 @@
         <a
           href=""
           ng-click="my.logout()"
+          ng-disabled="my.loggingOut"
           class="action-btn btn-large waves-effect waves-light white orange-text">
-          ออกจากระบบ
+          <span ng-show="!my.loggingOut">ออกจากระบบ</span>
+          <span ng-show="my.loggingOut">รอซักครู่</span>
         </a>
       </div>
 

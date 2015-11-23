@@ -38,7 +38,7 @@ export class Register {
                   console.log(res);
                   throw new Error('undefiend error');
                 }
-                reject(res);
+                reject(res.messages);
               }
             })
           .catch(
