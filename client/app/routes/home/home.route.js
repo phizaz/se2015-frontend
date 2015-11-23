@@ -9,6 +9,7 @@ import {loginModalDirectiveModule} from '../../components/login-modal/login-moda
 import {makeAppointmentModalDirectiveModule} from '../../components/make-appointment-modal/make-appointment-modal.directive.js';
 // locals
 import homeTemplate from './home.template.html';
+import './home.sass';
 import {HomeController} from './home.controller.js';
 
 export let homeRouteModule =
