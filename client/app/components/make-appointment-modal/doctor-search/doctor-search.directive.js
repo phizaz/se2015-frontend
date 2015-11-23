@@ -33,14 +33,21 @@ export let doctorSearchDirectiveModule =
 export function doctorSearchDirective(DoctorSearch) {
   // this will be the same across the directive of this kind
   let shared = {
+    loadingDoctorList: false,
     doctorList: [],
   };
 
   // this will be done only once no mattter how many instances
   function getDoctorList() {
+    shared.loadingDoctorList = true;
+
     DoctorSearch
       .getDoctorList()
-      .then((result) => angular.copy(result, shared.doctorList));
+      .then((result) => {
+        shared.loadingDoctorList = false;
+
+        angular.copy(result, shared.doctorList);
+      });
   }
   getDoctorList();
 
@@ -53,7 +60,9 @@ export function doctorSearchDirective(DoctorSearch) {
     }
 
     _.extend(my, {
+      shared: shared,
       doctorList: shared.doctorList,
+
       doctor: null,
 
       change: change,

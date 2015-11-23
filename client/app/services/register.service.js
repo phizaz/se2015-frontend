@@ -35,7 +35,7 @@ export class Register {
                 resolve(res);
               } else {
                 if (!res.message) {
-                  console.error(res);
+                  console.log(res);
                   throw new Error('undefiend error');
                 }
                 reject(res);
@@ -43,7 +43,7 @@ export class Register {
             })
           .catch(
             (res) => {
-              console.error(res);
+              console.log(res);
               throw new Error('register.takeRegister');
             });
       });

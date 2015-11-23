@@ -106,7 +106,7 @@ export function loginModalDirective(Login, $state) {
             my.loading = false;
             my.error.wrong = true;
 
-            console.error(res);
+            console.log(res);
             throw new Error('login');
           });
     }

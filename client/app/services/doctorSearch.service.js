@@ -1,7 +1,7 @@
 import angular from 'angular';
 import _ from 'lodash';
 
-import doctorList from './mocks/doctorList.mock.json';
+// import doctorList from './mocks/doctorList.mock.json';
 import specialtyList from './mocks/specialtyList.mock.json';
 
 export class DoctorSearch {
@@ -20,24 +20,36 @@ export class DoctorSearch {
   getDoctorList() {
     return this.private.$q(
       (resolve, reject) => {
-        resolve(this.getDoctorListMock());
-      });
-  }
 
-  getDoctorListMock() {
-    return doctorList;
+        this.private.$http
+          .get('/api/doctor')
+          .then(
+            (res) => {
+              res = res.data;
+
+              if (res.success) {
+                resolve(res.data);
+              } else {
+                console.log(res);
+                throw new Error('getdoctorlist');
+              }
+            })
+          .catch(
+            (res) => {
+              console.log(res);
+              throw new Error('getdoctorlist');
+            });
+
+      });
   }
 
   getSpecialtyList() {
     return this.private.$q(
       (resolve, reject) => {
-        resolve(this.getSpecialtyListMock());
+        resolve(specialtyList);
       });
   }
 
-  getSpecialtyListMock() {
-    return specialtyList;
-  }
 }
 
 export let doctorSearchServiceModule =

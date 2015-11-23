@@ -85,6 +85,7 @@ export function appointmentSelectCardDirective(MakeAppointment) {
       doctor: '=',
       onSelect: '&',
       onDeselect: '&',
+      disabled: '=',
     },
   };
 }

@@ -31,7 +31,7 @@ export class RegisterController {
       })
       .catch((res) => {
         this.loading = false;
-        console.error(res);
+        console.log(res);
         throw new Error('regis');
       });
 	}

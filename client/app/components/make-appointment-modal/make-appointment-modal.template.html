@@ -1,14 +1,18 @@
 <!-- step 1 - select doctors  -->
 <div class="make-appointment-modal modal">
-  <div class="modal-content">
-
+  <div class="modal-header orange">
     <button
       class="close-button modal-close btn-flat">
       <i class="fa fa-close"></i>
     </button>
 
+    <h4 class="title bold quark col s12">นัดหมายแพทย์</h4>
+
+  </div>
+
+  <div class="modal-content">
+
     <div class="row">
-      <h4 class="title bold quark col s12">นัดหมายออนไลน์</h4>
 
       <!-- docotr search -->
       <div
@@ -35,8 +39,8 @@
 
   <div class="modal-footer">
     <button ng-click="my.findOptions()"
-            ng-disabled="my.findingOptions"
-            class="modal-action waves-effect waves-light btn quark bold">
+            ng-disabled="my.findingOptions || !my.isSelected()"
+            class="modal-action orange btn quark bold">
       <span ng-if="!my.findingOptions">ค้นหาเวลานัดหมาย</span>
       <span ng-if="my.findingOptions">รอซักครู่</span>
     </button>
@@ -48,4 +52,5 @@
   name="my.appointmentSelector"
   title="my.appointmentSelectorTitle"
   on-back="my.showModal()"
+  on-appointment-made="my.onAppointmentMade()"
   possible-appointments="my.possibleAppointments"></appointment-select>

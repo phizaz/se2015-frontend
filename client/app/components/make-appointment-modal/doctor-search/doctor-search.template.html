@@ -1,16 +1,19 @@
 <div class="doctor-search">
 
   <ui-select
+    ng-disabled="my.shared.loadingDoctorList"
     ng-model="my.doctor"
     ng-click="my.change()"
     theme="selectize">
     <ui-select-match placeholder="พิมพ์ชื่อแพทย์ที่ต้องการพบ ..">
       <span ng-bind="$select.selected.firstname"></span>
       <span ng-bind="$select.selected.lastname"></span>
+      <small>({{$select.selected.specialty}})</small>
     </ui-select-match>
     <ui-select-choices repeat="doctor in my.doctorList | filter: $select.search">
       <span ng-bind-html="doctor.firstname | highlight: $select.search"></span>
       <span ng-bind-html="doctor.lastname | highlight: $select.search"></span>
+      <small>({{doctor.specialty}})</small>
     </ui-select-choices>
   </ui-select>
 

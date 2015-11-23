@@ -22,6 +22,8 @@ import './specialty-select.sass';
 export let specialtySelectDirectiveModule =
   angular
     .module('specialtySelectDirectiveModule', [
+      'ui.select',
+      'ngSanitize',
       doctorSearchServiceModule.name,
     ])
     .directive('specialtySelect', specialtySelectDirective);
