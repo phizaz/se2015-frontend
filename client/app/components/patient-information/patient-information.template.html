@@ -2,29 +2,29 @@
   <div class="card2">
     <img src="../../images/BlankFace.jpg" width="50px"></img>
     <div>
-      <div>ธนากร รัตนจริยา</div>
+      <show-appointment style="float:right" ng-repeat="appointment in my.patient.appointments" appointment="appointment"></show-appointment>
+      <div><span>{{my.patient.firstname}}</span><span> {{my.patient.lastname}}</span></div>
       <span>เลขประจำตัวประชาชน</span>
-      <show-appointment style="float:right"></show-appointment>
-      <span>1309900986836</span>
+      <span>{{my.patient.personal_id}}</span>
     </div>
-    <div><span>เพศ</span><span>ชาย</span><span> - เชื้อชาติ</span>
-        <span>ไทย</span><span> - ศาสนา</span><span>พุทธ</span>
+    <div><span>เพศ</span><span> {{my.patient.gender}}</span><span> - เชื้อชาติ</span>
+        <span>{{my.patient.nationality}}</span><span> - ศาสนา</span><span>{{my.patient.religion}}</span>
     </div>
     <div style="margin-left:9%">
     <div>ที่อยู่
     </div>
-    <div>123 กรุงเทพ 10002</div>
-    <div><span>โทร</span><span> - 0992850130</span></div>
-    <div><span>email</span><span> - amgerd_a@hotmail.com</span><a href="#" style="margin-left:30%;color:grey">นัดหมายเพื่ม</a></div>
+    <div>{{my.patient.address}}</div>
+    <div><span>โทร</span><span> - {{my.patient.telephone}}</span></div>
+    <div><span>email</span><span> - {{my.patient.email}}</span><a href="#" style="margin-left:30%;color:grey">นัดหมายเพื่ม</a></div>
     </div>
-      <a href="#" ng-click="patientInformation.dis()" style="margin-left:40%;color:grey">ยุบให้เล็กลง</a>
+      <a href="#" ng-click="my.dis()" style="margin-left:40%;color:grey">ยุบให้เล็กลง</a>
   </div>
-  <a ng-click="patientInformation.app()" href="#" style="color:black">
+  <a ng-click="my.app()" href="#" style="color:black">
   <div class="card3" >
     <img src="../../images/BlankFace.jpg" width="50px"></img>
-    <h5>ธนากร รัตนจริยา</h5>
-      <div><span>เพศ</span><span> - ชาย</span><span> เชื้อชาติ</span>
-      <span> -  ไทย</span>
+    <h5>{{my.patient.firstname}} {{my.patient.lastname}}</h5>
+      <div><span>เพศ</span><span> - {{my.patient.gender}}</span><span> เชื้อชาติ</span>
+      <span> -  {{my.patient.nationality}}</span>
   </div>
   </a>
 </div>

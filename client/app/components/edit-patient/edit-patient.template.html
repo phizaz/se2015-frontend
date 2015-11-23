@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card2">
+    <img src="../../images/BlankFace.jpg" width="50px"></img>
+    <div>
+      <div><span>{{my.patient.firstname}}</span><span> {{my.patient.lastname}}</span></div>
+      <span>เลขประจำตัวประชาชน</span>
+      <span>{{my.patient.personal_id}}</span>
+    </div>
+    <div><span>เพศ</span><span> {{my.patient.gender}}</span><span> - เชื้อชาติ</span>
+        <span>{{my.patient.nationality}}</span><span> - ศาสนา</span><span>{{my.patient.religion}}</span>
+    </div>
+    <div style="margin-left:9%">
+    <div>ที่อยู่
+    </div>
+    <div>{{my.patient.address}}</div>
+    <div><span>โทร</span><span> - {{my.patient.telephone}}</span></div>
+    <div><span>email</span><span> - {{my.patient.email}}</span>
+    <add-patientInfo-modal name='my.addPatientInfoModal'></add-patientInfo-modal>
+    <button class="amber darken-3 btn-large" style="margin-left:30%;" ng-click="my.addPatientInfoModal.show()">เพิ่มข้อมูลผู้ป่วย</button></div>
+    </div>
+  </div>
+</div>

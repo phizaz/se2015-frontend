@@ -2,19 +2,21 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive.js';
 
-import patientInformationTemplate from './patient-information.template.html';
-import './patient-information.sass';
+import editPatientTemplate from './edit-patient.template.html';
+import './edit-patient.sass';
 import {showAppointmentDirectiveModule} from '../show-appointment/show-appointment.directive.js';
 import {staffServiceModule} from '../../services/staff.service.js';
-export let patientInformationDirectiveModule =
+import {addPatientInfoModalDirectiveModule} from '../../components/add-patientInfo-modal/add-patientInfo-modal.directive.js';
+export let editPatientDirectiveModule =
   angular
-    .module('patientInformationDirectiveModule', [
+    .module('editPatientDirectiveModule', [
       showAppointmentDirectiveModule.name,
       staffServiceModule.name,
+      addPatientInfoModalDirectiveModule.name,
       ])
-    .directive('patientInformation', patientInformation);
+    .directive('editPatient', editPatient);
 
-export function patientInformation(Staff) {
+export function editPatient(Staff) {
   let shared = {};
 
   function link($scope, element, attrs) {
@@ -22,7 +24,6 @@ export function patientInformation(Staff) {
     my.element = element;
     my.attrs = attrs;
 
-    my.element.find('.card2').hide();
 
     // my.public.show();
   }
@@ -61,6 +62,6 @@ export function patientInformation(Staff) {
     controller: controller,
     controllerAs: 'my',
     link: link,
-    template: patientInformationTemplate,
+    template: editPatientTemplate,
   };
 }

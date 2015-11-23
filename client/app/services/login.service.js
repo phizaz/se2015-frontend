@@ -281,7 +281,41 @@ export class Login {
           });
       });
   }
+  isStaff(){
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin().then((res) => {
+          if (res.data.role === "staff") {
+            resolve(res.data);
+          } else {
+            reject();
+          }
+        });
+      });
+  }
 
+  isNurse() {
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+
+        // just pass it
+        resolve();
+
+      });
+  }
+
+  isPharmacist() {
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+
+        // just pass it
+        resolve();
+
+      });
+  }
 }
 
 loginServiceModule.service('Login', Login);

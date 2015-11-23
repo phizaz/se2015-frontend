@@ -2,7 +2,7 @@
 <greet></greet>
 <div>
 <div>
-	<span>
+  <span>
 <form style="float:left;margin-left:10%">
           <div class="input-field">
             <input id="search" type="search" style="width:300px"required>
@@ -18,11 +18,9 @@
 </div>
 </div>
 <div class="l">
-<patient-information
-  ng-repeat="patient in staff.patients"
-  patient="patient"></patient-information>
+<edit-patient
+  ng-repeat="patient in nurse.patients"
+  patient="patient"></edit-patient>
 </div>
-<div class="r">
-<doctor-information ng-repeat="staff in staff.staffs" staff="staff"></doctor-information>
 </div>
 

@@ -4,10 +4,10 @@ import _ from 'lodash';
 // local
 import patientInfoMock from './mocks/get-patient.mock.json';
 import staffInfoMock from './mocks/get-staff.mock.json';
-export let staffServiceModule =
-  angular.module('staffServiceModule', []);
+export let pharmacistServiceModule =
+  angular.module('pharmacistServiceModule', []);
 
-export class Staff {
+export class Pharmacist {
   constructor($http, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)
@@ -26,14 +26,14 @@ export class Staff {
             resolve(staffInfoMock.data);
         });
   }
-  staffInfo(){
+  pharmacistInfo(){
     let $q = this.private.$q;
     return $q(
         (resolve,reject) => {
             resolve(patientInfoMock.data);
         });
   }
-  takeStaff(photo,firstname,lastname,address,telephone,email,sex,nation,religion,blood,pid,password) {
+  takePharmacist(photo,firstname,lastname,address,telephone,email,sex,nation,religion,blood,pid,password) {
     console.log(firstname);
     console.log(lastname);
     console.log(address);
@@ -78,4 +78,4 @@ export class Staff {
 
 }
 
-staffServiceModule.service('Staff', Staff);
+pharmacistServiceModule.service('Pharmacist', Pharmacist);
