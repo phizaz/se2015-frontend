@@ -2,59 +2,47 @@ import angular from 'angular';
 import _ from 'lodash';
 
 export let registerServiceModule =
-  angular.module('registerServiceModule', []);
+angular.module('registerServiceModule', []);
 
 export class Register {
-  constructor($http) {
+  constructor($http, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)
     this.private = {};
-    this.private.$http = $http;
+    _.extend(this.private, {
+      $http: $http,
+      $q: $q
+    });
 
     // set public vars (if any)
     _.extend(this, {
     });
   }
 
-  takeRegister(photo,firstname,lastname,address,telephone,email,sex,nation,religion,blood,pid,password) {
-    console.log(firstname);
-    console.log(lastname);
-    console.log(address);
-    console.log(telephone);
-    console.log(email);
-    console.log(sex);
-    console.log(nation);
-    console.log(religion);
-    console.log(blood);
-    console.log(pid);
-    console.log(password);
-    return new Promise(
+  takeRegister(patient) {
+    console.log('registering patient:', patient);
+
+
+    return this.private.$q(
       (resolve, reject) => {
-
-
-        // resolve({
-        //  userTye:
-        // });
-
-        // this.priavte.$http.post('/api/..', {
-        //   username: '',
-        //   password: '...',
-        // })
-        //   .then(
-        //     (userInfo) => {
-        //       resolve(userInfo);
-        //     })
-        //   .catch(
-        //     (message) => {
-        //       // 400
-        //       if (message.info === 'validateFail') {
-        //         reject(...);
-        //       } else {
-        //         throw new Error('aoeuaoeu');
-        //       }
-
-        //     });
-
+        this.private.$http
+          .post('/api/register', patient)
+          .then(
+            (res) => {
+              res = res.data;
+              if (res.success) {
+                resolve(res);
+              } else {
+                if (!res.message) {
+                  throw new Error('undefiend error', res);
+                }
+                reject(res);
+              }
+            })
+          .catch(
+            (res) => {
+              throw new Error(res);
+            });
       });
 
   }

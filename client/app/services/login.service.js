@@ -30,40 +30,119 @@ export class Login {
 
     });
 
+    // this
+    //   .takeLogout()
+    //   .then(
+    //     (res) => {
+    //       console.log('takeLogout:', res);
+    //     })
+    //   .catch(
+    //     (res) => {
+    //       console.log('not takeLogout:', res);
+    //     });
+
+    this
+      .takeLogin('test', '1234')
+      .then(
+        (res) => {
+          console.log('login:', res);
+        })
+      .catch(
+        (res) => {
+          console.log('not login:', res);
+        });
+
+
+    // this
+    //   .isLogin()
+    //   .then((res) => {
+    //     console.log('isLogin:', res);
+    //   })
+    //   .catch((res) => {
+    //     console.log('not isLogin:', res);
+    //   });
+
+    // this
+    //   .userInfo()
+    //   .then((res) => {
+    //     console.log('userInfo:', res);
+    //   })
+    //   .catch((res) => {
+    //     console.log('not userInfo:', res);
+    //   });
+
+
+
   }
 
   takeLogin(username,password) {
-    console.log(username);
-    console.log(password);
-    return new Promise(
+    let Cache = this.private.Cache;
+    let $q = this.private.$q;
+    let $http=  this.private.$http;
+
+    return $q(
       (resolve, reject) => {
+        $http.
+          post('/api/login', {
+            username: username,
+            password: password,
+          })
+          .then(
+            (res) => {
+              // this is important
+              res = res.data;
 
+              if (res.success) {
 
-        // resolve({
-        //  userTye:
-        // });
+                Cache.setCache('is-login', {
+                  login: true,
+                  data: res.data
+                });
 
-        // this.priavte.$http.post('/api/..', {
-        //   username: '',
-        //   password: '...',
-        // })
-        //   .then(
-        //     (userInfo) => {
-        //       resolve(userInfo);
-        //     })
-        //   .catch(
-        //     (message) => {
-        //       // 400
-        //       if (message.info === 'validateFail') {
-        //         reject(...);
-        //       } else {
-        //         throw new Error('aoeuaoeu');
-        //       }
+                resolve(res);
+              } else {
+                if (!res.message) {
+                  throw new Error('undefine error', res);
+                }
 
-        //     });
+                reject(res);
+              }
+            })
+          .catch(
+            (res) => {
+              throw new Error(res);
+            });
+      });
+  }
 
-    });
+  takeLogout() {
+    let $http = this.private.$http;
+    let Cache = this.private.Cache;
+    let $q = this.private.$q;
 
+    return $q(
+      (resolve, reject) => {
+        $http
+          .post('/api/logout')
+          .then(
+            (res) => {
+              res = res.data;
+
+              Cache.setCache('is-login', {
+                login: false
+              });
+
+              if (res.success) {
+                resolve(res);
+              } else {
+                reject(res);
+              }
+            })
+          .catch(
+            (res) => {
+              throw new Error(res);
+            });
+      });
   }
 
   isLoginFresh() {
@@ -74,33 +153,46 @@ export class Login {
     let $q = this.private.$q;
     let CallOnce = this.private.CallOnce;
 
-    // real function
-    // return $q(
-    //     (resolve, reject) => {
-    //         $http
-    //             .get('/api/is-login')
-    //             .then(
-    //                 (res) => {
-    //                     Cache.setCache('is-login', res);
-    //                 });
-    //     });
+    return CallOnce.call(realRequest);
 
-    // mock function
-    return CallOnce.call(mockRequest);
-
-    function mockRequest() {
-      // console.log('really do http request');
+    function realRequest() {
       return $q(
         (resolve, reject) => {
-          let delay = 10;
-          setTimeout(() => {
-            // set cache
-            Cache.setCache('is-login', isLoginMock);
+          $http
+            .get('/api/is-login')
+            .then(
+              (res) => {
+                // this is important
+                res = res.data;
 
-            resolve(isLoginMock);
-          }, delay);
-        });
+                if (res.login) {
+                  // set cache
+                  Cache.setCache('is-login', res);
+                  resolve(res);
+                } else {
+                  reject(res);
+                }
+              })
+            .catch(
+              (res) => {
+                throw new Error(res);
+              });
+          });
     }
+
+    // function mockRequest() {
+    //   // console.log('really do http request');
+    //   return $q(
+    //     (resolve, reject) => {
+    //       let delay = 10;
+    //       setTimeout(() => {
+    //         // set cache
+    //         Cache.setCache('is-login', isLoginMock);
+
+    //         resolve(isLoginMock);
+    //       }, delay);
+    //     });
+    // }
 
   }
 
@@ -115,7 +207,10 @@ export class Login {
         if (Cache.isValid('is-login')) {
           resolve(Cache.getCache('is-login'));
         } else {
-          this.isLoginFresh().then((res) => resolve(res));
+          this
+            .isLoginFresh()
+            .then((res) => resolve(res))
+            .catch((res) => reject(res));
         }
       });
   }
@@ -124,13 +219,17 @@ export class Login {
     let $q = this.private.$q;
     return $q(
       (resolve, reject) => {
-        this.isLogin().then((res) => {
-          if (res.data) {
-            resolve(res.data);
-          } else {
-            reject();
-          }
-        });
+        this.isLogin()
+          .then((res) => {
+            if (res.data) {
+              resolve(res.data);
+            } else {
+              reject();
+            }
+          })
+          .catch((res) => {
+            reject(res);
+          });
       });
   }
 

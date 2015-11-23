@@ -37,7 +37,10 @@ export function doctorDrugListDirective(DrugRecord) {
 
       addDrug: addDrug,
       editDrug: editDrug,
+      cancelEditDrug: cancelEditDrug,
+      performEditDrug: performEditDrug,
       deleteDrug: deleteDrug,
+      isIdle: isIdle,
 
       // this is intentionally put here
       public: my,
@@ -67,68 +70,81 @@ export function doctorDrugListDirective(DrugRecord) {
     }
 
     function addDrug() {
-      // if (!isIdle()) {
-      //   throw new Error('busy!');
-      // }
+      if (!isIdle()) {
+        throw new Error('busy!');
+      }
 
-      my.addingDrug = true;
+      // my.addingDrug = true;
       init();
 
-      my.drugListByDate[my.today].push({
-        name: 'ชื่อยา',
-        quantity: 0,
-        remark: 'รายละเอียด',
+      let newDrug = {
+        name: '',
+        quantity: undefined,
+        remark: '',
         new: true,
-      });
-
+      };
+      my.drugListByDate[my.today].push(newDrug);
+      editDrug(newDrug);
       console.log('drugListByDate:', my.drugListByDate);
 
-      // DrugRecord
-      //   .createDrug()
-      //   .then(
-      //     (res) => {
-      //       my.addingDrug = false;
-      //       // todo
-      //       my.drugList.push(res);
-      //     })
-      //   .catch(
-      //     (error) => {
-      //       my.addingDrug = false;
-      //       // todo
-      //       throw new Error(error);
-      //     });
     }
 
     function editDrug(drug) {
-      my.addingDrug = true;
+      if (!isIdle()) {
+        throw new Error('busy!');
+      }
+
+      my.editingDrug = true;
+      drug.editing = true;
+    }
+
+    function cancelEditDrug(drug) {
+      my.editingDrug = false;
+      init();
+    }
+
+    function performEditDrug(drug) {
+      my.editingDrug = true;
 
       DrugRecord
         .editDrug(drug)
         .then(
           (res) => {
-            my.addingDrug = false;
-            // todo
+            my.editingDrug = false;
+            // update in the prototype
+            let item = _.find(my.drugList, { drug_id: drug.drug_id });
+            angular.copy(drug, item);
+            console.log('new drugList:', my.drugList);
+            init();
           })
         .catch(
           (error) => {
-            my.addingDrug = false;
+            my.editingDrug = false;
             // todo
           });
     }
 
     function deleteDrug(drug) {
-      my.addingDrug = true;
+      if (!isIdle()) {
+        throw new Error('busy!');
+      }
+
+      my.deletingDrug = true;
 
       DrugRecord
         .deleteDrug(drug)
         .then(
           (res) => {
-            my.addingDrug = false;
-            // todo
+            my.deletingDrug = false;
+            // delete from the prototype
+            let idx = _.findIndex(my.drugList, drug);
+            my.drugList.splice(idx, 1);
+            console.log('new drugList:', my.drugList);
+            init();
           })
         .catch(
           (error) => {
-            my.addingDrug = false;
+            my.deletingDrug = false;
             // todo
           });
     }

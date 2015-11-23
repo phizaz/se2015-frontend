@@ -31,21 +31,30 @@ export class CallOnce {
       // first time in its kind
 
       // init registry
-      registry.set(fn, []);
+      registry.set(fn, {
+        resolves: [],
+        rejects: [],
+      });
 
       // execute it
       let promise = null;
       promise = fn();
-      promise.then(
-        (res) => {
-          // when resolve resolves all in the registry
-          this.resolve(fn, res);
-        });
+      promise
+        .then(
+          (res) => {
+            // when resolve resolves all in the registry
+            this.resolve(fn, res);
+          })
+        .catch(
+          (res) => {
+            this.reject(fn, res);
+          });
     }
 
     let returnPromise = $q(
       (resolve, reject) => {
-        registry.get(fn).push(resolve);
+        registry.get(fn).resolves.push(resolve);
+        registry.get(fn).rejects.push(reject);
       });
 
     return returnPromise;
@@ -62,8 +71,21 @@ export class CallOnce {
       throw new Error('resolving unmet identifier');
     }
 
-    for (let resolve of registry.get(fn)) {
+    for (let resolve of registry.get(fn).resolves) {
       resolve(value);
+    }
+
+    registry.delete(fn);
+  }
+
+  reject(fn, value) {
+    let registry = this.private.registry;
+    if (!registry.has(fn)) {
+      throw new Error('resolving unmet identifier');
+    }
+
+    for (let reject of registry.get(fn).rejects) {
+      reject(value);
     }
 
     registry.delete(fn);

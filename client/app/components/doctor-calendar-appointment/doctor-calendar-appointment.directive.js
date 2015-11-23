@@ -59,7 +59,7 @@ export function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
   return {
     restrict: 'E',
     scope: {
-      modal: '=',
+      modal: '=targetModal',
       appointment: '=',
     },
     bindToController: true,

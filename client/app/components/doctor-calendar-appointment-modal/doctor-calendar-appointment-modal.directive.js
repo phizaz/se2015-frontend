@@ -60,6 +60,8 @@ export function doctorCalendarAppointmentModalDirective() {
        $modal.closeModal();
     }
 
+    showModal();
+
     _.extend(my, {
       element: element,
       attrs: attrs,
