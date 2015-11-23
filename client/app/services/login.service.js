@@ -41,16 +41,16 @@ export class Login {
     //       console.log('not takeLogout:', res);
     //     });
 
-    this
-      .takeLogin('test', '1234')
-      .then(
-        (res) => {
-          console.log('login:', res);
-        })
-      .catch(
-        (res) => {
-          console.log('not login:', res);
-        });
+    // this
+    //   .takeLogin('test', '1234')
+    //   .then(
+    //     (res) => {
+    //       console.log('login:', res);
+    //     })
+    //   .catch(
+    //     (res) => {
+    //       console.log('not login:', res);
+    //     });
 
 
     // this
@@ -165,9 +165,11 @@ export class Login {
                 // this is important
                 res = res.data;
 
+                // set cache
+                Cache.setCache('is-login', res);
+
+                console.log('isLoginFresh:', res);
                 if (res.login) {
-                  // set cache
-                  Cache.setCache('is-login', res);
                   resolve(res);
                 } else {
                   reject(res);
@@ -205,12 +207,23 @@ export class Login {
     return $q(
       (resolve, reject) => {
         if (Cache.isValid('is-login')) {
-          resolve(Cache.getCache('is-login'));
+          let cache = Cache.getCache('is-login');
+          if (cache.login) {
+            resolve(cache);
+          } else {
+            reject(cache);
+          }
         } else {
           this
             .isLoginFresh()
-            .then((res) => resolve(res))
-            .catch((res) => reject(res));
+            .then((res) => {
+              resolve(res);
+              console.log('isLogin: ', res);
+            })
+            .catch((res) => {
+              console.log('not isLogin:', res);
+              reject(res);
+            });
         }
       });
   }
@@ -230,11 +243,13 @@ export class Login {
   }
 
   toHisOwnPage() {
+    console.log('toHisOwnPage');
     let $q = this.private.$q;
     return $q(
       (resolve, reject) => {
         this.isLogin()
           .then((res) => {
+            console.log('toHisOwnPage login;', res);
             // logged in
             let data = res.data;
             let redirect = null;
@@ -259,6 +274,7 @@ export class Login {
             });
           })
           .catch((res) => {
+            console.log('toHisOwnPage not login:', res);
             // not logged in
             resolve(res);
           });

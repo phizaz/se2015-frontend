@@ -84,6 +84,7 @@ export class CallOnce {
       throw new Error('resolving unmet identifier');
     }
 
+    // console.log('rejects:', registry.get(fn).rejects);
     for (let reject of registry.get(fn).rejects) {
       reject(value);
     }

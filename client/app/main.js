@@ -1,6 +1,10 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
+// nprogress
+import NProgress from 'nprogress/nprogress.js';
+import 'nprogress/nprogress.css';
+
 // moment
 // angular-moment will include things automatically
 import 'angular-moment';
@@ -49,6 +53,12 @@ mainModule.run(
   ($rootScope, $state) => {
     console.log('the app is running');
 
+    $rootScope.$on('$stateChangeStart',
+      (event, toState, toParams, fromState, fromParams) => {
+        console.log('state change start');
+        NProgress.start();
+      });
+
     $rootScope.$on('$stateChangeSuccess',
       (event, toState, toParams, fromState, fromParams) => {
         console.group();
@@ -59,6 +69,8 @@ mainModule.run(
           console.info('fromState', fromState);
           console.info('fromParams', fromParams);
         console.groupEnd();
+
+        NProgress.done();
       });
 
     $rootScope.$on('$stateChangeError',

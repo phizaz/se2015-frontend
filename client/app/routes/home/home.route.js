@@ -30,5 +30,8 @@ homeRouteModule.config(
         controllerAs: 'home',
         resolve: {
         }
+      })
+      .state('home', {
+        controller: ($state) => $state.go('navigator.home')
       });
   });
