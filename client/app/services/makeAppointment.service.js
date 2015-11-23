@@ -10,7 +10,7 @@ export class MakeAppointment {
   }
 
   findOptionsByDoctor(doctor) {
-    if (!doctor.emp_id) {
+    if (!doctor.id) {
       throw new Error('doctor no emp_id');
     }
 
@@ -18,7 +18,7 @@ export class MakeAppointment {
       (resolve, reject) => {
 
         this.$http
-          .get('/find-options/doctor/' + doctor.emp_id)
+          .get('/api/find-options/doctor/' + doctor.id)
           .then(
             (res) => {
               res = res.data;
@@ -58,7 +58,7 @@ export class MakeAppointment {
       (resolve, reject) => {
 
         this.$http
-          .get('/find-options/specialty/' + specialty.val)
+          .get('/api/find-options/specialty/' + specialty.val)
           .then(
             (res) => {
               res = res.data;
@@ -95,18 +95,18 @@ export class MakeAppointment {
   }
 
   submitAppointment(doctor, datetime) {
-    if (!doctor.emp_id || !datetime) {
+    if (!doctor.id || !datetime) {
       console.log('doctor:', doctor);
       console.log('datetime:', datetime);
       throw new Error('no doctor or datetime');
     }
 
-    return this.$q(
-      (resolve) => {
+    // return this.$q(
+    //   (resolve) => {
 
-        setTimeout(() => resolve(), 500);
+    //     setTimeout(() => resolve(), 500);
 
-      });
+    //   });
 
     // the booked one
     return this.$q(
@@ -114,9 +114,9 @@ export class MakeAppointment {
 
         // make appointment
         this.$http
-          .post('/appointment/make',
+          .post('/api/appointment/make',
             {
-              doctor_id: doctor.emp_id,
+              doctor_id: doctor.id,
               datetime: datetime,
             })
           .then(

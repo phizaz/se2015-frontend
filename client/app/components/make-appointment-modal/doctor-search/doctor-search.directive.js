@@ -44,6 +44,7 @@ export function doctorSearchDirective(DoctorSearch) {
     DoctorSearch
       .getDoctorList()
       .then((result) => {
+        console.log('doctor search result:', result);
         shared.loadingDoctorList = false;
 
         angular.copy(result, shared.doctorList);
