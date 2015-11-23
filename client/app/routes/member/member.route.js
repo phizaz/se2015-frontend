@@ -5,6 +5,9 @@ import 'angular-ui-router';
 // services
 import {loginServiceModule} from '../../services/login.service';
 
+// directive
+import {greetDirectiveModule} from '../../components/greet/greet.directive.js';
+
 // routes
 import {doctorRouteModule} from '../doctor/doctor.route';
 import {staffRouteModule} from '../staff/staff.route';
@@ -21,6 +24,9 @@ export let memberRouteModule =
     // services
     loginServiceModule.name,
 
+    // directive
+    greetDirectiveModule.name,
+
     // routes
     doctorRouteModule.name,
     staffRouteModule.name,
@@ -35,6 +41,9 @@ memberRouteModule.config(
         controller: MemberController,
         controllerAs: 'member',
         resolve: {
+          isEmployee: (Login) => {
+            return Login.isEmployee();
+          },
           userInfo: (Login) => {
             return Login.userInfo();
           }

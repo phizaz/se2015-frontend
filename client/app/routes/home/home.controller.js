@@ -1,10 +1,8 @@
 import _ from 'lodash';
 
 export class HomeController {
-  constructor(Navigator) {
+  constructor() {
     console.log('home controller is loaded');
-    // set the current page
-    Navigator.currentPage = 'home';
 
     this.private = {};
     this.private.input = 0;

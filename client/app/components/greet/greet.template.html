@@ -1,12 +1,24 @@
-<div class="login-form">
-  <form>
-  <div id="box">
-    <img src="../../images/BlankFace.jpg" height="30px" style="float:left"></img>
-    <div><span style="color:black;margin-left:10px">สวัสดี,คุณ สัสสดี ใจจุง</span>
-        <span></span>
-        <button  class="btn red accent-4 waves-light" id="but">ออก</button>
-        <span style="margin-top:10px;color:#757575;margin-left:43px ">เจ้าหน้าที่</span>
-    </div>
-    </div>
-  </form>
+<div class="box animated bounceIn">
+
+  <button
+    ng-disabled="greet.loggingOut"
+    ng-click="greet.logout()"
+    class="logout btn red accent-4 waves-light">
+    <span ng-show="!greet.loggingOut">ออก</span>
+    <span ng-show="greet.loggingOut">รอซักครู่</span>
+  </button>
+
+  <!-- <img src="../../images/BlankFace.jpg" height="30px" style="float:left"></img> -->
+  <div class="content">
+
+    <h4 class="greeting">
+      สวัสดี, คุณ {{greet.userInfo.firstname}} {{greet.userInfo.lastname}}
+    </h4>
+
+    <p class="role">
+      {{greet.userInfo.role | role}}
+    </p>
+
+  </div>
+
 </div>

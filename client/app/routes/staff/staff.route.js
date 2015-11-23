@@ -3,20 +3,21 @@ import 'angular-ui-router';
 
 // services
 import {staffServiceModule} from '../../services/staff.service.js';
+
 // directives
-import {greetDirectiveModule} from '../../components/greet/greet.directive.js';
 import {patientInformationDirectiveModule} from '../../components/patient-information/patient-information.directive.js';
 import {showAppointmentDirectiveModule} from '../../components/show-appointment/show-appointment.directive.js';
 import {doctorInformationDirectiveModule} from '../../components/doctor-information/doctor-information.directive.js';
+
 // locals
-import staffTemplate from './staff.template.html';
+import template from './staff.template.html';
 import {StaffController} from './staff.controller.js';
 import './staff.sass';
+
 export let staffRouteModule =
   angular.module('staffRouteModule', [
     'ui.router',
     staffServiceModule.name,
-    greetDirectiveModule.name,
     patientInformationDirectiveModule.name,
     doctorInformationDirectiveModule.name,
     showAppointmentDirectiveModule.name
@@ -25,9 +26,9 @@ export let staffRouteModule =
 staffRouteModule.config(
   ($stateProvider) => {
     $stateProvider
-      .state('navigator.staff', {
+      .state('member.staff', {
         url: '/staff',
-        template: staffTemplate,
+        template: template,
         controller: StaffController,
         controllerAs: 'staff',
         resolve: {
@@ -35,5 +36,9 @@ staffRouteModule.config(
               return Login.isStaff();
           }
         }
+      })
+      // alias
+      .state('staff', {
+        controller: ($state) => $state.go('member.staff')
       });
   });

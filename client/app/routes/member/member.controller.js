@@ -1,9 +1,10 @@
 import _ from 'lodash';
 
 export class MemberController {
-  constructor() {
-    _.extend(this, {
+  constructor(userInfo) {
 
+    _.extend(this, {
+      userInfo: userInfo,
     });
   }
 }

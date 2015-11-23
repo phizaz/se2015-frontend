@@ -1,8 +1,7 @@
 import _ from 'lodash';
 
 export class RegisterController {
-  constructor(Navigator, Register, $scope, $state) {
-    Navigator.currentPage = 'register';
+  constructor(Register, $scope, $state) {
 
     _.extend(this, {
       Register: Register,

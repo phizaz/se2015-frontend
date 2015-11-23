@@ -12,7 +12,7 @@ export class Staff {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)
     this.private = {};
-    _.extend(this, {
+    _.extend(this.private, {
       $http: $http,
       $q: $q
     });

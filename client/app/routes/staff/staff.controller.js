@@ -1,7 +1,6 @@
 
 export class StaffController {
-  constructor(Navigator, Staff) {
-    Navigator.currentPage = 'staff';
+  constructor(Staff) {
     this.Staff =Staff;
     this.form = {};
     this.patients = [];
@@ -27,4 +26,4 @@ export class StaffController {
   }
 
 }
-  
+

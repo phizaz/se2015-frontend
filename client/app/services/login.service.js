@@ -235,10 +235,8 @@ export class Login {
       (resolve, reject) => {
         this.isLogin()
           .then((res) => {
+            // this is intended to be able to resolve only
             resolve(res.data);
-          })
-          .catch((res) => {
-            reject(res);
           });
       });
   }
@@ -281,17 +279,84 @@ export class Login {
           });
       });
   }
+
+  isPatient(){
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin()
+          .then(
+            (res) => {
+              if (!res.data.role) {
+                resolve(res.data);
+              } else {
+                reject({ redirect: 'home' });
+              }
+            })
+          .catch(
+            (res) => {
+              reject({ redirect: 'home' });
+            });
+      });
+  }
+
+  isEmployee(){
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin()
+          .then(
+            (res) => {
+              if (res.data.role) {
+                resolve(res.data);
+              } else {
+                reject({ redirect: 'home' });
+              }
+            })
+          .catch(
+            (res) => {
+              reject({ redirect: 'home' });
+            });
+      });
+  }
+
+  isDoctor(){
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin()
+          .then(
+            (res) => {
+              if (res.data.role === 'Doctor') {
+                resolve(res.data);
+              } else {
+                reject({ redirect: 'home' });
+              }
+            })
+          .catch(
+            (res) => {
+              reject({ redirect: 'home' });
+            });
+      });
+  }
+
   isStaff(){
     let $q = this.private.$q;
     return $q(
       (resolve, reject) => {
-        this.isLogin().then((res) => {
-          if (res.data.role === "staff") {
-            resolve(res.data);
-          } else {
-            reject();
-          }
-        });
+        this.isLogin()
+          .then(
+            (res) => {
+              if (res.data.role === 'Staff') {
+                resolve(res.data);
+              } else {
+                reject({ redirect: 'home' });
+              }
+            })
+          .catch(
+            (res) => {
+              reject({ redirect: 'home' });
+            });
       });
   }
 
@@ -299,10 +364,19 @@ export class Login {
     let $q = this.private.$q;
     return $q(
       (resolve, reject) => {
-
-        // just pass it
-        resolve();
-
+        this.isLogin()
+          .then(
+            (res) => {
+              if (res.data.role === 'Nurse') {
+                resolve(res.data);
+              } else {
+                reject({ redirect: 'home' });
+              }
+            })
+          .catch(
+            (res) => {
+              reject({ redirect: 'home' });
+            });
       });
   }
 
@@ -310,10 +384,19 @@ export class Login {
     let $q = this.private.$q;
     return $q(
       (resolve, reject) => {
-
-        // just pass it
-        resolve();
-
+        this.isLogin()
+          .then(
+            (res) => {
+              if (res.data.role === 'Pharmacist') {
+                resolve(res.data);
+              } else {
+                reject({ redirect: 'home' });
+              }
+            })
+          .catch(
+            (res) => {
+              reject({ redirect: 'home' });
+            });
       });
   }
 }

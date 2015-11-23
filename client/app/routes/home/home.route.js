@@ -2,7 +2,7 @@ import angular from 'angular';
 import 'angular-ui-router';
 
 // services
-import {navigatorServiceModule} from '../../services/navigator.service.js';
+// import {navigatorServiceModule} from '../../services/navigator.service.js';
 
 // directives
 import {loginModalDirectiveModule} from '../../components/login-modal/login-modal.directive.js';
@@ -16,7 +16,7 @@ import {HomeController} from './home.controller.js';
 export let homeRouteModule =
   angular.module('homeRouteModule', [
     'ui.router',
-    navigatorServiceModule.name,
+    // navigatorServiceModule.name,
     loginModalDirectiveModule.name,
     makeAppointmentModalDirectiveModule.name,
     editPatientDirectiveModule.name

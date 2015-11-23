@@ -1,28 +1,30 @@
-<div class = "t">
-<greet></greet>
-<div>
-<div>
-	<span>
-<form style="float:left;margin-left:10%">
+<div class="staff-wrapper">
+  <div class = "t">
+
+    <div>
+      <div>
+       <span>
+        <form style="float:left;margin-left:10%">
           <div class="input-field">
             <input id="search" type="search" style="width:300px"required>
             <label for="search"><i class="material-icons">search</i></label>
           </div>
         </form>
       </span>
-</div>
+    </div>
     <button class="btn amber darken-3 waves-light" style="margin-left:10%;margin-top:20px">เพิ่มผู้ป่วย</button>
-</div>
-<div>
+  </div>
+  <div>
 
-</div>
-</div>
-<div class="l">
-<patient-information
-  ng-repeat="patient in staff.patients"
-  patient="patient"></patient-information>
-</div>
-<div class="r">
-<doctor-information ng-repeat="staff in staff.staffs" staff="staff"></doctor-information>
+  </div>
+  </div>
+  <div class="l">
+    <patient-information
+    ng-repeat="patient in staff.patients"
+    patient="patient"></patient-information>
+  </div>
+  <div class="r">
+    <doctor-information ng-repeat="staff in staff.staffs" staff="staff"></doctor-information>
+  </div>
 </div>
 

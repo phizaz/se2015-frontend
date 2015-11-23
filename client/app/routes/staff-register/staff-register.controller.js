@@ -3,8 +3,7 @@ import _ from 'lodash';
 import specialtyList from '../../services/mocks/specialtyList.mock.json';
 
 export class StaffRegisterController {
-  constructor(Navigator, StaffRegister, $scope, $state) {
-    Navigator.currentPage = 'register';
+  constructor(StaffRegister, $scope, $state) {
 
     _.extend(this, {
       StaffRegister: StaffRegister,

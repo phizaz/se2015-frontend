@@ -1,7 +1,6 @@
 
 export class NurseController {
-  constructor(Navigator, Nurse) {
-    Navigator.currentPage = 'nurse';
+  constructor(Nurse) {
     this.Nurse =Nurse;
     this.form = {};
     this.patients = [];

@@ -1,7 +1,6 @@
 
 export class PharmacistController {
-  constructor(Navigator, Pharmacist, Staff) {
-    Navigator.currentPage = 'pharmacist';
+  constructor(Pharmacist, Staff) {
     this.Pharmacist =Staff;
     this.form = {};
     this.patients = [];

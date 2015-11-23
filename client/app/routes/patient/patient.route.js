@@ -34,27 +34,8 @@ patientRouteModule.config(
             return Login.userInfo();
           },
 
-          isPatient: (Login, $q) => {
-            return $q(
-              (resolve, reject) => {
-
-                Login
-                  .userInfo()
-                  .then(
-                    (res) => {
-                      if (res.role) {
-                        reject({redirect: 'home'});
-                      } else {
-                        resolve();
-                      }
-                    })
-                  .catch(
-                    (res) => {
-                      console.log('user info catch:', res);
-                      reject({redirect: 'home'});
-                    });
-
-              });
+          isPatient: (Login) => {
+            return Login.isPatient();
           }
         }
       });
