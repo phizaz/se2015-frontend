@@ -1,87 +1,180 @@
-<div id="register-page-wrapper" class="container">
-	<div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <input ng-model="register.photo" type="file" class="validate">
-          <label for="​photo">รูป</label>
-        </div>
-        <div class="input-field col s6">
-          <input ng-model="register.firstname" type="text" class="validate">
-          <label for="firstname">ชื่อ</label>
-        </div>
-        <div class="input-field col s6">
-          <input ng-model="register.lastname" type="text" class="validate">
-          <label for="lastname">นามสกุล</label>
-        </div>
-        <div class="input-field col s12">
-           <input ng-model="register.address" type="text" class="validate">
-           <label for="address">ที่อยู่</label> 
-        </div>
-        <div class="input-field col s12">
-           <input ng-model="register.telephone" type="text" class="validate">
-           <label for="telephone">เบอร์โทร</label> 
-        </div>
-        <div class="input-field col s12">
-           <input ng-model="register.email" type="text" class="validate">
-           <label for="email">อีเมลล์</label> 
-        </div>
-        <div class="input-field col s6">
-            <select ng-model="register.sex">
+<!-- login modal -->
+<login-modal name="register.loginModal"></login-modal>
+
+<div id="register-page-wrapper">
+  <div class="jumbotron section no-pad-bot orange animated fadeIn" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="title header center white-text">
+        ลงทะเบียน
+        <small>| ฮอสพิทัล โอพีดี</small>
+      </h1>
+      <div class="row center">
+        <a ui-sref="home" id="download-button" class="start-btn btn-large waves-effect waves-light white orange-text">กลับไปหน้าแรก</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+  <div class="body container animated fadeIn">
+    <div class="row">
+      <form name="form" class="col s12">
+        <div class="row">
+          <div input-field class="col s6">
+            <input
+              ng-model="register.form.firstname"
+              type="text"
+              class="validate"
+              id="firstname"
+              required>
+            <label for="firstname">ชื่อ</label>
+          </div>
+          <div input-field class="col s6">
+            <input
+              ng-model="register.form.lastname"
+              type="text"
+              class="validate"
+              id="lastname"
+              required>
+            <label for="lastname">นามสกุล</label>
+          </div>
+          <div input-field class="col s12">
+            <input
+              ng-model="register.form.address"
+              type="text"
+              class="validate"
+              id="address"
+              required>
+            <label for="address">ที่อยู่</label>
+          </div>
+          <div input-field class="col s12">
+            <input
+              ng-model="register.form.email"
+              type="text"
+              class="validate"
+              id="email"
+              required>
+            <label for="email">อีเมลล์</label>
+          </div>
+          <div input-field class="col s6">
+            <input
+              ng-model="register.form.tel"
+              type="text"
+              class="validate"
+              id="tel"
+              required>
+            <label for="tel">เบอร์โทร</label>
+          </div>
+          <div input-field class="col s6">
+            <input
+              ng-model="register.form.birthdate"
+              input-date
+              select-years="200"
+              format="yyyy-mm-dd"
+              type="text"
+              id="birthdate"
+              required>
+            <label for="birthdate">วันเกิด</label>
+          </div>
+          <div input-field class="col s6">
+            <select material-select ng-model="register.form.gender" required>
               <option value="" disabled selected></option>
-              <option value="​male">ชาย</option>
-              <option value="female">หญิง</option>
+              <option value="M">ชาย</option>
+              <option value="F">หญิง</option>
             </select>
             <label>เพศ</label>
-        </div>
-        <div class="input-field col s6">
-            <select ng-model="register.nation">
+          </div>
+          <div input-field class="col s6">
+            <select material-select ng-model="register.form.nationality" required>
               <option value="" disabled selected></option>
               <option value="​thai">ไทย</option>
               <option value="other_nation">อื่นๆ</option>
             </select>
             <label>เชื้อชาติ</label>
-        </div>
-         <div class="input-field col s6">
-            <select ng-model="register.religion">
+          </div>
+           <div input-field class="col s6">
+            <select material-select ng-model="register.form.religion" required>
               <option value="" disabled selected></option>
               <option value="​buddha">พุทธ</option>
               <option value="christ">คริสต์</option>
               <option value="​islam">อิสลาม</option>
-              <option value="​other_religion">อื่นๆ</option>
+              <option value="​other">อื่นๆ</option>
+              <option value="-">ไม่นับถือ</option>
             </select>
             <label>ศาสนา</label>
-        </div>
-        <div class="input-field col s6">
-            <select ng-model="register.blood">
+          </div>
+          <div input-field class="col s6">
+            <select material-select ng-model="register.form.bloodtype" required>
               <option value="" disabled selected></option>
-              <option value="​a">A</option>
-              <option value="​b">B</option>
-              <option value="​ab">AB</option>
-              <option value="​o">O</option>
-              <option value="​other_blood">อื่นๆ</option>
+              <option value="​A">A</option>
+              <option value="​B">B</option>
+              <option value="​AB">AB</option>
+              <option value="​O">O</option>
+              <option value="​-">ไม่ระบุ</option>
             </select>
             <label>กรุ๊ปเลือด</label>
-        </div>
-        <div class="input-field col s12">
-           <input ng-model="register.pid" type="text" class="validate">
-           <label for="pid">เลขประจำตัวประชาชน</label> 
-        </div>
-        <div class="input-field col s6">
-           <input ng-model="register.password" type="password" class="validate">
-           <label for="email">รหัส</label> 
-        </div>
-        <div class="input-field col s6">
-           <input ng-model="register.cpassword" type="password" class="validate">
-           <label for="email">ยืนยันรหัสผ่าน</label> 
-        </div>
-    </form>
-    <button class="amber darken-3 btn-large" ng-click="register.regis()" style="margin-left:37%">ลงทะเบียน</button>
-    <div style="margin-top:30px">
-    <span style="margin-left:30%">เคยลงทะเบียนแล้ว? </span>
-    <login-modal name="register.loginModal"></login-modal>
-    <a href="" ng-click="register.loginModal.show()">เข้าสู่ระบบได้เลย</a>
+          </div>
+
+          <div input-field class="col s12">
+            <input
+              ng-model="register.form.personal_id"
+              type="text"
+              class="validate"
+              id="personal_id"
+              required>
+            <label for="personal_id">เลขประจำตัวประชาชน</label>
+          </div>
+
+          <div input-field class="col s6">
+             <input
+              ng-model="register.form.password"
+              type="password"
+              class="validate"
+              id="password"
+              required>
+             <label for="password">รหัสผ่าน</label>
+          </div>
+
+          <div input-field class="col s6" ng-class="{'not-match': register.error.passwordNotMatch}">
+            <input
+              ng-model="register.form.cpassword"
+              type="password"
+              class="validate"
+              id="cpassword"
+              required>
+            <label for="cpassword">
+              ยืนยันรหัสผ่าน
+              <span ng-show="register.error.passwordNotMatch">รัหสผ่านไม่ตรงกัน</span>
+            </label>
+          </div>
+
+          <div class="footer col s12">
+            <button
+              ng-hide="register.finished"
+              ng-disabled="register.isError() || register.loading"
+              class="amber darken-3 btn-large"
+              ng-click="register.regis(register.form)">
+              <span ng-show="!register.loading">ลงทะเบียน</span>
+              <span ng-show="register.loading">รอซักครู่</span>
+            </button>
+
+            <button
+              ng-show="register.finished"
+              class="amber darken-3 btn-large"
+              ng-click="register.loginModal.showModal()">
+              ลงทะเบียนเรียบร้อยแล้ว! เข้าสู่ระบบเลย
+            </button>
+
+          </div>
+
+      </form>
+
+      <div style="margin-top:30px">
+
+      <span style="margin-left:30%">เคยลงทะเบียนแล้ว? </span>
+      <a href="" class="orange-text" ng-click="register.loginModal.showModal()">เข้าสู่ระบบได้เลย</a>
+    </div>
   </div>
-  </div>
+
 </div>
-        

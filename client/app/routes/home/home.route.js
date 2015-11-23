@@ -10,6 +10,7 @@ import {makeAppointmentModalDirectiveModule} from '../../components/make-appoint
 import {editPatientDirectiveModule} from '../../components/edit-patient/edit-patient.directive.js';
 // locals
 import homeTemplate from './home.template.html';
+import './home.sass';
 import {HomeController} from './home.controller.js';
 
 export let homeRouteModule =
@@ -30,7 +31,9 @@ homeRouteModule.config(
         controller: HomeController,
         controllerAs: 'home',
         resolve: {
-
         }
+      })
+      .state('home', {
+        controller: ($state) => $state.go('navigator.home')
       });
   });

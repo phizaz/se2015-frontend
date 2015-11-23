@@ -1,7 +1,7 @@
 <div class="appointment-select modal">
-  <div class="modal-header">
+  <div class="modal-header orange">
     <button ng-click="my.back()"
-            class="back-button modal-action waves-effect waves-light btn quark bold">
+            class="back-button modal-action btn quark bold white orange-text">
       กลับไปแก้ไข
     </button>
 
@@ -12,11 +12,19 @@
       <i class="fa fa-close"></i>
     </button>
 
-    <button ng-click="my.submitAppointment()"
+    <button ng-show="!my.appointmentCreated"
+            ng-click="my.submitAppointment()"
             ng-disabled="my.submitting || !my.selectingCard"
-            class="next-button modal-action waves-effect waves-light btn quark bold">
+            class="next-button modal-action btn quark bold white orange-text">
       <span ng-if="!my.submitting">ยืนยันการจอง</span>
       <span ng-if="my.submitting">รอซักครู่</span>
+    </button>
+
+    <button
+      ng-show="my.appointmentCreated"
+      ng-click="my.nextStep()"
+      class="next-button modal-action btn quark bold white orange-text">
+      <span>จองเรียบร้อย ! กลับ..</span>
     </button>
 
     <div style="clear: both;"></div>
@@ -29,6 +37,7 @@
         ng-repeat="appointment in my.possibleAppointments"
         datetime="appointment.datetime"
         doctor="appointment.doctor"
+        disabled="my.submitting"
         on-select="my.select(my.appointmentSelectCards[$index])"
         on-deselect="my.deselect()"
         name="my.appointmentSelectCards[$index]"></appointment-select-card>

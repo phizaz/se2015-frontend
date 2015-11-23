@@ -1,12 +1,125 @@
-<div class="container">
-  <h1>{{home.a}}</h1>
+<!-- login modal -->
+<login-modal name="home.loginModal"></login-modal>
 
-  <h1>This is heading 1 in home..</h1>
-  <p>this is the the content of the home page, and you can see that the home page contains the navigator on top</p>
-  <login-modal name="home.loginModal"></login-modal>
-  <button ng-click="home.loginModal.show()">login</button>
-  <edit-patient></edit-patient>
-  <make-appointment-modal
-    name="home.makeAppoinmentModal"></make-appointment-modal>
-  <button ng-click="home.makeAppoinmentModal.showModal()">นัดหมายแพทย์</button>
+<div class="home-page">
+  <div class="jumbotron section no-pad-bot animated fadeIn" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="title header center orange-text">ฮอสพิทัล โอพีดี</h1>
+      <div class="row center">
+        <h5 class="subtitle header col s12 light">โรงพยาบาลยุคใหม่ ไฉไลกว่าเดิม !</h5>
+      </div>
+      <div class="row center">
+        <a ui-sref="register" id="download-button" class="start-btn btn-large waves-effect waves-light orange">เริ่มนัดหมายแพทย์ได้เลย !</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+  <div class="body animated fadeIn">
+    <div class="container">
+      <div class="section">
+
+        <div class="row">
+          <div class="col s12">
+            <h2 class="title">กับ 3 ขั้นตอนง่าย ๆ ในการเข้ารับการรักษา</h2>
+          </div>
+        </div>
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+              <h5 class="center">สมัคร หรือ ลงทะเบียน</h5>
+
+              <p class="light">
+                เริ่มด้วยการลงทะเบียน และกรอกข้อมูลที่จำเป็นให้กับทางโรงพยาบาล หรือหากเคยลงทะเบียนไว้แล้วก็สามารถเข้าสู่ระบบได้ทันที
+              </p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+              <h5 class="center">นัดหมายแพทย์ที่ชอบในเวลาที่ใช่</h5>
+
+              <p class="light">ทางระบบ ฮอสพิทัล โอพีดี เปิดโอกาสให้ท่านได้เลือกนัดหมายกับแพทย์ที่ท่านต้องการ เพียงระบุแพทย์ตามชื่อ หรือแพทย์ตามความถนัด จากนั้นระบบจะแสดงตัวเลือกที่เป็นไปได้ ... คราวนี้ก็เหลือแต่ท่านที่จะเลือกนัดหมายกับแพทย์ในเวลาที่ใช่ !</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+              <h5 class="center">ไปรับการรักษาในเวลาที่นัดหมาย</h5>
+
+              <p class="light">เมื่อใกล้ถีงเวลาทางเราจะแจ้งเตือนว่าท่านมีนัดหมายกับเรา เมื่อนั้นท่านก็เพียงเดินทางมาที่โรงพยาบาล แจ้งกับทางพนักงานของเรา เพียงเท่านี้ท่านก็ไม่จำเป็นต้องไปต่อคิวยาวเหยียดเพื่อรับการรักษาอีกต่อไป !</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="text-align: center">
+        <a ui-sref="register" class="register-btn btn-large waves-effect waves-light white">ลงทะเบียน เพื่อทำการนัดหมายเลย !</a>
+
+        <div class="sub-button">
+          <a href="" ng-click="home.loginModal.showModal()">เข้าสู่ระบบ หากเคยลงทะเบียนแล้ว</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="page-footer animated fadeIn">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">ระบบฮอสพิทัล โอพีดี</h5>
+          <p class="grey-text text-lighten-2">ระบบฮอสพิทัล โอพีดี หรืออีกชื่อหนึ่ง Hospital OPD ระบบจัดการการจองคิวออนไลน์ของโรงพยาบาล</p>
+
+          <h5 class="white-text">
+            สร้างด้วย <i class="fa fa-heart"></i>
+          </h5>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">แผนผังเว็บ</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-2" href="" ng-click="home.loginModal.showModal()">เข้าสู่ระบบ</a></li>
+            <li><a class="grey-text text-lighten-2" href="" ui-sref="register">ลงทะเบียน</a></li>
+            <li><a class="grey-text text-lighten-2" href="" ui-sref="patient">สำหรับผู้ป่วย</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">สำหรับเจ้าหน้าที่</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-2" href="" ui-sref="doctor">แพทย์</a></li>
+            <li><a class="grey-text text-lighten-2" href="" ui-sref="nurse">พยาบาล</a></li>
+            <li><a class="grey-text text-lighten-2" href="" ui-sref="pharmacist">เภสัชกร</a></li>
+            <li><a class="grey-text text-lighten-2" href="" ui-sref="staff">เจ้าหน้าที่</a></li>
+            <li><a class="grey-text text-lighten-2" href="" ui-sref="staff-register">ลงทะเบียน จนท.</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- <div class="container">
+    <h1>{{home.a}}</h1>
+
+    <h1>This is heading 1 in home..</h1>
+    <p>this is the the content of the home page, and you can see that the home page contains the navigator on top</p>
+    <login-modal name="home.loginModal"></login-modal>
+    <button ng-click="home.loginModal.show()">login</button>
+
+    <make-appointment-modal
+      name="home.makeAppoinmentModal"></make-appointment-modal>
+    <button ng-click="home.makeAppoinmentModal.showModal()">นัดหมายแพทย์</button>
+  </div>
+   -->
+
 </div>

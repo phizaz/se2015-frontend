@@ -14,7 +14,7 @@ import 'ui-select/dist/select.css';
 // selector theme
 import 'selectize/dist/css/selectize.default.css';
 
-import {doctorServiceModule} from '../../../services/doctor.service.js';
+import {doctorSearchServiceModule} from '../../../services/doctorSearch.service.js';
 
 import specialtySelectTemplate from './specialty-select.template.html';
 import './specialty-select.sass';
@@ -22,17 +22,19 @@ import './specialty-select.sass';
 export let specialtySelectDirectiveModule =
   angular
     .module('specialtySelectDirectiveModule', [
-      doctorServiceModule.name,
+      'ui.select',
+      'ngSanitize',
+      doctorSearchServiceModule.name,
     ])
     .directive('specialtySelect', specialtySelectDirective);
 
-export function specialtySelectDirective(Doctor) {
+export function specialtySelectDirective(DoctorSearch) {
   let shared = {
     specialtyList: [],
   };
 
   function getSpecialtyList() {
-    Doctor
+    DoctorSearch
       .getSpecialtyList()
       .then((result) => {
         console.log('specialtyList:', result);

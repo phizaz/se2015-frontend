@@ -2,11 +2,16 @@ $block-height: 65px
 $padding: 4px
 
 doctor-calendar-appointment
+  height: $block-height
+  padding: 2 * $padding
+  padding-bottom: 0px
+  box-sizing: border-box
+  display: block
+  position: absolute
+  z-index: 3
+  width: 100%
+
   .appointment-wrapper
-    height: $block-height
-    padding: $padding
-    padding-bottom: 0px
-    box-sizing: border-box
 
     .appointment:hover
       background-color: darken(white, 3%)
@@ -32,63 +37,24 @@ doctor-calendar-appointment
         vertical-align: middle
         display: inline-block
         padding-left: 7px
+        color: black
 
         .name
           font-size: 0.75rem
           font-weight: bold
           margin: 0px
           font-family: "quark"
+          color: black
+
         .short-description
           font-size: 0.75rem
           font-weight: normal
           font-family: "quark"
           margin: 0px
-
-  .appointment-modal
-
-    $orange: rgb(254,163,0)
-    $grey: rgb(66,66,66)
-
-    overflow: hidden
-
-    .modal-header
-      padding: 1rem
-      background-color: $orange
-
-    .modal-content
-      width: 100%
-      overflow-x: scroll
-      overflow-y: hidden
-
-      .appointment-card-wrapper
-        white-space: nowrap
+          color: black
 
 
-    .back-button
-      float: left
 
-    .title
-      float: left
-      margin: 0px
-      color: white
-      letter-spacing: 1px
-      font-size: 1.1rem
-      line-height: 36px
-      font-weight: bold
-      font-family: 'quark'
-      padding: 0rem 1rem
 
-    .next-button
-      float: right
 
-    .close-button
-      float: right
-      color: $grey
-      padding: 0rem 1rem
-
-    .close-button:active, .close-button:focus
-      background-color: transparent
-
-    .close-button:hover
-      color: darken($grey, 10%)
 

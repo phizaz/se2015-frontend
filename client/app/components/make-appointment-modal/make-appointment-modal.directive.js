@@ -39,6 +39,25 @@ export function makeAppointmentModalDirective(MakeAppointment) {
   function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
+    _.extend(my, {
+      searchingMethod: null,
+      possibleAppointments: [],
+      type: null,
+      doctorSearcher: null,
+      specialtySelector: null,
+      findingOptions: false,
+      appointmentSelectorTitle: null,
+
+      changeSearchingMethod: changeSearchingMethod,
+      findOptions: findOptions,
+      showModal: showModal,
+      hideModal: hideModal,
+      isSelected: isSelected,
+
+      // intentiolly put here
+      public: my,
+    });
+
     function showModal() {
       my.element.children('.modal').openModal({
         dismissible: false,
@@ -58,14 +77,24 @@ export function makeAppointmentModalDirective(MakeAppointment) {
       return title;
     }
 
+    function isSelected() {
+      if (my.searchingMethod === 'doctor') {
+        return !!my.doctorSearcher.doctor;
+      } else {
+        return !!my.specialtySelector.specialty;
+      }
+    }
+
     function findOptions() {
       my.findingOptions = true;
       let promise = null;
 
       if (my.searchingMethod === 'doctor') {
-        promise = MakeAppointment.findOptionsByDoctor();
+        let doctor = my.doctorSearcher.doctor;
+        promise = MakeAppointment.findOptionsByDoctor(doctor);
       } else if (my.searchingMethod === 'specialty') {
-        promise = MakeAppointment.findOptionsBySpecialty();
+        let specialty = my.specialtySelector.specialty;
+        promise = MakeAppointment.findOptionsBySpecialty(specialty);
       } else {
         throw new Error('no searchingMethod');
       }
@@ -95,23 +124,6 @@ export function makeAppointmentModalDirective(MakeAppointment) {
       my.searchingMethod = option;
     }
 
-    _.extend(my, {
-      searchingMethod: null,
-      possibleAppointments: [],
-      type: null,
-      doctorSearcher: null,
-      specialtySelector: null,
-      findingOptions: false,
-      appointmentSelectorTitle: null,
-
-      changeSearchingMethod: changeSearchingMethod,
-      findOptions: findOptions,
-      showModal: showModal,
-      hideModal: hideModal,
-
-      // intentiolly put here
-      public: my,
-    });
   }
 
   function link($scope, element, attrs) {
@@ -129,6 +141,7 @@ export function makeAppointmentModalDirective(MakeAppointment) {
     restrict: 'E',
     scope: {
       public: '=name',
+      onAppointmentMade: '&',
     },
     bindToController: true,
     controller: controller,

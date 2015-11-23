@@ -1,20 +1,65 @@
 <div class="login-box-modal modal">
-  <div class="modal-content">
-    <login-form name="loginModal.loginForm"></login-form>
-    
+
+  <div class="header orange">
+    <h2>เข้าสู่ระบบ</h2>
   </div>
-  <div class="modal-footer">
-    <a  ng-click="loginModal.login()"
-        href="#!"
-        class="amber darken-3 btn-large"
-        id="button"
-        >เข้าสู่ระบบ</a>
-  </div>
-    <div>
-    </br>
-      <div id="foot">
-      <span>ยังไม่ได้ลงทะเบียน ?</span>
-      <a ui-sref="navigator.register" class="modal-close" id="aa">ไปลงทะเบียนก่อน</a>
+
+  <form name="form">
+
+    <div class="modal-content">
+
+      <div
+        ng-if="loginModal.error.wrong"
+        class="animated bounceIn">
+        <h4 class="error">ข้อมูลไม่ถูกต้อง โปรดลองอีกครั้ง</h4>
       </div>
+
+
+        <div input-field class="col s12">
+
+          <input
+            ng-disabled="loginModal.loading"
+            ng-model="loginModal.form.username"
+            type="text"
+            class="validate"
+            id="username"
+            required>
+          <label for="username">เลขประจำตัวประชาชน หรือ ยูสเซอร์เนม</label>
+        </div>
+
+        <div input-field class="col s12">
+          <input
+            ng-disabled="loginModal.loading"
+            ng-model="loginModal.form.password"
+            type="text"
+            class="validate"
+            id="password"
+            required>
+          <label for="password">รหัสผ่าน</label>
+        </div>
+
     </div>
+    <div class="modal-footer">
+
+      <div style="text-align: center">
+
+        <button
+          ng-disabled="!form.$valid || loginModal.loading"
+          class="amber darken-3 btn-large"
+          ng-click="loginModal.login(loginModal.form)">
+          <span ng-show="!loginModal.loading">เข้าสู่ระบบ</span>
+          <span ng-show="loginModal.loading">รอซักครู่</span>
+        </button>
+
+        <div class="sub-button">
+          <span>ยังไม่ได้ลงทะเบียน ?</span>
+          <a ui-sref="register" class="modal-close orange-text" id="aa">ไปลงทะเบียนก่อน</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+
 </div>

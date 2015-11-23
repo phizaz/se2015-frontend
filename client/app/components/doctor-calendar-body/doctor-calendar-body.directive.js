@@ -2,6 +2,13 @@ import angular from 'angular';
 import _ from 'lodash';
 import moment from 'moment';
 import {DirectiveBlueprint} from '../directive';
+import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
+
+// constants
+import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
+
+// service
+import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
 
 // directives
 import {doctorCalendarDayDirectiveModule} from '../doctor-calendar-day/doctor-calendar-day.directive';
@@ -13,30 +20,14 @@ import './doctor-calendar-body.sass';
 export let doctorCalendarBodyDirectiveModule =
   angular
     .module('doctorCalendarBodyDirectiveModule', [
+      doctorCalendarConstantModule.name,
+      doctorTimeEditingServiceModule.name,
       doctorCalendarDayDirectiveModule.name,
       ])
     .directive('doctorCalendarBody', doctorCalendarBodyDirective);
 
-export function doctorCalendarBodyDirective() {
+export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   let shared = {};
-
-  function blockToTime(beginHours, blockNumber) {
-    // block number shall start from 0
-    // since block is 15 minutes
-    let hoursPassed = blockNumber / 4;
-    let minutesPassed = (blockNumber % 4) * 15;
-
-    // console.log('hoursPassed:', hoursPassed);
-    // console.log('minutesPassed:', minutesPassed);
-
-    let time =
-      moment({
-        hour: beginHours + hoursPassed,
-        minute: minutesPassed
-      });
-
-    return time;
-  }
 
   function dateFormat(datetime) {
     return datetime.format('YYYY-MM-DD');
@@ -76,33 +67,93 @@ export function doctorCalendarBodyDirective() {
     let my = DirectiveBlueprint.constructor($scope, this);
 
     let calendarTimesList = [];
-    for (let i = 0; i < my.blockCounts; ++i) {
+    for (let i = 0; i < DOCTOR_CALENDAR.blockCounts; ++i) {
       calendarTimesList.push({
         blockNumber: i,
-        time: blockToTime(my.beginHours, i)
+        time: TimeBlockConverter.blockToTime(DOCTOR_CALENDAR.beginHours, i)
       });
     }
 
     let daysInWeek = [];
+    createDaysInWeek();
+
     $scope.$watch('my.currentWeek',
       (currentWeek) => {
-        for (let i = 0; i < 7; ++i) {
-          daysInWeek[i] = moment(currentWeek).day(i);
-        }
-      });
+        console.log('currentWeek has changed to:', currentWeek);
+        createDaysInWeek();
+      }, true);
 
     _.extend(my, {
       calendarTimesList: calendarTimesList,
-      doctorAppointmentList: sortAppointmentByDate(my.pureAppointmentList),
-      doctorTimeList: sortDoctorTimeByDate(my.pureDoctorTimeList),
+      appointmentListByDate: sortAppointmentByDate(my.pureAppointmentList),
+      doctorTimeListByDate: sortDoctorTimeByDate(my.pureDoctorTimeList),
       daysInWeek: daysInWeek,
+      editing: false,
+      editingGridByDate: {},
+      doctorCalendarDays: [],
 
+      // functions
       dateFormat: dateFormat,
+      startEditing: startEditing,
+      finishEditing: finishEditing,
+      askDamage: askDamage,
+      cancelEditing: cancelEditing,
       // this is intentionally put here
       public: my,
     });
 
     console.log('calendar-body my:', my);
+
+    function createDaysInWeek() {
+      for (let i = 0; i < 7; ++i) {
+        daysInWeek[i] = moment(my.currentWeek).day(i).startOf('day');
+      }
+    }
+
+    function makeEditingGrid() {
+      let theGrid =
+        DoctorTimeEditing.makeEditingGrid(my.doctorTimeListByDate);
+
+      angular.copy(theGrid, my.editingGridByDate);
+    }
+
+    function startEditing() {
+      console.log('start editing doctortime');
+      console.log('doctorCalendarDay:', my.doctorCalendarDays);
+      makeEditingGrid();
+      my.editing = true;
+      for (let each of my.doctorCalendarDays) {
+        let dateString = my.dateFormat(each.date);
+        each.startEditing(my.editingGridByDate[dateString]);
+      }
+    }
+
+    function askDamage() {
+      let damages = {};
+      for (let each of my.doctorCalendarDays) {
+        damages[my.dateFormat(each.date)] = each.askDamage();
+      }
+      return damages;
+    }
+
+    function finishEditing() {
+      console.log('stop editing doctortime');
+      let changes = [];
+      for (let each of my.doctorCalendarDays) {
+        changes.push(each.finishEditing());
+      }
+      my.editing = false;
+      return changes;
+    }
+
+    function cancelEditing() {
+      console.log('cancel editing doctortime');
+      for (let each of my.doctorCalendarDays) {
+        each.cancelEditing();
+      }
+      my.editing = false;
+    }
+
   }
 
   function link($scope, element, attrs) {
@@ -139,11 +190,10 @@ export function doctorCalendarBodyDirective() {
   return {
     restrict: 'E',
     scope: {
+      public: '=name',
       currentWeek: '=',
       pureAppointmentList: '=doctorAppointmentList',
       pureDoctorTimeList: '=doctorTimeList',
-      beginHours: '=',
-      blockCounts: '=',
       marginTop: '=',
       timeWidth: '=',
     },

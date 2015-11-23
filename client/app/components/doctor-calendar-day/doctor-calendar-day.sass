@@ -2,13 +2,15 @@ doctor-calendar-day
   $grey: rgb(235,235,235)
   $block-height: 65px
   $padding: 4px
+  $block-count: 40
+
+  font-size: 1rem
+  width: 14.285714%
+  display: inline-block
+  box-sizing: border-box
+  vertical-align: top
 
   .doctor-calendar-day
-    font-size: 1rem
-    width: 14.285714%
-    position: relative
-    display: inline-block
-    box-sizing: border-box
 
   .doctor-calendar-day.first
     .calendar-line-layer
@@ -29,10 +31,10 @@ doctor-calendar-day
     z-index: 20
 
   .calendar-line-layer
-    z-index: -1
+    z-index: 1
     top: 0px
     position: absolute
-    width: 100%
+    width: 14.285714%
 
     .calendar-line
       height: $block-height
@@ -49,16 +51,48 @@ doctor-calendar-day
     position: relative
     width: 100%
 
-    .doctor-time-wrapper
-      height: $block-height * 2 + 3 * $padding
-      padding: $padding
-      margin-top: -1.5 * $padding
-      box-sizing: border-box
+  .doctor-gridster-layer
+    width: 100%
+    height: $block-height * $block-count
+    // background-color: rgb(240,240,240)
+    //
 
-      .doctor-time
-        background-color: rgb(236,236,236)
-        height: 100%
-        border-radius: $padding
-        box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3)
+    .gridster-item:hover
+      .action
+        .delete
+          background-color: red
+
+    .gridster-item
+      margin-top: -$padding !important
+      background-color: lighten(rgb(255,152,25), 5%)
+      border-radius: $padding
+      // border: 1px solid darken(rgb(255,231,189), 10%)
+
+      .action
+        position: absolute
+        right: 0px
+        top: 0px
+        padding: 0.7rem
+
+        .delete
+          color: white
+          padding: 0.3rem
+          line-height: 1
+          height: auto
+          font-size: 0.9rem
+          font-weight: bold
+          font-family: "quark"
+          background-color: rgb(150,150,150)
+
+          i
+            font-size: 0.9rem
+
+      .label
+        padding: 1rem
+        text-align: left
+        font-weight: bold
+        font-family: "quark"
+        color: white
+        font-size: 1rem
 
 

@@ -1,24 +1,86 @@
 <div class="doctor-route">
 
   <nav class="doctor-navigator">
+    <div class="calendar-head">
+      <div class="linear-block">
+        <button
+          ng-click="my.goPreviousMonth()"
+          ng-disabled="my.editingMode"
+          class="action btn">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+      </div>
 
+      <div class="linear-block">
+        <span class="month">{{my.currentWeek.format('MMMM')}}</span>
+      </div>
+
+      <div class="linear-block">
+        <button
+          ng-click="my.goNextMonth()"
+          ng-disabled="my.editingMode"
+          class="action btn">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="linear-block">
+        <button
+          ng-click="my.goPreviousWeek()"
+          ng-disabled="my.editingMode"
+          class="action btn">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button
+          ng-click="my.goPresentWeek()"
+          ng-disabled="my.editingMode"
+          class="action btn">
+          สัปดาห์นี้
+        </button>
+        <button
+          ng-click="my.goNextWeek()"
+          ng-disabled="my.editingMode"
+          class="action btn">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="edit-doctor-time">
+      <button
+        ng-show="!my.editingMode"
+        ng-click="my.startEditingDoctorTime()"
+        class="edit btn">
+        แก้ไขเวลาออกตรวจ
+        </button>
+
+      <button
+        ng-hide="!my.editingMode"
+        ng-click="my.promptEditingDoctorTime()"
+        class="submit btn">
+        ยืนยันการแก้ไข
+        </button>
+
+      <button
+        ng-hide="!my.editingMode"
+        ng-click="my.cancelEditingDoctorTime()"
+        class="cancel btn">
+        ยกเลิก
+        </button>
+    </div>
   </nav>
 
-  <!-- <div gridster>
-    <ul>
-      <li gridster-item="item"
-          ng-repeat="item in doctor.items"></li>
-    </ul>
-  </div> -->
-
   <doctor-calendar-body
+    name="my.calendarBody"
     current-week="my.currentWeek"
     doctor-appointment-list="my.doctorAppointmentList"
     doctor-time-list="my.doctorTimeList"
-    begin-hours="8"
-    block-counts="40"
     margin-top="135"
     time-width="100"></doctor-calendar-body>
 
 </div>
 
+<doctor-calendar-prompt-modal
+  name="my.calendarPrompt"
+  submit="my.finishEditingDoctorTime()"></doctor-calendar-prompt-modal>

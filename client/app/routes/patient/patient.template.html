@@ -1,0 +1,169 @@
+<!-- make appointment modal -->
+<make-appointment-modal
+  name="my.appointmentModal"
+  on-appointment-made="my.onAppointmentMade()"></make-appointment-modal>
+
+<div id="patient-page-wrapper">
+  <div class="jumbotron section no-pad-bot orange animated fadeIn" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="title header center white-text">
+        สวัสดี,
+        <small>คุณ {{my.userInfo.firstname}} {{my.userInfo.lastname}}</small>
+      </h1>
+      <div class="row center">
+        <a
+          href=""
+          ng-click="my.appointmentModal.showModal()"
+          class="action-btn btn-large waves-effect waves-light white orange-text">
+          นัดหมายแพทย์
+        </a>
+
+        <a ui-sref="home" class="action-btn btn-large waves-effect waves-light white orange-text">
+          กลับไปหน้าแรก
+          <small>(ยังคงอยู่ในระบบ)</small>
+        </a>
+
+        <a
+          href=""
+          ng-click="my.logout()"
+          class="action-btn btn-large waves-effect waves-light white orange-text">
+          ออกจากระบบ
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="body animated fadeIn">
+
+      <div class="container">
+
+        <div class="user-info row">
+
+          <div class="col s12">
+            <!-- <div class="action">
+              <button
+                class="btn orange">
+                <i class="fa fa-edit"></i>
+                แก้ไข
+              </button>
+            </div> -->
+
+            <h4 class="title">ข้อมูลส่วนตัว</h4>
+
+            <span class="personal-id">
+              <strong>เลขประจำตัวประชาชน</strong> -
+              <span ng-bind="my.userInfo.personal_id"></span>
+            </span>
+
+            <br>
+
+            <span class="gender">
+              <strong>เพศ</strong> -
+              <span ng-bind="my.userInfo.gender"></span>
+            </span>
+
+            <span class="nationality">
+              <strong>เชื้อชาติ</strong> -
+              <span ng-bind="my.userInfo.nationality"></span>
+            </span>
+
+            <span class="religion">
+              <strong>ศาสนา</strong> -
+              <span ng-bind="my.userInfo.religion"></span>
+            </span>
+
+            <br>
+
+            <span class="address">
+              <strong>ที่อยู่</strong> -
+              <span ng-bind="my.userInfo.address"></span>
+            </span>
+
+            <br>
+
+            <span class="tel">
+              <strong>โทร</strong> -
+              <span ng-bind="my.userInfo.tel"></span>
+            </span>
+
+            <br>
+
+            <span class="email">
+              <strong>อีเมล</strong> -
+              <span ng-bind="my.userInfo.email"></span>
+            </span>
+          </div>
+
+        </div>
+
+        <div class="appointments row">
+
+          <div class="col s12">
+
+            <h4 class="title">นัดหมายทั้งหมด</h4>
+
+            <div class="appointments-wrapper-card card">
+
+              <h4
+                ng-if="my.loadingUserInfo"
+                class="loading animated bounceIn">กำลังโหลด... รอซักครู่</h4>
+
+              <ul class="collection">
+                <li class="collection-item avatar now">
+                  <i class="time circle">16.30</i>
+                  <span class="title">
+                    <small>นัดหมายกับ</small>
+                    นพ.​ กรพัฒน์​ ปรีชากุล
+                  </span>
+                  <p>
+                    <span class="date">วันนี้</span> เวลา 8.30 น.​
+                  </p>
+                </li>
+
+                <li class="collection-item avatar">
+                  <i class="time circle"></i>
+                  <span class="title">
+                    <small>นัดหมายกับ</small>
+                    นพ.​ กรพัฒน์​ ปรีชากุล
+                  </span>
+                  <p>
+                    <span></span>เวลา 8.30 น.​
+                  </p>
+                </li>
+
+                <li class="collection-item avatar">
+                  <i class="time circle"></i>
+                  <span class="title">
+                    <small>นัดหมายกับ</small>
+                    นพ.​ กรพัฒน์​ ปรีชากุล
+                  </span>
+                  <p>เวลา 8.30 น.​
+                  </p>
+                </li>
+
+                <li class="collection-item avatar">
+                  <i class="time circle"></i>
+                  <span class="title">
+                    <small>นัดหมายกับ</small>
+                    นพ.​ กรพัฒน์​ ปรีชากุล
+                  </span>
+                  <p>เวลา 8.30 น.​
+                  </p>
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+  </div>
+
+</div>

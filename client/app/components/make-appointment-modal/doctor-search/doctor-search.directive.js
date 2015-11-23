@@ -16,7 +16,7 @@ import 'ui-select/dist/select.css';
 // selector theme
 import 'selectize/dist/css/selectize.default.css';
 
-import {doctorServiceModule} from '../../../services/doctor.service.js';
+import {doctorSearchServiceModule} from '../../../services/doctorSearch.service.js';
 
 import doctorSearchTemplate from './doctor-search.template.html';
 import './doctor-search.sass';
@@ -26,21 +26,29 @@ export let doctorSearchDirectiveModule =
     .module('doctorSearchearchDirectiveModule', [
       'ui.select',
       'ngSanitize',
-      doctorServiceModule.name,
+      doctorSearchServiceModule.name,
     ])
     .directive('doctorSearch', doctorSearchDirective);
 
-export function doctorSearchDirective(Doctor) {
+export function doctorSearchDirective(DoctorSearch) {
   // this will be the same across the directive of this kind
   let shared = {
+    loadingDoctorList: false,
     doctorList: [],
   };
 
   // this will be done only once no mattter how many instances
   function getDoctorList() {
-    Doctor
+    shared.loadingDoctorList = true;
+
+    DoctorSearch
       .getDoctorList()
-      .then((result) => angular.copy(result, shared.doctorList));
+      .then((result) => {
+        console.log('doctor search result:', result);
+        shared.loadingDoctorList = false;
+
+        angular.copy(result, shared.doctorList);
+      });
   }
   getDoctorList();
 
@@ -53,7 +61,9 @@ export function doctorSearchDirective(Doctor) {
     }
 
     _.extend(my, {
+      shared: shared,
       doctorList: shared.doctorList,
+
       doctor: null,
 
       change: change,

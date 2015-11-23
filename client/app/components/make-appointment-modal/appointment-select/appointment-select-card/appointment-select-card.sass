@@ -1,12 +1,16 @@
+$blue: rgb(71,65,182)
+
 .appointment-select-card.selected
-  background-color: rgb(240,240,240)
+
+  .card-content
+    .appointment-time
+      background-color: darken($blue, 10%)
 
   .card-action
     .booking-button
       color: red
 
 .appointment-select-card
-  $blue: rgb(71,65,182)
 
   width: 230px
   display: inline-block
@@ -26,6 +30,7 @@
 
     .appointment-time
       background-color: $blue
+      transition: background-color 0.35s
 
       h2
         font-family: 'quark'

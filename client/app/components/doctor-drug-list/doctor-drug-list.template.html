@@ -1,0 +1,139 @@
+<div class="drug-info card">
+  <div class="card-header">
+
+    <div class="actions">
+      <button
+        ng-disabled="!my.isIdle()"
+        ng-click="my.addDrug()"
+        class="add btn">
+        เพิ่ม
+      </button>
+    </div>
+
+    <h4 class="title">
+      ข้อมูลจ่ายยา
+    </h4>
+  </div>
+
+  <div class="card-content">
+
+    <ul
+      ng-repeat="day in my.days"
+      class="collection with-header">
+      <li class="collection-header">
+
+        <h4
+          ng-if="day === my.today">วันนี้</h4>
+
+        <h4
+          ng-if="day !== my.today">
+          {{my.momentDays[$index].format('DD MMMM YYYY')}}
+          </h4>
+      </li>
+
+      <!-- each drug info -->
+      <li
+        ng-repeat="drugReport in my.drugListByDate[day]"
+        class="collection-item"
+        ng-class="{new: drugReport.new}">
+
+        <!-- drug-each-inside -->
+        <div class="drug-info-each">
+
+          <!-- showing -->
+          <div
+            ng-show="!drugReport.editing"
+            class="showing">
+
+            <!-- actions -->
+            <div
+              ng-if="day === my.today"
+              class="actions">
+              <div>
+                <button
+                  ng-disabled="!my.isIdle()"
+                  ng-click="my.editDrug(drugReport)"
+                  class="edit btn">แก้ไข</button>
+              </div>
+
+              <div>
+                <button
+                  ng-disabled="!my.isIdle()"
+                  ng-click="my.deleteDrug(drugReport)"
+                  class="cancel btn">ยกเลิก</button>
+              </div>
+            </div>
+
+            <!-- content -->
+            <div class="content">
+              <h5 class="name">{{drugReport.name}} ({{drugReport.quantity}} หน่วย)</h5>
+              <p class="description">
+                {{drugReport.remark}}
+              </p>
+            </div>
+          </div>
+
+          <!-- edititng -->
+          <div
+            ng-show="drugReport.editing"
+            class="editing">
+
+            <!-- actions -->
+            <div class="actions">
+              <div>
+                <button
+                  ng-click="my.performEditDrug(drugReport)"
+                  class="edit btn">บันทึก</button>
+              </div>
+
+              <div>
+                <button
+                  ng-click="my.cancelEditDrug(drugReport)"
+                  class="cancel btn">ยกเลิก</button>
+              </div>
+            </div>
+
+            <div class="content">
+
+              <!-- top row -->
+              <div class="row">
+                <div input-field class="col s8">
+                  <input
+                    ng-model="drugReport.name"
+                    id="name" type="text" class="validate"
+                    placeholder="ชื่อยา">
+                  <label for="name">ชื่อยา</label>
+                </div>
+
+                <div input-field class="col s4">
+                  <input
+                    ng-model="drugReport.quantity"
+                    id="quantity" type="number" class="validate"
+                    placeholder="จำนวน">
+                  <label for="quantity">จำนวน</label>
+                </div>
+              </div>
+              <!-- bottom row -->
+              <div class="row">
+                <div input-field class="col s12">
+                  <input
+                    ng-model="drugReport.remark"
+                    id="remark" type="text" class="validate"
+                    placeholder="คำอธิบาย">
+                  <label for="remark">คำอธิบาย</label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div style="clear:both;"></div>
+        </div>
+
+      </li>
+
+    </ul>
+
+  </div>
+</div>

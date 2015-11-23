@@ -4,29 +4,76 @@
 
   <!-- header -->
   <div class="calendar-header-date">
-    <span ng-bind="(my.date | amDateFormat: 'dddd, DD')"></span>
-  </div>
-
-  <!-- doctor times -->
-  <div class="doctor-time-layer">
-    <div class="doctor-time-wrapper">
-      <div class="doctor-time">
-
-        <doctor-calendar-appointment></doctor-calendar-appointment>
-
-        <doctor-calendar-appointment></doctor-calendar-appointment>
-
-      </div>
-    </div>
+    <span ng-bind="(my.date | amDateFormat: 'dddd DD')"></span>
   </div>
 
   <div class="calendar-line-layer">
     <!-- calendar lines -->
     <div  class="calendar-line"
-          ng-repeat="n in [] | range: my.blockCounts"
-          ng-style="my.calendarLineStyle">
+          ng-repeat="n in [] | range: my.DOCTOR_CALENDAR.blockCounts"
+          ng-style="my.calendarLineStyle"
+          ng-click="my.editCreateDoctorTime($index)">
     </div>
   </div>
 
+  <!-- doctor times -->
+  <div
+    ng-hide="my.editing"
+    class="doctor-time-layer">
 
+    <doctor-calendar-freearea
+      ng-repeat="doctorTime in my.doctorTimeList"
+      start-time="doctorTime.doctorTime_begin"
+      end-time="doctorTime.doctorTime_end">
+    </doctor-calendar-freearea>
+
+    <doctor-calendar-appointment
+      ng-repeat="appointment in my.appointmentList"
+      appointment="appointment"
+      target-modal="my.appointmentModals[$index]">
+      </doctor-calendar-appointment>
+
+  </div>
+
+  <!-- doctor time gridster -->
+  <div
+    ng-if="my.editing"
+    class="doctor-gridster-layer">
+
+    <div
+      gridster
+      class="doctor-gridster">
+      <ul>
+        <li gridster-item="item"
+            ng-repeat="item in my.editingGrid"
+            class="animated bounceIn">
+          <div class="action">
+            <button
+              ng-click="my.editDeleteDoctorTime(item)"
+              class="delete btn">
+              <i class="fa fa-close"></i>
+              ลบ
+            </button>
+          </div>
+
+          <div class="label">
+            {{my.blockToTime(item.row).format('HH:mm')}}
+            -
+            {{my.blockToTime(item.row + item.sizeY).format('HH:mm')}}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- doctor-calendar-appointment-modal -->
+<div class="appointment-modal-collection">
+  <doctor-calendar-appointment-modal
+    ng-repeat="appointment in my.appointmentList"
+    appointment="appointment"
+    name="my.appointmentModals[$index]">
+    </doctor-calendar-appoinment-modal>
 </div>

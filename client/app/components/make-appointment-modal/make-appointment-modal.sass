@@ -1,11 +1,11 @@
 .make-appointment-modal
-
+  $light-grey: rgb(180,180,180)
   overflow: visible
 
-  .modal-content
-    $light-grey: rgb(180,180,180)
+  .modal-header
+    padding: 1rem
     .close-button
-      color: $light-grey
+      color: darken(white, 5%)
       position: absolute
       right: 0px
 
@@ -13,16 +13,21 @@
       background-color: transparent
 
     .close-button:hover
-      color: darken($light-grey, 10%)
+      color: white
 
     .title
-      margin: 1rem 0rem
+      margin: 1rem 1.3rem
+      color: white
+
+  .modal-content
+
 
     .search-title
       font-size: 1rem
       font-weight: bold
       font-family: quark
       color: lighten(black, 40%)
+      letter-spacing: 0.6px
 
     .search-doctor-name.selected
       background-color: rgb(255,255,255)
@@ -32,6 +37,11 @@
 
   .modal-footer
     text-align: center
+    padding-bottom: 7rem
 
     .btn
+      float: none !important
+      font-size: 1.2rem
+      height: 3rem
+      line-height: 3rem
       margin: 0rem 3rem 3rem 3rem

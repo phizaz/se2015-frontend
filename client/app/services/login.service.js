@@ -30,40 +30,119 @@ export class Login {
 
     });
 
+    // this
+    //   .takeLogout()
+    //   .then(
+    //     (res) => {
+    //       console.log('takeLogout:', res);
+    //     })
+    //   .catch(
+    //     (res) => {
+    //       console.log('not takeLogout:', res);
+    //     });
+
+    // this
+    //   .takeLogin('test', '1234')
+    //   .then(
+    //     (res) => {
+    //       console.log('login:', res);
+    //     })
+    //   .catch(
+    //     (res) => {
+    //       console.log('not login:', res);
+    //     });
+
+
+    // this
+    //   .isLogin()
+    //   .then((res) => {
+    //     console.log('isLogin:', res);
+    //   })
+    //   .catch((res) => {
+    //     console.log('not isLogin:', res);
+    //   });
+
+    // this
+    //   .userInfo()
+    //   .then((res) => {
+    //     console.log('userInfo:', res);
+    //   })
+    //   .catch((res) => {
+    //     console.log('not userInfo:', res);
+    //   });
+
+
+
   }
 
   takeLogin(username,password) {
-    console.log(username);
-    console.log(password);
-    return new Promise(
+    let Cache = this.private.Cache;
+    let $q = this.private.$q;
+    let $http=  this.private.$http;
+
+    return $q(
       (resolve, reject) => {
+        $http.
+          post('/api/login', {
+            username: username,
+            password: password,
+          })
+          .then(
+            (res) => {
+              // this is important
+              res = res.data;
 
+              if (res.success) {
 
-        // resolve({
-        //  userTye:
-        // });
+                Cache.setCache('is-login', {
+                  login: true,
+                  data: res.data
+                });
 
-        // this.priavte.$http.post('/api/..', {
-        //   username: '',
-        //   password: '...',
-        // })
-        //   .then(
-        //     (userInfo) => {
-        //       resolve(userInfo);
-        //     })
-        //   .catch(
-        //     (message) => {
-        //       // 400
-        //       if (message.info === 'validateFail') {
-        //         reject(...);
-        //       } else {
-        //         throw new Error('aoeuaoeu');
-        //       }
+                resolve(res);
+              } else {
+                if (!res.message) {
+                  throw new Error('undefine error', res);
+                }
 
-        //     });
+                reject(res);
+              }
+            })
+          .catch(
+            (res) => {
+              throw new Error(res);
+            });
+      });
+  }
 
-    });
+  takeLogout() {
+    let $http = this.private.$http;
+    let Cache = this.private.Cache;
+    let $q = this.private.$q;
 
+    return $q(
+      (resolve, reject) => {
+        $http
+          .post('/api/logout')
+          .then(
+            (res) => {
+              res = res.data;
+
+              Cache.setCache('is-login', {
+                login: false
+              });
+
+              if (res.success) {
+                resolve(res);
+              } else {
+                reject(res);
+              }
+            })
+          .catch(
+            (res) => {
+              throw new Error(res);
+            });
+      });
   }
 
   isLoginFresh() {
@@ -74,33 +153,49 @@ export class Login {
     let $q = this.private.$q;
     let CallOnce = this.private.CallOnce;
 
-    // real function
-    // return $q(
-    //     (resolve, reject) => {
-    //         $http
-    //             .get('/api/is-login')
-    //             .then(
-    //                 (res) => {
-    //                     Cache.setCache('is-login', res);
-    //                 });
-    //     });
+    return CallOnce.call('is-login', realRequest);
 
-    // mock function
-    return CallOnce.call(mockRequest);
-
-    function mockRequest() {
-      // console.log('really do http request');
+    function realRequest() {
       return $q(
         (resolve, reject) => {
-          let delay = 10;
-          setTimeout(() => {
-            // set cache
-            Cache.setCache('is-login', isLoginMock);
+          $http
+            .get('/api/is-login')
+            .then(
+              (res) => {
+                // this is important
+                res = res.data;
 
-            resolve(isLoginMock);
-          }, delay);
-        });
+                // set cache
+                Cache.setCache('is-login', res);
+
+                console.log('isLoginFresh:', res);
+                if (res.login) {
+                  resolve(res);
+                } else {
+                  reject(res);
+                }
+              })
+            .catch(
+              (res) => {
+                console.log(res);
+                throw new Error('login.service.isloginFresh');
+              });
+          });
     }
+
+    // function mockRequest() {
+    //   // console.log('really do http request');
+    //   return $q(
+    //     (resolve, reject) => {
+    //       let delay = 10;
+    //       setTimeout(() => {
+    //         // set cache
+    //         Cache.setCache('is-login', isLoginMock);
+
+    //         resolve(isLoginMock);
+    //       }, delay);
+    //     });
+    // }
 
   }
 
@@ -113,9 +208,23 @@ export class Login {
     return $q(
       (resolve, reject) => {
         if (Cache.isValid('is-login')) {
-          resolve(Cache.getCache('is-login'));
+          let cache = Cache.getCache('is-login');
+          if (cache.login) {
+            resolve(cache);
+          } else {
+            reject(cache);
+          }
         } else {
-          this.isLoginFresh().then((res) => resolve(res));
+          this
+            .isLoginFresh()
+            .then((res) => {
+              resolve(res);
+              console.log('isLogin: ', res);
+            })
+            .catch((res) => {
+              console.log('not isLogin:', res);
+              reject(res);
+            });
         }
       });
   }
@@ -124,13 +233,52 @@ export class Login {
     let $q = this.private.$q;
     return $q(
       (resolve, reject) => {
-        this.isLogin().then((res) => {
-          if (res.data) {
+        this.isLogin()
+          .then((res) => {
             resolve(res.data);
-          } else {
-            reject();
-          }
-        });
+          })
+          .catch((res) => {
+            reject(res);
+          });
+      });
+  }
+
+  toHisOwnPage() {
+    console.log('toHisOwnPage');
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin()
+          .then((res) => {
+            console.log('toHisOwnPage login;', res);
+            // logged in
+            let data = res.data;
+            let redirect = null;
+            if (data.role) {
+              if (data.role === 'Doctor') {
+                redirect = 'doctor';
+              } else if (data.role === 'Staff') {
+                redirect = 'staff';
+              } else if (data.role === 'Nurse') {
+                redirect = 'nurse';
+              } else if (data.role === 'Pharmacist') {
+                redirect = 'pharmacist';
+              } else {
+                throw new Error('wrong role', res);
+              }
+            } else {
+              redirect = 'patient';
+            }
+
+            reject({
+              redirect: redirect
+            });
+          })
+          .catch((res) => {
+            console.log('toHisOwnPage not login:', res);
+            // not logged in
+            resolve(res);
+          });
       });
   }
   isStaff(){

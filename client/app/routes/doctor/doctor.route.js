@@ -2,11 +2,16 @@ import angular from 'angular';
 import _ from 'lodash';
 import 'angular-ui-router';
 
+// constants
+import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant'
+
 // services
 import {doctorTimeServiceModule} from '../../services/doctorTime.service';
+import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service'
 
 // directives
 import {doctorCalendarBodyDirectiveModule} from '../../components/doctor-calendar-body/doctor-calendar-body.directive';
+import {doctorCalendarPromptModalDirectiveModule} from '../../components/doctor-calendar-prompt-modal/doctor-calendar-prompt-modal.directive';
 
 // locals
 import {DoctorController} from './doctor.controller';
@@ -16,9 +21,13 @@ import './doctor.sass';
 export let doctorRouteModule =
   angular.module('doctorRouteModule', [
     'ui.router',
+    // constant
+    doctorCalendarConstantModule.name,
 
     // serivces
     doctorTimeServiceModule.name,
+    doctorTimeEditingServiceModule.name,
+    doctorCalendarPromptModalDirectiveModule.name,
 
     // directives
     doctorCalendarBodyDirectiveModule.name,
@@ -40,5 +49,9 @@ doctorRouteModule.config(
             return DoctorTime.getDoctorAppointmentList(userInfo);
           },
         }
+      })
+      // alias
+      .state('doctor', {
+        controller: ($state) => $state.go('member.doctor')
       });
   });

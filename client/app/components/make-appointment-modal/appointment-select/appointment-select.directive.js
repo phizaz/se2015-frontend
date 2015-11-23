@@ -33,11 +33,76 @@ export function appointmentSelect(MakeAppointment) {
   function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
 
-    let appointmentSelectCards = [];
+    _.extend(my, {
+      selectingCard: null,
+      submitting: false,
+      appointmentCreated: false,
+      appointmentSelectCards: [],
+
+      back: back,
+      showModal: showModal,
+      hideModal: hideModal,
+      select: select,
+      deselect: deselect,
+      submitAppointment: submitAppointment,
+      nextStep: nextStep,
+
+      // this is intensiontally placed here!
+      // to make the whole be seen from the outside
+      public: my
+    });
+
+    // mock();
+    // function mock() {
+    //   let possibleAppointments = [
+    //       { datetime: new Date("2016-10-10T14:48:00"),
+    //         doctor: {
+    //           firstname: 'นพ. กรพัฒน์',
+    //           lastname: 'ปรีชากุล',
+    //           emp_id: 1
+    //         }
+    //       },
+    //       { datetime: new Date("2015-10-10T12:00:00"),
+    //         doctor: {
+    //           firstname: 'นพ. กรพัฒน์',
+    //           lastname: 'ปรีชากุล',
+    //           emp_id: 1
+    //         }
+    //       },
+    //       { datetime: new Date(),
+    //         doctor: {
+    //           firstname: 'นพ. กรพัฒน์',
+    //           lastname: 'ปรีชากุล',
+    //           emp_id: 1
+    //         }
+    //       },
+    //       { datetime: new Date(),
+    //         doctor: {
+    //           firstname: 'นพ. กรพัฒน์',
+    //           lastname: 'ปรีชากุล',
+    //           emp_id: 1
+    //         }
+    //       },
+    //       { datetime: new Date(),
+    //         doctor: {
+    //           firstname: 'นพ. กรพัฒน์',
+    //           lastname: 'ปรีชากุล',
+    //           emp_id: 1
+    //         }
+    //       },
+    //     ];
+    //   my.possibleAppointments = possibleAppointments;
+    // }
 
     function back() {
       hideModal();
       my.onBack();
+    }
+
+    function nextStep() {
+      // hide modal
+      hideModal();
+      my.onAppointmentMade();
     }
 
     function showModal() {
@@ -54,7 +119,7 @@ export function appointmentSelect(MakeAppointment) {
       console.log('card:', cardInstance, 'is being selected');
       my.selectingCard = cardInstance;
       // deselect the rest
-      for (let card of appointmentSelectCards) {
+      for (let card of my.appointmentSelectCards) {
         if (card === cardInstance) {
           continue;
         }
@@ -76,35 +141,20 @@ export function appointmentSelect(MakeAppointment) {
 
       my.submitting = true;
       MakeAppointment
-        .submitAppointment()
+        .submitAppointment(my.selectingCard.doctor, my.selectingCard.datetime)
         .then(
           (res) => {
             console.log('summiting result:', res);
             my.submitting = false;
-            // ...todo
-            //
-            // go some where
-            // hide modal
-            hideModal();
+            my.appointmentCreated = true;
+          })
+        .catch(
+          (messages) => {
+            console.log(messages);
+            throw new Error('submittingAppointment');
           });
     }
 
-    _.extend(my, {
-      selectingCard: null,
-      submitting: false,
-      appointmentSelectCards: appointmentSelectCards,
-
-      back: back,
-      showModal: showModal,
-      hideModal: hideModal,
-      select: select,
-      deselect: deselect,
-      submitAppointment: submitAppointment,
-
-      // this is intensiontally placed here!
-      // to make the whole be seen from the outside
-      public: my
-    });
   }
 
   function link($scope, element, attrs) {
@@ -121,7 +171,8 @@ export function appointmentSelect(MakeAppointment) {
       public: '=name',
       title: '=',
       possibleAppointments: '=',
-      onBack: '&'
+      onBack: '&',
+      onAppointmentMade: '&',
     },
     bindToController: true,
     controller: controller,
