@@ -25,5 +25,8 @@ loginRouteModule.config(
             return Login.toHisOwnPage();
           }
         }
+      })
+      .state('login', {
+        controller: ($state) => $state.go('navigator.login')
       });
   });
