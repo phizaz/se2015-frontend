@@ -72,7 +72,7 @@ export function loginModalDirective(Login, $state) {
     }
 
     function closeModal() {
-      my.element.children.closeModal();
+      my.element.children('.modal').closeModal();
     }
 
     function login(form) {
@@ -97,6 +97,7 @@ export function loginModalDirective(Login, $state) {
               .catch(
                 (res) => {
                   // redirect ไปยังหน้าของตัวเอง
+                  my.closeModal();
                   $state.go(res.redirect);
                 });
 

@@ -1,0 +1,160 @@
+<!-- login modal -->
+<login-modal name="register.loginModal"></login-modal>
+
+<div id="staff-register-page-wrapper">
+
+  <div class="jumbotron section no-pad-bot orange animated fadeIn" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="title header center white-text">
+        ลงทะเบียนพนักงาน
+        <small>| ฮอสพิทัล โอพีดี</small>
+      </h1>
+      <div class="row center">
+        <a ui-sref="home" id="download-button" class="start-btn btn-large waves-effect waves-light white orange-text">กลับไปหน้าแรก</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+  <div class="body container animated fadeIn">
+
+    <form name="form" class="col s12">
+
+      <div class="row">
+        <div input-field class="col s6">
+          <select material-select
+            ng-model="register.form.role"
+            ng-disabled="register.finished || register.loading"
+            required>
+            <option value="" disabled selected></option>
+            <option value="Doctor">แพทย์</option>
+            <option value="Nurse">พยาบาล</option>
+            <option value="​Staff">เจ้าหน้าที่โรงพยาบาล</option>
+            <option value="​Pharmacist">เภสัชกร</option>
+          </select>
+          <label>ตำแหน่งที่ร้องขอ</label>
+        </div>
+
+        <div input-field
+          ng-if="register.form.role === 'Doctor'"
+          class="col s6 animated bounceIn"
+          style="position: relative; z-index: 10;">
+          <select material-select
+            ng-model="register.form.specialty"
+            ng-disabled="register.finished || register.loading"
+            ng-options="specialty.val as specialty.val for specialty in register.specialtyList"
+            required>
+            <option value="" disabled selected></option>
+          </select>
+          <label>ตำแหน่งที่ร้องขอ</label>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div input-field class="col s6">
+          <input type="text"  id="firstname"
+            ng-model="register.form.firstname"
+            ng-disabled="register.finished || register.loading"
+            class="validate"
+            required>
+          <label for="firstname">ชื่อ</label>
+        </div>
+
+        <div input-field class="col s6">
+          <input type="text" id="lastname"
+            ng-model="register.form.lastname"
+            ng-disabled="register.finished || register.loading"
+            class="validate"
+            required>
+          <label for="lastname">นามสกุล</label>
+        </div>
+
+        <div input-field class="col s12">
+          <input type="text" id="tel"
+            ng-model="register.form.tel"
+            ng-disabled="register.finished || register.loading"
+            class="validate"
+            required>
+          <label for="tel">เบอร์โทร</label>
+        </div>
+
+        <div input-field class="col s12">
+          <input type="text" id="email"
+            ng-model="register.form.email"
+            ng-disabled="register.finished || register.loading"
+            class="validate"
+            required>
+          <label for="email">อีเมลล์</label>
+        </div>
+
+        <div input-field class="col s12">
+          <input type="text" id="username"
+            ng-model="register.form.username"
+            ng-disabled="register.finished || register.loading"
+            class="validate"
+            required>
+          <label for="useranme">ยูสเซอร์เนม</label>
+        </div>
+
+        <div input-field class="col s6">
+          <input type="password" id="password"
+            ng-model="register.form.password"
+            ng-disabled="register.finished || register.loading"
+            class="validate"
+            required>
+          <label for="password">รหัสผ่าน</label>
+        </div>
+
+        <div input-field
+          ng-class="{'not-match': register.error.passwordNotMatch}"
+          class="col s6">
+          <input type="password" id="cpassword"
+            ng-model="register.form.cpassword"
+            ng-disabled="register.finished || register.loading"
+            class="validate"
+            required>
+          <label for="cpassword">
+            ยืนยันรหัสผ่าน
+            <span ng-show="register.error.passwordNotMatch">รัหสผ่านไม่ตรงกัน</span>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="footer col s12">
+          <button
+            ng-hide="register.finished"
+            ng-disabled="register.isError() || register.loading"
+            class="amber darken-3 btn-large"
+            ng-click="register.regis(register.form)">
+            <span ng-show="!register.loading">ส่งคำร้อง</span>
+            <span ng-show="register.loading">รอซักครู่</span>
+          </button>
+
+          <button
+            ng-show="register.finished"
+            class="amber darken-3 btn-large"
+            ng-click="register.goHome()">
+            ส่งคำร้องเรียบร้อยแล้ว ! โปรดรอจนกว่าเจ้าหน้าที่จะตอบรับ ... กลับไปหน้าแรก
+          </button>
+
+        </div>
+
+        <div class="bottom">
+          <span>เคยลงทะเบียนแล้ว? </span>
+          <a href="" class="orange-text" ng-click="register.loginModal.showModal()">เข้าสู่ระบบได้เลย</a>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
