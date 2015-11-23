@@ -7,6 +7,7 @@ import {navigatorServiceModule} from '../../services/navigator.service.js';
 // directives
 import {loginModalDirectiveModule} from '../../components/login-modal/login-modal.directive.js';
 import {makeAppointmentModalDirectiveModule} from '../../components/make-appointment-modal/make-appointment-modal.directive.js';
+import {editPatientDirectiveModule} from '../../components/edit-patient/edit-patient.directive.js';
 // locals
 import homeTemplate from './home.template.html';
 import {HomeController} from './home.controller.js';
@@ -17,6 +18,7 @@ export let homeRouteModule =
     navigatorServiceModule.name,
     loginModalDirectiveModule.name,
     makeAppointmentModalDirectiveModule.name,
+    editPatientDirectiveModule.name
   ]);
 
 homeRouteModule.config(

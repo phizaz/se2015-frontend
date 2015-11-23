@@ -133,7 +133,19 @@ export class Login {
         });
       });
   }
-
+  isStaff(){
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin().then((res) => {
+          if (res.data.role === "staff") {
+            resolve(res.data);
+          } else {
+            reject();
+          }
+        });
+      }); 
+  }
 }
 
 loginServiceModule.service('Login', Login);

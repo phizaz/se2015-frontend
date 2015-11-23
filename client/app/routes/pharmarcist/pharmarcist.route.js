@@ -2,37 +2,37 @@ import angular from 'angular';
 import 'angular-ui-router';
 
 // services
-import {staffServiceModule} from '../../services/staff.service.js';
+import {pharmarcistServiceModule} from '../../services/pharmarcist.service.js';
 // directives
 import {greetDirectiveModule} from '../../components/greet/greet.directive.js';
 import {patientInformationDirectiveModule} from '../../components/patient-information/patient-information.directive.js';
 import {showAppointmentDirectiveModule} from '../../components/show-appointment/show-appointment.directive.js';
 import {doctorInformationDirectiveModule} from '../../components/doctor-information/doctor-information.directive.js';
 // locals
-import staffTemplate from './staff.template.html';
-import {StaffController} from './staff.controller.js';
-import './staff.sass';
-export let staffRouteModule =
-  angular.module('staffRouteModule', [
+import pharmarcistTemplate from './pharmarcist.template.html';
+import {pharmarcistController} from './pharmarcist.controller.js';
+import './pharmarcist.sass';
+export let pharmarcistRouteModule =
+  angular.module('pharmarcistRouteModule', [
     'ui.router',
-    staffServiceModule.name,
+    pharmarcistServiceModule.name,
     greetDirectiveModule.name,
     patientInformationDirectiveModule.name,
     doctorInformationDirectiveModule.name,
     showAppointmentDirectiveModule.name
   ]);
 
-staffRouteModule.config(
+pharmarcistRouteModule.config(
   ($stateProvider) => {
     $stateProvider
-      .state('navigator.staff', {
-        url: '/staff',
-        template: staffTemplate,
-        controller: StaffController,
-        controllerAs: 'staff',
+      .state('navigator.pharmarcist', {
+        url: '/pharmarcist',
+        template: pharmarcistTemplate,
+        controller: pharmarcistController,
+        controllerAs: 'pharmarcist',
         resolve: {
-          isStaff: (Login) => {
-              return Login.isStaff();
+          isPharmarcist: (Login) => {
+              return Login.isPharmarcist();
           }
         }
       });

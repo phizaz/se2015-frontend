@@ -2,6 +2,10 @@
 	<div class="row">
     <form class="col s12">
       <div class="row">
+        <div class="input-field col s12">
+          <input ng-model="register.photo" type="file" class="validate">
+          <label for="​photo">รูป</label>
+        </div>
         <div class="input-field col s6">
           <input ng-model="register.firstname" type="text" class="validate">
           <label for="firstname">ชื่อ</label>
@@ -23,7 +27,7 @@
            <label for="email">อีเมลล์</label> 
         </div>
         <div class="input-field col s6">
-            <select>
+            <select ng-model="register.sex">
               <option value="" disabled selected></option>
               <option value="​male">ชาย</option>
               <option value="female">หญิง</option>
@@ -31,7 +35,7 @@
             <label>เพศ</label>
         </div>
         <div class="input-field col s6">
-            <select>
+            <select ng-model="register.nation">
               <option value="" disabled selected></option>
               <option value="​thai">ไทย</option>
               <option value="other_nation">อื่นๆ</option>
@@ -39,7 +43,7 @@
             <label>เชื้อชาติ</label>
         </div>
          <div class="input-field col s6">
-            <select>
+            <select ng-model="register.religion">
               <option value="" disabled selected></option>
               <option value="​buddha">พุทธ</option>
               <option value="christ">คริสต์</option>
@@ -49,7 +53,7 @@
             <label>ศาสนา</label>
         </div>
         <div class="input-field col s6">
-            <select>
+            <select ng-model="register.blood">
               <option value="" disabled selected></option>
               <option value="​a">A</option>
               <option value="​b">B</option>

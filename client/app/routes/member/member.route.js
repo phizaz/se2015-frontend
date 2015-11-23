@@ -7,6 +7,7 @@ import {loginServiceModule} from '../../services/login.service';
 
 // routes
 import {doctorRouteModule} from '../doctor/doctor.route';
+import {staffRouteModule} from '../staff/staff.route';
 
 // locals
 import {MemberController} from './member.controller';
@@ -22,6 +23,7 @@ export let memberRouteModule =
 
     // routes
     doctorRouteModule.name,
+    staffRouteModule.name,
     ]);
 
 memberRouteModule.config(

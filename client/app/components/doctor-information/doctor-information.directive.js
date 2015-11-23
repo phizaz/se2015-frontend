@@ -49,7 +49,8 @@ export function doctorInformation() {
   return {
     restrict: 'E',
     scope: {
-      public: '=name'
+      public: '=name',
+      staff: '='
     },
     bindToController: true,
     controller: controller,

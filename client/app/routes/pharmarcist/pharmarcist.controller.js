@@ -1,23 +1,23 @@
 
-export class StaffController {
-  constructor(Navigator, Staff) {
-    Navigator.currentPage = 'staff';
-    this.Staff =Staff;
+export class PharmarcistController {
+  constructor(Navigator, Pharmarcist) {
+    Navigator.currentPage = 'pharmarcist';
+    this.Pharmarcist =Staff;
     this.form = {};
     this.patients = [];
-    this.staffs =[];
+    this.pharmarcist =[];
     this.search();
-    this.Staff
-    .staffInfo()
+    this.Pharmarcist
+    .pharmarcistInfo()
     .then(
         (res) => {
-          this.staffs = res;
+          this.pharmarcists = res;
         }
       );
   }
 
   search(firstname, lastname) {
-    this.Staff
+    this.Pharmarcist
       .patientInfo()
       .then(
         (res) => {
