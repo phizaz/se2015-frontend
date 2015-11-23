@@ -54,6 +54,21 @@ export function loginModalDirective(Login, $state) {
     function showModal() {
       console.log('show');
       my.element.children('.modal').openModal();
+
+      // redirect to hisowpnage if needed
+      my.loading = true;
+      Login
+        .toHisOwnPage()
+        .then(
+          (res) => {
+            my.loading = false;
+          })
+        .catch(
+          (res) => {
+            my.loading = false;
+            my.closeModal();
+            $state.go(res.redirect);
+          });
     }
 
     function closeModal() {

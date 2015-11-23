@@ -18,6 +18,7 @@
         <div input-field class="col s12">
 
           <input
+            ng-disabled="loginModal.loading"
             ng-model="loginModal.form.username"
             type="text"
             class="validate"
@@ -28,6 +29,7 @@
 
         <div input-field class="col s12">
           <input
+            ng-disabled="loginModal.loading"
             ng-model="loginModal.form.password"
             type="text"
             class="validate"
