@@ -8,6 +8,8 @@ import 'angular-moment';
 // materialize
 import 'Materialize/dist/css/materialize.css';
 import 'Materialize/dist/js/materialize.js';
+import 'angular-materialize/src/angular-materialize.js';
+
 
 // font-awesome
 import 'font-awesome/css/font-awesome.css';
@@ -28,6 +30,7 @@ import './main.sass';
 
 export let mainModule = angular.module('mainModule', [
   'ui.router',
+  'ui.materialize',
   'angularMoment',
   mainConfigModule.name,
 

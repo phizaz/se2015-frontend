@@ -24,6 +24,7 @@
     "ui-select": "angular-ui-select#~0.13.2",
     "selectize": "~0.12.1",
     "angular-gridster": "~0.13.5",
-    "animate.css": "~3.4.0"
+    "animate.css": "~3.4.0",
+    "angular-materialize": "*"
   }
 }
