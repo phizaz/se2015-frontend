@@ -27,6 +27,7 @@ import 'animate.css';
 // routes
 import {navigatorRouteModule} from './routes/navigator/navigator.route.js';
 import {memberRouteModule} from './routes/member/member.route';
+import {patientRouteModule} from './routes/patient/patient.route';
 
 // locals
 import {mainConfigModule} from './config/main.config.js';
@@ -42,6 +43,7 @@ export let mainModule = angular.module('mainModule', [
   // this should list all the routes that don't depend on others say parent routes
   navigatorRouteModule.name,
   memberRouteModule.name,
+  patientRouteModule.name,
   ]);
 
 mainModule.run(
@@ -61,14 +63,14 @@ mainModule.run(
 
     $rootScope.$on('$stateChangeSuccess',
       (event, toState, toParams, fromState, fromParams) => {
-        console.group();
-          console.info('$stateChangeSuccess');
-          console.info('event', event);
-          console.info('toState', toState);
-          console.info('toParams', toParams);
-          console.info('fromState', fromState);
-          console.info('fromParams', fromParams);
-        console.groupEnd();
+        // console.group();
+        //   console.info('$stateChangeSuccess');
+        //   console.info('event', event);
+        //   console.info('toState', toState);
+        //   console.info('toParams', toParams);
+        //   console.info('fromState', fromState);
+        //   console.info('fromParams', fromParams);
+        // console.groupEnd();
 
         NProgress.done();
       });

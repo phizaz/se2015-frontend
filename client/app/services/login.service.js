@@ -153,7 +153,7 @@ export class Login {
     let $q = this.private.$q;
     let CallOnce = this.private.CallOnce;
 
-    return CallOnce.call(realRequest);
+    return CallOnce.call('is-login', realRequest);
 
     function realRequest() {
       return $q(

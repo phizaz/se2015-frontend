@@ -39,6 +39,8 @@ export class Cache {
 
     let now = moment();
     let timeout = this.private.timeout[field];
+
+    console.log('isValid:', 'timeout:', timeout);
     if (now.isAfter(timeout)) {
       return false;
     }

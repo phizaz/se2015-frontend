@@ -23,26 +23,39 @@ export let patientRouteModule =
 patientRouteModule.config(
   ($stateProvider) => {
     $stateProvider
-      .state('member.patient', {
+      .state('patient', {
         url: '/patient',
         template: patientTemplate,
         controller: PatientController,
         controllerAs: 'my',
         resolve: {
-          isPatient: (userInfo, $q) => {
+
+          userInfo: (Login) => {
+            return Login.userInfo();
+          },
+
+          isPatient: (Login, $q) => {
             return $q(
               (resolve, reject) => {
-                if (userInfo.role) {
-                  reject({redirect: 'home'});
-                } else {
-                  resolve();
-                }
+
+                Login
+                  .userInfo()
+                  .then(
+                    (res) => {
+                      if (res.role) {
+                        reject({redirect: 'home'});
+                      } else {
+                        resolve();
+                      }
+                    })
+                  .catch(
+                    (res) => {
+                      console.log('user info catch:', res);
+                      reject({redirect: 'home'});
+                    });
+
               });
           }
         }
-      })
-      // alias
-      .state('patient', {
-        controller: ($state) => $state.go('member.patient')
       });
   });

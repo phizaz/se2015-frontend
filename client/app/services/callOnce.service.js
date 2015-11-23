@@ -6,7 +6,7 @@ export class CallOnce {
   constructor($q) {
     this.private = {};
     _.extend(this.private, {
-      registry: new WeakMap(),
+      registry: {},
       $q: $q,
     });
 
@@ -23,18 +23,18 @@ export class CallOnce {
    *                               should return a promise
    * @return {[type]}              a promise
    */
-  call(fn) {
+  call(id, fn) {
     let $q = this.private.$q;
     let registry = this.private.registry;
 
-    if (!registry.has(fn)) {
+    if (!registry[id]) {
       // first time in its kind
 
       // init registry
-      registry.set(fn, {
+      registry[id] = {
         resolves: [],
         rejects: [],
-      });
+      };
 
       // execute it
       let promise = null;
@@ -43,18 +43,18 @@ export class CallOnce {
         .then(
           (res) => {
             // when resolve resolves all in the registry
-            this.resolve(fn, res);
+            this.resolve(id, fn, res);
           })
         .catch(
           (res) => {
-            this.reject(fn, res);
+            this.reject(id, fn, res);
           });
     }
 
     let returnPromise = $q(
       (resolve, reject) => {
-        registry.get(fn).resolves.push(resolve);
-        registry.get(fn).rejects.push(reject);
+        registry[id].resolves.push(resolve);
+        registry[id].rejects.push(reject);
       });
 
     return returnPromise;
@@ -65,31 +65,31 @@ export class CallOnce {
    * @param  {[type]} identifier [description]
    * @return {[type]}            [description]
    */
-  resolve(fn, value) {
+  resolve(id, fn, value) {
     let registry = this.private.registry;
-    if (!registry.has(fn)) {
+    if (!registry[id]) {
       throw new Error('resolving unmet identifier');
     }
 
-    for (let resolve of registry.get(fn).resolves) {
+    for (let resolve of registry[id].resolves) {
       resolve(value);
     }
 
-    registry.delete(fn);
+    delete registry[id];
   }
 
-  reject(fn, value) {
+  reject(id, fn, value) {
     let registry = this.private.registry;
-    if (!registry.has(fn)) {
+    if (!registry[id]) {
       throw new Error('resolving unmet identifier');
     }
 
     // console.log('rejects:', registry.get(fn).rejects);
-    for (let reject of registry.get(fn).rejects) {
+    for (let reject of registry[id].rejects) {
       reject(value);
     }
 
-    registry.delete(fn);
+    delete registry[id];
   }
 
 
