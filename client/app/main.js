@@ -46,7 +46,7 @@ mainModule.run(
   });
 
 mainModule.run(
-  ($rootScope) => {
+  ($rootScope, $state) => {
     console.log('the app is running');
 
     $rootScope.$on('$stateChangeSuccess',
@@ -72,5 +72,10 @@ mainModule.run(
           console.info('fromState', fromState);
           console.info('fromParams', fromParams);
         console.groupEnd();
+
+        // redirect to the desired target
+        if (error.redirect) {
+          $state.go(error.redirect);
+        }
       });
   });

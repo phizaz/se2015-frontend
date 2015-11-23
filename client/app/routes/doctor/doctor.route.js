@@ -49,5 +49,9 @@ doctorRouteModule.config(
             return DoctorTime.getDoctorAppointmentList(userInfo);
           },
         }
+      })
+      // alias
+      .state('doctor', {
+        controller: ($state) => $state.go('member.doctor')
       });
   });

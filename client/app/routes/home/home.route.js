@@ -29,7 +29,6 @@ homeRouteModule.config(
         controller: HomeController,
         controllerAs: 'home',
         resolve: {
-
         }
       });
   });

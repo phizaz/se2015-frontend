@@ -21,5 +21,14 @@ registerRouteModule.config(
         template: registerTemplate,
         controller: RegisterController,
         controllerAs: 'register',
+        resolve: {
+          redirectToHisOwnPage: (Login) => {
+            return Login.toHisOwnPage();
+          }
+        }
+      })
+      // alias
+      .state('register', {
+        controller: ($state) => $state.go('navigator.register')
       });
   });

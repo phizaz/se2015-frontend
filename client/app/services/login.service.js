@@ -221,14 +221,46 @@ export class Login {
       (resolve, reject) => {
         this.isLogin()
           .then((res) => {
-            if (res.data) {
-              resolve(res.data);
-            } else {
-              reject();
-            }
+            resolve(res.data);
           })
           .catch((res) => {
             reject(res);
+          });
+      });
+  }
+
+  toHisOwnPage() {
+    let $q = this.private.$q;
+    return $q(
+      (resolve, reject) => {
+        this.isLogin()
+          .then((res) => {
+            // logged in
+            let data = res.data;
+            let redirect = null;
+            if (data.role) {
+              if (data.role === 'Doctor') {
+                redirect = 'doctor';
+              } else if (data.role === 'Staff') {
+                redirect = 'staff';
+              } else if (data.role === 'Nurse') {
+                redirect = 'nurse';
+              } else if (data.role === 'Pharmacist') {
+                redirect = 'pharmacist';
+              } else {
+                throw new Error('wrong role', res);
+              }
+            } else {
+              redirect = 'patient';
+            }
+
+            reject({
+              redirect: redirect
+            });
+          })
+          .catch((res) => {
+            // not logged in
+            resolve(res);
           });
       });
   }
