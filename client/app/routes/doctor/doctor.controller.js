@@ -1,8 +1,9 @@
+import angular from 'angular';
 import _ from 'lodash';
 import moment from 'moment';
 
 export class DoctorController {
-  constructor(DoctorTime, DoctorTimeEditing, userInfo, doctorTimeList, doctorAppointmentList) {
+  constructor(DoctorTime, DoctorTimeEditing, userInfo, doctorTimeList, doctorAppointmentList, $q) {
 
     console.log('userInfo:', userInfo);
 
@@ -11,9 +12,11 @@ export class DoctorController {
     //   () => this.startEditingDoctorTime(), 100);
 
     _.extend(this, {
+      userInfo: userInfo,
       editingMode: false,
       DoctorTime: DoctorTime,
       DoctorTimeEditing: DoctorTimeEditing,
+      $q: $q,
 
       doctorTimeList: doctorTimeList,
       doctorAppointmentList: doctorAppointmentList,
@@ -89,7 +92,7 @@ export class DoctorController {
     }
 
     this.calendarPrompt.setLoading(true);
-    let changes = this.calendarBody.finishEditing();
+    let changes = this.calendarBody.askChanges();
 
     console.log('changes summary:', changes);
 
@@ -97,8 +100,8 @@ export class DoctorController {
     let allDeletes = [];
 
     for (let change of changes) {
-      allCreates.append(change.create);
-      allDeletes.append(change.delete);
+      allCreates = allCreates.concat(change.create);
+      allDeletes = allDeletes.concat(change.delete);
     }
 
     // call backend with { create: , delete: }
@@ -106,7 +109,44 @@ export class DoctorController {
     console.log('creates:', allCreates);
     console.log('deletes:', allDeletes);
 
-    this.editingMode = false;
+    this.DoctorTime
+      .updateDoctorTime(this.userInfo, allCreates, allDeletes)
+      .then(
+        (res) => {
+
+          console.log('finish edit doctortime: ', res);
+
+          // refresh
+          return this.$q.all([
+            this.DoctorTime.getDoctorAppointmentList(this.userInfo),
+            this.DoctorTime.getDoctorTimeList(this.userInfo),
+            ]);
+        })
+      .then(
+        (results) => {
+
+          let appointments = results[0];
+          let doctorTimes = results[1];
+
+          console.log('appointments:', appointments);
+          console.log('doctorTimes', doctorTimes);
+
+          this.doctorTimeList = doctorTimes;
+          this.doctorAppointmentList = appointments;
+          this.calendarBody.finishEditing();
+          this.calendarBody.init(appointments, doctorTimes);
+
+          this.editingMode = false;
+          this.calendarPrompt.setLoading(false);
+          this.calendarPrompt.closeModal();
+
+        })
+      .catch(
+        (res) => {
+          console.log(res);
+          throw new Error('finish edit doctortime');
+        });
+
   }
 
   cancelEditingDoctorTime() {

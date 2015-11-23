@@ -252,18 +252,20 @@ export class Login {
             // logged in
             let data = res.data;
             let redirect = null;
+
+            let map = {
+              Doctor: 'doctor',
+              Staff: 'staff',
+              Pharmacist: 'pharmacist',
+              Nurse: 'nurse',
+            };
+
             if (data.role) {
-              if (data.role === 'Doctor') {
-                redirect = 'doctor';
-              } else if (data.role === 'Staff') {
-                redirect = 'staff';
-              } else if (data.role === 'Nurse') {
-                redirect = 'nurse';
-              } else if (data.role === 'Pharmacist') {
-                redirect = 'pharmacist';
-              } else {
-                throw new Error('wrong role', res);
+              if (!map[data.role]) {
+                console.log(res);
+                throw new Error('mappnig not found');
               }
+              redirect = map[data.role];
             } else {
               redirect = 'patient';
             }

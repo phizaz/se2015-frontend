@@ -48,6 +48,7 @@ export function doctorCalendarPromptModalDirective() {
     function init(damages) {
       console.log('damages:', damages);
       my.damages = damages || {};
+      my.setLoading(false);
 
       for (let day of Object.keys(my.damages)) {
         if (my.damages[day].length > 0) {

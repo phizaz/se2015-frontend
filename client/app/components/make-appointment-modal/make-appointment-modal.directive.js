@@ -102,6 +102,8 @@ export function makeAppointmentModalDirective(MakeAppointment) {
       promise
         .then(
           (res) => {
+            console.log('find options res:', res);
+
             my.findingOptions = false;
             my.possibleAppointments = res;
 

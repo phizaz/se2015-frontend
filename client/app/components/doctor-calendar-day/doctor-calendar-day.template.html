@@ -24,13 +24,15 @@
     <doctor-calendar-freearea
       ng-repeat="doctorTime in my.doctorTimeList"
       start-time="doctorTime.doctorTime_begin"
-      end-time="doctorTime.doctorTime_end">
+      end-time="doctorTime.doctorTime_end"
+      class="animated bounceIn">
     </doctor-calendar-freearea>
 
     <doctor-calendar-appointment
       ng-repeat="appointment in my.appointmentList"
       appointment="appointment"
-      target-modal="my.appointmentModals[$index]">
+      target-modal="my.appointmentModals[$index]"
+      class="animated fadeIn">
       </doctor-calendar-appointment>
 
   </div>

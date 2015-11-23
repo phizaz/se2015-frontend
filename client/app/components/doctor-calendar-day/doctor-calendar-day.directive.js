@@ -1,5 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
+import moment from 'moment';
 import {DirectiveBlueprint} from '../directive';
 import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
 
@@ -73,6 +74,7 @@ export function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
 
       // functions
       startEditing: startEditing,
+      askChanges: askChanges,
       finishEditing: finishEditing,
       cancelEditing: cancelEditing,
       askDamage: askDamage,
@@ -107,17 +109,20 @@ export function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
      * gather changes done in this day
      * return the change list
      */
-    function finishEditing() {
+    function askChanges() {
       let [deletions, creations] =
-        DoctorTimeEditing.calculateChange(my.doctorTimeList, my.editingGrid);
-
-      my.editing = false;
+        DoctorTimeEditing.calculateChange(my.doctorTimeList, my.editingGrid, moment(my.date));
 
       return {
         delete: deletions,
         create: creations,
       };
     }
+
+    function finishEditing() {
+      my.editing = false;
+    }
+
 
     function cancelEditing() {
       my.editing = false;

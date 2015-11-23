@@ -99,7 +99,7 @@ export class DoctorTimeEditing {
     return damages;
   }
 
-  calculateChange(doctorTimeList, editingGrid) {
+  calculateChange(doctorTimeList, editingGrid, today) {
     doctorTimeList = doctorTimeList || [];
     editingGrid = editingGrid || [];
 
@@ -129,7 +129,13 @@ export class DoctorTimeEditing {
       let time =
         TimeBlockConverter.blockToTime(
           DOCTOR_CALENDAR.beginHours, block);
-      return time.format();
+
+      let todayDate = {
+        date: today.date(),
+        month: today.month(),
+        year: today.year(),
+      };
+      return time.set(todayDate).format();
     }
 
     // create connected components
@@ -145,8 +151,8 @@ export class DoctorTimeEditing {
         else {
           if (connectedSize > 0) {
             creations.push({
-              startTime: blockToTime(connectedBegin),
-              endTime: blockToTime(connectedBegin + connectedSize)
+              start: blockToTime(connectedBegin),
+              end: blockToTime(connectedBegin + connectedSize)
               });
           }
 

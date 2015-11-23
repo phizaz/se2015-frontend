@@ -1,30 +1,92 @@
 <div class="staff-wrapper">
-  <div class = "t">
+  <div class="header nav-wrapper">
 
-    <div>
-      <div>
-       <span>
-        <form style="float:left;margin-left:10%">
-          <div class="input-field">
-            <input id="search" type="search" style="width:300px"required>
-            <label for="search"><i class="material-icons">search</i></label>
-          </div>
-        </form>
-      </span>
+    <button class="adding-btn btn white orange-text">
+      เพิ่มผู้ป่วย
+    </button>
+
+    <div class="search-field">
+      <form name="form">
+
+        <div input-field class="search-field-inside">
+          <!-- <i class="material-icons prefix">search</i> -->
+          <input type="text"
+            ng-model="staff.searchForm.firstname"
+            ng-disabled="staff.searching"
+            id="search"></input>
+          <label for="search">ชื่อ</label>
+        </div>
+
+        <div input-field class="search-field-inside">
+          <!-- <i class="material-icons prefix">search</i> -->
+          <input type="text"
+            ng-model="staff.searchFrom.lastname"
+            ng-disabled="staff.searching"
+            id="search2"></input>
+          <label for="search2">สกุล</label>
+        </div>
+
+        <div class="search-field-inside">
+          <button
+            ng-click="staff.search(staff.searchForm.firstname, staff.searchForm.lastname)"
+            ng-disabled="staff.searching"
+            class="search-btn orange white-text btn"
+            type="submit">
+            <span ng-show="!staff.searching">ค้นหาผู้ป่วย</span>
+            <span ng-show="staff.searching">รอซักครู่</span>
+          </button>
+        </div>
+
+      </form>
     </div>
-    <button class="btn amber darken-3 waves-light" style="margin-left:10%;margin-top:20px">เพิ่มผู้ป่วย</button>
-  </div>
-  <div>
 
   </div>
+
+  <div class="left">
+    <div
+      ng-show="staff.searchResult.length === 0"
+      class="no-result">
+
+      <h4>ไม่มีผลการค้นหา...</h4>
+
+    </div>
+
+    <div
+      ng-show="staff.searchResult.length > 0"
+      cass="some-result">
+
+      <patient-information
+        ng-repeat="patient in staff.searchResult"
+        patient="patient"></patient-information>
+    </div>
+
   </div>
-  <div class="l">
-    <patient-information
-    ng-repeat="patient in staff.patients"
-    patient="patient"></patient-information>
-  </div>
-  <div class="r">
-    <doctor-information ng-repeat="staff in staff.staffs" staff="staff"></doctor-information>
+
+  <div class="right">
+
+    <div
+      ng-show="staff.unconfirmedStaffs.length === 0"
+      class="no-result">
+      <h4 ng-show="!staff.refreshing">
+        ไม่มีคำร้องในตอนนี้
+        <a href="" ng-click="staff.refresh()">รีเฟรช</a>
+      </h4>
+
+      <h4 ng-show="staff.refreshing">
+        รอซักครู่
+      </h4>
+    </div>
+
+    <div
+      ng-show="staff.unconfirmedStaffs.length > 0"
+      class="some-result">
+
+      <doctor-information
+        ng-repeat="employee in staff.unconfirmedStaffs"
+        staff="employee"
+        parent="staff"></doctor-information>
+    </div>
+
   </div>
 </div>
 

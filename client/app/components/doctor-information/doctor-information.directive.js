@@ -16,6 +16,9 @@ export function doctorInformation() {
   let shared = {};
 
   function link($scope, element, attrs) {
+
+    console.log('scope:', $scope);
+
     let my = DirectiveBlueprint.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
@@ -27,34 +30,38 @@ export function doctorInformation() {
 
   function controller($scope) {
     let my = DirectiveBlueprint.constructor($scope, this);
+
     _.extend(my, {
-      app: app,
-      dis: dis,
+      appear: appear,
+      disappear: disappear,
 
       public: my,
     });
-    function app() {
-      console.log('app');
+
+    console.log('doctor information my:', my);
+
+    function appear() {
+      console.log('appear');
       my.element.find('.card2').show(800);
       my.element.find('.card3').hide(800);
     }
-    function dis() {
-      console.log('dis');
+    function disappear() {
+      console.log('disappear');
       my.element.find('.card2').hide(800);
       my.element.find('.card3').show(800);
     }
-  
   }
 
   return {
     restrict: 'E',
     scope: {
       public: '=name',
-      staff: '='
+      staff: '=',
+      parent: '=',
     },
     bindToController: true,
     controller: controller,
-    controllerAs: 'doctorInformation',
+    controllerAs: 'my',
     link: link,
     template: doctorInformationTemplate,
   };

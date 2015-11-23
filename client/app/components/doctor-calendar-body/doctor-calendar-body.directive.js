@@ -85,8 +85,8 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) 
 
     _.extend(my, {
       calendarTimesList: calendarTimesList,
-      appointmentListByDate: sortAppointmentByDate(my.pureAppointmentList),
-      doctorTimeListByDate: sortDoctorTimeByDate(my.pureDoctorTimeList),
+      appointmentListByDate: {},
+      doctorTimeListByDate: {},
       daysInWeek: daysInWeek,
       editing: false,
       editingGridByDate: {},
@@ -96,13 +96,23 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) 
       dateFormat: dateFormat,
       startEditing: startEditing,
       finishEditing: finishEditing,
+      askChanges: askChanges,
       askDamage: askDamage,
       cancelEditing: cancelEditing,
+      init: init,
       // this is intentionally put here
       public: my,
     });
 
     console.log('calendar-body my:', my);
+    init(my.pureAppointmentList, my.pureDoctorTimeList);
+
+    function init(appointmentList, doctorTimeList) {
+      _.extend(my, {
+        appointmentListByDate: sortAppointmentByDate(appointmentList),
+        doctorTimeListByDate: sortDoctorTimeByDate(doctorTimeList),
+      });
+    }
 
     function createDaysInWeek() {
       for (let i = 0; i < 7; ++i) {
@@ -136,14 +146,21 @@ export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) 
       return damages;
     }
 
-    function finishEditing() {
+    function askChanges() {
       console.log('stop editing doctortime');
       let changes = [];
       for (let each of my.doctorCalendarDays) {
-        changes.push(each.finishEditing());
+        changes.push(each.askChanges());
+      }
+
+      return changes;
+    }
+
+    function finishEditing() {
+      for (let each of my.doctorCalendarDays) {
+        each.finishEditing();
       }
       my.editing = false;
-      return changes;
     }
 
     function cancelEditing() {

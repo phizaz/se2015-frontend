@@ -33,7 +33,10 @@ staffRouteModule.config(
         controllerAs: 'staff',
         resolve: {
           isStaff: (Login) => {
-              return Login.isStaff();
+            return Login.isStaff();
+          },
+          unconfirmedStaffs: (Staff) => {
+            return Staff.getUnconfirmedStaff();
           }
         }
       })

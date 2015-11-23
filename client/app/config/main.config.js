@@ -28,3 +28,27 @@ that.filter('range',
       return input;
     };
 });
+
+that.filter('role',
+  () => {
+    let conversion = {
+      Doctor: 'แพทย์',
+      Staff: 'เจ้าหน้าที่',
+      Nurse: 'พยาบาล',
+      Pharmacist: 'เภสัชกร',
+    };
+    return (role) => {
+      return conversion[role];
+    };
+  });
+
+that.filter('gender',
+  () => {
+    let conversion = {
+      M: 'ชาย',
+      F: 'หญิง',
+    };
+    return (gender) => {
+      return conversion[gender];
+    };
+  });

@@ -1,30 +1,67 @@
 <div class="doctor-information-wrapper">
   <div class="card">
-      <div class="card2">
-        <img src="../../images/BlankFace.jpg" width="50px"></img>
-        <div id="title">กรพัฒน์ ปรีชากุล</div>
-        <div>
-          <span>เบอร์โทรศัพท์ </span><span>087-2222222</span><span style="margin-left:150px">ตำแหน่ง </span><span>แพทย์</span>
-        </div>
-        <div>
-          <span>email - </span><span>the.akitata.hotmail.com</span><span style="margin-left:130px">ความเชี่ยวชาญ - </span><span>จักษุ</span>
-          </div>
-        <button class="btn light-green accent-4 waves-light" style="margin-left:30%;margin-top:30px">รับคำร้องเป็นแพทย์</button>
-        <button class="btn red accent-4 waves-light" style="margin-left:10px;margin-top:30px">ลบ</button>
-        </br>
-        <a href="#" ng-click="doctorInformation.dis()" style="color:grey"><p style="margin-left:50%">ยุบให้เล็กลง</p></a>
+    <div class="card2">
+      <img src="../../images/BlankFace.jpg" width="50px"></img>
+
+      <div id="title">
+        {{my.staff.firstname}} {{my.staff.lastname}}
       </div>
-      <a ng-click="doctorInformation.app()" href="#" style="color:black">
-        <div class="card3">
-          <img src="../../images/BlankFace.jpg" width="50px"></img>
-          <h5>กรพัฒน์ ปรีชากุล</h5>
-          <div>
-            <span>เพศ</span><span> - ชาย</span><span> เชื้อชาติ</span>
-            <span> -  ไทย</span>
-      </a>
-      <button class="btn light-green accent-4 waves-light" style="margin-left:200px">รับคำร้องเป็นแพทย์</button>
-      <button class="btn red accent-4 waves-light">ลบ</button>
+
+      <div>
+        <span>เบอร์โทรศัพท์ </span><span>087-2222222</span><span style="margin-left:150px">ตำแหน่ง </span><span>แพทย์</span>
+      </div>
+
+      <div>
+        <span>email - </span><span>the.akitata.hotmail.com</span><span style="margin-left:130px">ความเชี่ยวชาญ - </span><span>จักษุ</span>
+      </div>
+
+      <button class="btn light-green accent-4 waves-light" style="margin-left:30%;margin-top:30px">รับคำร้องเป็นแพทย์</button>
+
+      <button class="btn red accent-4 waves-light" style="margin-left:10px;margin-top:30px">ลบ</button>
+
+      </br>
+
+      <a href="" ng-click="my.disappear()" style="color:grey"><p style="margin-left:50%">ยุบให้เล็กลง</p></a>
+
+    </div>
+
+    <a ng-click="my.appear()" href="" style="color:black">
+      <div class="card3">
+
+        <img src="../../images/BlankFace.jpg" width="50px"></img>
+
+        <h5>{{my.staff.firstname}} {{my.staff.lastname}}</h5>
+
+        <div>
+          <span>
+            อีเมล - {{my.staff.email}}
+          </span>
+          <span>
+            เบอร์โทร - {{my.staff.tel}}
+          </span>
         </div>
+
+      </div>
+    </a>
+
+    <button
+      ng-click="my.parent.onApprove(my.staff)"
+      ng-disabled="my.approving || my.discarding"
+      class="btn light-green accent-4 waves-light"
+      style="margin-left:200px">
+      <span ng-show="!my.approving">
+        รับคำร้องเป็น {{my.staff.role | role}}
+        <span ng-if="my.staff.role === 'Doctor'">({{my.staff.specialty}})</span>
+      </span>
+      <span ng-show="my.approving">รอซักครู่</span>
+    </button>
+    <button
+      ng-click="my.parent.onDiscard(my.staff)"
+      ng-disabled="my.approving || my.discarding"
+      class="btn red accent-4 waves-light">
+      <span ng-show="!my.discarding">ลบ</span>
+      <span ng-show="my.discarding">รอซักครู่</span>
+    </button>
   </div>
 
 </div>

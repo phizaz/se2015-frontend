@@ -14,19 +14,7 @@ export let greetDirectiveModule =
       'ui.router',
       loginServiceModule.name,
       ])
-    .directive('greet', greet)
-    .filter('role',
-      () => {
-        let conversion = {
-          Doctor: 'แพทย์',
-          Staff: 'เจ้าหน้าที่',
-          Nurse: 'พยาบาล',
-          Pharmacist: 'เภสัชกร',
-        };
-        return (role) => {
-          return conversion[role];
-        };
-      });
+    .directive('greet', greet);
 
 export function greet(Login, $state) {
   let shared = {};

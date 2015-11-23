@@ -24,7 +24,20 @@ export class MakeAppointment {
               res = res.data;
 
               if (res.success) {
-                resolve(res.data);
+                let data = [];
+
+                for (let each of res.data.datetime) {
+                  if (!each.doctorTime_begin) {
+                    continue;
+                  }
+
+                  data.push({
+                    datetime: (each.doctorTime_begin).date,
+                    doctor: res.data.doctor,
+                  });
+                }
+
+                resolve(data);
               } else {
                 console.log(res);
                 throw new Error('find options by doctor');
@@ -95,7 +108,7 @@ export class MakeAppointment {
   }
 
   submitAppointment(doctor, datetime) {
-    if (!doctor.id || !datetime) {
+    if (!doctor.emp_id || !datetime) {
       console.log('doctor:', doctor);
       console.log('datetime:', datetime);
       throw new Error('no doctor or datetime');
@@ -116,7 +129,7 @@ export class MakeAppointment {
         this.$http
           .post('/api/appointment/make',
             {
-              doctor_id: doctor.id,
+              doctor_id: doctor.emp_id,
               datetime: datetime,
             })
           .then(
