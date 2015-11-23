@@ -6,6 +6,7 @@ npm-debug.log
 
 # we ignore this becasue everythings in this directory should be "generated from somewhere else"
 public
+api
 
 
 # Some other default ignores
