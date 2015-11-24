@@ -113,47 +113,30 @@
                 class="loading animated bounceIn">กำลังโหลด... รอซักครู่</h4>
 
               <ul class="collection">
-                <li class="collection-item avatar now">
-                  <i class="time circle">16.30</i>
+
+                <li
+                  ng-repeat="each in my.userInfo.appointments"
+                  ng-class="{now: my.isToday(each.appointment.time)}"
+                  class="collection-item avatar">
+
+                  <i class="time circle">
+                    {{each.appointment.time | amDateFormat:'H:mm'}}
+                  </i>
                   <span class="title">
                     <small>นัดหมายกับ</small>
-                    นพ.​ กรพัฒน์​ ปรีชากุล
+                    {{each.doctor.firstname}} {{each.doctor.lastname}}
                   </span>
+
                   <p>
-                    <span class="date">วันนี้</span> เวลา 8.30 น.​
+                    <span class="date">
+                      <span ng-show="my.isToday(each.appointment.time)">วันนี้</span>
+                      <span ng-show="!my.isToday(each.appointment.time)">
+                        {{each.appointment.time | amDateFormat:'ddddที่ Do MMMM YYYY'}}
+                      </span>
+                    </span>
                   </p>
                 </li>
 
-                <li class="collection-item avatar">
-                  <i class="time circle"></i>
-                  <span class="title">
-                    <small>นัดหมายกับ</small>
-                    นพ.​ กรพัฒน์​ ปรีชากุล
-                  </span>
-                  <p>
-                    <span></span>เวลา 8.30 น.​
-                  </p>
-                </li>
-
-                <li class="collection-item avatar">
-                  <i class="time circle"></i>
-                  <span class="title">
-                    <small>นัดหมายกับ</small>
-                    นพ.​ กรพัฒน์​ ปรีชากุล
-                  </span>
-                  <p>เวลา 8.30 น.​
-                  </p>
-                </li>
-
-                <li class="collection-item avatar">
-                  <i class="time circle"></i>
-                  <span class="title">
-                    <small>นัดหมายกับ</small>
-                    นพ.​ กรพัฒน์​ ปรีชากุล
-                  </span>
-                  <p>เวลา 8.30 น.​
-                  </p>
-                </li>
               </ul>
 
             </div>

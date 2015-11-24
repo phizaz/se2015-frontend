@@ -1,10 +1,13 @@
 import _ from 'lodash';
+import moment from 'moment';
 
 export class PatientController {
 
   constructor ($scope, userInfo, Login, $state) {
 
     _.extend(this, {
+      today: moment().format('YYYY-MM-DD'),
+      moment: moment,
       $scope: $scope,
       userInfo: userInfo,
       Login: Login,
@@ -12,6 +15,10 @@ export class PatientController {
       $state: $state,
       loadingUserInfo: false,
     });
+  }
+
+  isToday(time) {
+    return moment(time).format('YYYY-MM-DD') === this.today;
   }
 
   logout() {

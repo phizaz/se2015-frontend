@@ -14,6 +14,7 @@ var webpackProductionConfig = _.extend(webpackBaseConfig, {
   },
 
   plugins: [
+    new ngAnnotatePlugin(),
     // this will make it requirable but not include in the bundle
     new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
     // makes bower (and normal) packages requirable
@@ -29,7 +30,6 @@ var webpackProductionConfig = _.extend(webpackBaseConfig, {
         jQuery: "jquery",
         "window.jQuery": "jquery"
       }),
-    new ngAnnotatePlugin(),
     new webpack.optimize.UglifyJsPlugin({ sourceMap: true })
   ],
 
