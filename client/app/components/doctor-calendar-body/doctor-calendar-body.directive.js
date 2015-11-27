@@ -27,6 +27,23 @@ partial.directive('doctorCalendarBody', doctorCalendarBodyDirective);
 function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   let shared = {};
 
+  return {
+    restrict: 'E',
+    scope: {
+      public: '=name',
+      currentWeek: '=',
+      pureAppointmentList: '=doctorAppointmentList',
+      pureDoctorTimeList: '=doctorTimeList',
+      marginTop: '=',
+      timeWidth: '=',
+    },
+    bindToController: true,
+    controller: controller,
+    controllerAs: 'my',
+    link: link,
+    template: template,
+  };
+
   function dateFormat(datetime) {
     return datetime.format('YYYY-MM-DD');
   }
@@ -203,22 +220,5 @@ function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
       attrs: attrs,
     });
   }
-
-  return {
-    restrict: 'E',
-    scope: {
-      public: '=name',
-      currentWeek: '=',
-      pureAppointmentList: '=doctorAppointmentList',
-      pureDoctorTimeList: '=doctorTimeList',
-      marginTop: '=',
-      timeWidth: '=',
-    },
-    bindToController: true,
-    controller: controller,
-    controllerAs: 'my',
-    link: link,
-    template: template,
-  };
 
 }

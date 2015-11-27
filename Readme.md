@@ -1,3 +1,119 @@
+# อัพเดทสำหรับระบบ Module !
+แต่เดิมนั้นเรายึด มาตรฐานการเขียนแบบ modular จาก gocardless แต่ผมคิดว่ามันนถึงเวลาที่ต้องเปลี่ยน เพราะว่า การเขียนแบบเดิมนั้น "เยอะโดยใช่เหตุ" ซึ่งผมเสนอวิธีการเขียนแบบใหม่สั้นลง ! ดังนี้
+
+## directive
+
+### แบบเดิม
+
+ซึ่งจะต้องเขียน "คำเดิม ๆ" ไว้หลายที่
+
+```
+import {moduleDependency} from '../path/to/modlueDependency';
+
+export let moduleName = 
+	angular
+		.module('moduleName', [
+			moduleDependency.name
+		])
+		.directive('directiveName', directiveFunction);
+		
+function directiveFunction() {
+	...
+}
+```
+
+### แบบใหม่
+ซึ่งจะเขียนชื่อ module เพียงที่เดียวคือตรง dependecies ของ angular.module ผมคิดว่างดงามกว่ามาก ๆ 
+
+```
+let partial = 
+	angular.module('moduleName', [
+		require('../path/to/moduleDependency'),
+	]);
+
+// บรรทัดนี้ทำให้คนอื่นสามารถ require อย่างด้านบนได้ !! สำคัญ !!
+// หมายเหตุ: partial.name เป็น string เฉย ๆ	
+export default partial.name;
+
+partial.directive('directiveName', directiveFunction);
+
+function directiveFunction() {
+	...
+}
+```
+
+## service
+อันนี้นอกจากจะมีการแก้ไขแบบด้านบนแล้ว ยังมีการพัฒนาอีกเล็กน้อยเพื่อลดการพิมพ์ `this.private.varName`
+
+### เดิม
+
+```
+import {moduleDependency} from '../path/to/modlueDependency';
+
+class ServiceName {
+	constructor($http) {
+		
+		this.private = {};
+		_.extend(this.private, {
+			$http: $http
+		});
+		
+		_.extend(this, {
+			...
+		});
+	
+	}
+	
+	callSomething() {
+		return this.private.$http.get('....')....
+	}
+}
+
+export let moduleName = 
+	angular
+		.module('moduleName', [
+			moduleDependency.name
+		])
+		.service('ServiceName', ServiceName);
+		
+```
+
+### ใหม่
+
+```
+import _ from 'lodash';
+
+let partial = 
+	angular.module('moduleName', [
+		require('../path/to/moduleDependency'),
+	]);
+
+// บรรทัดนี้ทำให้คนอื่นสามารถ require อย่างด้านบนได้ !! สำคัญ !!
+// หมายเหตุ: partial.name เป็น string เฉย ๆ	
+export default partial.name;
+
+partial.service('ServiceName',
+	($http, $q) => {
+	
+		class ServiceName {
+			constructor() {
+				
+				_.extend(this, {
+					...
+				});
+			
+			}
+			
+			callSomething() {
+				// เรียกใช้ $http ได้เลย
+				return $http.get('....')....
+			}
+		}
+		
+		return new ServiceName();
+	});
+```
+
 # Phizaz's Angular Seed
 Angular skeleton with Webpack and Karma (Jasmine) configured
 
