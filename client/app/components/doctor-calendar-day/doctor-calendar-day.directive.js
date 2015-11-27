@@ -13,50 +13,50 @@ import 'angular-gridster/dist/angular-gridster.min.css';
 import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
 
 // service
-import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service'
-
-// directives
-import {doctorCalendarAppointmentDirectiveModule} from '../doctor-calendar-appointment/doctor-calendar-appointment.directive';
-import {doctorCalendarFreeareaDirectiveModule} from '../doctor-calendar-freearea/doctor-calendar-freearea.directive';
-import {doctorCalendarAppointmentModalDirectiveModule} from '../doctor-calendar-appointment-modal/doctor-calendar-appointment-modal.directive';
+import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
 
 // locals
 import template from './doctor-calendar-day.template.html';
 import './doctor-calendar-day.sass';
 
-export let doctorCalendarDayDirectiveModule =
+let partial =
   angular
     .module('doctorCalendarDayDirectiveModule', [
       'gridster',
       doctorCalendarConstantModule.name,
       doctorTimeEditingServiceModule.name,
-      doctorCalendarAppointmentDirectiveModule.name,
-      doctorCalendarFreeareaDirectiveModule.name,
-      doctorCalendarAppointmentModalDirectiveModule.name,
-      ])
-    .directive('doctorCalendarDay', doctorCalendarDayDirective)
-    .run(/*@ngInject*/ (gridsterConfig, DOCTOR_CALENDAR) => {
-        _.extend(gridsterConfig, {
-          mobileBreakPoint: 0,
-          columns: 1,
-          floating: false,
-          swapping: false,
-          pushing: false,
-          rowHeight: DOCTOR_CALENDAR.blockHeight,
-          minColumns: 1,
-          minRows: 1,
-          defaultSizeX: 1,
-          defaultSizeY: 1,
-          minSizeX: 1,
-          maxSizeX: 1,
-          minSizeY: 1,
-          maxSizeY: null,
-          outerMargin: true,
-          margins: [ 2 * DOCTOR_CALENDAR.blockPadding, DOCTOR_CALENDAR.blockPadding],
-        });
+      require('../doctor-calendar-appointment/doctor-calendar-appointment.directive'),
+      require('../doctor-calendar-freearea/doctor-calendar-freearea.directive'),
+      require('../doctor-calendar-appointment-modal/doctor-calendar-appointment-modal.directive')
+      ]);
 
-        console.log('gridsterConfig:', gridsterConfig);
-      });
+export default partial.name;
+
+partial.directive('doctorCalendarDay', doctorCalendarDayDirective);
+
+partial.run(
+  (gridsterConfig, DOCTOR_CALENDAR) => {
+    _.extend(gridsterConfig, {
+      mobileBreakPoint: 0,
+      columns: 1,
+      floating: false,
+      swapping: false,
+      pushing: false,
+      rowHeight: DOCTOR_CALENDAR.blockHeight,
+      minColumns: 1,
+      minRows: 1,
+      defaultSizeX: 1,
+      defaultSizeY: 1,
+      minSizeX: 1,
+      maxSizeX: 1,
+      minSizeY: 1,
+      maxSizeY: null,
+      outerMargin: true,
+      margins: [ 2 * DOCTOR_CALENDAR.blockPadding, DOCTOR_CALENDAR.blockPadding],
+    });
+
+    console.log('gridsterConfig:', gridsterConfig);
+  });
 
 function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
 

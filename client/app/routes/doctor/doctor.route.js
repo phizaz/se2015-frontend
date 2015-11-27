@@ -10,7 +10,6 @@ import {doctorTimeServiceModule} from '../../services/doctorTime.service';
 import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
 
 // directives
-import {doctorCalendarBodyDirectiveModule} from '../../components/doctor-calendar-body/doctor-calendar-body.directive';
 import {doctorCalendarPromptModalDirectiveModule} from '../../components/doctor-calendar-prompt-modal/doctor-calendar-prompt-modal.directive';
 
 // locals
@@ -27,10 +26,10 @@ export let doctorRouteModule =
     // serivces
     doctorTimeServiceModule.name,
     doctorTimeEditingServiceModule.name,
-    doctorCalendarPromptModalDirectiveModule.name,
 
     // directives
-    doctorCalendarBodyDirectiveModule.name,
+    require('../../components/doctor-calendar-body/doctor-calendar-body.directive'),
+    require('../../components/doctor-calendar-prompt-modal/doctor-calendar-prompt-modal.directive'),
     ]);
 
 doctorRouteModule.config(

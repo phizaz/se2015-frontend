@@ -1,7 +1,7 @@
 import angular from 'angular';
 import _ from 'lodash';
 
-/*@ngInject*/ class MakeAppointment {
+export /*@ngInject*/ class MakeAppointment {
   constructor($http, $q) {
     _.extend(this, {
       $http: $http,

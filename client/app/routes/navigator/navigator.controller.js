@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-/*@ngInject*/ class NavigatorController {
+export /*@ngInject*/ class NavigatorController {
   constructor() {
 
     // private vars

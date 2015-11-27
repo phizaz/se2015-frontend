@@ -5,7 +5,7 @@ import {TimeBlockConverter} from '../helpers/timeBlockCoverter';
 import {doctorCalendarConstantModule} from '../constants/doctorCalendar.constant';
 import {doctorTimeServiceModule} from './doctorTime.service';
 
-/*@ngInject*/ class DoctorTimeEditing {
+export /*@ngInject*/ class DoctorTimeEditing {
 
   constructor(DOCTOR_CALENDAR) {
 

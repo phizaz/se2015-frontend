@@ -1,5 +1,5 @@
 
-/*@ngInject*/ class PharmacistController {
+export /*@ngInject*/ class PharmacistController {
   constructor(Pharmacist, Staff) {
     this.Pharmacist =Staff;
     this.form = {};

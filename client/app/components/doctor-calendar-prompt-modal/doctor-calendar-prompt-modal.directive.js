@@ -8,12 +8,15 @@ import {DirectiveBlueprint} from '../directive';
 import template from './doctor-calendar-prompt-modal.template.html';
 import './doctor-calendar-prompt-modal.sass';
 
-export let doctorCalendarPromptModalDirectiveModule =
+let partial =
   angular
     .module('doctorCalendarPromptModalDirectiveModule', [
 
-      ])
-    .directive('doctorCalendarPromptModal', doctorCalendarPromptModalDirective);
+      ]);
+
+export default partial.name;
+
+partial.directive('doctorCalendarPromptModal', doctorCalendarPromptModalDirective);
 
 function doctorCalendarPromptModalDirective() {
 

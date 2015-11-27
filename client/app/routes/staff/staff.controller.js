@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-/*@ngInject*/ class StaffController {
+export /*@ngInject*/ class StaffController {
   constructor(Staff, unconfirmedStaffs, $scope) {
 
     _.extend(this, {

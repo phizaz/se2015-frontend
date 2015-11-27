@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-/*@ngInject*/ class RegisterController {
+export /*@ngInject*/ class RegisterController {
   constructor(Register, $scope, $state) {
 
     _.extend(this, {

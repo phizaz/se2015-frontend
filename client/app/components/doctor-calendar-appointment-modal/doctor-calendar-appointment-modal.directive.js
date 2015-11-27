@@ -2,21 +2,20 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive';
 
-// directives
-import {doctorDrugListDirectiveModule} from '../doctor-drug-list/doctor-drug-list.directive';
-import {doctorSymtomListDirectiveModule} from '../doctor-symtom-list/doctor-symtom-list.directive';
-
 // locals
 import template from './doctor-calendar-appointment-modal.template.html';
 import './doctor-calendar-appointment-modal.sass';
 
-export let doctorCalendarAppointmentModalDirectiveModule =
+let partial =
   angular
     .module('doctorCalendarAppointmentModalDirectiveModule', [
-      doctorDrugListDirectiveModule.name,
-      doctorSymtomListDirectiveModule.name,
-      ])
-    .directive('doctorCalendarAppointmentModal', doctorCalendarAppointmentModalDirective);
+      require('../doctor-drug-list/doctor-drug-list.directive'),
+      require('../doctor-symtom-list/doctor-symtom-list.directive'),
+      ]);
+
+export default partial.name;
+
+partial.directive('doctorCalendarAppointmentModal', doctorCalendarAppointmentModalDirective);
 
 function doctorCalendarAppointmentModalDirective() {
 

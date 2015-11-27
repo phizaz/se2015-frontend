@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import moment from 'moment';
 
-/*@ngInject*/ class Cache {
+export /*@ngInject*/ class Cache {
   constructor() {
 
     this.private = {};

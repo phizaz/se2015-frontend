@@ -6,7 +6,7 @@ import 'angular-ui-router';
 import {loginServiceModule} from '../../services/login.service';
 
 // directive
-import {greetDirectiveModule} from '../../components/greet/greet.directive.js';
+// import greetDirective from '../../components/greet/greet.directive.js';
 
 // routes
 import {doctorRouteModule} from '../doctor/doctor.route';
@@ -25,7 +25,7 @@ export let memberRouteModule =
     loginServiceModule.name,
 
     // directive
-    greetDirectiveModule.name,
+    require('../../components/greet/greet.directive'),
 
     // routes
     doctorRouteModule.name,

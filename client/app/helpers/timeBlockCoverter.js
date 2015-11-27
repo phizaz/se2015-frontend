@@ -1,7 +1,6 @@
 import moment from 'moment';
 
-/*@ngInject*/ class TimeBlockConverter {
-
+export class TimeBlockConverter {
 
   static blockToTime(beginHours, blockNumber) {
     // block number shall start from 0

@@ -10,12 +10,15 @@ import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.const
 import template from './doctor-calendar-appointment.template.html';
 import './doctor-calendar-appointment.sass';
 
-export let doctorCalendarAppointmentDirectiveModule =
+let partial =
   angular
     .module('doctorCalendarAppointmentDirectiveModule', [
       doctorCalendarConstantModule.name,
-      ])
-    .directive('doctorCalendarAppointment', doctorCalendarAppointmentDirective);
+      ]);
+
+export default partial.name;
+
+partial.directive('doctorCalendarAppointment', doctorCalendarAppointmentDirective);
 
 function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
 

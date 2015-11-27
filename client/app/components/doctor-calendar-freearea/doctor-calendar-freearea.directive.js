@@ -10,12 +10,15 @@ import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.const
 import template from './doctor-calendar-freearea.template.html';
 import './doctor-calendar-freearea.sass';
 
-export let doctorCalendarFreeareaDirectiveModule =
+let partial =
   angular
     .module('doctorCalendarFreeareaDirectiveModule', [
       doctorCalendarConstantModule.name,
-      ])
-    .directive('doctorCalendarFreearea', doctorCalendarFreeareaDirective);
+      ]);
+
+export default partial.name;
+
+partial.directive('doctorCalendarFreearea', doctorCalendarFreeareaDirective);
 
 function doctorCalendarFreeareaDirective(DOCTOR_CALENDAR) {
 

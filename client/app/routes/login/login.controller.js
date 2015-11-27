@@ -1,4 +1,4 @@
-/*@ngInject*/ class LoginController {
+export /*@ngInject*/ class LoginController {
   constructor() {
   }
 }

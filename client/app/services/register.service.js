@@ -4,7 +4,7 @@ import _ from 'lodash';
 export let registerServiceModule =
 angular.module('registerServiceModule', []);
 
-/*@ngInject*/ class Register {
+export /*@ngInject*/ class Register {
   constructor($http, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)

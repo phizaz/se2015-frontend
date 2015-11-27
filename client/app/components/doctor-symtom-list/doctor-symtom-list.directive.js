@@ -9,12 +9,15 @@ import {symtomReportServiceModule} from '../../services/symtomReport.service';
 import template from './doctor-symtom-list.template.html';
 import './doctor-symtom-list.sass';
 
-export let doctorSymtomListDirectiveModule =
+let partial =
   angular
     .module('doctorSymtomListDirectiveModule', [
       symtomReportServiceModule.name,
-      ])
-    .directive('doctorSymtomList', doctorSymtomListDirective);
+      ]);
+
+export default partial.name;
+
+partial.directive('doctorSymtomList', doctorSymtomListDirective);
 
 function doctorSymtomListDirective(SymtomReport) {
 

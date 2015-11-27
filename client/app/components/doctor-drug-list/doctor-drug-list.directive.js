@@ -10,12 +10,15 @@ import {drugRecordServiceModule} from '../../services/drugRecord.service';
 import template from './doctor-drug-list.template.html';
 import './doctor-drug-list.sass';
 
-export let doctorDrugListDirectiveModule =
+let partial =
   angular
     .module('doctorDrugListDirectiveModule', [
       drugRecordServiceModule.name,
-      ])
-    .directive('doctorDrugList', doctorDrugListDirective);
+      ]);
+
+export default partial.name;
+
+partial.directive('doctorDrugList', doctorDrugListDirective);
 
 function doctorDrugListDirective(DrugRecord) {
 

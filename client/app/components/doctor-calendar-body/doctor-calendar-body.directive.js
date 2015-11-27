@@ -10,21 +10,21 @@ import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.const
 // service
 import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
 
-// directives
-import {doctorCalendarDayDirectiveModule} from '../doctor-calendar-day/doctor-calendar-day.directive';
-
 // locals
 import template from './doctor-calendar-body.template.html';
 import './doctor-calendar-body.sass';
 
-export let doctorCalendarBodyDirectiveModule =
+let partial =
   angular
     .module('doctorCalendarBodyDirectiveModule', [
       doctorCalendarConstantModule.name,
       doctorTimeEditingServiceModule.name,
-      doctorCalendarDayDirectiveModule.name,
-      ])
-    .directive('doctorCalendarBody', doctorCalendarBodyDirective);
+      require('../doctor-calendar-day/doctor-calendar-day.directive')
+      ]);
+
+export default partial.name;
+
+partial.directive('doctorCalendarBody', doctorCalendarBodyDirective);
 
 function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   let shared = {};
@@ -49,6 +49,7 @@ function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   }
 
   function sortAppointmentByDate(doctorAppointmentList) {
+    console.log('doctorAppointmentList:', doctorAppointmentList);
     let result = {};
 
     for (let appointment of doctorAppointmentList) {
@@ -105,6 +106,7 @@ function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
     });
 
     console.log('calendar-body my:', my);
+
     init(my.pureAppointmentList, my.pureDoctorTimeList);
 
     function init(appointmentList, doctorTimeList) {

@@ -8,16 +8,16 @@ import {loginServiceModule} from '../../services/login.service';
 import greetTemplate from './greet.template.html';
 import './greet.sass';
 
-let app =
+let partial =
   angular
     .module('greetDirectiveModule', [
       'ui.router',
       loginServiceModule.name,
     ]);
 
-app.directive('greet', greet);
+export default partial.name;
 
-export let greetDirectiveModule = app;
+partial.directive('greet', greet);
 
 function greet(Login, $state) {
 
