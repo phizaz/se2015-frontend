@@ -88,7 +88,7 @@ function newDirective(obj) {
 
   /*@ngInject*/ function controller($scope) {
     this.$scope = $scope;
-    Directive.create($scope, this, obj);
+    create($scope, this, obj);
   }
 
   return {
