@@ -1,28 +1,24 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
-// services
-// import {navigatorServiceModule} from '../../services/navigator.service.js';
-
-// directives
-import {loginModalDirectiveModule} from '../../components/login-modal/login-modal.directive.js';
-import {makeAppointmentModalDirectiveModule} from '../../components/make-appointment-modal/make-appointment-modal.directive.js';
-import {editPatientDirectiveModule} from '../../components/edit-patient/edit-patient.directive.js';
 // locals
 import homeTemplate from './home.template.html';
 import './home.sass';
 import {HomeController} from './home.controller.js';
 
-export let homeRouteModule =
+let partial =
   angular.module('homeRouteModule', [
     'ui.router',
-    // navigatorServiceModule.name,
-    loginModalDirectiveModule.name,
-    makeAppointmentModalDirectiveModule.name,
-    editPatientDirectiveModule.name
+
+    // directives
+    require('../../components/login-modal/login-modal.directive'),
+    require('../../components/make-appointment-modal/make-appointment-modal.directive'),
+    require('../../components/edit-patient/edit-patient.directive'),
   ]);
 
-homeRouteModule.config(
+export default partial.name;
+
+partial.config(
   ($stateProvider) => {
     $stateProvider
       .state('navigator.home', {

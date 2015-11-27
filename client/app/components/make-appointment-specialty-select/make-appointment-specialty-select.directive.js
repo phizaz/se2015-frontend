@@ -14,19 +14,21 @@ import 'ui-select/dist/select.css';
 // selector theme
 import 'selectize/dist/css/selectize.default.css';
 
-import {doctorSearchServiceModule} from '../../services/doctorSearch.service';
-
 import specialtySelectTemplate from './make-appointment-specialty-select.template.html';
 import './make-appointment-specialty-select.sass';
 
-export let specialtySelectDirectiveModule =
+let partial =
   angular
     .module('specialtySelectDirectiveModule', [
       'ui.select',
       'ngSanitize',
-      doctorSearchServiceModule.name,
-    ])
-    .directive('specialtySelect', specialtySelectDirective);
+      // services
+      require('../../services/doctorSearch.service'),
+    ]);
+
+export default partial.name;
+
+partial.directive('specialtySelect', specialtySelectDirective);
 
 function specialtySelectDirective(DoctorSearch) {
   let shared = {

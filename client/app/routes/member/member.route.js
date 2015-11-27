@@ -2,37 +2,28 @@ import angular from 'angular';
 import _ from 'lodash';
 import 'angular-ui-router';
 
-// services
-import {loginServiceModule} from '../../services/login.service';
-
-// directive
-// import greetDirective from '../../components/greet/greet.directive.js';
-
-// routes
-import {doctorRouteModule} from '../doctor/doctor.route';
-import {staffRouteModule} from '../staff/staff.route';
-
-// locals
 import {MemberController} from './member.controller';
 import memberTemplate from './member.template.html';
 import './member.sass';
 
-export let memberRouteModule =
+let partial =
   angular.module('memberRouteModule', [
     'ui.router',
 
     // services
-    loginServiceModule.name,
+    require('../../services/login.service'),
 
     // directive
     require('../../components/greet/greet.directive'),
 
     // routes
-    doctorRouteModule.name,
-    staffRouteModule.name,
+    require('../doctor/doctor.route'),
+    require('../staff/staff.route'),
     ]);
 
-memberRouteModule.config(
+export default partial.name;
+
+partial.config(
   ($stateProvider) => {
     $stateProvider
       .state('member', {

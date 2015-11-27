@@ -3,8 +3,6 @@ import _ from 'lodash';
 import 'angular-ui-router';
 import {DirectiveBlueprint} from '../directive.js';
 
-import {loginServiceModule} from '../../services/login.service';
-
 import greetTemplate from './greet.template.html';
 import './greet.sass';
 
@@ -12,7 +10,9 @@ let partial =
   angular
     .module('greetDirectiveModule', [
       'ui.router',
-      loginServiceModule.name,
+
+      // services
+      require('../../services/login.service')
     ]);
 
 export default partial.name;
@@ -20,7 +20,6 @@ export default partial.name;
 partial.directive('greet', greet);
 
 function greet(Login, $state) {
-
   let shared = {};
 
   function controller($scope) {

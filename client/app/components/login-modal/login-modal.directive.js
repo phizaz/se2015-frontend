@@ -12,14 +12,17 @@ import 'angular-ui-router';
 
 import loginModalTemplate from './login-modal.template.html';
 import './login-modal.sass';
-import {loginServiceModule} from '../../services/login.service.js';
 import {DirectiveBlueprint} from '../directive.js';
 
-export let loginModalDirectiveModule =
+let partial =
   angular.module('loginModalDirectiveModule', [
     'ui.router',
-    loginServiceModule.name
+    require('../../services/login.service')
   ]);
+
+export default partial.name;
+
+partial.directive('loginModal', loginModalDirective);
 
 function loginModalDirective(Login, $state) {
   console.log('login modal is loaded');
@@ -142,4 +145,3 @@ function loginModalDirective(Login, $state) {
   };
 }
 
-loginModalDirectiveModule.directive('loginModal', loginModalDirective);

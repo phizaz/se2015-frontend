@@ -4,55 +4,62 @@ import _ from 'lodash';
 // import doctorList from './mocks/doctorList.mock.json';
 import specialtyList from './mocks/specialtyList.mock.json';
 
-export /*@ngInject*/ class DoctorSearch {
+let partial  =
+  angular
+    .module('doctorSearchServiceModule', []);
 
-  constructor ($http, $q) {
-    this.private = {};
-    _.extend(this.private, {
-      $http: $http,
-      $q: $q,
-    });
+export default partial.name;
 
-    _.extend(this, {
-    });
-  }
+partial.service('DoctorSearch', ($http, $q) => {
+  class DoctorSearch {
 
-  getDoctorList() {
-    return this.private.$q(
-      (resolve, reject) => {
+    constructor () {
+      this.private = {};
+      _.extend(this.private, {
+        $http: $http,
+        $q: $q,
+      });
 
-        this.private.$http
-          .get('/api/doctor')
-          .then(
-            (res) => {
-              res = res.data;
+      _.extend(this, {
+      });
+    }
 
-              if (res.success) {
-                resolve(res.data);
-              } else {
+    getDoctorList() {
+      return this.private.$q(
+        (resolve, reject) => {
+
+          this.private.$http
+            .get('/api/doctor')
+            .then(
+              (res) => {
+                res = res.data;
+
+                if (res.success) {
+                  resolve(res.data);
+                } else {
+                  console.log(res);
+                  throw new Error('getdoctorlist');
+                }
+              })
+            .catch(
+              (res) => {
                 console.log(res);
                 throw new Error('getdoctorlist');
-              }
-            })
-          .catch(
-            (res) => {
-              console.log(res);
-              throw new Error('getdoctorlist');
-            });
+              });
 
-      });
+        });
+    }
+
+    getSpecialtyList() {
+      return this.private.$q(
+        (resolve, reject) => {
+          resolve(specialtyList);
+        });
+    }
+
   }
 
-  getSpecialtyList() {
-    return this.private.$q(
-      (resolve, reject) => {
-        resolve(specialtyList);
-      });
-  }
+  return new DoctorSearch();
+});
 
-}
 
-export let doctorSearchServiceModule =
-  angular
-    .module('doctorSearchServiceModule', [])
-    .service('DoctorSearch', DoctorSearch);

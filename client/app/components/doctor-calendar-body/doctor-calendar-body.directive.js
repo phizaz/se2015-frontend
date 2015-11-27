@@ -4,23 +4,21 @@ import moment from 'moment';
 import {DirectiveBlueprint} from '../directive';
 import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
 
-// constants
-import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
-
-// service
-import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
-
-// locals
 import template from './doctor-calendar-body.template.html';
 import './doctor-calendar-body.sass';
 
 let partial =
   angular
     .module('doctorCalendarBodyDirectiveModule', [
-      doctorCalendarConstantModule.name,
-      doctorTimeEditingServiceModule.name,
+      // constant
+      require('../../constants/doctorCalendar.constant'),
+
+      // services
+      require('../../services/doctorTimeEditing.service'),
+
+      // directives
       require('../doctor-calendar-day/doctor-calendar-day.directive')
-      ]);
+    ]);
 
 export default partial.name;
 

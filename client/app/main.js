@@ -7,14 +7,12 @@ import NProgress from 'nprogress/nprogress.js';
 import 'nprogress/nprogress.css';
 
 // moment
-// angular-moment will include things automatically
 import 'angular-moment';
 
 // materialize
 import 'Materialize/dist/css/materialize.css';
 import 'Materialize/dist/js/materialize.js';
 import 'angular-materialize/src/angular-materialize.js';
-
 
 // font-awesome
 import 'font-awesome/css/font-awesome.css';
@@ -25,35 +23,33 @@ import './fonts/quark/stylesheet.css';
 // animate-css
 import 'animate.css';
 
-// routes
-import {navigatorRouteModule} from './routes/navigator/navigator.route.js';
-import {memberRouteModule} from './routes/member/member.route';
-import {patientRouteModule} from './routes/patient/patient.route';
-
-// locals
-import {mainConfigModule} from './config/main.config.js';
 import './main.sass';
 
-export let mainModule = angular.module('mainModule', [
-  'flux',
-  'ui.router',
-  'ui.materialize',
-  'angularMoment',
-  mainConfigModule.name,
+let partial =
+  angular
+    .module('mainModule', [
+      'flux',
+      'ui.router',
+      'ui.materialize',
+      'angularMoment',
 
-  // Routes
-  // this should list all the routes that don't depend on others say parent routes
-  navigatorRouteModule.name,
-  memberRouteModule.name,
-  patientRouteModule.name,
-  ]);
+      // config
+      require('./config/main.config'),
 
-mainModule.run(
+      // routes
+      require('./routes/navigator/navigator.route'),
+      require('./routes/member/member.route'),
+      require('./routes/patient/patient.route'),
+    ]);
+
+export default partial.name;
+
+partial.run(
   (amMoment) => {
     amMoment.changeLocale('th');
   });
 
-mainModule.run(
+partial.run(
   ($rootScope, $state) => {
     console.log('the app is running');
 
@@ -65,15 +61,6 @@ mainModule.run(
 
     $rootScope.$on('$stateChangeSuccess',
       (event, toState, toParams, fromState, fromParams) => {
-        // console.group();
-        //   console.info('$stateChangeSuccess');
-        //   console.info('event', event);
-        //   console.info('toState', toState);
-        //   console.info('toParams', toParams);
-        //   console.info('fromState', fromState);
-        //   console.info('fromParams', fromParams);
-        // console.groupEnd();
-
         NProgress.done();
       });
 

@@ -16,19 +16,21 @@ import 'ui-select/dist/select.css';
 // selector theme
 import 'selectize/dist/css/selectize.default.css';
 
-import {doctorSearchServiceModule} from '../../services/doctorSearch.service';
-
 import doctorSearchTemplate from './make-appointment-doctor-search.template.html';
 import './make-appointment-doctor-search.sass';
 
-export let doctorSearchDirectiveModule =
+let partial =
   angular
     .module('doctorSearchearchDirectiveModule', [
       'ui.select',
       'ngSanitize',
-      doctorSearchServiceModule.name,
-    ])
-    .directive('doctorSearch', doctorSearchDirective);
+      // services
+      require('../../services/doctorSearch.service'),
+    ]);
+
+export default partial.name;
+
+partial.directive('doctorSearch', doctorSearchDirective);
 
 function doctorSearchDirective(DoctorSearch) {
   // this will be the same across the directive of this kind

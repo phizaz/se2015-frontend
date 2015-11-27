@@ -3,18 +3,15 @@ import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive';
 import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
 
-// constant
-import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
-
-// locals
 import template from './doctor-calendar-freearea.template.html';
 import './doctor-calendar-freearea.sass';
 
 let partial =
   angular
     .module('doctorCalendarFreeareaDirectiveModule', [
-      doctorCalendarConstantModule.name,
-      ]);
+      // constant
+      require('../../constants/doctorCalendar.constant')
+    ]);
 
 export default partial.name;
 

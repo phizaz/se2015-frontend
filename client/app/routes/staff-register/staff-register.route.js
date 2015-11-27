@@ -2,23 +2,25 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-messages';
 
-import {staffRegisterServiceModule} from '../../services/staff-register.service.js';
-
-import {loginModalDirectiveModule} from '../../components/login-modal/login-modal.directive';
-
 import {StaffRegisterController} from './staff-register.controller';
 import template from './staff-register.template.html';
 import "./staff-register.sass";
 
-export let staffRegisterRouteModule =
+let partial =
   angular.module('staffRegisterRouteModule', [
     'ui.router',
     'ngMessages',
-    staffRegisterServiceModule.name,
-    loginModalDirectiveModule.name,
+
+    // services
+    require('../../services/staff-register.service'),
+
+    // directives
+    require('../../components/login-modal/login-modal.directive'),
   ]);
 
-staffRegisterRouteModule.config(
+export default partial.name;
+
+partial.config(
   ($stateProvider) => {
     $stateProvider
       .state('navigator.staff-register', {

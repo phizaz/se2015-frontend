@@ -9,28 +9,25 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive.js';
 
-// services
-import {makeAppointmentServiceModule} from '../../services/makeAppointment.service';
-
-// directives
-import {doctorSearchDirectiveModule} from '../make-appointment-doctor-search/make-appointment-doctor-search.directive.js';
-import {specialtySelectDirectiveModule} from '../make-appointment-specialty-select/make-appointment-specialty-select.directive.js';
-import {appointmentSelectDirectiveModule} from '../make-appointment-select/make-appointment-select.directive.js';
-
 // locals
 import makeAppointmentModalTemplate from './make-appointment-modal.template.html';
 import './make-appointment-modal.sass';
 
-export let makeAppointmentModalDirectiveModule =
+let partial =
   angular
     .module('makeAppointmentModalDirectiveModule', [
-      makeAppointmentServiceModule.name,
+      // services
+      require('../../services/makeAppointment.service'),
 
-      doctorSearchDirectiveModule.name,
-      specialtySelectDirectiveModule.name,
-      appointmentSelectDirectiveModule.name,
-    ])
-    .directive('makeAppointmentModal', makeAppointmentModalDirective);
+      // directives
+      require('../make-appointment-doctor-search/make-appointment-doctor-search.directive'),
+      require('../make-appointment-specialty-select/make-appointment-specialty-select.directive'),
+      require('../make-appointment-select/make-appointment-select.directive'),
+    ]);
+
+export default partial.name;
+
+partial.directive('makeAppointmentModal', makeAppointmentModalDirective);
 
 function makeAppointmentModalDirective(MakeAppointment) {
   // this will be the same across the directive of this kind

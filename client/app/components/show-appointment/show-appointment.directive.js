@@ -6,11 +6,13 @@ import {DirectiveBlueprint} from '../directive.js';
 import showAppointmentTemplate from './show-appointment.template.html';
 import './show-appointment.sass';
 
-export let showAppointmentDirectiveModule =
+let partial =
   angular
-    .module('showAppointmentDirectiveModule', [
-      ])
-    .directive('showAppointment', showAppointment);
+    .module('showAppointmentDirectiveModule', []);
+
+export default partial.name;
+
+partial.directive('showAppointment', showAppointment);
 
 function showAppointment() {
   let shared = {};

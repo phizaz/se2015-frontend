@@ -1,16 +1,15 @@
-// This part should contains global configs
-// Configures Providers. For example, $locationProvider.html5Mode(true);.
-
 import angular from 'angular';
 import 'angular-ui-router';
 
-let partial = angular.module('mainConfigModule', [
-  'ui.router',
+let partial =
+  angular.module('mainConfigModule', [
+    'ui.router',
   ]);
 
-export let mainConfigModule = partial;
+export default partial.name;
 
-partial.config(function mainConfigModule($urlRouterProvider) {
+partial.config(
+  ($urlRouterProvider) => {
     // set fallback url
     $urlRouterProvider.otherwise('/');
   });

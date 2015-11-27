@@ -4,15 +4,20 @@ import {DirectiveBlueprint} from '../directive.js';
 
 import patientInformationTemplate from './patient-information.template.html';
 import './patient-information.sass';
-import {showAppointmentDirectiveModule} from '../show-appointment/show-appointment.directive.js';
-import {staffServiceModule} from '../../services/staff.service.js';
-export let patientInformationDirectiveModule =
+
+let partial =
   angular
     .module('patientInformationDirectiveModule', [
-      showAppointmentDirectiveModule.name,
-      staffServiceModule.name,
-      ])
-    .directive('patientInformation', patientInformation);
+      // services
+      require('../../services/staff.service'),
+
+      // directives
+      require('../show-appointment/show-appointment.directive'),
+    ]);
+
+export default partial.name;
+
+partial.directive('patientInformation', patientInformation);
 
 function patientInformation(Staff) {
   let shared = {};

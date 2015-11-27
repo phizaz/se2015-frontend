@@ -2,37 +2,28 @@ import angular from 'angular';
 import _ from 'lodash';
 import 'angular-ui-router';
 
-// constants
-import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
-
-// services
-import {doctorTimeServiceModule} from '../../services/doctorTime.service';
-import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
-
-// directives
-import {doctorCalendarPromptModalDirectiveModule} from '../../components/doctor-calendar-prompt-modal/doctor-calendar-prompt-modal.directive';
-
-// locals
 import {DoctorController} from './doctor.controller';
 import doctorTemplate from './doctor.template.html';
 import './doctor.sass';
 
-export let doctorRouteModule =
+let partial =
   angular.module('doctorRouteModule', [
     'ui.router',
     // constant
-    doctorCalendarConstantModule.name,
+    require('../../constants/doctorCalendar.constant'),
 
     // serivces
-    doctorTimeServiceModule.name,
-    doctorTimeEditingServiceModule.name,
+    require('../../services/doctorTime.service'),
+    require('../../services/doctorTimeEditing.service'),
 
     // directives
     require('../../components/doctor-calendar-body/doctor-calendar-body.directive'),
     require('../../components/doctor-calendar-prompt-modal/doctor-calendar-prompt-modal.directive'),
     ]);
 
-doctorRouteModule.config(
+export default partial.name;
+
+partial.config(
   ($stateProvider) => {
     $stateProvider
       .state('member.doctor', {

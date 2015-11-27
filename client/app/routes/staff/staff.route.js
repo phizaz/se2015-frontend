@@ -1,29 +1,27 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
-// services
-import {staffServiceModule} from '../../services/staff.service.js';
-
-// directives
-import {patientInformationDirectiveModule} from '../../components/patient-information/patient-information.directive.js';
-import {showAppointmentDirectiveModule} from '../../components/show-appointment/show-appointment.directive.js';
-import {doctorInformationDirectiveModule} from '../../components/doctor-information/doctor-information.directive.js';
-
 // locals
 import template from './staff.template.html';
 import {StaffController} from './staff.controller.js';
 import './staff.sass';
 
-export let staffRouteModule =
+let partial =
   angular.module('staffRouteModule', [
     'ui.router',
-    staffServiceModule.name,
-    patientInformationDirectiveModule.name,
-    doctorInformationDirectiveModule.name,
-    showAppointmentDirectiveModule.name
+
+    // services
+    require('../../services/staff.service'),
+
+    // directives
+    require('../../components/patient-information/patient-information.directive'),
+    require('../../components/doctor-information/doctor-information.directive'),
+    require('../../components/show-appointment/show-appointment.directive'),
   ]);
 
-staffRouteModule.config(
+export default partial.name;
+
+partial.config(
   ($stateProvider) => {
     $stateProvider
       .state('member.staff', {

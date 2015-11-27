@@ -9,13 +9,6 @@ import 'javascript-detect-element-resize/jquery.resize.js';
 import 'angular-gridster/dist/angular-gridster.min.js';
 import 'angular-gridster/dist/angular-gridster.min.css';
 
-// constants
-import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
-
-// service
-import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
-
-// locals
 import template from './doctor-calendar-day.template.html';
 import './doctor-calendar-day.sass';
 
@@ -23,8 +16,13 @@ let partial =
   angular
     .module('doctorCalendarDayDirectiveModule', [
       'gridster',
-      doctorCalendarConstantModule.name,
-      doctorTimeEditingServiceModule.name,
+      // constant
+      require('../../constants/doctorCalendar.constant'),
+
+      // services
+      require('../../services/doctorTimeEditing.service'),
+
+      // directives
       require('../doctor-calendar-appointment/doctor-calendar-appointment.directive'),
       require('../doctor-calendar-freearea/doctor-calendar-freearea.directive'),
       require('../doctor-calendar-appointment-modal/doctor-calendar-appointment-modal.directive')

@@ -4,17 +4,21 @@ import {DirectiveBlueprint} from '../directive.js';
 
 import editPatientTemplate from './edit-patient.template.html';
 import './edit-patient.sass';
-import {showAppointmentDirectiveModule} from '../show-appointment/show-appointment.directive.js';
-import {staffServiceModule} from '../../services/staff.service.js';
-import {addPatientInfoModalDirectiveModule} from '../../components/add-patientInfo-modal/add-patientInfo-modal.directive.js';
-export let editPatientDirectiveModule =
+
+let partial =
   angular
     .module('editPatientDirectiveModule', [
-      showAppointmentDirectiveModule.name,
-      staffServiceModule.name,
-      addPatientInfoModalDirectiveModule.name,
-      ])
-    .directive('editPatient', editPatient);
+      // services
+      require('../../services/staff.service'),
+
+      // directives
+      require('../show-appointment/show-appointment.directive'),
+      require('../add-patientInfo-modal/add-patientInfo-modal.directive'),
+    ]);
+
+export default partial.name;
+
+partial.directive('editPatient', editPatient);
 
 function editPatient(Staff) {
   let shared = {};
@@ -23,7 +27,6 @@ function editPatient(Staff) {
     let my = DirectiveBlueprint.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
-
 
     // my.public.show();
   }

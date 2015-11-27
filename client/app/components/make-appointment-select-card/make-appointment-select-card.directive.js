@@ -2,19 +2,19 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive';
 
-// services
-import {makeAppointmentServiceModule} from '../../services/makeAppointment.service';
-
 // locals
 import appointmentSelectCardTemplate from './make-appointment-select-card.template.html';
 import './make-appointment-select-card.sass';
 
-export let appointmentSelectCardDirectiveModule =
+let partial =
   angular
     .module('appointmentSelectCardDirectiveModule', [
-      makeAppointmentServiceModule.name,
-      ])
-    .directive('appointmentSelectCard', appointmentSelectCardDirective);
+      require('../../services/makeAppointment.service'),
+    ]);
+
+export default partial.name;
+
+partial.directive('appointmentSelectCard', appointmentSelectCardDirective);
 
 function appointmentSelectCardDirective(MakeAppointment) {
   // shared across every instance of the directive

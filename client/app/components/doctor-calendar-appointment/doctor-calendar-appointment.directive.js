@@ -3,25 +3,21 @@ import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive';
 import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
 
-// constant
-import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
-
-// locals
 import template from './doctor-calendar-appointment.template.html';
 import './doctor-calendar-appointment.sass';
 
 let partial =
   angular
     .module('doctorCalendarAppointmentDirectiveModule', [
-      doctorCalendarConstantModule.name,
-      ]);
+      // constant
+      require('../../constants/doctorCalendar.constant'),
+    ]);
 
 export default partial.name;
 
 partial.directive('doctorCalendarAppointment', doctorCalendarAppointmentDirective);
 
 function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
-
   let shared = {};
 
   function controller($scope) {

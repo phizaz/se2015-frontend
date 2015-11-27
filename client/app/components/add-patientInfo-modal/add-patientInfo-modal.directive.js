@@ -8,15 +8,19 @@
 
 import angular from 'angular';
 import _ from 'lodash';
+import {DirectiveBlueprint} from '../directive.js';
 
 import addPatientInfoModalTemplate from './add-patientInfo-modal.template.html';
 import './add-patientInfo-modal.sass';
-import {loginServiceModule} from '../../services/login.service.js';
-import {DirectiveBlueprint} from '../directive.js';
-export let addPatientInfoModalDirectiveModule =
+
+let partial =
   angular.module('addPatientInfoModalDirectiveModule', [
-    loginServiceModule.name
+    require('../../services/login.service')
   ]);
+
+export default partial.name;
+
+partial.directive('addPatientInfoModal', addPatientInfoModalDirective);
 
 function addPatientInfoModalDirective(Login) {
   console.log('login modal is loaded');
@@ -80,5 +84,3 @@ function addPatientInfoModalDirective(Login) {
     template: addPatientInfoModalTemplate,
   };
 }
-
-addPatientInfoModalDirectiveModule.directive('addPatientInfoModal', addPatientInfoModalDirective);

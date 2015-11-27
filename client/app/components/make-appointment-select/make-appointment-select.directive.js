@@ -9,23 +9,23 @@ import angular from 'angular';
 import _ from 'lodash';
 import {DirectiveBlueprint} from '../directive.js';
 
-// services
-import {makeAppointmentServiceModule} from '../../services/makeAppointment.service';
-
-// directives
-import {appointmentSelectCardDirectiveModule} from '../make-appointment-select-card/make-appointment-select-card.directive.js';
-
 // locals
 import appointmentSelectTemplate from './make-appointment-select.template.html';
 import './make-appointment-select.sass';
 
-export let appointmentSelectDirectiveModule =
+let partial =
   angular
     .module('appointmentSelectDirectiveModule', [
-      makeAppointmentServiceModule.name,
-      appointmentSelectCardDirectiveModule.name,
-      ])
-    .directive('appointmentSelect', appointmentSelect);
+      // services
+      require('../../services/makeAppointment.service'),
+
+      // directives
+      require('../make-appointment-select-card/make-appointment-select-card.directive'),
+      ]);
+
+export default partial.name;
+
+partial.directive('appointmentSelect', appointmentSelect);
 
 function appointmentSelect(MakeAppointment) {
   let shared = {};
