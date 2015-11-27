@@ -52,7 +52,7 @@ export class StaffRegisterController {
 
   isError() {
     let $scope = this.$scope;
-    return !$scope.form.$valid;
+    return !$scope.form.$valid || this.error.passwordNotMatch;
   }
 }
 
