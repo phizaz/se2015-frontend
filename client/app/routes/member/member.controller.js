@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export class MemberController {
+/*@ngInject*/ class MemberController {
   constructor(userInfo) {
 
     _.extend(this, {

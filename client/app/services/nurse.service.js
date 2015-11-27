@@ -8,7 +8,7 @@ import patientInfoMock from './mocks/get-patient.mock.json';
 export let nurseServiceModule =
   angular.module('nurseServiceModule', []);
 
-export class Nurse {
+/*@ngInject*/ class Nurse {
   constructor($http, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)

@@ -2,7 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 import moment from 'moment';
 
-export class DoctorController {
+/*@ngInject*/ class DoctorController {
   constructor(DoctorTime, DoctorTimeEditing, userInfo, doctorTimeList, doctorAppointmentList, $q) {
 
     console.log('userInfo:', userInfo);
@@ -157,8 +157,5 @@ export class DoctorController {
     this.calendarBody.cancelEditing();
     this.editingMode = false;
   }
-
-
-
 
 }

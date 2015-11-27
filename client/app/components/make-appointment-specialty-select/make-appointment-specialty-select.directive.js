@@ -28,7 +28,7 @@ export let specialtySelectDirectiveModule =
     ])
     .directive('specialtySelect', specialtySelectDirective);
 
-export function specialtySelectDirective(DoctorSearch) {
+function specialtySelectDirective(DoctorSearch) {
   let shared = {
     specialtyList: [],
   };

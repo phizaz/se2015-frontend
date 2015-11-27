@@ -32,7 +32,7 @@ export let makeAppointmentModalDirectiveModule =
     ])
     .directive('makeAppointmentModal', makeAppointmentModalDirective);
 
-export function makeAppointmentModalDirective(MakeAppointment) {
+function makeAppointmentModalDirective(MakeAppointment) {
   // this will be the same across the directive of this kind
   let shared = {};
 

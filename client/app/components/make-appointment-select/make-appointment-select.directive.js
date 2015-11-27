@@ -27,7 +27,7 @@ export let appointmentSelectDirectiveModule =
       ])
     .directive('appointmentSelect', appointmentSelect);
 
-export function appointmentSelect(MakeAppointment) {
+function appointmentSelect(MakeAppointment) {
   let shared = {};
 
   function controller($scope) {

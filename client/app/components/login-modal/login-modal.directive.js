@@ -21,7 +21,7 @@ export let loginModalDirectiveModule =
     loginServiceModule.name
   ]);
 
-export function loginModalDirective(Login, $state) {
+function loginModalDirective(Login, $state) {
   console.log('login modal is loaded');
   let shared = {};
 

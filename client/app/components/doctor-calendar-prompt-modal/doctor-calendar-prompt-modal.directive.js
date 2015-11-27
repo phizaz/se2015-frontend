@@ -15,7 +15,7 @@ export let doctorCalendarPromptModalDirectiveModule =
       ])
     .directive('doctorCalendarPromptModal', doctorCalendarPromptModalDirective);
 
-export function doctorCalendarPromptModalDirective() {
+function doctorCalendarPromptModalDirective() {
 
   let shared = {};
 

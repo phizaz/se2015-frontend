@@ -16,7 +16,7 @@ export let appointmentSelectCardDirectiveModule =
       ])
     .directive('appointmentSelectCard', appointmentSelectCardDirective);
 
-export function appointmentSelectCardDirective(MakeAppointment) {
+function appointmentSelectCardDirective(MakeAppointment) {
   // shared across every instance of the directive
   let shared = {};
 

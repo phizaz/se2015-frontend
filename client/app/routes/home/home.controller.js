@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export class HomeController {
+/*@ngInject*/ class HomeController {
   constructor() {
     console.log('home controller is loaded');
 

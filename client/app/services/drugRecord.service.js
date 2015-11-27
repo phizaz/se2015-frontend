@@ -2,7 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 
 
-export class DrugRecord {
+/*@ngInject*/ class DrugRecord {
   constructor($http, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)

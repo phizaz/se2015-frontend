@@ -2,7 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 
 
-export class CallOnce {
+/*@ngInject*/ class CallOnce {
   constructor($q) {
     this.private = {};
     _.extend(this.private, {

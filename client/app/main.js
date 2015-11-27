@@ -1,5 +1,6 @@
 import angular from 'angular';
 import 'angular-ui-router';
+import 'flux-angular';
 
 // nprogress
 import NProgress from 'nprogress/nprogress.js';
@@ -34,6 +35,7 @@ import {mainConfigModule} from './config/main.config.js';
 import './main.sass';
 
 export let mainModule = angular.module('mainModule', [
+  'flux',
   'ui.router',
   'ui.materialize',
   'angularMoment',

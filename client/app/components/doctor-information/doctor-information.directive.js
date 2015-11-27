@@ -12,7 +12,7 @@ export let doctorInformationDirectiveModule =
       ])
     .directive('doctorInformation', doctorInformation);
 
-export function doctorInformation() {
+function doctorInformation() {
   let shared = {};
 
   function link($scope, element, attrs) {

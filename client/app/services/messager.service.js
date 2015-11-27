@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export let messagerServiceModule = angular.module('messagerServiceModule', []);
 
-export class Messager {
+/*@ngInject*/ class Messager {
   constructor($rootScope) {
 
     this.private = {};

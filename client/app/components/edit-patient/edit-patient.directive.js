@@ -16,7 +16,7 @@ export let editPatientDirectiveModule =
       ])
     .directive('editPatient', editPatient);
 
-export function editPatient(Staff) {
+function editPatient(Staff) {
   let shared = {};
 
   function link($scope, element, attrs) {
@@ -49,7 +49,7 @@ export function editPatient(Staff) {
       my.element.find('.card2').hide(800);
       my.element.find('.card3').show(800);
     }
-  
+
   }
 
   return {

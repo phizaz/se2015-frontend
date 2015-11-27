@@ -8,7 +8,7 @@
 //     messagerServiceModule.name,
 //   ]);
 
-// export class Navigator {
+// /*@ngInject*/ class Navigator {
 //   constructor(Messager) {
 
 //     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)

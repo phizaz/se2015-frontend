@@ -18,11 +18,11 @@ export let addPatientInfoModalDirectiveModule =
     loginServiceModule.name
   ]);
 
-export function addPatientInfoModalDirective(Login) {
+function addPatientInfoModalDirective(Login) {
   console.log('login modal is loaded');
   let shared = {};
 
-  
+
   function link($scope, element, attrs) {
     let my = DirectiveBlueprint.getPrivate($scope);
     my.element = element;
@@ -54,9 +54,9 @@ export function addPatientInfoModalDirective(Login) {
 
     });
   }
- 
 
-  
+
+
 
   return {
     // this direcitve will apply to tag's name only,

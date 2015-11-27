@@ -4,7 +4,7 @@ import _ from 'lodash';
 // import doctorList from './mocks/doctorList.mock.json';
 import specialtyList from './mocks/specialtyList.mock.json';
 
-export class DoctorSearch {
+/*@ngInject*/ class DoctorSearch {
 
   constructor ($http, $q) {
     this.private = {};

@@ -5,7 +5,7 @@ import _ from 'lodash';
 // local
 // import isLoginMock from './mocks/is-login.mock.json';
 
-export class SymtomReport {
+/*@ngInject*/ class SymtomReport {
   constructor($http, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)

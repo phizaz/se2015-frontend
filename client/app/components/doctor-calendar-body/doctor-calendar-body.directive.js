@@ -26,7 +26,7 @@ export let doctorCalendarBodyDirectiveModule =
       ])
     .directive('doctorCalendarBody', doctorCalendarBodyDirective);
 
-export function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
+function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   let shared = {};
 
   function dateFormat(datetime) {

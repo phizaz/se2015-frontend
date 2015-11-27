@@ -30,7 +30,7 @@ export let doctorSearchDirectiveModule =
     ])
     .directive('doctorSearch', doctorSearchDirective);
 
-export function doctorSearchDirective(DoctorSearch) {
+function doctorSearchDirective(DoctorSearch) {
   // this will be the same across the directive of this kind
   let shared = {
     loadingDoctorList: false,

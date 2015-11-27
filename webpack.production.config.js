@@ -1,6 +1,5 @@
 // webpack production config
 var _ = require('lodash');
-var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var webpack = require('webpack');
 
 var webpackBaseConfig = _.cloneDeep(require('./webpack.base.config'));
@@ -14,7 +13,6 @@ var webpackProductionConfig = _.extend(webpackBaseConfig, {
   },
 
   plugins: [
-    new ngAnnotatePlugin(),
     // this will make it requirable but not include in the bundle
     new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
     // makes bower (and normal) packages requirable
@@ -42,7 +40,7 @@ webpackProductionConfig.module.loaders = webpackProductionConfig.module.loaders.
     {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        loaders: ['ng-annotate', 'babel'],
     },
 
     // css loader

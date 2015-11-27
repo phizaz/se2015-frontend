@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
 
-export class PatientController {
+/*@ngInject*/ class PatientController {
 
   constructor ($scope, userInfo, Login, $state) {
 

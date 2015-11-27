@@ -17,7 +17,7 @@ export let doctorCalendarAppointmentDirectiveModule =
       ])
     .directive('doctorCalendarAppointment', doctorCalendarAppointmentDirective);
 
-export function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
+function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
 
   let shared = {};
 

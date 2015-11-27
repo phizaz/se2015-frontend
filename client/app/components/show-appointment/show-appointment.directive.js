@@ -12,7 +12,7 @@ export let showAppointmentDirectiveModule =
       ])
     .directive('showAppointment', showAppointment);
 
-export function showAppointment() {
+function showAppointment() {
   let shared = {};
 
   function link($scope, element, attrs) {

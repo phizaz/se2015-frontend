@@ -1,5 +1,5 @@
 
-export class NurseController {
+/*@ngInject*/ class NurseController {
   constructor(Nurse) {
     this.Nurse =Nurse;
     this.form = {};

@@ -17,7 +17,7 @@ export let doctorDrugListDirectiveModule =
       ])
     .directive('doctorDrugList', doctorDrugListDirective);
 
-export function doctorDrugListDirective(DrugRecord) {
+function doctorDrugListDirective(DrugRecord) {
 
   let shared = {};
 

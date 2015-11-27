@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import specialtyList from '../../services/mocks/specialtyList.mock.json';
 
-export class StaffRegisterController {
+/*@ngInject*/ class StaffRegisterController {
   constructor(StaffRegister, $scope, $state) {
 
     _.extend(this, {

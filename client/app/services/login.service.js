@@ -13,7 +13,7 @@ angular.module('loginServiceModule', [
   callOnceServiceModule.name,
   ]);
 
-export class Login {
+/*@ngInject*/ class Login {
   constructor($http, Cache, $q, CallOnce) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)

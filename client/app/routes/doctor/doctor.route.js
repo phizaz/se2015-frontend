@@ -3,11 +3,11 @@ import _ from 'lodash';
 import 'angular-ui-router';
 
 // constants
-import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant'
+import {doctorCalendarConstantModule} from '../../constants/doctorCalendar.constant';
 
 // services
 import {doctorTimeServiceModule} from '../../services/doctorTime.service';
-import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service'
+import {doctorTimeEditingServiceModule} from '../../services/doctorTimeEditing.service';
 
 // directives
 import {doctorCalendarBodyDirectiveModule} from '../../components/doctor-calendar-body/doctor-calendar-body.directive';

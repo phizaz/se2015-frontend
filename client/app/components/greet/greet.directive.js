@@ -8,15 +8,19 @@ import {loginServiceModule} from '../../services/login.service';
 import greetTemplate from './greet.template.html';
 import './greet.sass';
 
-export let greetDirectiveModule =
+let app =
   angular
     .module('greetDirectiveModule', [
       'ui.router',
       loginServiceModule.name,
-      ])
-    .directive('greet', greet);
+    ]);
 
-export function greet(Login, $state) {
+app.directive('greet', greet);
+
+export let greetDirectiveModule = app;
+
+function greet(Login, $state) {
+
   let shared = {};
 
   function controller($scope) {

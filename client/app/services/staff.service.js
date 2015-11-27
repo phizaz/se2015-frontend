@@ -7,7 +7,7 @@ import staffInfoMock from './mocks/get-staff.mock.json';
 export let staffServiceModule =
   angular.module('staffServiceModule', []);
 
-export class Staff {
+/*@ngInject*/ class Staff {
   constructor($http, $q) {
 
     // set private vars (although this is not the real private, but the real private is not all that good it reduces testablitiy)

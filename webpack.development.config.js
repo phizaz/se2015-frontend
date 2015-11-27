@@ -1,7 +1,6 @@
 // webpack development config
 var _ = require('lodash');
 var webpack = require('webpack');
-var path = require('path');
 
 var webpackBaseConfig = _.cloneDeep(require('./webpack.base.config'));
 
@@ -71,7 +70,7 @@ webpackDevelopmentConfig.module.loaders = webpackDevelopmentConfig.module.loader
     {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        loaders: ['ng-annotate', 'babel'],
     },
 
     // css loader

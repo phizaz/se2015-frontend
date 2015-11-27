@@ -5,6 +5,10 @@
 var path = require('path');
 
 module.exports = {
+    node: {
+        fs: "empty",
+        net: "empty",
+    },
     entry: {
         vendor: [
             'jquery',

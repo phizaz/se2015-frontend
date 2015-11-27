@@ -12,7 +12,7 @@ import './login-form.sass';
 export let loginFormDirectiveModule =
   angular.module('loginFormDirectiveModule', []);
 
-export function loginFormDirective() {
+function loginFormDirective() {
   let shared = {};
 
   function controller () {

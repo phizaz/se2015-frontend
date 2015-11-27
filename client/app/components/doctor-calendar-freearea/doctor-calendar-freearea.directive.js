@@ -17,7 +17,7 @@ export let doctorCalendarFreeareaDirectiveModule =
       ])
     .directive('doctorCalendarFreearea', doctorCalendarFreeareaDirective);
 
-export function doctorCalendarFreeareaDirective(DOCTOR_CALENDAR) {
+function doctorCalendarFreeareaDirective(DOCTOR_CALENDAR) {
 
   let shared = {};
 

@@ -4,19 +4,18 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
-let that = angular.module('mainConfigModule', [
+let partial = angular.module('mainConfigModule', [
   'ui.router',
   ]);
 
-export let mainConfigModule = that;
+export let mainConfigModule = partial;
 
-that.config(
-  function mainConfigModule($urlRouterProvider) {
+partial.config(function mainConfigModule($urlRouterProvider) {
     // set fallback url
     $urlRouterProvider.otherwise('/');
   });
 
-that.filter('range',
+partial.filter('range',
   () => {
     return (input, total) => {
       total = parseInt(total);
@@ -29,7 +28,7 @@ that.filter('range',
     };
 });
 
-that.filter('role',
+partial.filter('role',
   () => {
     let conversion = {
       Doctor: 'แพทย์',
@@ -42,7 +41,7 @@ that.filter('role',
     };
   });
 
-that.filter('gender',
+partial.filter('gender',
   () => {
     let conversion = {
       M: 'ชาย',

@@ -35,7 +35,7 @@ export let doctorCalendarDayDirectiveModule =
       doctorCalendarAppointmentModalDirectiveModule.name,
       ])
     .directive('doctorCalendarDay', doctorCalendarDayDirective)
-    .run((gridsterConfig, DOCTOR_CALENDAR) => {
+    .run(/*@ngInject*/ (gridsterConfig, DOCTOR_CALENDAR) => {
         _.extend(gridsterConfig, {
           mobileBreakPoint: 0,
           columns: 1,
@@ -58,7 +58,7 @@ export let doctorCalendarDayDirectiveModule =
         console.log('gridsterConfig:', gridsterConfig);
       });
 
-export function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
+function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
 
   let shared = {};
 
