@@ -1,13 +1,13 @@
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../../../directive.js';
+import {DirectiveBlueprint} from '../directive';
 
 // services
-import {makeAppointmentServiceModule} from '../../../../services/makeAppointment.service';
+import {makeAppointmentServiceModule} from '../../services/makeAppointment.service';
 
 // locals
-import appointmentSelectCardTemplate from './appointment-select-card.template.html';
-import './appointment-select-card.sass';
+import appointmentSelectCardTemplate from './make-appointment-select-card.template.html';
+import './make-appointment-select-card.sass';
 
 export let appointmentSelectCardDirectiveModule =
   angular

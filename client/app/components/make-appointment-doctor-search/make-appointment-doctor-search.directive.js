@@ -7,7 +7,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../../directive.js';
+import {DirectiveBlueprint} from '../directive.js';
 
 import 'angular-sanitize';
 import 'ui-select/dist/select.js';
@@ -16,10 +16,10 @@ import 'ui-select/dist/select.css';
 // selector theme
 import 'selectize/dist/css/selectize.default.css';
 
-import {doctorSearchServiceModule} from '../../../services/doctorSearch.service.js';
+import {doctorSearchServiceModule} from '../../services/doctorSearch.service';
 
-import doctorSearchTemplate from './doctor-search.template.html';
-import './doctor-search.sass';
+import doctorSearchTemplate from './make-appointment-doctor-search.template.html';
+import './make-appointment-doctor-search.sass';
 
 export let doctorSearchDirectiveModule =
   angular

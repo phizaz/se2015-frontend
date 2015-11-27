@@ -13,9 +13,9 @@ import {DirectiveBlueprint} from '../directive.js';
 import {makeAppointmentServiceModule} from '../../services/makeAppointment.service';
 
 // directives
-import {doctorSearchDirectiveModule} from './doctor-search/doctor-search.directive.js';
-import {specialtySelectDirectiveModule} from './specialty-select/specialty-select.directive.js';
-import {appointmentSelectDirectiveModule} from './appointment-select/appointment-select.directive.js';
+import {doctorSearchDirectiveModule} from '../make-appointment-doctor-search/make-appointment-doctor-search.directive.js';
+import {specialtySelectDirectiveModule} from '../make-appointment-specialty-select/make-appointment-specialty-select.directive.js';
+import {appointmentSelectDirectiveModule} from '../make-appointment-select/make-appointment-select.directive.js';
 
 // locals
 import makeAppointmentModalTemplate from './make-appointment-modal.template.html';

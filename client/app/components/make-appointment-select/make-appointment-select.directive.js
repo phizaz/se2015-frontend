@@ -7,17 +7,17 @@
 
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../../directive.js';
+import {DirectiveBlueprint} from '../directive.js';
 
 // services
-import {makeAppointmentServiceModule} from '../../../services/makeAppointment.service';
+import {makeAppointmentServiceModule} from '../../services/makeAppointment.service';
 
 // directives
-import {appointmentSelectCardDirectiveModule} from './appointment-select-card/appointment-select-card.directive.js';
+import {appointmentSelectCardDirectiveModule} from '../make-appointment-select-card/make-appointment-select-card.directive.js';
 
 // locals
-import appointmentSelectTemplate from './appointment-select.template.html';
-import './appointment-select.sass';
+import appointmentSelectTemplate from './make-appointment-select.template.html';
+import './make-appointment-select.sass';
 
 export let appointmentSelectDirectiveModule =
   angular
