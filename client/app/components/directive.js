@@ -9,7 +9,6 @@ const Directive = {
 
   constructor: constructor,
   getPrivate: getPrivate,
-  create: create,
   new: newDirective,
 
 };
@@ -40,9 +39,7 @@ function getPrivate($scope) {
 function create($scope, init, obj) {
   let my = constructor($scope, init);
 
-  if (obj.public) {
-    _.extend(my, {public: my});
-  }
+  _.extend(my, {public: my});
 
   _.extend(my, obj.props || {});
 
@@ -76,7 +73,7 @@ function create($scope, init, obj) {
 function newDirective(obj) {
 
   let validKeys = [
-    'interfaces', 'controllerAs', 'link', 'template', 'props', 'methods', 'public', 'starter', 'watcher'
+    'interfaces', 'controllerAs', 'link', 'template', 'props', 'methods', 'starter', 'watcher'
   ];
 
   for (let key of Object.keys(obj)) {

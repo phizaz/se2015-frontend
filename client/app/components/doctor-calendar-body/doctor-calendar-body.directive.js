@@ -30,8 +30,6 @@ partial.directive('doctorCalendarBody',
     link: link,
     template: template,
 
-    public: true,
-
     interfaces: {
       public: '=name',
       currentWeek: '=',

@@ -1,3 +1,74 @@
+# อัพเดทสำหรับการเขียน Directive
+อันนี้จะเป็นตัวอย่างการเขียน directive แบบ isolated scope แบบทีน่าจะง่ายขึ้นมาอีก 
+
+```
+import Directive from '../directive';
+
+import template from './doctor-calendar-body.template.html';
+
+let partial = 
+	angular.module('moduleName', [
+		require('../path/to/moduleDependency'),
+	]);
+
+// บรรทัดนี้ทำให้คนอื่นสามารถ require อย่างด้านบนได้ !! สำคัญ !!
+// หมายเหตุ: partial.name เป็น string เฉย ๆ	
+export default partial.name;
+
+partial.directive('directiveName', 
+	(Something) => {
+		return Directive.new({
+			controllerAs: 'my',
+			link: link,
+			template: template,
+			
+			// เอาไว้ให้คนนอกติดต่อเข้ามา ใช้แทน scope
+			// เรียกใช้ผ่าน `this` ได้
+			interfaces: {
+				public: '=name',
+				outsideVal: '=',
+			},
+			
+			// ตัวแปรที่จะใช้ผ่าน `this`
+			props: {
+				x: 0,
+				y: 0,
+			},
+			
+			// ถ้ามี: คำสั่งที่เกี่ยวกับการ watch
+			watcher() {
+				this.$scope.$watch(...);
+			}
+			
+			// ถ้ามี: คำสั่งที่จะเรียกในตอนแรก
+			starter() {
+				...
+			}
+			
+			// methods ต่าง ๆ ที่เรียกใช้ได้ผ่าน `this`
+			methods: {
+				
+				outside() {
+					return this.outsideVal;
+				}
+				
+				sum() {
+					return this.x + this.y;
+				}
+				
+			}
+			
+		});
+		
+		function link($scope, element, attrs) {
+			let my = Directive.getPrivate($scope);
+			// ทำไรก็ทำ 
+			...
+		}
+		
+	});
+```
+
 # อัพเดทสำหรับระบบ Module !
 แต่เดิมนั้นเรายึด มาตรฐานการเขียนแบบ modular จาก gocardless แต่ผมคิดว่ามันนถึงเวลาที่ต้องเปลี่ยน เพราะว่า การเขียนแบบเดิมนั้น "เยอะโดยใช่เหตุ" ซึ่งผมเสนอวิธีการเขียนแบบใหม่สั้นลง ! ดังนี้
 
