@@ -22,14 +22,17 @@ let partial =
 
 export default partial.name;
 
-partial.directive('doctorCalendarBody', doctorCalendarBodyDirective);
+partial.directive('doctorCalendarBody',
+  (DOCTOR_CALENDAR, DoctorTimeEditing) => {
 
-function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
-  let shared = {};
+  return Directive.new({
+    controllerAs: 'my',
+    link: link,
+    template: template,
 
-  return {
-    restrict: 'E',
-    scope: {
+    public: true,
+
+    interfaces: {
       public: '=name',
       currentWeek: '=',
       pureAppointmentList: '=doctorAppointmentList',
@@ -37,158 +40,112 @@ function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
       marginTop: '=',
       timeWidth: '=',
     },
-    bindToController: true,
-    controller: controller,
-    controllerAs: 'my',
-    link: link,
-    template: template,
-  };
 
-  function dateFormat(datetime) {
-    return datetime.format('YYYY-MM-DD');
-  }
-
-  function sortDoctorTimeByDate(doctorTimeList) {
-    let result = {};
-
-    for (let doctorTime of doctorTimeList) {
-      let date = dateFormat(moment(doctorTime.doctorTime_begin));
-      if (!result[date]) {
-        result[date] = [];
-      }
-
-      result[date].push(doctorTime);
-    }
-
-    return result;
-  }
-
-  function sortAppointmentByDate(doctorAppointmentList) {
-    console.log('doctorAppointmentList:', doctorAppointmentList);
-    let result = {};
-
-    for (let appointment of doctorAppointmentList) {
-      let date = dateFormat(moment(appointment.time));
-      if (!result[date]) {
-        result[date] = [];
-      }
-
-      result[date].push(appointment);
-    }
-
-    return result;
-  }
-
-  function controller($scope) {
-    let my = Directive.constructor($scope, this);
-
-    let calendarTimesList = [];
-    for (let i = 0; i < DOCTOR_CALENDAR.blockCounts; ++i) {
-      calendarTimesList.push({
-        blockNumber: i,
-        time: TimeBlockConverter.blockToTime(DOCTOR_CALENDAR.beginHours, i)
-      });
-    }
-
-    let daysInWeek = [];
-    createDaysInWeek();
-
-    $scope.$watch('my.currentWeek',
-      (currentWeek) => {
-        console.log('currentWeek has changed to:', currentWeek);
-        createDaysInWeek();
-      }, true);
-
-    _.extend(my, {
-      calendarTimesList: calendarTimesList,
+    props: {
+      calendarTimesList: [],
       appointmentListByDate: {},
       doctorTimeListByDate: {},
-      daysInWeek: daysInWeek,
+      daysInWeek: [],
       editing: false,
       editingGridByDate: {},
       doctorCalendarDays: [],
+    },
 
-      // functions
+    watcher() {
+      console.log('watcher works!');
+
+      this.$scope.$watch('my.currentWeek',
+        (currentWeek) => {
+          console.log('currentWeek has changed to:', currentWeek);
+          this.createDaysInWeek();
+        }, true);
+    },
+
+    starter() {
+      console.log('calendar-body my:', this);
+
+      this.init(this.pureAppointmentList, this.pureDoctorTimeList);
+    },
+
+    methods: {
+
       dateFormat: dateFormat,
-      startEditing: startEditing,
-      finishEditing: finishEditing,
-      askChanges: askChanges,
-      askDamage: askDamage,
-      cancelEditing: cancelEditing,
-      init: init,
-      // this is intentionally put here
-      public: my,
-    });
 
-    console.log('calendar-body my:', my);
+      init(appointmentList, doctorTimeList) {
 
-    init(my.pureAppointmentList, my.pureDoctorTimeList);
+        _.extend(this, {
+          appointmentListByDate: sortAppointmentByDate(appointmentList),
+          doctorTimeListByDate: sortDoctorTimeByDate(doctorTimeList),
+        });
 
-    function init(appointmentList, doctorTimeList) {
-      _.extend(my, {
-        appointmentListByDate: sortAppointmentByDate(appointmentList),
-        doctorTimeListByDate: sortDoctorTimeByDate(doctorTimeList),
-      });
-    }
+        for (let i = 0; i < DOCTOR_CALENDAR.blockCounts; ++i) {
+          this.calendarTimesList.push({
+            blockNumber: i,
+            time: TimeBlockConverter.blockToTime(DOCTOR_CALENDAR.beginHours, i)
+          });
+        }
+      },
 
-    function createDaysInWeek() {
-      for (let i = 0; i < 7; ++i) {
-        daysInWeek[i] = moment(my.currentWeek).day(i).startOf('day');
-      }
-    }
+      createDaysInWeek() {
+        for (let i = 0; i < 7; ++i) {
+          this.daysInWeek[i] = moment(this.currentWeek).day(i).startOf('day');
+        }
+      },
 
-    function makeEditingGrid() {
-      let theGrid =
-        DoctorTimeEditing.makeEditingGrid(my.doctorTimeListByDate);
+      makeEditingGrid() {
+        let theGrid =
+          DoctorTimeEditing.makeEditingGrid(this.doctorTimeListByDate);
 
-      angular.copy(theGrid, my.editingGridByDate);
-    }
+        angular.copy(theGrid, this.editingGridByDate);
+      },
 
-    function startEditing() {
-      console.log('start editing doctortime');
-      console.log('doctorCalendarDay:', my.doctorCalendarDays);
-      makeEditingGrid();
-      my.editing = true;
-      for (let each of my.doctorCalendarDays) {
-        let dateString = my.dateFormat(each.date);
-        each.startEditing(my.editingGridByDate[dateString]);
-      }
-    }
+      startEditing() {
+        console.log('start editing doctortime');
+        console.log('doctorCalendarDay:', this.doctorCalendarDays);
+        this.makeEditingGrid();
+        this.editing = true;
+        for (let each of this.doctorCalendarDays) {
+          let dateString = this.dateFormat(each.date);
+          each.startEditing(this.editingGridByDate[dateString]);
+        }
+      },
 
-    function askDamage() {
-      let damages = {};
-      for (let each of my.doctorCalendarDays) {
-        damages[my.dateFormat(each.date)] = each.askDamage();
-      }
-      return damages;
-    }
+      askDamage() {
+        let damages = {};
+        for (let each of this.doctorCalendarDays) {
+          damages[this.dateFormat(each.date)] = each.askDamage();
+        }
+        return damages;
+      },
 
-    function askChanges() {
-      console.log('stop editing doctortime');
-      let changes = [];
-      for (let each of my.doctorCalendarDays) {
-        changes.push(each.askChanges());
-      }
+      askChanges() {
+        console.log('stop editing doctortime');
+        let changes = [];
+        for (let each of this.doctorCalendarDays) {
+          changes.push(each.askChanges());
+        }
 
-      return changes;
-    }
+        return changes;
+      },
 
-    function finishEditing() {
-      for (let each of my.doctorCalendarDays) {
-        each.finishEditing();
-      }
-      my.editing = false;
-    }
+      finishEditing() {
+        for (let each of this.doctorCalendarDays) {
+          each.finishEditing();
+        }
+        this.editing = false;
+      },
 
-    function cancelEditing() {
-      console.log('cancel editing doctortime');
-      for (let each of my.doctorCalendarDays) {
-        each.cancelEditing();
-      }
-      my.editing = false;
-    }
+      cancelEditing() {
+        console.log('cancel editing doctortime');
+        for (let each of this.doctorCalendarDays) {
+          each.cancelEditing();
+        }
+        this.editing = false;
+      },
 
-  }
+    },
+
+  });
 
   function link($scope, element, attrs) {
     let my = Directive.getPrivate($scope);
@@ -221,4 +178,41 @@ function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
     });
   }
 
+});
+
+// helpers
+
+function dateFormat(datetime) {
+  return datetime.format('YYYY-MM-DD');
+}
+
+function sortDoctorTimeByDate(doctorTimeList) {
+  let result = {};
+
+  for (let doctorTime of doctorTimeList) {
+    let date = dateFormat(moment(doctorTime.doctorTime_begin));
+    if (!result[date]) {
+      result[date] = [];
+    }
+
+    result[date].push(doctorTime);
+  }
+
+  return result;
+}
+
+function sortAppointmentByDate(doctorAppointmentList) {
+  console.log('doctorAppointmentList:', doctorAppointmentList);
+  let result = {};
+
+  for (let appointment of doctorAppointmentList) {
+    let date = dateFormat(moment(appointment.time));
+    if (!result[date]) {
+      result[date] = [];
+    }
+
+    result[date].push(appointment);
+  }
+
+  return result;
 }
