@@ -1,8 +1,8 @@
 import angular from 'angular';
 import _ from 'lodash';
 import moment from 'moment';
-import {DirectiveBlueprint} from '../directive';
-import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
+import Directive from '../directive';
+import TimeBlockConverter from '../../helpers/timeBlockCoverter';
 
 // angular gridster
 import 'javascript-detect-element-resize/jquery.resize.js';
@@ -61,7 +61,7 @@ function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   let shared = {};
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     _.extend(my, {
       DOCTOR_CALENDAR: DOCTOR_CALENDAR,
@@ -150,7 +150,7 @@ function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
 
     _.extend(my, {
       element: element,

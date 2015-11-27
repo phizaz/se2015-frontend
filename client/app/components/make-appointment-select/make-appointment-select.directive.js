@@ -7,7 +7,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../directive.js';
+import Directive from '../directive.js';
 
 // locals
 import appointmentSelectTemplate from './make-appointment-select.template.html';
@@ -31,7 +31,7 @@ function appointmentSelect(MakeAppointment) {
   let shared = {};
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     _.extend(my, {
       selectingCard: null,
@@ -158,7 +158,7 @@ function appointmentSelect(MakeAppointment) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
 

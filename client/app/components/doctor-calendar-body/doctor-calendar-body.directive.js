@@ -1,8 +1,8 @@
 import angular from 'angular';
 import _ from 'lodash';
 import moment from 'moment';
-import {DirectiveBlueprint} from '../directive';
-import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
+import Directive from '../directive';
+import TimeBlockConverter from '../../helpers/timeBlockCoverter';
 
 import template from './doctor-calendar-body.template.html';
 import './doctor-calendar-body.sass';
@@ -63,7 +63,7 @@ function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   }
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     let calendarTimesList = [];
     for (let i = 0; i < DOCTOR_CALENDAR.blockCounts; ++i) {
@@ -174,7 +174,7 @@ function doctorCalendarBodyDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
 
     let $element = $(element);
 

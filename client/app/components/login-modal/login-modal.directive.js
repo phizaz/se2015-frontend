@@ -12,7 +12,7 @@ import 'angular-ui-router';
 
 import loginModalTemplate from './login-modal.template.html';
 import './login-modal.sass';
-import {DirectiveBlueprint} from '../directive.js';
+import Directive from '../directive.js';
 
 let partial =
   angular.module('loginModalDirectiveModule', [
@@ -30,7 +30,7 @@ function loginModalDirective(Login, $state) {
 
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
 
@@ -38,7 +38,7 @@ function loginModalDirective(Login, $state) {
   }
 
   function controller ($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
     console.log('login modal controller is loaded');
 
     _.extend(my, {

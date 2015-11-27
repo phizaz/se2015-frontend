@@ -1,7 +1,7 @@
 import angular from 'angular';
 import _ from 'lodash';
 import moment from 'moment';
-import {DirectiveBlueprint} from '../directive';
+import Directive from '../directive';
 
 // services
 import {drugRecordServiceModule} from '../../services/drugRecord.service';
@@ -25,7 +25,7 @@ function doctorDrugListDirective(DrugRecord) {
   let shared = {};
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     _.extend(my, {
       addingDrug: false,
@@ -154,7 +154,7 @@ function doctorDrugListDirective(DrugRecord) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
 
     _.extend(my, {
       element: element,

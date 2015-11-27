@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export class TimeBlockConverter {
+export default class TimeBlockConverter {
 
   static blockToTime(beginHours, blockNumber) {
     // block number shall start from 0

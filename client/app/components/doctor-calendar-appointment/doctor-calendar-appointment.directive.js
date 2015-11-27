@@ -1,7 +1,7 @@
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../directive';
-import {TimeBlockConverter} from '../../helpers/timeBlockCoverter';
+import Directive from '../directive';
+import TimeBlockConverter from '../../helpers/timeBlockCoverter';
 
 import template from './doctor-calendar-appointment.template.html';
 import './doctor-calendar-appointment.sass';
@@ -21,7 +21,7 @@ function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
   let shared = {};
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     _.extend(my, {
 
@@ -31,7 +31,7 @@ function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
 
 
     function setPos() {

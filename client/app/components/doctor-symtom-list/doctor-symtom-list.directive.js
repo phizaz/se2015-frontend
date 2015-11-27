@@ -1,6 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../directive';
+import Directive from '../directive';
 
 // service
 import {symtomReportServiceModule} from '../../services/symtomReport.service';
@@ -24,7 +24,7 @@ function doctorSymtomListDirective(SymtomReport) {
   let shared = {};
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     _.extend(my, {
       addingSymtom: false,
@@ -92,7 +92,7 @@ function doctorSymtomListDirective(SymtomReport) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
 
     _.extend(my, {
       element: element,

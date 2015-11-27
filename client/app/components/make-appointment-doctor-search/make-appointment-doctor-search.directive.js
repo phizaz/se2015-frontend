@@ -7,7 +7,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../directive.js';
+import Directive from '../directive.js';
 
 import 'angular-sanitize';
 import 'ui-select/dist/select.js';
@@ -55,7 +55,7 @@ function doctorSearchDirective(DoctorSearch) {
   getDoctorList();
 
   function controller ($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     function change() {
       console.log('changed!');
@@ -75,7 +75,7 @@ function doctorSearchDirective(DoctorSearch) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
     _.extend(my, {
       element: element,
       attrs: attrs,

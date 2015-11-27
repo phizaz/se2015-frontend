@@ -8,7 +8,7 @@
 
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../directive.js';
+import Directive from '../directive.js';
 
 import addPatientInfoModalTemplate from './add-patientInfo-modal.template.html';
 import './add-patientInfo-modal.sass';
@@ -28,12 +28,12 @@ function addPatientInfoModalDirective(Login) {
 
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
   }
   function controller ($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
     console.log('login modal controller is loaded');
     let api = {
         show: show

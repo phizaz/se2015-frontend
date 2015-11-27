@@ -3,13 +3,14 @@
  * adding private var capability to directives
  */
 
-export const DirectiveBlueprint = {
+const Directive = {
 
   constructor: constructor,
   getPrivate: getPrivate,
 
 };
 
+export default Directive;
 
 // this will be private and shared only with an instance of directive
 let priv = new Map();

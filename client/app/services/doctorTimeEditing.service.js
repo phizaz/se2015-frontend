@@ -1,6 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
-import {TimeBlockConverter} from '../helpers/timeBlockCoverter';
+import TimeBlockConverter from '../helpers/timeBlockCoverter';
 
 let partial =
   angular

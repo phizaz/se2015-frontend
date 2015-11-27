@@ -1,7 +1,7 @@
 import angular from 'angular';
 import _ from 'lodash';
 import 'angular-ui-router';
-import {DirectiveBlueprint} from '../directive.js';
+import Directive from '../directive.js';
 
 import greetTemplate from './greet.template.html';
 import './greet.sass';
@@ -23,7 +23,7 @@ function greet(Login, $state) {
   let shared = {};
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     _.extend(my, {
       loggingOut: false,
@@ -54,7 +54,7 @@ function greet(Login, $state) {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
   }

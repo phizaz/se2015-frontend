@@ -1,6 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../directive';
+import Directive from '../directive';
 
 // locals
 import template from './doctor-calendar-appointment-modal.template.html';
@@ -22,7 +22,7 @@ function doctorCalendarAppointmentModalDirective() {
   let shared = {};
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
     let patient = my.appointment.patient;
     let patientReport = my.appointment.patientReport;
     let drugInfo = my.appointment.drugInfo;
@@ -45,7 +45,7 @@ function doctorCalendarAppointmentModalDirective() {
   }
 
   function link($scope, element, attrs) {
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
 
     let $modal = element.find('.modal');
 

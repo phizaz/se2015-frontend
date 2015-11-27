@@ -1,6 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
-import {DirectiveBlueprint} from '../directive.js';
+import Directive from '../directive.js';
 
 import doctorInformationTemplate from './doctor-information.template.html';
 import './doctor-information.sass';
@@ -23,7 +23,7 @@ function doctorInformation() {
 
     console.log('scope:', $scope);
 
-    let my = DirectiveBlueprint.getPrivate($scope);
+    let my = Directive.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
 
@@ -33,7 +33,7 @@ function doctorInformation() {
   }
 
   function controller($scope) {
-    let my = DirectiveBlueprint.constructor($scope, this);
+    let my = Directive.constructor($scope, this);
 
     _.extend(my, {
       appear: appear,
