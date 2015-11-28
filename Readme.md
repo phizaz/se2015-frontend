@@ -44,13 +44,13 @@ partial.directive('directiveName',
 			
 			// ถ้ามี: คำสั่งที่เกี่ยวกับการ watch
 			// เรียกใช้ `this` ได้
-			watcher() {
-				this.$scope.$watch(...);
+			watcher($scope) {
+				$scope.$watch(...);
 			}
 			
 			// ถ้ามี: คำสั่งที่จะเรียกในตอนแรก
 			// เรียกใช้ `this` ได้
-			starter() {
+			starter($scope) {
 				...
 			}
 			

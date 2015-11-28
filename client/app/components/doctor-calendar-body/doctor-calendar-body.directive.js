@@ -74,10 +74,10 @@ partial.directive('doctorCalendarBody', (DOCTOR_CALENDAR, DoctorTimeEditing) => 
       $(window).resize(() => setWeekWidth());
     },
 
-    watcher() {
+    watcher($scope) {
       console.log('watcher works!');
 
-      this.$scope.$watch('my.currentWeek',
+      $scope.$watch('my.currentWeek',
         (currentWeek) => {
           console.log('currentWeek has changed to:', currentWeek);
           this.createDaysInWeek();
@@ -97,6 +97,7 @@ partial.directive('doctorCalendarBody', (DOCTOR_CALENDAR, DoctorTimeEditing) => 
       init(appointmentList, doctorTimeList) {
 
         _.extend(this, {
+          calendarTimesList: [],
           appointmentListByDate: sortAppointmentByDate(appointmentList),
           doctorTimeListByDate: sortDoctorTimeByDate(doctorTimeList),
         });

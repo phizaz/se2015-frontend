@@ -15,62 +15,40 @@ let partial =
 
 export default partial.name;
 
-partial.directive('doctorCalendarFreearea', doctorCalendarFreeareaDirective);
+partial.directive('doctorCalendarFreearea', (DOCTOR_CALENDAR) => {
 
-function doctorCalendarFreeareaDirective(DOCTOR_CALENDAR) {
+  return Directive.new({
 
-  let shared = {};
+    controllerAs: 'my',
+    template: template,
 
-  function controller($scope) {
-    let my = Directive.constructor($scope, this);
-
-    _.extend(my, {
-
-      // this is intentionally put here
-      public: my,
-    });
-  }
-
-  function link($scope, element, attrs) {
-    let my = Directive.getPrivate($scope);
-
-    function setSizeAndPos() {
-      let startBlock =
-        TimeBlockConverter.timeToBlock(DOCTOR_CALENDAR.beginHours, my.startTime);
-      let endBlock =
-        TimeBlockConverter.timeToBlock(DOCTOR_CALENDAR.beginHours, my.endTime);
-      let blockHeight = DOCTOR_CALENDAR.blockHeight;
-      let blockCount = endBlock - startBlock;
-
-      let height = blockHeight * blockCount + 3 * DOCTOR_CALENDAR.blockPadding;
-      // console.log('setHeight:', height, blockHeight, blockCount);
-      element.css('height', height);
-
-      // console.log('setTop:', blockHeight * startBlock);
-      element.css('top', blockHeight * startBlock);
-    }
-
-    setSizeAndPos();
-
-    _.extend(my, {
-      element: element,
-      attrs: attrs,
-
-      setSizeAndPos: setSizeAndPos,
-    });
-  }
-
-  return {
-    restrict: 'E',
-    scope: {
+    interfaces: {
       startTime: '=',
       endTime: '=',
     },
-    bindToController: true,
-    controller: controller,
-    controllerAs: 'my',
-    link: link,
-    template: template,
-  };
 
-}
+    link($scope, element, attrs) {
+      this.setSizeAndPos();
+    },
+
+    methods: {
+      setSizeAndPos() {
+        let startBlock =
+          TimeBlockConverter.timeToBlock(DOCTOR_CALENDAR.beginHours, this.startTime);
+        let endBlock =
+          TimeBlockConverter.timeToBlock(DOCTOR_CALENDAR.beginHours, this.endTime);
+        let blockHeight = DOCTOR_CALENDAR.blockHeight;
+        let blockCount = endBlock - startBlock;
+
+        let height = blockHeight * blockCount + 3 * DOCTOR_CALENDAR.blockPadding;
+        // console.log('setHeight:', height, blockHeight, blockCount);
+        this.element.css('height', height);
+
+        // console.log('setTop:', blockHeight * startBlock);
+        this.element.css('top', blockHeight * startBlock);
+      }
+    },
+
+  });
+
+});

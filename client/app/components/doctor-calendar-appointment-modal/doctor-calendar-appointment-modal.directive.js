@@ -9,79 +9,65 @@ import './doctor-calendar-appointment-modal.sass';
 let partial =
   angular
     .module('doctorCalendarAppointmentModalDirectiveModule', [
+      // directives
       require('../doctor-drug-list/doctor-drug-list.directive'),
       require('../doctor-symtom-list/doctor-symtom-list.directive'),
       ]);
 
 export default partial.name;
 
-partial.directive('doctorCalendarAppointmentModal', doctorCalendarAppointmentModalDirective);
+partial.directive('doctorCalendarAppointmentModal', () => {
 
-function doctorCalendarAppointmentModalDirective() {
+  return Directive.new({
 
-  let shared = {};
+    controllerAs: 'my',
+    template: template,
 
-  function controller($scope) {
-    let my = Directive.constructor($scope, this);
-    let patient = my.appointment.patient;
-    let patientReport = my.appointment.patientReport;
-    let drugInfo = my.appointment.drugInfo;
-    let symtomInfo = my.appointment.symtomInfo;
-
-    function patientToPharmacist() {
-
-    }
-
-    _.extend(my, {
-      patient: patient,
-      patientReport: patientReport,
-      drugInfo: drugInfo,
-      symtomInfo: symtomInfo,
-
-      patientToPharmacist: patientToPharmacist,
-      // this is intentionally put here
-      public: my,
-    });
-  }
-
-  function link($scope, element, attrs) {
-    let my = Directive.getPrivate($scope);
-
-    let $modal = element.find('.modal');
-
-    function showModal() {
-      $modal.openModal({
-        dismissible: false,
-      });
-    }
-
-    function closeModal() {
-       $modal.closeModal();
-    }
-
-    // showModal();
-
-    _.extend(my, {
-      element: element,
-      attrs: attrs,
-      $modal: $modal,
-
-      showModal: showModal,
-      closeModal: closeModal,
-    });
-  }
-
-  return {
-    restrict: 'E',
-    scope: {
+    interfaces: {
       public: '=name',
       appointment: '=',
     },
-    bindToController: true,
-    controller: controller,
-    controllerAs: 'my',
-    link: link,
-    template: template,
-  };
 
-}
+    props: {
+      patient: {},
+      patientReport: {},
+      drugInfo: {},
+      symtomInfo: {},
+    },
+
+    link($scope, element) {
+      _.extend(this, {
+        $modal: element.find('.modal')
+      });
+
+      // this.showModal();
+    },
+
+    starter() {
+      _.extend(this, {
+        patient: this.appointment.patient,
+        patientReport: this.appointment.patientReport,
+        drugInfo: this.appointment.drugInfo,
+        symtomInfo: this.appointment.symtomInfo,
+      });
+    },
+
+    methods: {
+      showModal() {
+        this.$modal.openModal({
+          dismissible: false,
+        });
+      },
+
+      closeModal() {
+         this.$modal.closeModal();
+      },
+
+      patientToPharmacist() {
+
+      }
+    },
+
+  });
+
+});

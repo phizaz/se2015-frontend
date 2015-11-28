@@ -59,12 +59,12 @@ function create($scope, init, obj) {
 
   // run the starter
   if (obj.starter) {
-    obj.starter.call(my);
+    obj.starter.call(my, $scope);
   }
 
   // run the watches
   if (obj.watcher) {
-    obj.watcher.call(my);
+    obj.watcher.call(my, $scope);
   }
 
   return my;

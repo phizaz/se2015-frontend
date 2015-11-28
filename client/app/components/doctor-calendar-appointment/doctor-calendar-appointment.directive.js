@@ -15,57 +15,35 @@ let partial =
 
 export default partial.name;
 
-partial.directive('doctorCalendarAppointment', doctorCalendarAppointmentDirective);
+partial.directive('doctorCalendarAppointment', (DOCTOR_CALENDAR) => {
+  return Directive.new({
+    controllerAs: 'my',
+    template: template,
 
-function doctorCalendarAppointmentDirective(DOCTOR_CALENDAR) {
-  let shared = {};
-
-  function controller($scope) {
-    let my = Directive.constructor($scope, this);
-
-    _.extend(my, {
-
-      // this is intentionally put here
-      public: my,
-    });
-  }
-
-  function link($scope, element, attrs) {
-    let my = Directive.getPrivate($scope);
-
-
-    function setPos() {
-      let blockHeight = DOCTOR_CALENDAR.blockHeight;
-      let startBlock =
-        TimeBlockConverter.timeToBlock(DOCTOR_CALENDAR.beginHours, my.appointment.time);
-      let top = blockHeight * startBlock - 1.5 * DOCTOR_CALENDAR.blockPadding;
-
-      // console.log('top:', top);
-
-      element.css('top', top);
-    }
-
-    setPos();
-
-    _.extend(my, {
-      element: element,
-      attrs: attrs,
-
-      setPos: setPos,
-    });
-  }
-
-  return {
-    restrict: 'E',
-    scope: {
+    interfaces: {
       modal: '=targetModal',
       appointment: '=',
     },
-    bindToController: true,
-    controller: controller,
-    controllerAs: 'my',
-    link: link,
-    template: template,
-  };
 
-}
+    props: {
+
+    },
+
+    link() {
+      this.setPos();
+    },
+
+    methods: {
+      setPos() {
+        let blockHeight = DOCTOR_CALENDAR.blockHeight;
+        let startBlock =
+          TimeBlockConverter.timeToBlock(DOCTOR_CALENDAR.beginHours, this.appointment.time);
+        let top = blockHeight * startBlock - 1.5 * DOCTOR_CALENDAR.blockPadding;
+
+        this.element.css('top', top);
+      }
+    },
+
+
+  });
+});
