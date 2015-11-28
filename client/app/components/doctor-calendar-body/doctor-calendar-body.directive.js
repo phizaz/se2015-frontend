@@ -22,12 +22,10 @@ let partial =
 
 export default partial.name;
 
-partial.directive('doctorCalendarBody',
-  (DOCTOR_CALENDAR, DoctorTimeEditing) => {
+partial.directive('doctorCalendarBody', (DOCTOR_CALENDAR, DoctorTimeEditing) => {
 
   return Directive.new({
     controllerAs: 'my',
-    link: link,
     template: template,
 
     interfaces: {
@@ -47,6 +45,33 @@ partial.directive('doctorCalendarBody',
       editing: false,
       editingGridByDate: {},
       doctorCalendarDays: [],
+    },
+
+    link($scope, element, attrs) {
+      console.log('$scope:', $scope);
+      console.log('element:', element);
+      console.log('attrs:', attrs);
+      let $element = $(element);
+
+      let $body = $element.find('.doctor-calendar-body');
+      let $time = $element.find('.doctor-calendar-time');
+      let $week = $element.find('.doctor-calendar-week');
+
+      $body.css({
+        'padding-top': this.marginTop
+      });
+      $time.width(this.timeWidth);
+
+
+      let setWeekWidth = () => {
+        let windowWidth = $(window).width();
+        $week.width(windowWidth - this.timeWidth);
+        console.log($week.width());
+      };
+
+      setWeekWidth();
+
+      $(window).resize(() => setWeekWidth());
     },
 
     watcher() {
@@ -144,37 +169,6 @@ partial.directive('doctorCalendarBody',
     },
 
   });
-
-  function link($scope, element, attrs) {
-    let my = Directive.getPrivate($scope);
-
-    let $element = $(element);
-
-    my.$body = $element.find('.doctor-calendar-body');
-    my.$time = $element.find('.doctor-calendar-time');
-    my.$week = $element.find('.doctor-calendar-week');
-
-    my.$body.css({
-      'padding-top': my.marginTop
-    });
-    my.$time.width(my.timeWidth);
-
-
-    function setWeekWidth() {
-      let windowWidth = $(window).width();
-      my.$week.width(windowWidth - my.timeWidth);
-      console.log(windowWidth - my.timeWidth);
-    }
-
-    setWeekWidth();
-
-    $(window).resize(() => setWeekWidth());
-
-    _.extend(my, {
-      element: element,
-      attrs: attrs,
-    });
-  }
 
 });
 

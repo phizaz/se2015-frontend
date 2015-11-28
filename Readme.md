@@ -35,17 +35,27 @@ partial.directive('directiveName',
 				y: 0,
 			},
 			
+			// ถ้ามี: คำสั่งจัดการเกี่ยวกับ element โดยตรง
+			// เรียนกใช้ `this` ได้
+			// ใน `this` มี $scope, element, attrs ให้ด้วย ไม่ต้องเพิ่มเอง
+			link($scope, element, attrs) {
+				...
+			}
+			
 			// ถ้ามี: คำสั่งที่เกี่ยวกับการ watch
+			// เรียกใช้ `this` ได้
 			watcher() {
 				this.$scope.$watch(...);
 			}
 			
 			// ถ้ามี: คำสั่งที่จะเรียกในตอนแรก
+			// เรียกใช้ `this` ได้
 			starter() {
 				...
 			}
 			
 			// methods ต่าง ๆ ที่เรียกใช้ได้ผ่าน `this`
+			// `this` ทุก ๆ ตัวเชื่อมถึงกันหมด
 			methods: {
 				
 				outside() {

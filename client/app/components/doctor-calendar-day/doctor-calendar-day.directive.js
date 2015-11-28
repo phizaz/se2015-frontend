@@ -30,8 +30,6 @@ let partial =
 
 export default partial.name;
 
-partial.directive('doctorCalendarDay', doctorCalendarDayDirective);
-
 partial.run(
   (gridsterConfig, DOCTOR_CALENDAR) => {
     _.extend(gridsterConfig, {
@@ -56,122 +54,92 @@ partial.run(
     console.log('gridsterConfig:', gridsterConfig);
   });
 
-function doctorCalendarDayDirective(DOCTOR_CALENDAR, DoctorTimeEditing) {
+partial.directive('doctorCalendarDay', (DOCTOR_CALENDAR, DoctorTimeEditing) => {
 
-  let shared = {};
+  return Directive.new({
+    controllerAs: 'my',
+    template: template,
 
-  function controller($scope) {
-    let my = Directive.constructor($scope, this);
-
-    _.extend(my, {
-      DOCTOR_CALENDAR: DOCTOR_CALENDAR,
-      appointmentModals: [],
-      editing: false,
-      editingGrid: [],
-      blockToTime: blockToTime,
-
-      // functions
-      startEditing: startEditing,
-      askChanges: askChanges,
-      finishEditing: finishEditing,
-      cancelEditing: cancelEditing,
-      askDamage: askDamage,
-
-      editDeleteDoctorTime: editDeleteDoctorTime,
-      editCreateDoctorTime: editCreateDoctorTime,
-      // this is intentionally put here
-      public: my,
-    });
-
-    console.log('calendar-day my:', my);
-
-    function blockToTime(block) {
-      return TimeBlockConverter.blockToTime(
-        DOCTOR_CALENDAR.beginHours, block);
-    }
-
-    function startEditing(grid) {
-      // console.log('day: ', my.date, 'grid:', grid);
-      my.editing = true;
-      my.editingGrid = grid || [];
-      // start gridster
-    }
-
-    function askDamage() {
-      let damages =
-        DoctorTimeEditing.calculateDamage(my.appointmentList, my.editingGrid);
-      return damages;
-    }
-
-    /**
-     * gather changes done in this day
-     * return the change list
-     */
-    function askChanges() {
-      let [deletions, creations] =
-        DoctorTimeEditing.calculateChange(my.doctorTimeList, my.editingGrid, moment(my.date));
-
-      return {
-        delete: deletions,
-        create: creations,
-      };
-    }
-
-    function finishEditing() {
-      my.editing = false;
-    }
-
-
-    function cancelEditing() {
-      my.editing = false;
-    }
-
-    function editDeleteDoctorTime(item) {
-      // console.log('my:', my);
-      let idx = _.findIndex(my.editingGrid, item);
-      // remove from array
-      my.editingGrid.splice(idx, 1);
-    }
-
-    function editCreateDoctorTime(row) {
-      console.log('creating a new doctor time:', row, my.editingGrid);
-
-      if (!my.editingGrid) {
-        my.editingGrid = [];
-      }
-
-      my.editingGrid.push({
-        sizeX: 1,
-        sizeY: 1,
-        row: row,
-        col: 0,
-      });
-    }
-  }
-
-  function link($scope, element, attrs) {
-    let my = Directive.getPrivate($scope);
-
-    _.extend(my, {
-      element: element,
-      attrs: attrs,
-    });
-  }
-
-  return {
-    restrict: 'E',
-    scope: {
+    interfaces: {
       public: '=name',
       date: '=',
       appointmentList: '=',
       doctorTimeList: '=',
       first: '=',
     },
-    bindToController: true,
-    controller: controller,
-    controllerAs: 'my',
-    link: link,
-    template: template,
-  };
 
-}
+    props: {
+      DOCTOR_CALENDAR: DOCTOR_CALENDAR,
+      appointmentModals: [],
+      editing: false,
+      editingGrid: [],
+    },
+
+    methods: {
+      blockToTime(block) {
+        return TimeBlockConverter.blockToTime(
+          DOCTOR_CALENDAR.beginHours, block);
+      },
+
+      startEditing(grid) {
+        // console.log('day: ', my.date, 'grid:', grid);
+        this.editing = true;
+        this.editingGrid = grid || [];
+        // start gridster
+      },
+
+      askDamage() {
+        let damages =
+          DoctorTimeEditing.calculateDamage(this.appointmentList, this.editingGrid);
+        return damages;
+      },
+
+      /**
+       * gather changes done in this day
+       * return the change list
+       */
+      askChanges() {
+        let [deletions, creations] =
+          DoctorTimeEditing.calculateChange(this.doctorTimeList, this.editingGrid, moment(this.date));
+
+        return {
+          delete: deletions,
+          create: creations,
+        };
+      },
+
+      finishEditing() {
+        this.editing = false;
+      },
+
+
+      cancelEditing() {
+        this.editing = false;
+      },
+
+      editDeleteDoctorTime(item) {
+        // console.log('this:', this);
+        let idx = _.findIndex(this.editingGrid, item);
+        // remove from array
+        this.editingGrid.splice(idx, 1);
+      },
+
+      editCreateDoctorTime(row) {
+        console.log('creating a new doctor time:', row, this.editingGrid);
+
+        if (!this.editingGrid) {
+          this.editingGrid = [];
+        }
+
+        this.editingGrid.push({
+          sizeX: 1,
+          sizeY: 1,
+          row: row,
+          col: 0,
+        });
+      },
+    }
+
+  });
+
+});

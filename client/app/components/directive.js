@@ -91,6 +91,20 @@ function newDirective(obj) {
     create($scope, this, obj);
   }
 
+  // add `this` to the link function, but keeping everything else the same
+  let linkFunc = obj.link;
+  obj.link = ($scope, element, attrs) => {
+    let my = getPrivate($scope);
+
+    _.extend(my, {
+      element, attrs
+    });
+
+    if (linkFunc) {
+      linkFunc.apply(my, [$scope, element, attrs].concat(arguments));
+    }
+  };
+
   return {
     restrict: 'E',
     scope: obj.interfaces,
