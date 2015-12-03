@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 const Directive = {
 
-  constructor: constructor,
+  constructor: createPrivate,
   getPrivate: getPrivate,
   new: newDirective,
 
@@ -18,7 +18,7 @@ export default Directive;
 // this will be private and shared only with an instance of directive
 let priv = new Map();
 
-function constructor($scope, init) {
+function createPrivate($scope, init) {
   // create unqiue id for a single instance of directive
   let id = Symbol();
   // cretae private var instance of the instance
@@ -36,8 +36,8 @@ function getPrivate($scope) {
   return priv.get(id);
 }
 
-function create($scope, init, obj) {
-  let my = constructor($scope, init);
+function createController($scope, init, obj) {
+  let my = createPrivate($scope, init);
 
   _.extend(my, {public: my});
 
@@ -71,7 +71,8 @@ function create($scope, init, obj) {
 }
 
 function newDirective(obj) {
-
+  // just some checking ...
+  // making sure that there are no alien parameters
   let validKeys = [
     'interfaces', 'controllerAs', 'link', 'template', 'props', 'methods', 'starter', 'watcher'
   ];
@@ -88,7 +89,7 @@ function newDirective(obj) {
 
   /*@ngInject*/ function controller($scope) {
     this.$scope = $scope;
-    create($scope, this, obj);
+    createController($scope, this, obj);
   }
 
   // add `this` to the link function, but keeping everything else the same
@@ -101,7 +102,12 @@ function newDirective(obj) {
     });
 
     if (linkFunc) {
-      linkFunc.apply(my, [$scope, element, attrs].concat(arguments));
+      linkFunc.apply(my, [
+        $scope,
+        element,
+        attrs,
+        ...arguments
+      ]);
     }
   };
 
