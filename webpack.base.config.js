@@ -42,7 +42,7 @@ module.exports = {
 
             // html loader
             // this also will load images as well (apply to all non-root images)
-            { test: /\.html$/, loader: 'html' },
+            { test: /\.html$/, loader: 'html?minimize=false' },
 
             // fonts
             { test: /\.(woff|svg|ttf|eot)([\?]?.*)$/, loader: 'file?name=[name].[ext]' },
