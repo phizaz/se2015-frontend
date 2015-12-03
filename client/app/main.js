@@ -1,6 +1,5 @@
 import angular from 'angular';
 import 'angular-ui-router';
-import 'flux-angular';
 
 // nprogress
 import NProgress from 'nprogress/nprogress.js';
@@ -28,7 +27,6 @@ import './main.sass';
 let partial =
   angular
     .module('mainModule', [
-      'flux',
       'ui.router',
       'ui.materialize',
       'angularMoment',

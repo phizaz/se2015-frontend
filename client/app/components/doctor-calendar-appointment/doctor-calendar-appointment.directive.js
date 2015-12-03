@@ -15,7 +15,9 @@ let partial =
 
 export default partial.name;
 
-partial.directive('doctorCalendarAppointment', (DOCTOR_CALENDAR) => {
+partial.directive('doctorCalendarAppointment',
+  (DOCTOR_CALENDAR) => {
+
   return Directive.new({
     controllerAs: 'my',
     template: template,
@@ -43,7 +45,6 @@ partial.directive('doctorCalendarAppointment', (DOCTOR_CALENDAR) => {
         this.element.css('top', top);
       }
     },
-
-
   });
+
 });
