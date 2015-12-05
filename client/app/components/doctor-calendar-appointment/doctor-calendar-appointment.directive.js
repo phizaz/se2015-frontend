@@ -6,7 +6,7 @@ import TimeBlockConverter from '../../helpers/timeBlockCoverter';
 import template from './doctor-calendar-appointment.template.html';
 import './doctor-calendar-appointment.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorCalendarAppointmentDirectiveModule', [
       // constant

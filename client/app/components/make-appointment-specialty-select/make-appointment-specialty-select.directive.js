@@ -17,7 +17,7 @@ import 'selectize/dist/css/selectize.default.css';
 import specialtySelectTemplate from './make-appointment-specialty-select.template.html';
 import './make-appointment-specialty-select.sass';
 
-let partial =
+const partial =
   angular
     .module('specialtySelectDirectiveModule', [
       'ui.select',

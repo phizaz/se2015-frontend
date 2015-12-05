@@ -4,7 +4,7 @@ import _ from 'lodash';
 // import doctorList from './mocks/doctorList.mock.json';
 import specialtyList from './mocks/specialtyList.mock.json';
 
-let partial  =
+const partial  =
   angular
     .module('doctorSearchServiceModule', []);
 

@@ -5,7 +5,7 @@ import Directive from '../directive.js';
 import doctorInformationTemplate from './doctor-information.template.html';
 import './doctor-information.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorInformationDirectiveModule', [
       // directives

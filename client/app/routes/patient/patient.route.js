@@ -6,7 +6,7 @@ import {PatientController} from './patient.controller';
 import patientTemplate from './patient.template.html';
 import './patient.sass';
 
-let partial =
+const partial =
   angular.module('patientRouteModule', [
     'ui.router',
 

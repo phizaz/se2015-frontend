@@ -3,15 +3,12 @@ import 'angular-ui-router';
 
 // locals
 import template from './staff.template.html';
-import {StaffController} from './staff.controller.js';
+import { StaffController } from './staff.controller.js';
 import './staff.sass';
 
-let partial =
+const partial =
   angular.module('staffRouteModule', [
     'ui.router',
-
-    // services
-    require('../../services/staff.service'),
 
     // directives
     require('../../components/patient-information/patient-information.directive'),
@@ -33,13 +30,10 @@ partial.config(
           isStaff: (Login) => {
             return Login.isStaff();
           },
-          unconfirmedStaffs: (Staff) => {
-            return Staff.getUnconfirmedStaff();
-          }
-        }
+        },
       })
       // alias
       .state('staff', {
-        controller: ($state) => $state.go('member.staff')
+        controller: ($state) => $state.go('member.staff'),
       });
   });

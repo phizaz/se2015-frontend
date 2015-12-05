@@ -6,7 +6,7 @@ import {StaffRegisterController} from './staff-register.controller';
 import template from './staff-register.template.html';
 import "./staff-register.sass";
 
-let partial =
+const partial =
   angular.module('staffRegisterRouteModule', [
     'ui.router',
     'ngMessages',

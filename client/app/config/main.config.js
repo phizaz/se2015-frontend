@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
-let partial =
+const partial =
   angular.module('mainConfigModule', [
     'ui.router',
   ]);

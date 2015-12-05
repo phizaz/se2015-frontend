@@ -2,7 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 import TimeBlockConverter from '../helpers/timeBlockCoverter';
 
-let partial =
+const partial =
   angular
     .module('doctorTimeEditingServiceModule', [
       require('../constants/doctorCalendar.constant'),

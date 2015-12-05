@@ -6,7 +6,7 @@ import Directive from '../directive.js';
 import greetTemplate from './greet.template.html';
 import './greet.sass';
 
-let partial =
+const partial =
   angular
     .module('greetDirectiveModule', [
       'ui.router',

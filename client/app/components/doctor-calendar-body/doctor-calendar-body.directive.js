@@ -7,7 +7,7 @@ import TimeBlockConverter from '../../helpers/timeBlockCoverter';
 import template from './doctor-calendar-body.template.html';
 import './doctor-calendar-body.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorCalendarBodyDirectiveModule', [
       // constant
@@ -17,7 +17,7 @@ let partial =
       require('../../services/doctorTimeEditing.service'),
 
       // directives
-      require('../doctor-calendar-day/doctor-calendar-day.directive')
+      require('../doctor-calendar-day/doctor-calendar-day.directive'),
     ]);
 
 export default partial.name;

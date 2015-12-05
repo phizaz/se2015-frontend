@@ -9,7 +9,7 @@ import {symtomReportServiceModule} from '../../services/symtomReport.service';
 import template from './doctor-symtom-list.template.html';
 import './doctor-symtom-list.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorSymtomListDirectiveModule', [
       symtomReportServiceModule.name,

@@ -13,54 +13,47 @@ import Directive from '../directive.js';
 import addPatientInfoModalTemplate from './add-patientInfo-modal.template.html';
 import './add-patientInfo-modal.sass';
 
-let partial =
+const partial =
   angular.module('addPatientInfoModalDirectiveModule', [
-    require('../../services/login.service')
+    require('../../services/login.service'),
   ]);
 
 export default partial.name;
 
-partial.directive('addPatientInfoModal', addPatientInfoModalDirective);
-
-function addPatientInfoModalDirective(Login) {
+partial.directive('addPatientInfoModal', (Login) => {
   console.log('login modal is loaded');
-  let shared = {};
-
 
   function link($scope, element, attrs) {
-    let my = Directive.getPrivate($scope);
+    const my = Directive.getPrivate($scope);
     my.element = element;
     my.attrs = attrs;
   }
-  function controller ($scope) {
-    let my = Directive.constructor($scope, this);
+  function controller($scope) {
+    const my = Directive.constructor($scope, this);
     console.log('login modal controller is loaded');
-    let api = {
-        show: show
-      };
     // expose 'api' to the outside (=name)
     function show() {
       console.log('show');
       my.element.children('.modal').openModal();
     }
+
     function close() {
       my.element.children.closeModal();
     }
+
     _.extend(this, {
-      api: api,
+      api: {
+        show,
+      },
       login: () => {
         Login
-          .takeLogin(this.loginForm.username,this.loginForm.password)
+          .takeLogin(this.loginForm.username, this.loginForm.password)
           .then((res) => {
             close();
           });
-      }
-
+      },
     });
   }
-
-
-
 
   return {
     // this direcitve will apply to tag's name only,
@@ -71,7 +64,7 @@ function addPatientInfoModalDirective(Login) {
     // the outside world
     // scope is equivalent to `this` in the class
     scope: {
-      api: '=name'
+      api: '=name',
     },
     // always use bindToController
     // so that the code will work as expected
@@ -83,4 +76,4 @@ function addPatientInfoModalDirective(Login) {
     link: link,
     template: addPatientInfoModalTemplate,
   };
-}
+});

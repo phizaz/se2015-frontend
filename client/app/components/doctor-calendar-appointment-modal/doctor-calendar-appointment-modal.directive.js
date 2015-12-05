@@ -6,7 +6,7 @@ import Directive from '../directive';
 import template from './doctor-calendar-appointment-modal.template.html';
 import './doctor-calendar-appointment-modal.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorCalendarAppointmentModalDirectiveModule', [
       // directives

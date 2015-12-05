@@ -4,7 +4,7 @@ import _ from 'lodash';
 // // local
 // import isLoginMock from './mocks/is-login.mock.json';
 
-let partial =
+const partial =
   angular.module('loginServiceModule', [
     require('./cache.service'),
     require('./callOnce.service'),

@@ -6,7 +6,7 @@ import Directive from '../directive';
 import appointmentSelectCardTemplate from './make-appointment-select-card.template.html';
 import './make-appointment-select-card.sass';
 
-let partial =
+const partial =
   angular
     .module('appointmentSelectCardDirectiveModule', [
       require('../../services/makeAppointment.service'),

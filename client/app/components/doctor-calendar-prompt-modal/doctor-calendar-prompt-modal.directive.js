@@ -8,7 +8,7 @@ import Directive from '../directive';
 import template from './doctor-calendar-prompt-modal.template.html';
 import './doctor-calendar-prompt-modal.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorCalendarPromptModalDirectiveModule', [
 

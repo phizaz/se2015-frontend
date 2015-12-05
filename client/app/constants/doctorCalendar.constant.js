@@ -8,7 +8,7 @@ const DOCTOR_CALENDAR = {
   blockPadding: 4,
 };
 
-let partial =
+const partial =
   angular.module('doctorCalendarConstantModule', []);
 
 export default partial.name;

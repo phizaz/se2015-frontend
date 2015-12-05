@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import moment from 'moment';
 
-let partial =
+const partial =
   angular
     .module('cacheServiceModule', []);
 

@@ -2,7 +2,7 @@ import angular from 'angular';
 import moment from 'moment';
 import _ from 'lodash';
 
-let partial =
+const partial =
   angular.module('DoctorCalendarStoreModule', []);
 
 export default partial.name;

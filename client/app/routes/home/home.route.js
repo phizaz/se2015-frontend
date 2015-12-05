@@ -6,7 +6,7 @@ import homeTemplate from './home.template.html';
 import './home.sass';
 import {HomeController} from './home.controller.js';
 
-let partial =
+const partial =
   angular.module('homeRouteModule', [
     'ui.router',
 

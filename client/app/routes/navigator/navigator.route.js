@@ -5,7 +5,7 @@ import {NavigatorController} from './navigator.controller.js';
 import navigatorTemplate from './navigator.template.html';
 import './navigator.sass';
 
-let partial =
+const partial =
   angular.module('navigatorRouteModule', [
     'ui.router',
 

@@ -10,7 +10,7 @@ import {drugRecordServiceModule} from '../../services/drugRecord.service';
 import template from './doctor-drug-list.template.html';
 import './doctor-drug-list.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorDrugListDirectiveModule', [
       drugRecordServiceModule.name,

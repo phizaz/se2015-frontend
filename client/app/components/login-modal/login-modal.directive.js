@@ -14,7 +14,7 @@ import loginModalTemplate from './login-modal.template.html';
 import './login-modal.sass';
 import Directive from '../directive.js';
 
-let partial =
+const partial =
   angular.module('loginModalDirectiveModule', [
     'ui.router',
     require('../../services/login.service')

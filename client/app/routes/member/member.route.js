@@ -6,7 +6,7 @@ import {MemberController} from './member.controller';
 import memberTemplate from './member.template.html';
 import './member.sass';
 
-let partial =
+const partial =
   angular.module('memberRouteModule', [
     'ui.router',
 

@@ -22,9 +22,10 @@ import './fonts/quark/stylesheet.css';
 // animate-css
 import 'animate.css';
 
+// local
 import './main.sass';
 
-let partial =
+const partial =
   angular
     .module('mainModule', [
       'ui.router',
@@ -33,6 +34,9 @@ let partial =
 
       // config
       require('./config/main.config'),
+
+      // store
+      require('./redux/store'),
 
       // routes
       require('./routes/navigator/navigator.route'),
@@ -65,13 +69,13 @@ partial.run(
     $rootScope.$on('$stateChangeError',
       (event, toState, toParams, fromState, fromParams, error) => {
         console.group();
-          console.log('$stateChangeError', error);
-          console.log(error.stack);
-          console.info('event', event);
-          console.info('toState', toState);
-          console.info('toParams', toParams);
-          console.info('fromState', fromState);
-          console.info('fromParams', fromParams);
+        console.log('$stateChangeError', error);
+        console.log(error.stack);
+        console.info('event', event);
+        console.info('toState', toState);
+        console.info('toParams', toParams);
+        console.info('fromState', fromState);
+        console.info('fromParams', fromParams);
         console.groupEnd();
 
         // redirect to the desired target

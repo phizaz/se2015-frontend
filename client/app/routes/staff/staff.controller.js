@@ -1,85 +1,60 @@
 import _ from 'lodash';
+import actions from '../../redux/actions/';
 
 export /*@ngInject*/ class StaffController {
-  constructor(Staff, unconfirmedStaffs, $scope) {
-
+  constructor($scope, Store) {
     _.extend(this, {
-      Staff: Staff,
+      Store: Store,
       $scope: $scope,
-      unconfirmedStaffs: unconfirmedStaffs,
       form: {},
-      searchResult: [],
-      onApprove: (staff) => {
-        this.appove(staff);
-      },
-      onDiscard: (staff) => {
-        this.discard(staff);
-      },
 
-      refreshing: false,
-      searching: false,
+      // unconfirmedStaffs: unconfirmedStaffs,
+
+      // onApprove: (staff) => {
+      //   this.appove(staff);
+      // },
+      // onDiscard: (staff) => {
+      //   this.discard(staff);
+      // },
+
+      // refreshing: false,
     });
+
+    const mapStateToThis = (state) => {
+      _.extend(this, state.staff);
+      // console.log('this:', this);
+    };
+
+    // live update
+    Store.$subscribe(() => {
+      mapStateToThis(Store.getState());
+    });
+    // init call
+    mapStateToThis(Store.getState());
   }
 
-  search(firstname, lastname) {
-    this.searching = true;
-
-    this.Staff
-      .getPatient(firstname, lastname)
-      .then(
-        (res) => {
-          this.searching = false;
-          this.searchResult = res;
-          console.log(this.searchResult);
-        });
+  searchPatient(firstname, lastname) {
+    console.log('seacrhing for patients...');
+    this.Store.dispatch(
+      actions.staffSearchPatient(firstname, lastname));
   }
 
-  appove(staff) {
+  approveStaff(staff) {
     console.log('approving staff:', staff);
-    staff.approving = true;
-
-    this.Staff
-      .approveStaff(staff)
-      .then(
-        (res) => {
-          staff.approving = false;
-          // remove from the list
-          let idx = _.findIndex(this.unconfirmedStaffs, {emp_id: staff.emp_id});
-          this.unconfirmedStaffs.splice(idx, 1);
-        });
+    this.Store.dispatch(
+      actions.staffApprove(staff.emp_id));
   }
 
-  discard(staff) {
-    staff.discarding = true;
-
-    this.Staff
-      .discardStaff(staff)
-      .then(
-        (res) => {
-          staff.discarding = false;
-          // remove from the list
-          let idx = _.findIndex(this.unconfirmedStaffs, {emp_id: staff.emp_id});
-          this.unconfirmedStaffs.splice(idx, 1);
-        });
+  discardStaff(staff) {
+    console.log('dismiss staff:', staff);
+    this.Store.dispatch(
+      actions.staffDismiss(staff.emp_id));
   }
 
-  refresh() {
-    this.refreshing = true;
-
-    this.Staff
-      .getUnconfirmedStaff()
-      .then(
-        (res) => {
-          this.refreshing = false;
-          this.unconfirmedStaffs = res;
-        })
-      .catch(
-        (res) => {
-          console.log(res);
-          throw new Error('refresh');
-        });
-
+  fetchUnconfirmedStaff() {
+    console.log('fetchUnconfirmedStaff staff');
+    this.Store.dispatch(
+      actions.staffFetchUnconfirmedStaff());
   }
-
 }
 

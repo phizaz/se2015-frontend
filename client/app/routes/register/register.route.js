@@ -6,7 +6,7 @@ import {RegisterController} from './register.controller';
 import registerTemplate from './register.template.html';
 import "./register.sass";
 
-let partial =
+const partial =
   angular.module('registerRouteModule', [
     'ui.router',
     'ngMessages',

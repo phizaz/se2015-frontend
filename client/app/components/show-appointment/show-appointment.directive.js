@@ -6,7 +6,7 @@ import Directive from '../directive.js';
 import showAppointmentTemplate from './show-appointment.template.html';
 import './show-appointment.sass';
 
-let partial =
+const partial =
   angular
     .module('showAppointmentDirectiveModule', []);
 

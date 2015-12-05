@@ -1,7 +1,7 @@
 import angular from 'angular';
 import _ from 'lodash';
 
-let partial =
+const partial =
   angular.module('registerServiceModule', []);
 
 export default partial.name;

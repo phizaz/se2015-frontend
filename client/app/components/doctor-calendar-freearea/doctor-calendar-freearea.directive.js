@@ -6,7 +6,7 @@ import TimeBlockConverter from '../../helpers/timeBlockCoverter';
 import template from './doctor-calendar-freearea.template.html';
 import './doctor-calendar-freearea.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorCalendarFreeareaDirectiveModule', [
       // constant

@@ -13,7 +13,7 @@ import Directive from '../directive.js';
 import appointmentSelectTemplate from './make-appointment-select.template.html';
 import './make-appointment-select.sass';
 
-let partial =
+const partial =
   angular
     .module('appointmentSelectDirectiveModule', [
       // services

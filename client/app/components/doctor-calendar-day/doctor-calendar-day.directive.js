@@ -12,7 +12,7 @@ import 'angular-gridster/dist/angular-gridster.min.css';
 import template from './doctor-calendar-day.template.html';
 import './doctor-calendar-day.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorCalendarDayDirectiveModule', [
       'gridster',

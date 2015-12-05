@@ -5,12 +5,9 @@ import Directive from '../directive.js';
 import editPatientTemplate from './edit-patient.template.html';
 import './edit-patient.sass';
 
-let partial =
+const partial =
   angular
     .module('editPatientDirectiveModule', [
-      // services
-      require('../../services/staff.service'),
-
       // directives
       require('../show-appointment/show-appointment.directive'),
       require('../add-patientInfo-modal/add-patientInfo-modal.directive'),
@@ -20,7 +17,7 @@ export default partial.name;
 
 partial.directive('editPatient', editPatient);
 
-function editPatient(Staff) {
+function editPatient() {
   let shared = {};
 
   function link($scope, element, attrs) {

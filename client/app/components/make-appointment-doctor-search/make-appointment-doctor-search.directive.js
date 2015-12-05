@@ -19,7 +19,7 @@ import 'selectize/dist/css/selectize.default.css';
 import doctorSearchTemplate from './make-appointment-doctor-search.template.html';
 import './make-appointment-doctor-search.sass';
 
-let partial =
+const partial =
   angular
     .module('doctorSearchearchDirectiveModule', [
       'ui.select',

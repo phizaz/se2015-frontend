@@ -13,7 +13,7 @@ import Directive from '../directive.js';
 import makeAppointmentModalTemplate from './make-appointment-modal.template.html';
 import './make-appointment-modal.sass';
 
-let partial =
+const partial =
   angular
     .module('makeAppointmentModalDirectiveModule', [
       // services

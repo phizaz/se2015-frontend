@@ -11,8 +11,8 @@
         <div input-field class="search-field-inside">
           <!-- <i class="material-icons prefix">search</i> -->
           <input type="text"
-            ng-model="staff.searchForm.firstname"
-            ng-disabled="staff.searching"
+            ng-model="staff.form.firstname"
+            ng-disabled="staff.search.loading"
             id="search"></input>
           <label for="search">ชื่อ</label>
         </div>
@@ -21,19 +21,19 @@
           <!-- <i class="material-icons prefix">search</i> -->
           <input type="text"
             ng-model="staff.searchFrom.lastname"
-            ng-disabled="staff.searching"
+            ng-disabled="staff.search.loading"
             id="search2"></input>
           <label for="search2">สกุล</label>
         </div>
 
         <div class="search-field-inside">
           <button
-            ng-click="staff.search(staff.searchForm.firstname, staff.searchForm.lastname)"
-            ng-disabled="staff.searching"
+            ng-click="staff.searchPatient(staff.form.firstname, staff.form.lastname)"
+            ng-disabled="staff.search.loading"
             class="search-btn orange white-text btn"
             type="submit">
-            <span ng-show="!staff.searching">ค้นหาผู้ป่วย</span>
-            <span ng-show="staff.searching">รอซักครู่</span>
+            <span ng-show="!staff.search.loading">ค้นหาผู้ป่วย</span>
+            <span ng-show="staff.search.loading">รอซักครู่</span>
           </button>
         </div>
 
@@ -44,7 +44,7 @@
 
   <div class="left">
     <div
-      ng-show="staff.searchResult.length === 0"
+      ng-show="staff.searchResults.length === 0"
       class="no-result">
 
       <h4>ไม่มีผลการค้นหา...</h4>
@@ -52,11 +52,11 @@
     </div>
 
     <div
-      ng-show="staff.searchResult.length > 0"
+      ng-show="staff.searchResults.length > 0"
       cass="some-result">
 
       <patient-information
-        ng-repeat="patient in staff.searchResult"
+        ng-repeat="patient in staff.searchResults"
         patient="patient"></patient-information>
     </div>
 
@@ -67,12 +67,12 @@
     <div
       ng-show="staff.unconfirmedStaffs.length === 0"
       class="no-result">
-      <h4 ng-show="!staff.refreshing">
+      <h4 ng-show="!staff.fetch.loading">
         ไม่มีคำร้องในตอนนี้
-        <a href="" ng-click="staff.refresh()">รีเฟรช</a>
+        <a href="" ng-click="staff.fetchUnconfirmedStaff()">รีเฟรช</a>
       </h4>
 
-      <h4 ng-show="staff.refreshing">
+      <h4 ng-show="staff.fetch.loading">
         รอซักครู่
       </h4>
     </div>
