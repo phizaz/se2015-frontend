@@ -31,6 +31,7 @@ export /*@ngInject*/ class StaffController {
     });
     // init call
     mapStateToThis(Store.getState());
+    this.fetchUnconfirmedStaff();
   }
 
   searchPatient(firstname, lastname) {
