@@ -13,7 +13,8 @@ const Directive = {
 
 };
 
-export default Directive;
+export default Directive
+
 
 // this will be private and shared only with an instance of directive
 let priv = new Map();
@@ -74,7 +75,7 @@ function newDirective(obj) {
   // just some checking ...
   // making sure that there are no alien parameters
   let validKeys = [
-    'interfaces', 'controllerAs', 'link', 'template', 'props', 'methods', 'starter', 'watcher'
+    'interfaces', 'controllerAs', 'link', 'template', 'props', 'methods', 'starter', 'watcher', 'transclude',
   ];
 
   for (let key of Object.keys(obj)) {
@@ -119,6 +120,7 @@ function newDirective(obj) {
     controllerAs: obj.controllerAs,
     link: obj.link,
     template: obj.template,
+    transclude: obj.transclude || false,
   };
 
 }
