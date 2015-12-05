@@ -2,9 +2,9 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-messages';
 
-import {RegisterController} from './register.controller';
+import { RegisterController } from './register.controller';
 import registerTemplate from './register.template.html';
-import "./register.sass";
+import './register.sass';
 
 const partial =
   angular.module('registerRouteModule', [
@@ -26,7 +26,23 @@ partial.config(
         controllerAs: 'register',
         resolve: {
           redirectToHisOwnPage: (Login) => {
-            return Login.toHisOwnPage();
+            return new Promise(
+              (resolve, reject) => {
+                Login.toHisOwnPage()
+                  .then(() => {
+                    resolve();
+                  })
+                  .catch((err) => {
+                    console.log('redirect:', err);
+                    if (err.redirect === 'staff') {
+                      // let staff to get in the register page
+                      resolve();
+                    }
+                    else {
+                      reject(err);
+                    }
+                  });
+              });
           }
         }
       })

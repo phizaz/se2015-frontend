@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+
 /**
  * [STAFF_SEARCH_PATIENT_REQUEST description]
  * @type {String}
@@ -203,11 +204,3 @@ export function staffDismiss(staffId) {
       });
   };
 }
-
-/**
- * [STAFF_ADD_PATIENT_REQUEST description]
- * @type {String}
- */
-export const STAFF_ADD_PATIENT_REQUEST = 'STAFF_ADD_PATIENT_REQUEST';
-export const STAFF_ADD_PATIENT_SUCCESS = 'STAFF_ADD_PATIENT_SUCCESS';
-export const STAFF_ADD_PATIENT_FAILURE = 'STAFF_ADD_PATIENT_FAILURE';

@@ -2,11 +2,6 @@ import actions from './actions/';
 
 export default {
 
-  inspector(state = {}, action) {
-    console.log('inspect state:', state, 'action:', action);
-    return state;
-  },
-
   staff(state = {
     searchResults: [],
     search: {
@@ -28,6 +23,8 @@ export default {
       error: null,
     },
   }, action) {
+
+    console.log('inspect state:', state, 'action:', action);
 
     switch (action.type) {
       /*
