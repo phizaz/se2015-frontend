@@ -14,6 +14,7 @@ const partial =
     require('../../components/patient-information/patient-information.directive'),
     require('../../components/doctor-information/doctor-information.directive'),
     require('../../components/show-appointment/show-appointment.directive'),
+    require('../../components/make-appointment-modal/make-appointment-modal.directive'),
   ]);
 
 export default partial.name;

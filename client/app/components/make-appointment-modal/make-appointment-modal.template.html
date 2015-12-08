@@ -1,6 +1,6 @@
 <!-- step 1 - select doctors  -->
 <div class="make-appointment-modal modal">
-  <div class="modal-header orange">
+  <div class="modal-header orange row ">
     <button
       class="close-button modal-close btn-flat">
       <i class="fa fa-close"></i>
@@ -50,6 +50,7 @@
 <!-- step 2 - select appointment -->
 <appointment-select
   name="my.appointmentSelector"
+  patient="my.patient"
   title="my.appointmentSelectorTitle"
   on-back="my.showModal()"
   on-appointment-made="my.onAppointmentMade()"

@@ -140,6 +140,8 @@ function makeAppointmentModalDirective(MakeAppointment) {
     restrict: 'E',
     scope: {
       public: '=name',
+      // for specific patient (used by staff)
+      patient: '=',
       onAppointmentMade: '&',
     },
     bindToController: true,

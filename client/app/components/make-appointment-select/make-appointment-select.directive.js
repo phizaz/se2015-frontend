@@ -139,9 +139,17 @@ function appointmentSelect(MakeAppointment) {
         throw new Error('no selected card');
       }
 
+      if (my.patient) {
+        console.log('making an appointment with specific given patient');
+      }
+
+      if (!my.patient) {
+        console.log('making an appointment without speciifc user (my user)');
+      }
+
       my.submitting = true;
       MakeAppointment
-        .submitAppointment(my.selectingCard.doctor, my.selectingCard.datetime)
+        .submitAppointment(my.selectingCard.doctor, my.selectingCard.datetime, my.patient)
         .then(
           (res) => {
             console.log('summiting result:', res);
@@ -169,6 +177,8 @@ function appointmentSelect(MakeAppointment) {
     restrict: 'E',
     scope: {
       public: '=name',
+      // specific patient (used by staff)
+      patient: '=',
       title: '=',
       possibleAppointments: '=',
       onBack: '&',

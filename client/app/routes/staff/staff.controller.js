@@ -7,6 +7,12 @@ export /*@ngInject*/ class StaffController {
       Store: Store,
       $scope: $scope,
       form: {},
+      makeAppointmentModals: {},
+
+      searchPatientNoArg() {
+        console.log('call search patient no arg');
+        this.searchPatient(this.form.firstname, this.form.lastname);
+      }
     });
 
     const mapStateToThis = (state) => {
@@ -30,7 +36,7 @@ export /*@ngInject*/ class StaffController {
   }
 
   addAppointment(patient) {
-    throw new Error('not implemented yet');
+    this.makeAppointmentModals[patient.id].showModal();
   }
 
   deleteAppointment(appointment) {

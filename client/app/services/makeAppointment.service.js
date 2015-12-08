@@ -114,11 +114,18 @@ partial.service('MakeAppointment', ($http, $q) => {
         });
     }
 
-    submitAppointment(doctor, datetime) {
+    submitAppointment(doctor, datetime, patient = undefined) {
       if (!doctor.emp_id || !datetime) {
         console.log('doctor:', doctor);
         console.log('datetime:', datetime);
         throw new Error('no doctor or datetime');
+      }
+
+      if (patient) {
+        console.log('patient is present:', patient);
+        if (!patient.id) {
+          throw new Error('no patient id');
+        }
       }
 
       // return this.$q(
@@ -134,11 +141,11 @@ partial.service('MakeAppointment', ($http, $q) => {
 
           // make appointment
           this.$http
-            .post('/api/appointment/make',
-              {
-                doctor_id: doctor.emp_id,
-                datetime: datetime,
-              })
+            .post('/api/appointment/make',{
+              doctor_id: doctor.emp_id,
+              datetime: datetime,
+              patient_id: patient ? patient.id : null,
+            })
             .then(
               (res) => {
                 res = res.data;
