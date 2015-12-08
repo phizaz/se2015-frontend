@@ -1,5 +1,12 @@
 import $ from 'jquery';
 
+export const STAFF_TOGGLE_VIEW = 'STAFF_TOGGLE_VIEW';
+export function staffToggleView(patientId) {
+  return {
+    type: STAFF_TOGGLE_VIEW,
+    id: patientId,
+  };
+}
 
 /**
  * [STAFF_SEARCH_PATIENT_REQUEST description]
@@ -145,7 +152,7 @@ export function staffApprove(staffId) {
             dispatch(staffApproveSuccess(staffId));
             resolve();
           })
-          .fail((res) => {
+          .fail((err) => {
             console.log('staff approve err:', err);
             dispatch(staffApproveFailure(staffId, err));
             reject(err);
@@ -196,7 +203,7 @@ export function staffDismiss(staffId) {
             dispatch(staffDismissSuccess(staffId));
             resolve();
           })
-          .fail((res) => {
+          .fail((err) => {
             console.log('staff dismiss err:', err);
             dispatch(staffDismissFailure(staffId, err));
             reject(err);

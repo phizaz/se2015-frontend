@@ -45,6 +45,8 @@ partial.filter('gender',
     let conversion = {
       M: 'ชาย',
       F: 'หญิง',
+      m: 'ชาย',
+      f: 'หญิง',
     };
     return (gender) => {
       return conversion[gender];

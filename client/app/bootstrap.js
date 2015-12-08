@@ -5,10 +5,10 @@ import 'babel/polyfill';
 
 import angular from 'angular';
 
-angular.element(document).ready(function() {
+angular.element(document).ready(() => {
   angular.bootstrap(document, [
-      require('./main')
-    ], {
-      strictDi: true,
-    });
+    require('./main')
+  ], {
+    strictDi: true,
+  });
 });

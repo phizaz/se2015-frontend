@@ -4,6 +4,7 @@ export default {
 
   staff(state = {
     searchResults: [],
+    maximized: {},
     search: {
       loading: false,
       error: null,
@@ -27,6 +28,18 @@ export default {
     console.log('inspect state:', state, 'action:', action);
 
     switch (action.type) {
+      /*
+      STAFF TOGGLE VIEW
+       */
+      case actions.STAFF_TOGGLE_VIEW:
+        return {
+          ...state,
+          maximized: {
+            ...state.maximized,
+            [action.id]: !state.maximized[action.id],
+          },
+        };
+
       /*
       STAFF SERACH PATIENT
        */

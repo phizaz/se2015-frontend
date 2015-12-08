@@ -55,12 +55,170 @@
     </div>
 
     <div
-      ng-show="staff.searchResults.length > 0"
-      cass="some-result">
-
-      <patient-information
+      ng-if="staff.searchResults.length > 0">
+      <div
         ng-repeat="patient in staff.searchResults"
-        patient="patient"></patient-information>
+        class="patient-wrapper">
+
+
+          <div class="patient">
+            <a  href=""
+                ng-click="staff.toggleView(patient)"
+                ng-if="!staff.maximized[patient.id]">
+              <div class="brief">
+                <div class="img">
+
+                </div>
+
+                <div class="content">
+                  <h4 class="name">
+                    {{patient.firstname}} {{patient.lastname}}
+                  </h4>
+
+                  <p class="short-description">
+                    <span class="gender">
+                      เพศ {{patient.gender | gender}}
+                    </span>
+                    -
+                    <span class="nationality">
+                      เชื้อชาติ {{patient.nationality}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <div
+              ng-if="staff.maximized[patient.id]"
+              class="full row">
+                <div class="img-wrapper col s2">
+                  <div class="img">
+
+                  </div>
+                </div>
+
+                <div class="content col s10">
+                    <h4 class="name">
+                      {{patient.firstname}} {{patient.lastname}}
+                    </h4>
+
+                    <div class="patient-info row">
+                      <div class="patient-info-left col s6">
+                        <span class="personal-id">
+                          <strong>เลขประจำตัวประชาชน</strong> -
+                          {{patient.personal_id}}
+                        </span>
+
+                        <br>
+
+                        <span class="gender">
+                          <strong>เพศ</strong> -
+                          {{patient.gender | gender}}
+                        </span>
+
+                        <span class="nationality">
+                          <strong>เชื้อชาติ</strong> -
+                          {{patient.nationality}}
+                        </span>
+
+                        <span class="religion">
+                          <strong>ศาสนา</strong> -
+                          {{patient.religion}}
+                        </span>
+
+                        <br>
+
+                        <span class="address">
+                          <strong>ที่อยู่</strong> -
+                          {{patient.address}}
+                        </span>
+
+                        <br>
+
+                        <span class="tel">
+                          <strong>โทร</strong> -
+                          {{patient.tel}}
+                        </span>
+
+                        <br>
+
+                        <span class="email">
+                          <strong>อีเมล</strong> -
+                          {{patient.email}}
+                        </span>
+                      </div>
+
+                      <div class="patient-info-right col s6">
+                        <!-- นัดหมายล่าสุด -->
+                        <div class="appointments">
+                          <div class="appointments-wrapper-card card">
+
+                            <ul class="collection">
+
+                              <li
+                                ng-repeat="appointment in patient.appointments | orderBy: 'appointment.time'"
+                                class="collection-item avatar">
+
+                                <div class="actions">
+                                  <button class="btn red"
+                                    ng-click="staff.deleteAppointment(appointment)">
+                                    ลบ
+                                  </button>
+                                </div>
+
+                                <i class="time circle">
+                                  {{appointment.time | amDateFormat:'H:mm'}}
+                                </i>
+                                <span class="title">
+                                  <small>
+                                  {{appointment.doctor.firstname}} {{appointment.doctor.lastname}}
+                                  </small>
+                                </span>
+
+                                <p>
+                                  <span class="date">
+                                    {{appointment.time | amDateFormat:'ddddที่ Do MMMM YYYY'}}
+                                  </span>
+                                </p>
+                              </li>
+
+                              <li>
+                                <a href=""
+                                  ng-click="staff.addAppointment(patient)">
+                                  <h4 class="add-appointment">
+                                    <i class="fa fa-add"></i>
+                                      เพิ่มนัดหมาย
+                                  </h4>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style="clear: both;"></div>
+                    </div>
+
+                </div>
+
+                <div style="clear: both;"></div>
+
+                <div class="toggle-view">
+                  <a href=""
+                    ng-click="staff.toggleView(patient)">
+                    <h4>
+                      <i class="fa fa-bars"></i>
+                      ยุบลง
+                    </h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+        </a>
+      </div>
+
+
     </div>
 
   </div>

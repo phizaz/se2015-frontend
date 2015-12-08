@@ -7,17 +7,6 @@ export /*@ngInject*/ class StaffController {
       Store: Store,
       $scope: $scope,
       form: {},
-
-      // unconfirmedStaffs: unconfirmedStaffs,
-
-      // onApprove: (staff) => {
-      //   this.appove(staff);
-      // },
-      // onDiscard: (staff) => {
-      //   this.discard(staff);
-      // },
-
-      // refreshing: false,
     });
 
     const mapStateToThis = (state) => {
@@ -32,6 +21,20 @@ export /*@ngInject*/ class StaffController {
     // init call
     mapStateToThis(Store.getState());
     this.fetchUnconfirmedStaff();
+  }
+
+  toggleView(patient) {
+    console.log('toggling the patient: ', patient);
+    this.Store.dispatch(
+      actions.staffToggleView(patient.id));
+  }
+
+  addAppointment(patient) {
+    throw new Error('not implemented yet');
+  }
+
+  deleteAppointment(appointment) {
+    throw new Error('not implemented yet');
   }
 
   searchPatient(firstname, lastname) {
