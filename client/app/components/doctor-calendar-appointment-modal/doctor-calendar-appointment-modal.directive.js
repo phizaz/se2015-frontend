@@ -34,6 +34,10 @@ partial.directive('doctorCalendarAppointmentModal', (Store) => {
 
     props: {
       patient: {},
+      sandbox: {
+        drugAllergic: null,
+      },
+      drugAllergicEditing: false,
     },
 
     link($scope, element) {
@@ -41,7 +45,7 @@ partial.directive('doctorCalendarAppointmentModal', (Store) => {
         $modal: element.find('.modal')
       });
 
-      // this.showModal();
+      this.showModal();
     },
 
     watcher() {
@@ -74,6 +78,24 @@ partial.directive('doctorCalendarAppointmentModal', (Store) => {
     },
 
     methods: {
+      drugAllergicStartEdit() {
+        console.log('drugallergic edit start');
+        this.sandbox.drugAllergic = this.drugAllergic;
+        this.drugAllergicEditing = true;
+      },
+
+      drugAllergicSubmitEdit(drugAllergic) {
+        console.log('drugallergic edit submit');
+        this.drugAllergicEdit(drugAllergic)
+          .then(() => {
+            this.drugAllergicEditing = false;
+          });
+      },
+
+      drugAllergicCancelEdit() {
+        this.drugAllergicEditing = false;
+      },
+
       showModal() {
         this.$modal.openModal({
           dismissible: false,
@@ -105,7 +127,7 @@ partial.directive('doctorCalendarAppointmentModal', (Store) => {
       drugAllergicEdit(drugAllergic) {
         let patientId = this.patient.id;
         console.log('editing drug allergic:', drugAllergic);
-        Store.dispatch(actions.editDrugAllergic(patientId, drugAllergic));
+        return Store.dispatch(actions.editDrugAllergic(patientId, drugAllergic));
       },
 
       symptomAdd(symptom) {

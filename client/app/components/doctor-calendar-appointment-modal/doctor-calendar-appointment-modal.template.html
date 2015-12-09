@@ -109,7 +109,58 @@
         </div>
 
         <span class="drug-allergic">
-          <strong>ยาที่แพ้</strong> - {{my.patient.drugAllergic}}
+          <div
+            ng-if="!my.drugAllergicEditing">
+            <p>
+              <strong>ยาที่แพ้</strong> - {{my.drugAllergic}}
+            </p>
+
+            <button
+              ng-click="my.drugAllergicStartEdit()"
+              class="btn orange edit-button">
+              <i class="fa fa-edit"></i>
+              แก้ไขยาที่แพ้
+            </button>
+          </div>
+
+          <div
+            ng-if="my.drugAllergicEditing"
+            class="drug-allergic-edit animated bounceIn">
+            <div input-field>
+              <input
+                ng-model="my.sandbox.drugAllergic"
+                ng-disabled="my.editDrugAllergic.loading"
+                type="text"
+                class="validate"
+                id="drugAllergic"
+                required>
+              <label for="drugAllergic">ยาที่แพ้</label>
+            </div>
+
+            <div class="actions">
+              <button
+                ng-click="my.drugAllergicSubmitEdit(my.sandbox.drugAllergic)"
+                ng-disabled="my.editDrugAllergic.loading"
+                class="btn green">
+                <span ng-show="!my.editDrugAllergic.loading">
+                  แก้ไข
+                </span>
+
+                <span ng-show="my.editDrugAllergic.loading">
+                  <i class="fa fa-spin fa-circle-o-notch"></i>
+                  รอซักครู่
+                </span>
+              </button>
+
+              <button
+                ng-click="my.drugAllergicCancelEdit()"
+                ng-disabled="my.editDrugAllergic.loading"
+                class="btn red">
+                <span>ยกเลิก</span>
+              </button>
+            </div>
+          </div>
+
         </span>
       </div>
 
