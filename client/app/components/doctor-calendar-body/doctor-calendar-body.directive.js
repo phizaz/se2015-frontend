@@ -137,7 +137,10 @@ partial.directive('doctorCalendarBody', (DOCTOR_CALENDAR, DoctorTimeEditing) => 
       askDamage() {
         let damages = {};
         for (let each of this.doctorCalendarDays) {
-          damages[this.dateFormat(each.date)] = each.askDamage();
+          let eachDamages = each.askDamage();
+          if (eachDamages.length > 0) {
+            damages[this.dateFormat(each.date)] = eachDamages;
+          }
         }
         return damages;
       },
