@@ -78,7 +78,14 @@ partial.service('MakeAppointment', ($http, $q) => {
                 res = res.data;
 
                 if (res.success) {
-                  resolve(res.data);
+                  let data = res.data.map(x => {
+                    return {
+                      ...x,
+                      datetime: x.datetime.date,
+                    };
+                  });
+
+                  resolve(data);
                 } else {
                   console.log(res);
                   throw new Error('find options by specialty');
