@@ -8,6 +8,7 @@ export /*@ngInject*/ class StaffController {
       $scope: $scope,
       form: {},
       makeAppointmentModals: {},
+      deleteAppointmentModals: {},
 
       searchPatientNoArg() {
         console.log('call search patient no arg');
@@ -40,7 +41,8 @@ export /*@ngInject*/ class StaffController {
   }
 
   deleteAppointment(appointment) {
-    throw new Error('not implemented yet');
+    console.log('gonna delete:', appointment, 'modals:', this.deleteAppointmentModals);
+    this.deleteAppointmentModals[appointment.appointment_id].showModal();
   }
 
   searchPatient(firstname, lastname) {

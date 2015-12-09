@@ -38,7 +38,7 @@ export default class TimeBlockConverter {
     return diffMinutes / 15;
   }
 
-  static dateFromat(momentDate) {
+  static dateFormat(momentDate) {
     return momentDate.format('YYYY-MM-DD');
   }
 

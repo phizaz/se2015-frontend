@@ -180,6 +180,10 @@
                                     {{appointment.time | amDateFormat:'ddddที่ Do MMMM YYYY'}}
                                   </span>
                                 </p>
+
+                                <delete-appointment-modal
+                                  name="staff.deleteAppointmentModals[appointment.appointment_id]"
+                                  appointment="appointment"></delete-appointment-modal>
                               </li>
 
                               <li>

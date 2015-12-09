@@ -31,18 +31,12 @@ partial.service('MakeAppointment', ($http, $q) => {
                 res = res.data;
 
                 if (res.success) {
-                  let data = [];
-
-                  for (let each of res.data.datetime) {
-                    if (!each.doctorTime_begin) {
-                      continue;
-                    }
-
-                    data.push({
-                      datetime: (each.doctorTime_begin).date,
-                      doctor: res.data.doctor,
-                    });
-                  }
+                  let data = res.data.map(x => {
+                    return {
+                      ...x,
+                      datetime: x.datetime.date,
+                    };
+                  });
 
                   resolve(data);
                 } else {

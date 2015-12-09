@@ -34,7 +34,7 @@
   <div class="modal-content">
     <div class="appointment-card-wrapper">
       <appointment-select-card
-        ng-repeat="appointment in my.possibleAppointments"
+        ng-repeat="appointment in my.possibleAppointments | orderBy:'datetime'"
         datetime="appointment.datetime"
         doctor="appointment.doctor"
         disabled="my.submitting"

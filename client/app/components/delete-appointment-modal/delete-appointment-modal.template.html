@@ -1,0 +1,18 @@
+<div class="delete-appointment-modal modal" style="padding: 2rem">
+
+  <div class="modal-content">
+
+    <h4 style="text-align: center;">ต้องการยกเลิกนัดหมายนี้จริงหรือไม่ ?</h4>
+
+  </div>
+
+  <div class="modal-footer" style="text-align: center;">
+    <button ng-click="my.deleteAppointment(my.appointment)"
+            ng-disabled="my.delete.loading"
+            class="modal-action orange btn quark bold"
+            style="float: none;">
+      <span ng-if="!my.delete.loading">ยกเลิกนัดหมายนี้</span>
+      <span ng-if="my.delete.loading">รอซักครู่</span>
+    </button>
+  </div>
+</div>

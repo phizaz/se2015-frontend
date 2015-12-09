@@ -2,6 +2,46 @@ import actions from './actions/';
 
 export default {
 
+  appointment(state = {
+    delete: {
+      loading: false,
+      error: null,
+    },
+  }, action) {
+    switch(action.type) {
+      /*
+      DELETE APPOINTMENT
+       */
+      case actions.APPOINTMENT_DELETE_REQUEST:
+        return {
+          ...state,
+          delete: {
+            ...state.delete,
+            loading: true,
+          },
+        };
+      case actions.APPOINTMENT_DELETE_SUCCESS:
+        return {
+          ...state,
+          delete: {
+            ...state.delete,
+            loading: false,
+          },
+        };
+      case actions.APPOINTMENT_DELETE_FAILURE:
+        return {
+          ...state,
+          delete: {
+            ...state.delete,
+            loading: false,
+            error: action.error,
+          },
+        };
+      default:
+        return state;
+    }
+  },
+
   staff(state = {
     searchResults: [],
     maximized: {},
@@ -28,6 +68,22 @@ export default {
     console.log('inspect state:', state, 'action:', action);
 
     switch (action.type) {
+      /*
+      SOME APPOINTMENT HAS BEEN REMOVED
+       */
+      case actions.APPOINTMENT_DELETE_SUCCESS:
+        return {
+          ...state,
+          searchResults: state.searchResults
+            .map(x => {
+              return {
+                ...x,
+                appointments: x.appointments
+                  .filter(y => y.appointment_id !== action.appointmentId)
+              };
+            })
+        };
+
       /*
       STAFF TOGGLE VIEW
        */
