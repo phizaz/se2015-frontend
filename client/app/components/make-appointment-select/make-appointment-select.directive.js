@@ -106,6 +106,13 @@ function appointmentSelect(MakeAppointment) {
     }
 
     function showModal() {
+      _.extend(my, {
+        selectingCard: null,
+        submitting: false,
+        appointmentCreated: false,
+        appointmentSelectCards: [],
+      });
+
       my.element.children('.modal').openModal({
         dismissible: false,
       });

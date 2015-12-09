@@ -3,7 +3,7 @@ import moment from 'moment';
 
 export /*@ngInject*/ class PatientController {
 
-  constructor ($scope, userInfo, Login, $state) {
+  constructor($scope, userInfo, Login, $state, Store) {
 
     _.extend(this, {
       today: moment().format('YYYY-MM-DD'),
@@ -14,11 +14,26 @@ export /*@ngInject*/ class PatientController {
       loggingOut: false,
       $state: $state,
       loadingUserInfo: false,
+
+      deleteAppointmentModals: {},
     });
+  }
+
+  isFuture(appointment) {
+    return moment(appointment.appointment.time) > moment();
+  }
+
+  isPast(appointment) {
+    return moment(appointment.appointment.time) <= moment();
   }
 
   isToday(time) {
     return moment(time).format('YYYY-MM-DD') === this.today;
+  }
+
+  deleteAppointment(appointment) {
+    console.log('gonna delete:', appointment, 'modals:', this.deleteAppointmentModals);
+    this.deleteAppointmentModals[appointment.appointment_id].showModal();
   }
 
   logout() {
@@ -40,6 +55,10 @@ export /*@ngInject*/ class PatientController {
           console.log(res);
           throw new Error('logout');
         });
+  }
+
+  onAppointmentDeleted() {
+    this.onAppointmentMade();
   }
 
   onAppointmentMade() {

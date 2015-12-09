@@ -12,9 +12,11 @@ const partial =
 
     // services
     require('../../services/login.service'),
+    require('../../redux/store'),
 
     // directives
     require('../../components/make-appointment-modal/make-appointment-modal.directive'),
+    require('../../components/delete-appointment-modal/delete-appointment-modal.directive'),
   ]);
 
 export default partial.name;

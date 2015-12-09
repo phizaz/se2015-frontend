@@ -23,6 +23,7 @@ partial.directive('deleteAppointmentModal',
       interfaces: {
         public: '=name',
         appointment: '=',
+        onAppointmentDeleted: '&',
       },
 
       starter() {
@@ -44,7 +45,13 @@ partial.directive('deleteAppointmentModal',
           console.log('deleting an appointment:', appointment);
           Store.dispatch(actions.appointmentDelete(appointment.appointment_id))
             .then(() => {
+              console.log('delete finished!');
               this.hideModal();
+
+              if(this.onAppointmentDeleted) {
+                console.log('onAppointmentDeleted');
+                this.onAppointmentDeleted();
+              }
             });
         },
 

@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div class="body animated fadeIn">
+  <div class="body">
 
       <div class="container">
 
@@ -123,9 +123,44 @@
                 ng-if="my.userInfo.appointments.length > 0">
 
                 <li
-                  ng-repeat="each in my.userInfo.appointments | orderBy: 'appointment.time'"
+                  ng-repeat="each in my.userInfo.appointments | orderBy: 'appointment.time' | filter: my.isFuture"
                   ng-class="{now: my.isToday(each.appointment.time)}"
                   class="collection-item avatar">
+
+                  <div class="actions">
+                    <button class="btn red"
+                      ng-click="my.deleteAppointment(each.appointment)">
+                      ลบ
+                    </button>
+                  </div>
+
+                  <delete-appointment-modal
+                    name="my.deleteAppointmentModals[each.appointment.appointment_id]"
+                    appointment="each.appointment"
+                    on-appointment-deleted="my.onAppointmentDeleted()"></delete-appointment-modal>
+
+                  <i class="time circle">
+                    {{each.appointment.time | amDateFormat:'H:mm'}}
+                  </i>
+                  <span class="title">
+                    <small>นัดหมายกับ</small>
+                    {{each.doctor.firstname}} {{each.doctor.lastname}}
+                  </span>
+
+                  <p>
+                    <span class="date">
+                      <span ng-show="my.isToday(each.appointment.time)">วันนี้</span>
+                      <span ng-show="!my.isToday(each.appointment.time)">
+                        {{each.appointment.time | amDateFormat:'ddddที่ Do MMMM YYYY'}}
+                      </span>
+                    </span>
+                  </p>
+                </li>
+
+                <li
+                  ng-repeat="each in my.userInfo.appointments | orderBy: 'appointment.time' | filter: my.isPast"
+                  ng-class="{now: my.isToday(each.appointment.time)}"
+                  class="collection-item avatar old">
 
                   <i class="time circle">
                     {{each.appointment.time | amDateFormat:'H:mm'}}
