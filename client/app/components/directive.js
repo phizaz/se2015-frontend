@@ -40,7 +40,7 @@ function getPrivate($scope) {
 function createController($scope, init, obj) {
   let my = createPrivate($scope, init);
 
-  _.extend(my, {public: my});
+  _.extend(my, { public: my });
 
   _.extend(my, obj.props || {});
 
@@ -58,14 +58,14 @@ function createController($scope, init, obj) {
 
   _.extend(my, obj.methods || {});
 
-  // run the starter
-  if (obj.starter) {
-    obj.starter.call(my, $scope);
-  }
-
   // run the watches
   if (obj.watcher) {
     obj.watcher.call(my, $scope);
+  }
+
+  // run the starter
+  if (obj.starter) {
+    obj.starter.call(my, $scope);
   }
 
   return my;

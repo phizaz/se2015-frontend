@@ -1,5 +1,5 @@
 doctor-drug-list
-  .drug-info
+  .drug-list
     padding: 0px
     overflow: hidden
     margin: 0px
@@ -38,9 +38,16 @@ doctor-drug-list
       overflow-x: hidden
       padding: 1rem
 
+      .no-drug
+        font-size: 2rem
+        font-weight: bold
+        text-align: center
+        padding: 1.5rem
+        color: darken(white, 40%)
+        margin: 0px
 
       .collection
-        margin: 0px 0px 1rem 0px
+        margin: 0px
 
       .collection-header
         padding: 0.4rem 0.7rem
@@ -49,28 +56,21 @@ doctor-drug-list
           margin: 0px
           font-size: 0.8rem
 
-      .collection-item.new
-        background-color: darken(white, 4%)
-        // color: rgb(225,0,0)
-
       .collection-item
         padding: 0.5rem
         font-size: 0.8rem
 
-        .drug-info-each
+        .drug-list-each
+          border-bottom: 1px solid darken(white, 10%)
 
-          .editing
-            .row
-              width: 80%
-
-            .input-field
-              label
-                left: 0px
-              input
-                height: auto
+          .row
+            margin: 0px
 
           .actions
-            float: right
+            text-align: right
+            padding-right: 0px
+            padding: 0.6rem 0rem
+
             .btn
               width: 45px
               padding: 0px
@@ -79,6 +79,9 @@ doctor-drug-list
               line-height: 1.35rem
               height: 1.35rem
               margin: 0.15rem
+
+              i
+                font-size: 0.75rem
 
             .edit
               background-color: rgb(254,163,0)
@@ -89,14 +92,14 @@ doctor-drug-list
           .content
             padding: 0.35rem 0.35rem 0.3rem 0.35rem
 
-            .name
-              font-size: 1rem
+            small
+              font-size: 0.7rem
               font-weight: bold
-              margin: 0px
+
+            input
+              font-size: 0.9rem
+              padding-left: 0.7rem
 
             .description
               margin: 0px
-
-            .row
-              margin: 0px
-
+              font-size: 0.9rem

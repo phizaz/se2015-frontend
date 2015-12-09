@@ -3,175 +3,100 @@ import _ from 'lodash';
 import moment from 'moment';
 import Directive from '../directive';
 
-// services
-import {drugRecordServiceModule} from '../../services/drugRecord.service';
-
 // locals
 import template from './doctor-drug-list.template.html';
 import './doctor-drug-list.sass';
 
 const partial =
   angular
-    .module('doctorDrugListDirectiveModule', [
-      drugRecordServiceModule.name,
-      ]);
+    .module('doctorDrugListDirectiveModule', []);
 
 export default partial.name;
 
-partial.directive('doctorDrugList', doctorDrugListDirective);
+partial.directive('doctorDrugList',
+  () => {
+    return Directive.new({
+      controllerAs: 'my',
+      template: template,
 
-function doctorDrugListDirective(DrugRecord) {
+      interfaces: {
+        drugs: '=',
 
-  let shared = {};
+        addDrug: '=',
+        editDrug: '=',
+        deleteDrug: '=',
 
-  function controller($scope) {
-    let my = Directive.constructor($scope, this);
+        createDrugFn: '&',
+        editDrugFn: '&',
+        deleteDrugFn: '&',
+      },
 
-    _.extend(my, {
-      addingDrug: false,
-      editingDrug: false,
-      deletingDrug: false,
-      // editable
-      drugListByDate: {},
-      days: [],
-      momentDays: [],
-      newDrug: {},
-      today: moment().format('YYYY-MM-DD'),
+      props: {
+        new: null,
+        newing: false,
 
-      addDrug: addDrug,
-      editDrug: editDrug,
-      cancelEditDrug: cancelEditDrug,
-      performEditDrug: performEditDrug,
-      deleteDrug: deleteDrug,
-      isIdle: isIdle,
+        sandbox: {},
+        editing: {}, //key: drugId
+      },
 
-      // this is intentionally put here
-      public: my,
-    });
+      methods: {
+        create() {
+          this.new = {
+            name: null,
+            quantity: 1,
+            remark: null,
+          };
+          this.newing = true;
+        },
 
-    init();
+        isToday(date) {
+          return moment(date).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD');
+        },
 
-    function init() {
-      my.drugListByDate = [];
-      // drugListByDate & days & momentDays
-      for (let drug of (my.drugList || [])) {
-        let date = moment(drug.created_at).format('YYYY-MM-DD');
+        submitCreate() {
+          console.log('this:', this);
+          this.createDrugFn({ drug: this.new })
+            .then(() => {
+              this.newing = false;
+            });
+        },
 
-        if (!my.drugListByDate[date]) {
-          my.drugListByDate[date] = [];
-          my.days.push(date);
-          my.momentDays.push(moment(date));
+        cancelCreate() {
+          this.newing = false;
+        },
+
+        edit(drug) {
+          let drugId = drug.drug_id;
+          this.sandbox = {
+            ...this.sandbox,
+            [drugId]: this.drugs
+              .reduce((old, x) => {
+                if (x.drug_id !== drugId) {
+                  return old;
+                }
+                return { ...x };
+              }, null)
+          };
+          this.editing[drugId] = true;
+        },
+
+        submitEdit(drug) {
+          let drugId = drug.drug_id;
+          this.editDrugFn({ drug })
+            .then(() => {
+              this.editing[drugId] = false;
+            });
+        },
+
+        cancelEdit(drug) {
+          let drugId = drug.drug_id;
+          this.editing[drugId] = false;
+        },
+
+        delete(drug) {
+          this.deleteDrugFn({ drug });
         }
-
-        my.drugListByDate[date].push(angular.copy(drug));
-      }
-      console.log('drugListByDate:', my.drugListByDate);
-    }
-
-    function isIdle() {
-      return !my.addingDrug && !my.editingDrug && !my.deletingDrug;
-    }
-
-    function addDrug() {
-      if (!isIdle()) {
-        throw new Error('busy!');
-      }
-
-      // my.addingDrug = true;
-      init();
-
-      let newDrug = {
-        name: '',
-        quantity: undefined,
-        remark: '',
-        new: true,
-      };
-      my.drugListByDate[my.today].push(newDrug);
-      editDrug(newDrug);
-      console.log('drugListByDate:', my.drugListByDate);
-
-    }
-
-    function editDrug(drug) {
-      if (!isIdle()) {
-        throw new Error('busy!');
-      }
-
-      my.editingDrug = true;
-      drug.editing = true;
-    }
-
-    function cancelEditDrug(drug) {
-      my.editingDrug = false;
-      init();
-    }
-
-    function performEditDrug(drug) {
-      my.editingDrug = true;
-
-      DrugRecord
-        .editDrug(drug)
-        .then(
-          (res) => {
-            my.editingDrug = false;
-            // update in the prototype
-            let item = _.find(my.drugList, { drug_id: drug.drug_id });
-            angular.copy(drug, item);
-            console.log('new drugList:', my.drugList);
-            init();
-          })
-        .catch(
-          (error) => {
-            my.editingDrug = false;
-            // todo
-          });
-    }
-
-    function deleteDrug(drug) {
-      if (!isIdle()) {
-        throw new Error('busy!');
-      }
-
-      my.deletingDrug = true;
-
-      DrugRecord
-        .deleteDrug(drug)
-        .then(
-          (res) => {
-            my.deletingDrug = false;
-            // delete from the prototype
-            let idx = _.findIndex(my.drugList, drug);
-            my.drugList.splice(idx, 1);
-            console.log('new drugList:', my.drugList);
-            init();
-          })
-        .catch(
-          (error) => {
-            my.deletingDrug = false;
-            // todo
-          });
-    }
-  }
-
-  function link($scope, element, attrs) {
-    let my = Directive.getPrivate($scope);
-
-    _.extend(my, {
-      element: element,
-      attrs: attrs,
+      },
     });
-  }
+  });
 
-  return {
-    restrict: 'E',
-    scope: {
-      'drugList': '=',
-    },
-    bindToController: true,
-    controller: controller,
-    controllerAs: 'my',
-    link: link,
-    template: template,
-  };
-
-}

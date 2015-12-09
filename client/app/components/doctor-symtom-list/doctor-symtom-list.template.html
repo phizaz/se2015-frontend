@@ -1,12 +1,20 @@
-<div class="symtom-list card">
+<div class="symptom-list card">
   <div class="card-header">
 
     <div class="actions">
-      <button
-        ng-click="my.addSymtom()"
-        class="add btn">
-        เพิ่ม
-      </button>
+        <button
+          ng-if="!my.newing"
+          ng-click="my.create()"
+          class="add btn">
+          เพิ่ม
+        </button>
+
+        <button
+          ng-if="my.newing"
+          ng-click="my.cancelCreate()"
+          class="add btn">
+          ยกเลิก
+        </button>
     </div>
 
     <h4 class="title">
@@ -17,36 +25,148 @@
   <div class="card-content">
 
     <ul class="collection with-header">
-      <li class="collection-header">
+<!--       <li class="collection-header">
         <h4>วันนี้</h4>
       </li>
-
-      <!-- each drug info -->
+ -->
       <li class="collection-item">
-        <div class="symtom-list-each">
-          <div class="actions">
 
-            <div>
-              <button
-                ng-click="my.editSymtom()"
-                class="edit btn">แก้ไข</button>
+        <!-- new symptom -->
+        <div
+          ng-if="my.newing"
+          class="symptom-list-each animated bounceIn">
+          <div class="row">
+            <div class="content col s9">
+              <div input-field>
+                <input
+                  ng-model="my.new.report"
+                  ng-disabled="my.addSymptom.loading"
+                  type="text"
+                  class="validate"
+                  id="report"
+                  required>
+                <label for="report">อาการ</label>
+              </div>
             </div>
 
-            <div>
-              <button
-                ng-click="my.deleteSymtom()"
-                class="cancel btn">ยกเลิก</button>
+            <div class="actions col s3">
+              <div>
+                <button
+                  ng-click="my.submitCreate()"
+                  class="edit btn">
+                  <span ng-show="!my.addSymptom.loading">
+                    เพิ่ม
+                  </span>
+
+                  <span ng-show="my.addSymptom.loading">
+                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                  </span>
+                </button>
+              </div>
+
+              <div>
+                <button
+                  ng-click="my.cancelCreate()"
+                  class="cancel btn">ยกเลิก</button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <h4
+          ng-if="my.symptoms.length === 0"
+          class="no-symtom">
+          ไม่มีประวัิตอาการ
+        </h4>
+
+        <!-- each symptom info -->
+        <div
+          ng-repeat="symptom in my.symptoms | orderBy: '-symptom_id'"
+          class="symptom-list-each">
+          <div class="row">
+            <div class="content col s9">
+              <p>
+                <small>{{symptom.created_at | amDateFormat:'Do MMMM YYYY'}}</small>
+
+                <small ng-show="my.isToday(symptom.created_at)">(วันนี้)</small>
+              </p>
+              <p
+                ng-if="!my.editing[symptom.symptom_id]"
+                class="description">
+                {{symptom.report}}
+              </p>
+
+              <div
+                ng-if="my.editing[symptom.symptom_id]"
+                input-field>
+                <input
+                  ng-model="my.sandbox[symptom.symptom_id].report"
+                  ng-disabled="my.addSymptom.loading"
+                  type="text"
+                  class="validate"
+                  id="report"
+                  required>
+                <label for="report">อาการ</label>
+              </div>
             </div>
 
-          </div>
+            <div
+              ng-if="my.isToday(symptom.created_at)"
+              class="actions col s3">
+              <div
+                ng-if="!my.editing[symptom.symptom_id]">
+                <div>
+                  <button
+                    ng-click="my.edit(symptom)"
+                    ng-disabled="my.deleteSymptom.loading"
+                    class="edit btn">แก้ไข</button>
+                </div>
 
-          <div class="content">
-            <p class="description">
-              ผู้ป่วยมีอาการเจ็บคอ เนื่องจากหวัด และแพ้อากาศฤดูหนาว
-            </p>
-          </div>
+                <div>
+                  <button
+                    ng-click="my.delete(symptom)"
+                    ng-disabled="my.deleteSymptom.loading"
+                    class="cancel btn">
+                    <span ng-show="!my.deleteSymptom.loading">
+                      ลบ
+                    </span>
 
-          <div style="clear:both;"></div>
+                    <span ng-show="my.deleteSymptom.loading">
+                      <i class="fa fa-spin fa-circle-o-notch"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div
+                ng-if="my.editing[symptom.symptom_id]">
+                <div>
+                  <button
+                    ng-click="my.submitEdit(my.sandbox[symptom.symptom_id])"
+                    ng-disabled="my.editSymptom.loading"
+                    class="edit btn">
+                    <span ng-show="!my.editSymptom.loading">
+                      แก้ไข
+                    </span>
+
+                    <span ng-show="my.editSymptom.loading">
+                      <i class="fa fa-spin fa-circle-o-notch"></i>
+                    </span>
+                  </button>
+                </div>
+
+                <div>
+                  <button
+                    ng-click="my.cancelEdit(symptom)"
+                    ng-disabled="my.editSymptom.loading"
+                    class="cancel btn">ยกเลิก</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </li>
 

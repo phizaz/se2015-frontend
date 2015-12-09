@@ -1,5 +1,5 @@
 doctor-symtom-list
-  .symtom-list
+  .symptom-list
     padding: 0px
     overflow: hidden
     margin: 0px
@@ -38,6 +38,13 @@ doctor-symtom-list
       overflow-x: hidden
       padding: 1rem
 
+      .no-symtom
+        font-size: 2rem
+        font-weight: bold
+        text-align: center
+        padding: 1.5rem
+        color: darken(white, 40%)
+        margin: 0px
 
       .collection
         margin: 0px
@@ -53,10 +60,17 @@ doctor-symtom-list
         padding: 0.5rem
         font-size: 0.8rem
 
-        .symtom-list-each
+        .symptom-list-each
+          border-bottom: 1px solid darken(white, 10%)
+
+          .row
+            margin: 0px
 
           .actions
-            float: right
+            text-align: right
+            padding-right: 0px
+            padding: 0.6rem 0rem
+
             .btn
               width: 45px
               padding: 0px
@@ -66,6 +80,9 @@ doctor-symtom-list
               height: 1.35rem
               margin: 0.15rem
 
+              i
+                font-size: 0.75rem
+
             .edit
               background-color: rgb(254,163,0)
 
@@ -74,6 +91,14 @@ doctor-symtom-list
 
           .content
             padding: 0.35rem 0.35rem 0.3rem 0.35rem
+
+            small
+              font-size: 0.7rem
+              font-weight: bold
+
+            input
+              font-size: 0.9rem
+              padding-left: 0.7rem
 
             .description
               margin: 0px

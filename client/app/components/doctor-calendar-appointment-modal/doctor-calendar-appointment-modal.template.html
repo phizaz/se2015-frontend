@@ -94,22 +94,22 @@
           <div class="height col s4">
             <strong>ส่วนสูง</strong>
             <br>
-            <span>170 ซม.</span>
+            <span>{{my.patient.patientReport.height}} ซม.</span>
           </div>
           <div class="weight col s4">
             <strong>น้ำหนัก</strong>
             <br>
-            <span>67 กก.</span>
+            <span>{{my.patient.patientReport.weight}} กก.</span>
           </div>
           <div class="pressure col s4">
             <strong>ความดัน</strong>
             <br>
-            <span>140/70</span>
+            <span>{{my.patient.patientReport.pressure}}</span>
           </div>
         </div>
 
         <span class="drug-allergic">
-          <strong>ยาที่แพ้</strong> - Adenaline Peptide 500 mg., Amoxcillin
+          <strong>ยาที่แพ้</strong> - {{my.patient.drugAllergic}}
         </span>
       </div>
 
@@ -122,7 +122,13 @@
       <div class="col s6">
 
         <doctor-drug-list
-          drug-list="my.patient.drugRecords"></doctor-drug-list>
+          drugs="my.drugs"
+          add-drug="my.addDrug"
+          edit-drug="my.editDrug"
+          delete-drug="my.deleteDrug"
+          create-drug-fn="my.drugAdd(drug)"
+          edit-drug-fn="my.drugEdit(drug)"
+          delete-drug-fn="my.drugDelete(drug)"></doctor-drug-list>
 
       </div>
 
@@ -130,7 +136,13 @@
       <div class="col s6">
 
         <doctor-symtom-list
-          symtom-list=""></doctor-symtom-list>
+          symptoms="my.symptoms"
+          add-symptom="my.addSymptom"
+          edit-symptom="my.editSymptom"
+          delete-symptom="my.deleteSymptom"
+          create-symptom-fn="my.symptomAdd(symptom)"
+          edit-symptom-fn="my.symptomEdit(symptom)"
+          delete-symptom-fn="my.symptomDelete(symptom)"></doctor-symtom-list>
 
       </div>
     </div>

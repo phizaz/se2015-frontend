@@ -6,7 +6,7 @@ import {
   applyMiddleware,
 } from 'redux';
 import thunk from 'redux-thunk';
-import reducers from './reducers';
+import reducers from './reducers/';
 
 const combinedReducer = combineReducers(reducers);
 const createStoreWithMiddleware = applyMiddleware(
@@ -20,8 +20,13 @@ export default partial.name;
 
 partial.factory('Store', ($timeout) => {
 
+  // inspect
+  store.subscribe(() => {
+    console.log('inspect state:', store.getState());
+  });
+
   store.$subscribe = (fn) => {
-    const unsubscribe =  store.subscribe(() => {
+    const unsubscribe = store.subscribe(() => {
       fn();
       // this will trigger $digest cycle
       $timeout();
