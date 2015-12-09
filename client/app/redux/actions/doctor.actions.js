@@ -1,5 +1,52 @@
 import $ from 'jquery';
 
+export const TO_PHARMACIST_REQUEST = 'TO_PHARMACIST_REQUEST';
+export const TO_PHARMACIST_SUCCESS = 'TO_PHARMACIST_SUCCESS';
+export const TO_PHARMACIST_FAILURE = 'TO_PHARMACIST_FAILURE';
+
+function toPharmacistRequest(patientId) {
+  return {
+    type: TO_PHARMACIST_REQUEST,
+    patientId,
+  };
+}
+
+function toPharmacistSuccess(patientId) {
+  return {
+    type: TO_PHARMACIST_SUCCESS,
+    patientId,
+  };
+}
+
+function toPharmacistFailure(patientId, error) {
+  return {
+    type: TO_PHARMACIST_FAILURE,
+    patientId,
+    error,
+  };
+}
+
+export function toPharmacist(patientId) {
+  return (dispatch) => {
+    dispatch(toPharmacistRequest(patientId));
+
+    return new Promise(
+      (resolve, reject) => {
+        $.post(`/api/to-pharmacist/${patientId}`)
+          .done((res) => {
+            console.log('toPharmacist res:', res);
+            dispatch(toPharmacistSuccess(patientId));
+            resolve();
+          })
+          .fail((err) => {
+            console.log('toPharmacist err:', err);
+            dispatch(toPharmacistFailure(patientId, err));
+            reject(err);
+          });
+      });
+  };
+}
+
 export const SYMPTOM_SET = 'SYMPTOM_SET';
 export function symptomSet(patientId, symptoms) {
   return {

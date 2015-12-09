@@ -106,6 +106,15 @@ partial.directive('doctorCalendarAppointmentModal', (Store) => {
         this.$modal.closeModal();
       },
 
+      patientToPharmacist() {
+        let patientId = this.patient.id;
+        console.log('patienToPharmacist..');
+        Store.dispatch(actions.toPharmacist(patientId))
+          .then(() => {
+            this.closeModal();
+          });
+      },
+
       setSymptom(symptoms) {
         let patientId = this.patient.id;
         console.log('setting symptom:', symptoms);

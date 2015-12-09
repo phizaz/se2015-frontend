@@ -13,8 +13,16 @@
     </button>
 
     <button ng-click="my.patientToPharmacist()"
+            ng-disabled="my.toPharmacist.loading"
             class="next-button modal-action waves-effect waves-light btn quark bold">
-      <span>ระบุให้้ไปรับยา</span>
+      <span ng-show="!my.toPharmacist.loading">
+        ระบุให้้ไปรับยา
+      </span>
+
+      <span ng-show="my.toPharmacist.loading">
+        <i class="fa fa-spin fa-circle-o-notch"></i>
+        รอซักครู่
+      </span>
     </button>
 
     <button ng-click="my.closeModal()"

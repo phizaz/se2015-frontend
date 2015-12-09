@@ -3,6 +3,11 @@ import actions from '../actions';
 export default {
 
   doctor(state = {
+    toPharmacist: {
+      loading: false,
+      error: null,
+    },
+
     drugAllergic: {}, //key: patientId
     editDrugAllergic: {
       loading: false,
@@ -40,6 +45,37 @@ export default {
     console.log('inspect action:', action);
 
     switch(action.type) {
+
+      /*
+      TO PHARMACIST
+       */
+      case actions.TO_PHARMACIST_REQUEST:
+        return {
+          ...state,
+          toPharmacist: {
+            ...state.toPharmacist,
+            loading: true,
+          }
+        };
+
+      case actions.TO_PHARMACIST_SUCCESS:
+        return {
+          ...state,
+          toPharmacist: {
+            ...state.toPharmacist,
+            loading: false,
+          }
+        };
+
+      case actions.TO_PHARMACIST_FAILURE:
+        return {
+          ...state,
+          toPharmacist: {
+            ...state.toPharmacist,
+            loading: false,
+            error: action.error,
+          }
+        };
 
       case actions.SYMPTOM_SET:
         return {
