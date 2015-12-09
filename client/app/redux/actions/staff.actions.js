@@ -1,10 +1,18 @@
 import $ from 'jquery';
 
+export const STAFF_TOGGLE_EMP_VIEW = 'STAFF_TOGGLE_EMP_VIEW';
+export function staffToggleEmpView(empId) {
+  return {
+    type: STAFF_TOGGLE_EMP_VIEW,
+    empId,
+  };
+}
+
 export const STAFF_TOGGLE_VIEW = 'STAFF_TOGGLE_VIEW';
 export function staffToggleView(patientId) {
   return {
     type: STAFF_TOGGLE_VIEW,
-    id: patientId,
+    patientId
   };
 }
 

@@ -2,6 +2,165 @@
   font-family: quark
   font-size: 1rem
 
+  .emp-wrapper
+    $block-height: 80px
+    $padding: 10px
+
+    display: block
+    margin: 1rem 0rem
+
+    .toggle-view
+      h4
+        text-align: center
+        font-weight: bold
+        font-size: 1.2rem
+      a
+        color: darken(white, 25%)
+      a:hover
+        color: darken(white, 40%)
+
+    .emp:hover
+      background-color: darken(white, 3%)
+
+    .appointments
+      font-size: 1.2rem
+      font-weight: bold
+
+      .add-appointment
+        font-size: 1.5rem
+        font-weight: bold
+        color: darken(white, 25%)
+        text-align: center
+        padding: 1rem
+        margin: 0px
+      .add-appointment:hover
+        color: darken(white, 40%)
+
+      .title
+        font-weight: bold
+        margin: 1.5rem 0rem
+
+      .collection
+        margin: 0px
+
+        .collection-item.now
+          .time
+            background-color: rgb(217,0,33)
+          .date
+            font-weight: bold
+            color: rgb(217,0,33)
+
+        .collection-item
+          min-height: auto
+          padding: 0.5rem
+          padding-left: 66px
+
+          .actions
+            position: absolute
+            right: 0.5rem
+            .btn
+              padding: 0px 0.5rem
+              font-size: 1rem
+              height: 45px
+              line-height: 45px
+
+          .time
+            left: 0.5rem
+            border-radius: 3px
+            width: 50px
+            height: 45px
+            line-height: 45px
+            background-color: rgb(255,152,0)
+            font-size: 1rem
+
+          .title
+            font-size: 1.3rem
+            color: lighten(black, 25%)
+
+          p
+            font-weight: normal
+            font-size: 0.8rem
+
+    .emp
+      padding: $padding
+      background-color: rgb(240,240,240)
+      border-radius: 4px
+      box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.35)
+      transition: background-color 0.15s
+
+
+      .img
+        $size: $block-height - 2 * $padding
+        background-color: rgb(200,200,200)
+        width: $size
+        height: $size
+        border-radius: $size / 2
+
+      .content
+        padding-left: 7px
+        color: black
+
+        .name
+          font-size: 0.9rem
+          font-weight: bold
+          margin: 0px
+          font-family: "quark"
+          color: black
+
+        .short-description
+          font-size: 0.9rem
+          font-weight: normal
+          font-family: "quark"
+          margin: 0px
+          color: black
+
+        strong
+          font-weight: bold
+
+
+      .brief
+        .img
+          display: inline-block
+          vertical-align: middle
+
+        .content
+          display: inline-block
+          vertical-align: middle
+          padding-top: 1rem
+          padding-bottom: 1rem
+
+      .full
+        padding-top: 1rem
+        margin: 0rem
+        .img-wrapper
+          text-align: center
+          .img
+            $size: 90px
+            display: inline-block
+            background-color: rgb(200,200,200)
+            width: $size
+            height: $size
+            border-radius: $size / 2
+
+        .content
+
+        .name
+          font-size: 2rem
+          font-family: "quark"
+          font-weight: bold
+          margin: 0rem 0.7rem
+
+        .emp-info
+          width: 100%
+          .emp-info-left
+            float: left
+            span
+              display: inline-block
+              margin: 0.1rem 0.3rem 0.15rem 0rem
+
+          .emp-info-right
+            float: right
+
   .patient-wrapper
     $block-height: 80px
     $padding: 10px
@@ -196,7 +355,7 @@
   .left
     width: 50%
     float: left
-    padding: 15px
+    padding: 0rem 15px
 
   .right
     width: 50%
@@ -210,5 +369,10 @@
       text-align: center
       padding: 3rem
       color: darken(white, 20%)
+
+    a
+      color: darken(white, 25%)
+    a:hover
+      color: darken(white, 40%)
 
 

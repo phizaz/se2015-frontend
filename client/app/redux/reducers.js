@@ -44,6 +44,7 @@ export default {
 
   staff(state = {
     searchResults: [],
+    empMaximized: {},
     maximized: {},
     search: {
       loading: false,
@@ -51,6 +52,7 @@ export default {
     },
 
     unconfirmedStaffs: [],
+    confirmedStaffs: {},
     fetch: {
       loading: false,
       error: null,
@@ -85,6 +87,18 @@ export default {
         };
 
       /*
+      STAFF TOGGLE EMP VIEW
+       */
+      case actions.STAFF_TOGGLE_EMP_VIEW:
+        return {
+          ...state,
+          empMaximized: {
+            ...state.empMaximized,
+            [action.empId]: !state.empMaximized[action.empId],
+          },
+        };
+
+      /*
       STAFF TOGGLE VIEW
        */
       case actions.STAFF_TOGGLE_VIEW:
@@ -92,7 +106,7 @@ export default {
           ...state,
           maximized: {
             ...state.maximized,
-            [action.id]: !state.maximized[action.id],
+            [action.patientId]: !state.maximized[action.patientId],
           },
         };
 
@@ -174,9 +188,10 @@ export default {
             ...state.approve,
             loading: false,
           },
-          unconfirmedStaffs:
-            state.unconfirmedStaffs.filter(
-              x => x.emp_id !== action.emp_id),
+          confirmedStaffs: {
+            ...state.confirmedStaffs,
+            [action.staffId]: true,
+          },
         };
       case actions.STAFF_APPROVE_FAILURE:
         return {
@@ -208,7 +223,7 @@ export default {
           },
           unconfirmedStaffs:
             state.unconfirmedStaffs.filter(
-              x => x.emp_id !== action.emp_id),
+              x => x.emp_id !== action.staffId),
         };
       case actions.STAFF_DISMISS_FAILURE:
         return {

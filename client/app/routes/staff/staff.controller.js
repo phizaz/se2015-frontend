@@ -36,6 +36,12 @@ export /*@ngInject*/ class StaffController {
       actions.staffToggleView(patient.id));
   }
 
+  toggleEmpView(emp) {
+    console.log('toggleing the emp:', emp);
+    this.Store.dispatch(
+      actions.staffToggleEmpView(emp.emp_id));
+  }
+
   addAppointment(patient) {
     this.makeAppointmentModals[patient.id].showModal();
   }

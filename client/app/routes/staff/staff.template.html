@@ -226,8 +226,6 @@
 
         </a>
       </div>
-
-
     </div>
 
   </div>
@@ -235,26 +233,184 @@
   <div class="right">
 
     <div
-      ng-show="staff.unconfirmedStaffs.length === 0"
-      class="no-result">
-      <h4 ng-show="!staff.fetch.loading">
-        ไม่มีคำร้องในตอนนี้
-        <a href="" ng-click="staff.fetchUnconfirmedStaff()">รีเฟรช</a>
-      </h4>
+      ng-if="staff.unconfirmedStaffs.length > 0">
+      <div
+        ng-repeat="emp in staff.unconfirmedStaffs"
+        class="emp-wrapper">
 
-      <h4 ng-show="staff.fetch.loading">
-        รอซักครู่
-      </h4>
+
+          <div class="emp">
+            <a  href=""
+                ng-click="staff.toggleEmpView(emp)"
+                ng-if="!staff.empMaximized[emp.emp_id]"
+                ng-class="{confirmed: !!staff.confirmedStaffs[emp.emp_id]}">
+              <div class="brief">
+                <div class="img">
+
+                </div>
+
+                <div class="content">
+                  <h4 class="name">
+                    {{emp.firstname}} {{emp.lastname}}
+                  </h4>
+
+                  <p class="short-description">
+                    <span
+                      ng-show="!staff.confirmedStaffs[emp.emp_id]"
+                      class="role">
+                      <strong>ร้องขอเป็น {{emp.role}}</strong>
+                    </span>
+                    <span
+                      ng-show="staff.confirmedStaffs[emp.emp_id]"
+                      class="role ">
+                      <strong>อนุมัติการร้องขอเป็น {{emp.role}} แล้ว</strong>
+                    </span>
+                    -
+                    <span class="email">
+                      อีเมล {{emp.email}}
+                    </span>
+                    -
+                    <span class="tel">
+                      โทร {{emp.tel}}
+                    </span>
+                  </p>
+
+                </div>
+              </div>
+            </a>
+
+            <div
+              ng-if="staff.empMaximized[emp.emp_id]"
+              class="full row">
+                <div class="img-wrapper col s2">
+                  <div class="img">
+
+                  </div>
+                </div>
+
+                <div class="content col s10">
+                    <h4 class="name">
+                      {{emp.firstname}} {{emp.lastname}}
+                    </h4>
+
+                    <div class="emp-info row">
+                      <div class="emp-info-left col s6">
+                        <span class="tel">
+                          <strong>โทร</strong> -
+                          {{emp.tel}}
+                        </span>
+
+                        <br>
+
+                        <span class="email">
+                          <strong>อีเมล</strong> -
+                          {{emp.email}}
+                        </span>
+                      </div>
+
+                      <div class="emp-info-right col s6">
+                        <span class="role">
+                          <strong>ตำแหน่ง</strong> -
+                          {{emp.role}}
+                        </span>
+
+                        <br>
+
+                        <span
+                          ng-if="emp.role === 'Doctor'"
+                          class="specialty">
+                          <strong>ความเชี่ยวชาญ</strong> -
+                          {{emp.specialty}}
+                        </span>
+                      </div>
+
+                      <div style="clear: both;"></div>
+                    </div>
+
+                </div>
+
+                <div style="clear: both;"></div>
+
+                <div class="actions" style="text-align: center;">
+                  <div
+                    ng-if="!staff.confirmedStaffs[emp.emp_id]">
+                    <button
+                      ng-click="staff.approveStaff(emp)"
+                      ng-disabled="staff.approve.loading || staff.dismiss.loading"
+                      class="btn green bold"
+                      type="button">
+
+                      <span ng-show="!staff.approve.loading">
+                        รับคำร้องการเป็น {{emp.role}}
+                      </span>
+
+                      <span ng-show="staff.approve.loading">
+                        รอซักครู่
+                      </span>
+
+                    </button>
+
+                    <button
+                      ng-click="staff.discardStaff(emp)"
+                      ng-disabled="staff.approve.loading || staff.dismiss.loading"
+                      class="btn red bold"
+                      type="button">
+
+                      <span ng-show="!staff.dismiss.loading">
+                        ลบคำร้อง
+                      </span>
+
+                      <span ng-show="staff.dismiss.loading">
+                        รอซักครู่
+                      </span>
+
+                    </button>
+                  </div>
+
+                  <div
+                    ng-if="staff.confirmedStaffs[emp.emp_id]">
+                    <button
+                      disabled="disabled"
+                      class="btn green bold"
+                      type="button">
+                      รับคำร้องการเป็น {{emp.role}} เรียบร้อยแล้ว !
+                    </button>
+                  </div>
+                </div>
+
+                <div class="toggle-view">
+                  <a href=""
+                    ng-click="staff.toggleEmpView(emp)">
+                    <h4>
+                      <i class="fa fa-bars"></i>
+                      ยุบลง
+                    </h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+        </a>
+      </div>
     </div>
 
     <div
-      ng-show="staff.unconfirmedStaffs.length > 0"
-      class="some-result">
+      class="no-result">
+      <h4 ng-show="!staff.fetch.loading">
+        <span
+          ng-show="staff.unconfirmedStaffs.length === 0">
+          ไม่มีคำร้องในตอนนี้
+        </span>
+        <a href="" ng-click="staff.fetchUnconfirmedStaff()">
+          <i class="fa fa-refresh"></i>
+          รีเฟรช
+        </a>
+      </h4>
 
-      <doctor-information
-        ng-repeat="employee in staff.unconfirmedStaffs"
-        staff="employee"
-        parent="staff"></doctor-information>
+      <h4 ng-show="staff.fetch.loading">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        รอซักครู่
+      </h4>
     </div>
 
   </div>
