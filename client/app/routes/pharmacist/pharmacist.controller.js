@@ -1,29 +1,59 @@
+import _ from 'lodash';
+import actions from '../../redux/actions/';
+import moment from 'moment';
 
 export /*@ngInject*/ class PharmacistController {
-  constructor(Pharmacist, Staff) {
-    this.Pharmacist =Staff;
-    this.form = {};
-    this.patients = [];
-    this.pharmacist =[];
-    this.search();
-    // ยังไม่ได้สร้าง
-    this.Pharmacist
-      .pharmacistinfo()
-      .then(
-          (res) => {
-            this.pharmarcists = res;
-          }
-        );
+
+  constructor($scope, Store) {
+    _.extend(this, {
+      Store,
+      $scope,
+      form: {},
+      new: {
+        weight: null,
+        heightn: null,
+        pressure: null,
+      },
+    });
+
+    const mapStateToThis = (state) => {
+      _.extend(this, state.pharmacist);
+    };
+
+    Store.$subscribe(() => {
+      mapStateToThis(Store.getState());
+    });
+
+    mapStateToThis(Store.getState());
+
+    this.fetchPatient();
   }
 
-  search(firstname, lastname) {
-    this.Pharmacist
-      .patientInfo()
-      .then(
-        (res) => {
-          this.patients = res;
-          console.log(this.patients);
-        });
+  cancelCreate() {
+    this.new = {
+      weight: null,
+      heightn: null,
+      pressure: null,
+    };
+  }
+
+  isToday(date) {
+    return moment().format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD');
+  }
+
+  toggleView(patient) {
+    console.log('toggle view patient:', patient);
+    this.Store.dispatch(actions.pharmacistToggleView(patient.id));
+  }
+
+  fetchPatient() {
+    console.log('fetcihng patient');
+    this.Store.dispatch(actions.pharmacistFetch());
+  }
+
+  finishPatient(patient) {
+    console.log('finishing patient:', patient);
+    this.Store.dispatch(actions.pharmacistFinish(patient.id));
   }
 
 }

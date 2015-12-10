@@ -1,0 +1,325 @@
+.pharmacist-wrapper
+  font-family: quark
+  font-size: 1rem
+
+  .checked
+    color: rgb(46,204,113)
+    font-weight: bold
+
+  .pharmacist-body
+    max-width: 800px
+
+  .patient-wrapper
+    $block-height: 80px
+    $padding: 10px
+
+    display: block
+    margin: 1.5rem 0rem
+
+    .toggle-view
+      h4
+        text-align: center
+        font-weight: bold
+        font-size: 1.2rem
+      a
+        color: darken(white, 25%)
+      a:hover
+        color: darken(white, 40%)
+
+    .patient:hover
+      background-color: darken(white, 3%)
+
+    .appointments
+      font-size: 1.2rem
+      font-weight: bold
+
+      .add-appointment
+        font-size: 1.5rem
+        font-weight: bold
+        color: darken(white, 25%)
+        text-align: center
+        padding: 1rem
+        margin: 0px
+      .add-appointment:hover
+        color: darken(white, 40%)
+
+      .title
+        font-weight: bold
+        margin: 1.5rem 0rem
+
+      .collection
+        margin: 0px
+
+        .collection-item.now
+          .time
+            background-color: rgb(217,0,33)
+          .date
+            font-weight: bold
+            color: rgb(217,0,33)
+
+        .collection-item
+          min-height: auto
+          padding: 0.5rem
+          padding-left: 66px
+
+          .actions
+            position: absolute
+            right: 0.5rem
+            .btn
+              padding: 0px 0.5rem
+              font-size: 1rem
+              height: 45px
+              line-height: 45px
+
+          .time
+            left: 0.5rem
+            border-radius: 3px
+            width: 50px
+            height: 45px
+            line-height: 45px
+            background-color: rgb(255,152,0)
+            font-size: 1rem
+
+          .title
+            font-size: 1.3rem
+            color: lighten(black, 25%)
+
+          p
+            font-weight: normal
+            font-size: 0.8rem
+
+    .patient
+      padding: $padding
+      background-color: rgb(240,240,240)
+      border-radius: 4px
+      box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.35)
+      transition: background-color 0.15s
+
+
+      .img
+        $size: $block-height - 2 * $padding
+        background-color: rgb(200,200,200)
+        width: $size
+        height: $size
+        border-radius: $size / 2
+
+      .content
+        padding-left: 7px
+        color: black
+
+        .name
+          font-size: 1rem
+          font-weight: bold
+          margin: 0px
+          font-family: "quark"
+          color: black
+
+        .short-description
+          font-size: 1rem
+          font-weight: normal
+          font-family: "quark"
+          margin: 0px
+          color: black
+
+        strong
+          font-weight: bold
+
+
+      .brief
+        .img
+          display: inline-block
+          vertical-align: middle
+          margin: 0.5rem
+
+        .content
+          padding: 1rem
+          padding-left: 0.5rem
+          display: inline-block
+          vertical-align: middle
+
+      .full
+        padding-top: 1rem
+        margin: 0rem
+        .img-wrapper
+          text-align: center
+          .img
+            $size: 90px
+            display: inline-block
+            background-color: rgb(200,200,200)
+            width: $size
+            height: $size
+            border-radius: $size / 2
+
+        .content
+          padding-right: 0px
+
+        .name
+          font-size: 2rem
+          font-family: "quark"
+          font-weight: bold
+          margin: 1rem 0rem
+
+        .patient-info
+          width: 100%
+          padding-left: 0.75rem
+
+          .patient-info-left
+            span
+              display: inline-block
+              margin: 0.1rem 0.3rem 0.15rem 0rem
+
+          .patient-info-right
+            padding: 0px
+
+
+
+  .header
+    background-color: #424242
+    color: white
+    padding: 15px
+    height: 120px
+    font-weight: bold
+    text-align: center
+
+    .actions
+      padding-top: 1.5rem
+
+  .no-result
+    h4
+      font-weight: bold
+      font-size: 2.5rem
+      text-align: center
+      padding: 3rem
+      color: darken(white, 20%)
+
+    a
+      color: darken(white, 25%)
+    a:hover
+      color: darken(white, 40%)
+
+  .drug-list
+    padding: 0px
+    overflow: hidden
+    margin: 0px
+
+    .card-header
+      background-color: rgb(225,0,0)
+      box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.3)
+      position: relative
+      z-index: 10
+
+      .title
+        font-size: 1rem
+        font-family: quark
+        font-weight: bold
+        color: white
+        padding: 1rem
+        margin: 0px
+
+      .actions
+        text-align: center
+        padding: 0.5rem
+
+        .btn
+          padding: 0rem 1rem
+          font-size: 1rem
+          font-weight: bold
+          line-height: 2rem
+          height: 2rem
+
+        .finish-btn
+          background-color: rgb(37,37,37)
+
+    .card-content
+      height: 300px
+      overflow-y: scroll
+      overflow-x: hidden
+      padding: 1rem
+
+      .no-drug
+        font-size: 2rem
+        font-weight: bold
+        text-align: center
+        padding: 1.5rem
+        color: darken(white, 40%)
+        margin: 0px
+
+      .collection
+        margin: 0px
+
+      .collection-header
+        padding: 0.4rem 0.7rem
+        h4
+          font-weight: bold
+          margin: 0px
+          font-size: 0.8rem
+
+      .collection-item.old
+        background-color: darken(white, 4%)
+
+      .collection-item.checked
+        background-color: lighten(rgb(28,188,156), 7%)
+
+      .collection-item
+        padding: 0.5rem
+        font-size: 0.8rem
+
+        .drug-list-each
+
+          .row
+            margin: 0px
+
+          .actions
+            text-align: right
+            padding-right: 0px
+            padding: 0.6rem 0rem
+
+            .btn
+              width: 45px
+              padding: 0px
+              font-size: 0.75rem
+              font-weight: bold
+              line-height: 1.35rem
+              height: 1.35rem
+              margin: 0.15rem
+
+              i
+                font-size: 0.75rem
+
+            .edit
+              background-color: rgb(254,163,0)
+
+            .cancel
+              background-color: rgb(224,0,0)
+
+        .content
+          padding: 0rem
+
+          .col
+            padding: 0.3rem
+
+          .show
+            .time
+              color: darken(white, 50%)
+
+            .col
+              margin: 0rem
+              padding: 0rem 0.5rem
+
+              span
+                font-size: 1rem
+
+          small
+            font-size: 0.7rem
+            font-weight: bold
+
+          input
+            font-size: 0.9rem
+            padding-left: 0.7rem
+            font-weight: bold
+
+          .description
+            margin: 0px
+            font-size: 0.9rem
+
+

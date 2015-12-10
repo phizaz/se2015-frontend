@@ -20,6 +20,7 @@ const partial =
     require('../doctor/doctor.route'),
     require('../staff/staff.route'),
     require('../nurse/nurse.route'),
+    require('../pharmacist/pharmacist.route'),
   ]);
 
 export default partial.name;

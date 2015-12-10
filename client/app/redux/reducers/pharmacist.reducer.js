@@ -81,6 +81,16 @@ export default {
             ...state.markedFinished,
             [action.patientId]: true,
           },
+          // patients: state.patients
+          //   .map(x => {
+          //     if (x.id !== action.patientId) {
+          //       return x;
+          //     }
+          //     return {
+          //       ...x,
+          //       drugRecords: action.drugRecords,
+          //     };
+          //   })
         };
 
       case actions.PHARMACIST_FINISH_FAILURE:

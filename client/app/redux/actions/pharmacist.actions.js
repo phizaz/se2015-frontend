@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 export const PHARMACIST_TOGGLE_VIEW = 'PHARMACIST_TOGGLE_VIEW';
-export function nurseToggleView(patientId) {
+export function pharmacistToggleView(patientId) {
   return {
     type: PHARMACIST_TOGGLE_VIEW,
     patientId
@@ -72,10 +72,11 @@ function pharmacistFinishRequest(patientId) {
   };
 }
 
-function pharmacistFinishSuccess(patientId) {
+function pharmacistFinishSuccess(patientId, drugRecords) {
   return {
     type: PHARMACIST_FINISH_SUCCESS,
     patientId,
+    drugRecords,
   };
 }
 
@@ -96,8 +97,8 @@ export function pharmacistFinish(patientId) {
         $.post(`/api/pharmacist/finish/${patientId}`)
           .done((res) => {
             console.log('pharmacistFinish res:', res);
-            dispatch(pharmacistFinishSuccess(patientId));
-            resolve(patientId);
+            dispatch(pharmacistFinishSuccess(patientId, res.data));
+            resolve(res.data);
           })
           .fail((err) => {
             console.log('pharmacistFinish err:', err);

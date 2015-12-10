@@ -45,7 +45,7 @@ partial.directive('doctorCalendarAppointmentModal', (Store) => {
         $modal: element.find('.modal')
       });
 
-      this.showModal();
+      // this.showModal();
     },
 
     watcher() {

@@ -1,0 +1,248 @@
+<div class="pharmacist-wrapper">
+  <div class="header nav-wrapper">
+
+    <div class="actions">
+      <button
+        ng-click="my.fetchPatient()"
+        ng-disabled="my.fetch.loading"
+        class="btn orange">
+        <span ng-show="!my.fetch.loading">
+          รีเฟรชรายการคนไข้ที่ยังไม่ได้รับยา
+        </span>
+
+        <span ng-show="my.fetch.loading">
+          <i class="fa fa-spin fa-circle-o-notch"></i>
+          รอซักครู่
+        </span>
+
+      </button>
+    </div>
+
+  </div>
+
+  <div class="pharmacist-body container">
+    <div
+      ng-if="my.fetch.loading"
+      class="no-result animated fadeIn">
+
+      <h4>
+        <i class="fa fa-spin fa-circle-o-notch"></i>
+        กำลังรีเฟรช...
+      </h4>
+
+    </div>
+
+    <div
+      ng-show="my.patients.length === 0"
+      class="no-result">
+
+      <h4>ไม่มีคนไข้ที่ต้องรับยาในตอนนี้...</h4>
+
+    </div>
+
+    <div
+      ng-if="my.patients.length > 0">
+      <div
+        ng-repeat="patient in my.patients"
+        ng-class="{finished: my.markedFinished[patient.id]}"
+        class="patient-wrapper">
+
+
+          <div class="patient">
+            <a  href=""
+                ng-click="my.toggleView(patient)"
+                ng-if="!my.maximized[patient.id]">
+              <div class="brief">
+                <div class="img">
+
+                </div>
+
+                <div class="content">
+                  <h4 class="name">
+                    {{patient.firstname}} {{patient.lastname}}
+                    <i
+                      ng-if="my.markedFinished[patient.id]"
+                      class="fa fa-check-circle animated bounceIn checked"></i>
+                  </h4>
+
+                  <p class="short-description">
+                    <span class="gender">
+                      เพศ {{patient.gender | gender}}
+                    </span>
+                    -
+                    <span class="nationality">
+                      เชื้อชาติ {{patient.nationality}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <div
+              ng-if="my.maximized[patient.id]"
+              class="full row">
+                <div class="img-wrapper col s2">
+                  <div class="img">
+
+                  </div>
+                </div>
+
+                <div class="content col s10">
+                  <div class="patient-info row">
+                    <div class="patient-info-left col s6">
+                      <h4 class="name">
+                        {{patient.firstname}} {{patient.lastname}}
+                        <i
+                          ng-if="my.markedFinished[patient.id]"
+                          class="fa fa-check-circle animated bounceIn checked"></i>
+                      </h4>
+
+                      <span class="personal-id">
+                        <strong>เลขประจำตัวประชาชน</strong> -
+                        {{patient.personal_id}}
+                      </span>
+
+                      <br>
+
+                      <span class="gender">
+                        <strong>เพศ</strong> -
+                        {{patient.gender | gender}}
+                      </span>
+
+                      <span class="nationality">
+                        <strong>เชื้อชาติ</strong> -
+                        {{patient.nationality}}
+                      </span>
+
+                      <span class="religion">
+                        <strong>ศาสนา</strong> -
+                        {{patient.religion}}
+                      </span>
+
+                      <br>
+
+                      <span class="address">
+                        <strong>ที่อยู่</strong> -
+                        {{patient.address}}
+                      </span>
+
+                      <br>
+
+                      <span class="tel">
+                        <strong>โทร</strong> -
+                        {{patient.tel}}
+                      </span>
+
+                      <br>
+
+                      <span class="email">
+                        <strong>อีเมล</strong> -
+                        {{patient.email}}
+                      </span>
+                    </div>
+
+                    <div class="patient-info-right col s6">
+                      <div class="drug-list card">
+                        <div class="card-header">
+                          <div class="actions">
+                            <button
+                              ng-if="!my.markedFinished[patient.id]"
+                              ng-click="my.finishPatient(patient)"
+                              ng-disabled="my.finish.loading"
+                              class="btn finish-btn">
+                              <span ng-show="!my.finish.loading">
+                                ระบุว่าจ่ายยาแล้ว
+                              </span>
+
+                              <span ng-show="my.finish.loading">
+                                รอซักครู่
+                              </span>
+
+                            </button>
+
+                            <button
+                              ng-if="my.markedFinished[patient.id]"
+                              class="btn finish-btn animated bounceIn"
+                              disabled="disabled">
+                              <i
+                                class="fa fa-check-circle animated bounceIn"></i>
+                              บันทึกเรียบร้อย
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="card-content">
+                          <h4
+                            ng-if="patient.drugRecords.length === 0"
+                            class="no-drug">
+                            ไม่ต้องรับยา
+                          </h4>
+
+                          <ul
+                            ng-if="patient.drugRecords.length > 0"
+                            class="collection with-header">
+
+                            <li
+                              ng-repeat="drug in patient.drugRecords | orderBy: '-drug_id'"
+                              class="collection-item"
+                              ng-class="{
+                                old: !my.isToday(drug.created_at) }">
+                              <div class="drug-list-each content">
+                                <div class="show row">
+                                  <p class="time col s12">
+                                    <small>{{drug.created_at | amDateFormat:'Do MMMM YYYY'}}</small>
+                                    <small ng-show="my.isToday(drug.created_at)">(วันนี้)</small>
+                                  </p>
+
+                                  <div class="col s12">
+                                    <strong>
+                                      {{drug.name}}
+                                    </strong>
+                                    <span>
+                                      ({{drug.quantity}} หน่วย)
+                                    </span>
+                                    <span
+                                      ng-if="my.markedFinished[patient.id]"
+                                      class="checked">
+                                      <i
+                                        class="fa fa-check-circle animated bounceIn"></i>
+                                      จ่ายแล้ว
+                                    </span>
+                                  </div>
+
+                                  <div class="col s12">
+                                    <span>{{drug.remark}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="clear: both;"></div>
+
+                <div class="toggle-view">
+                  <a href=""
+                    ng-click="pharmacist.toggleView(patient)">
+                    <h4>
+                      <i class="fa fa-bars"></i>
+                      ยุบลง
+                    </h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
