@@ -42,7 +42,6 @@ export default {
       error: null,
     }
   }, action) {
-    console.log('inspect action:', action);
 
     switch(action.type) {
 

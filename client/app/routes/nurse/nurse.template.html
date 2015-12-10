@@ -1,26 +1,286 @@
-<div class="t">
-<greet></greet>
-<div>
-<div>
-  <span>
-<form style="float:left;margin-left:10%">
-          <div class="input-field">
-            <input id="search" type="search" style="width:300px"required>
-            <label for="search"><i class="material-icons">search</i></label>
-          </div>
-        </form>
-      </span>
-</div>
-    <button class="btn amber darken-3 waves-light" style="margin-left:10%;margin-top:20px">เพิ่มผู้ป่วย</button>
-</div>
-<div>
+<div class="nurse-wrapper">
+  <div class="header nav-wrapper">
 
-</div>
-</div>
-<div class="l">
-<edit-patient
-  ng-repeat="patient in nurse.patients"
-  patient="patient"></edit-patient>
-</div>
+    <div class="search-field">
+      <form name="form">
+
+        <div input-field class="search-field-inside">
+          <!-- <i class="material-icons prefix">search</i> -->
+          <input type="text"
+            ng-model="my.form.firstname"
+            ng-disabled="my.search.loading"
+            id="search"></input>
+          <label for="search">ชื่อ</label>
+        </div>
+
+        <div input-field class="search-field-inside">
+          <!-- <i class="material-icons prefix">search</i> -->
+          <input type="text"
+            ng-model="my.form.lastname"
+            ng-disabled="my.search.loading"
+            id="search2"></input>
+          <label for="search2">สกุล</label>
+        </div>
+
+        <div class="search-field-inside">
+          <button
+            ng-click="my.searchPatient(my.form.firstname, my.form.lastname)"
+            ng-disabled="my.search.loading"
+            class="search-btn orange white-text btn"
+            type="submit">
+            <span ng-show="!my.search.loading">ค้นหาผู้ป่วย</span>
+            <span ng-show="my.search.loading">รอซักครู่</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+  <div class="nurse-body container">
+    <div
+      ng-show="my.patients.length === 0"
+      class="no-result">
+
+      <h4>ไม่มีผลการค้นหา...</h4>
+
+    </div>
+
+    <div
+      ng-if="my.patients.length > 0">
+      <div
+        ng-repeat="patient in my.patients"
+        class="patient-wrapper">
+
+
+          <div class="patient">
+            <a  href=""
+                ng-click="my.toggleView(patient)"
+                ng-if="!my.maximized[patient.id]">
+              <div class="brief">
+                <div class="img">
+
+                </div>
+
+                <div class="content">
+                  <h4 class="name">
+                    {{patient.firstname}} {{patient.lastname}}
+                  </h4>
+
+                  <p class="short-description">
+                    <span class="gender">
+                      เพศ {{patient.gender | gender}}
+                    </span>
+                    -
+                    <span class="nationality">
+                      เชื้อชาติ {{patient.nationality}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <div
+              ng-if="my.maximized[patient.id]"
+              class="full row">
+                <div class="img-wrapper col s2">
+                  <div class="img">
+
+                  </div>
+                </div>
+
+                <div class="content col s10">
+                  <div class="patient-info row">
+                    <div class="patient-info-left col s6">
+                      <h4 class="name">
+                        {{patient.firstname}} {{patient.lastname}}
+                      </h4>
+
+                      <span class="personal-id">
+                        <strong>เลขประจำตัวประชาชน</strong> -
+                        {{patient.personal_id}}
+                      </span>
+
+                      <br>
+
+                      <span class="gender">
+                        <strong>เพศ</strong> -
+                        {{patient.gender | gender}}
+                      </span>
+
+                      <span class="nationality">
+                        <strong>เชื้อชาติ</strong> -
+                        {{patient.nationality}}
+                      </span>
+
+                      <span class="religion">
+                        <strong>ศาสนา</strong> -
+                        {{patient.religion}}
+                      </span>
+
+                      <br>
+
+                      <span class="address">
+                        <strong>ที่อยู่</strong> -
+                        {{patient.address}}
+                      </span>
+
+                      <br>
+
+                      <span class="tel">
+                        <strong>โทร</strong> -
+                        {{patient.tel}}
+                      </span>
+
+                      <br>
+
+                      <span class="email">
+                        <strong>อีเมล</strong> -
+                        {{patient.email}}
+                      </span>
+                    </div>
+
+                    <div class="patient-info-right col s6">
+                      <div class="report-list card">
+                        <div class="card-header">
+
+                        </div>
+
+                        <div class="card-content">
+                          <ul class="collection with-header">
+                            <!-- new report -->
+                            <li class="collection-item">
+                              <div
+                                class="report-list-each animated bounceIn">
+
+                                <div class="row">
+                                  <div class="content col s9">
+                                    <div class="row">
+                                      <div input-field class="col s4">
+                                        <input
+                                          ng-model="my.new.weight"
+                                          ng-disabled="my.addReport.loading"
+                                          type="text"
+                                          class="validate"
+                                          placeholder="60"
+                                          id="weight"
+                                          required>
+                                        <label for="weight">น้ำหนัก</label>
+                                      </div>
+                                      <div input-field class="col s4">
+                                        <input
+                                          ng-model="my.new.height"
+                                          ng-disabled="my.addReport.loading"
+                                          type="text"
+                                          class="validate"
+                                          placeholder="170"
+                                          id="height"
+                                          required>
+                                        <label for="height">ส่วนสูง</label>
+                                      </div>
+                                      <div input-field class="col s4">
+                                        <input
+                                          ng-model="my.new.pressure"
+                                          ng-disabled="my.addReport.loading"
+                                          type="text"
+                                          class="validate"
+                                          id="pressure"
+                                          placeholder="140/70"
+                                          required>
+                                        <label for="pressure">ความดัน</label>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="actions col s3">
+                                    <div>
+                                      <button
+                                        ng-click="my.addPatientReport(patient, my.new)"
+                                        ng-disabled="my.addReport.loading"
+                                        class="edit btn">
+                                        <span ng-show="!my.addReport.loading">
+                                          ยืนยัน
+                                        </span>
+
+                                        <span ng-show="my.addReport.loading">
+                                          <i class="fa fa-spin fa-circle-o-notch"></i>
+                                        </span>
+                                      </button>
+                                    </div>
+
+                                    <div>
+                                      <button
+                                        ng-click="my.cancelCreate()"
+                                        ng-disabled="my.addReport.loading"
+                                        class="cancel btn">
+                                        ลบ
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </li>
+
+                            <li
+                              ng-repeat="report in patient.patientReports | orderBy: '-report_id'"
+                              class="collection-item"
+                              ng-class="{ old: !my.isToday(report.created_at) }">
+                              <div class="report-list-each content">
+                                <div class="show row">
+                                  <p class="time col s12">
+                                    <small>{{report.created_at | amDateFormat:'Do MMMM YYYY'}}</small>
+                                    <small ng-show="my.isToday(report.created_at)">(วันนี้)</small>
+                                  </p>
+
+                                  <div class="col s4">
+                                    <strong>น้ำหนัก</strong>
+                                    <br>
+                                    <span>{{report.weight}} กก.</span>
+                                  </div>
+
+                                  <div class="col s4">
+                                    <strong>ส่วนสูง</strong>
+                                    <br>
+                                    <span>{{report.height}} ซม.</span>
+                                  </div>
+
+                                  <div class="col s4">
+                                    <strong>ความดัน</strong>
+                                    <br>
+                                    <span>{{report.pressure}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="clear: both;"></div>
+
+                <div class="toggle-view">
+                  <a href=""
+                    ng-click="nurse.toggleView(patient)">
+                    <h4>
+                      <i class="fa fa-bars"></i>
+                      ยุบลง
+                    </h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+        </a>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 

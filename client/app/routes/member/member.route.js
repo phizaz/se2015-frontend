@@ -2,7 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 import 'angular-ui-router';
 
-import {MemberController} from './member.controller';
+import { MemberController } from './member.controller';
 import memberTemplate from './member.template.html';
 import './member.sass';
 
@@ -19,7 +19,8 @@ const partial =
     // routes
     require('../doctor/doctor.route'),
     require('../staff/staff.route'),
-    ]);
+    require('../nurse/nurse.route'),
+  ]);
 
 export default partial.name;
 

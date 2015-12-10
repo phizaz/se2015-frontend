@@ -1,35 +1,39 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
-// services
-import {nurseServiceModule} from '../../services/nurse.service.js';
-// directives
-import {greetDirectiveModule} from '../../components/greet/greet.directive.js';
-import {patientInformationDirectiveModule} from '../../components/patient-information/patient-information.directive.js';
 // locals
+import { NurseController } from './nurse.controller.js';
 import nurseTemplate from './nurse.template.html';
-import {NurseController} from './nurse.controller.js';
 import './nurse.sass';
-export let nurseRouteModule =
+
+const partial =
   angular.module('nurseRouteModule', [
     'ui.router',
-    nurseServiceModule.name,
-    greetDirectiveModule.name,
-    patientInformationDirectiveModule.name,
+
+    // services
+    require('../../redux/store'),
   ]);
 
-nurseRouteModule.config(
+export default partial.name;
+
+partial.config(
   ($stateProvider) => {
     $stateProvider
-      .state('navigator.nurse', {
+      .state('member.nurse', {
         url: '/nurse',
         template: nurseTemplate,
         controller: NurseController,
-        controllerAs: 'nurse',
+        controllerAs: 'my',
         resolve: {
           isNurse: (Login) => {
-              return Login.isNurse();
+            return Login.isNurse();
           }
+        }
+      })
+      // alias
+      .state('nurse', {
+        controller($state) {
+          $state.go('member.nurse');
         }
       });
   });
