@@ -81,7 +81,7 @@
                     </span>
                     -
                     <span class="nationality">
-                      เชื้อชาติ {{patient.nationality}}
+                      เชื้อชาติ {{patient.nationality | nationality}}
                     </span>
                   </p>
                 </div>
@@ -118,12 +118,12 @@
 
                         <span class="nationality">
                           <strong>เชื้อชาติ</strong> -
-                          {{patient.nationality}}
+                          {{patient.nationality | nationality}}
                         </span>
 
                         <span class="religion">
                           <strong>ศาสนา</strong> -
-                          {{patient.religion}}
+                          {{patient.religion | religion}}
                         </span>
 
                         <br>

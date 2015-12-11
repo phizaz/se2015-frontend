@@ -25,7 +25,7 @@ partial.filter('range',
 
       return input;
     };
-});
+  });
 
 partial.filter('role',
   () => {
@@ -50,5 +50,32 @@ partial.filter('gender',
     };
     return (gender) => {
       return conversion[gender];
+    };
+  });
+
+partial.filter('nationality',
+  () => {
+    const conversion = {
+      'thai': 'ไทย',
+      'other_nation': 'อื่นๆ',
+    };
+
+    return (nationality) => {
+      return conversion[nationality];
+    };
+  });
+
+partial.filter('religion',
+  () => {
+    const conversion = {
+      'buddha': 'พุทธ',
+      'christ': 'คริสต์',
+      'islam': 'อิสลาม',
+      'other': 'อื่นๆ',
+      '-': 'ไม่นับถือ',
+    };
+
+    return (religion) => {
+      return conversion[religion];
     };
   });
