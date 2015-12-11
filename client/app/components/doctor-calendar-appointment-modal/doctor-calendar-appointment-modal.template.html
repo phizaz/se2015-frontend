@@ -61,17 +61,17 @@
 
         <span class="gender">
           <strong>เพศ</strong> -
-          <span ng-bind="my.patient.gender"></span>
+          <span ng-bind="(my.patient.gender | gender)"></span>
         </span>
 
         <span class="nationality">
           <strong>เชื้อชาติ</strong> -
-          <span ng-bind="my.patient.nationality"></span>
+          <span ng-bind="(my.patient.nationality | nationality)"></span>
         </span>
 
         <span class="religion">
           <strong>ศาสนา</strong> -
-          <span ng-bind="my.patient.religion"></span>
+          <span ng-bind="(my.patient.religion | religion)"></span>
         </span>
 
         <br>

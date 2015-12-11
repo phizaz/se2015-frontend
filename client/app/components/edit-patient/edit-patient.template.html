@@ -6,8 +6,8 @@
       <span>เลขประจำตัวประชาชน</span>
       <span>{{my.patient.personal_id}}</span>
     </div>
-    <div><span>เพศ</span><span> {{my.patient.gender}}</span><span> - เชื้อชาติ</span>
-        <span>{{my.patient.nationality}}</span><span> - ศาสนา</span><span>{{my.patient.religion}}</span>
+    <div><span>เพศ</span><span> {{my.patient.gender | gender}}</span><span> - เชื้อชาติ</span>
+        <span>{{my.patient.nationality | nationality}}</span><span> - ศาสนา</span><span>{{my.patient.religion | religion}}</span>
     </div>
     <div style="margin-left:9%">
     <div>ที่อยู่
